@@ -7,12 +7,19 @@ public class Movie {
     private String poster_path;
     private String title;
     private String imdb_id;
+    private String tmdb_id;
     private String release_date;
     private String overview;
     private String length;
     private List<String> starCast;
     private Double ratings;
+    private Integer ratingsCount;
+    private String genre;
 
+    public Movie(String poster_path, String title) {
+        this.poster_path = poster_path;
+        this.title = title;
+    }
 
     public String getImdb() {
         return imdb;

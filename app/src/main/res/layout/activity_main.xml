@@ -26,10 +26,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="480dp"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
             android:orientation="vertical"
-            android:paddingLeft="26dp"
-            android:paddingRight="26dp"
+            android:padding="26dp"
             app:layout_constraintBottom_toBottomOf="@+id/image_view_poster_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -147,6 +147,20 @@
                 android:layout_height="wrap_content"
                 android:text="Tom Cruise | Henry Cavill | Rebecca Ferguson"
                 android:textSize="12dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="16dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_similar_movie"
+                android:layout_width="match_parent"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_similar_movies_list">
+
+            </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 
