@@ -17,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView mImageView = findViewById(R.id.image_view_poster_bg);
 
-        RatingBar ratingBar = findViewById(R.id.rating);
+        RatingBar ratingBar = findViewById(R.id.rating_bar_stars);
 
         ratingBar.setRating((float) 4.5);
 
         String url = "https://image.tmdb.org/t/p/original";
         url += "/AkJQpZp9WoNdj7pLYSj1L0RcMMN.jpg";
-        Picasso.get().load(url).placeholder(R.color.colorPrimaryDark).resize(2000, 3000).centerInside().into(mImageView);
+        Picasso.get().load(url).placeholder(R.color.colorAccent).resize(2000, 3000).centerInside().into(mImageView);
     }
 }
