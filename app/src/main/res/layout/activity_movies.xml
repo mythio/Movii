@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    tools:context=".Activity.MainActivity">
+    tools:context=".Activity.MovieActivity">
 
     <ImageView
         android:id="@+id/image_view_poster_bg"
@@ -157,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-                android:layout_height="wrap_content"
+                android:layout_height="240dp"
                 android:background="@drawable/bg_similar_movies_list">
 
             </android.support.v7.widget.RecyclerView>
