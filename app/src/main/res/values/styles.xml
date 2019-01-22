@@ -6,8 +6,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:fontFamily">@font/gsans_medium</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="colorControlHighlight">@color/colorPrimaryRipple</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="colorControlHighlight">@color/pixel_blue</item>
     </style>
+
+
 
 </resources>
