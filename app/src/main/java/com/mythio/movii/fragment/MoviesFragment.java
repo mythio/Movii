@@ -1,4 +1,4 @@
-package com.mythio.movii.Fragment;
+package com.mythio.movii.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

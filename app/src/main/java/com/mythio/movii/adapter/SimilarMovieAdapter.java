@@ -1,4 +1,4 @@
-package com.mythio.movii.Adapter;
+package com.mythio.movii.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mythio.movii.Model.Movie;
+import com.mythio.movii.model.Movie;
 import com.mythio.movii.R;
 import com.squareup.picasso.Picasso;
 

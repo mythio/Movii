@@ -1,4 +1,4 @@
-package com.mythio.movii.Activity;
+package com.mythio.movii.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,11 +6,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import com.mythio.movii.Fragment.MoviesFragment;
-import com.mythio.movii.Fragment.ProfileFragment;
-import com.mythio.movii.Fragment.SeriesFragment;
+import com.mythio.movii.fragment.MoviesFragment;
+import com.mythio.movii.fragment.ProfileFragment;
+import com.mythio.movii.fragment.SeriesFragment;
 import com.mythio.movii.R;
 
 public class StartActivity extends AppCompatActivity {

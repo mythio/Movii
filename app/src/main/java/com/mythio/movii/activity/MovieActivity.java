@@ -1,10 +1,11 @@
-package com.mythio.movii.Activity;
+package com.mythio.movii.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
@@ -14,8 +15,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.mythio.movii.Adapter.SimilarMovieAdapter;
-import com.mythio.movii.Model.Movie;
+import com.google.android.youtube.player.YouTubeIntents;
+import com.mythio.movii.adapter.SimilarMovieAdapter;
+import com.mythio.movii.model.Movie;
 import com.mythio.movii.R;
 import com.squareup.picasso.Picasso;
 
@@ -36,7 +38,15 @@ public class MovieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
 
-        ImageView mImageView = findViewById(R.id.image_view_poster_bg);
+        final ImageView mImageView = findViewById(R.id.image_view_poster_bg);
+
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YouTubeIntents.canResolvePlayVideoIntent(MovieActivity.this);
+                startActivity(new Intent(MovieActivity.this, YoutubePlayer.class));
+            }
+        });
 
         mRequestQueue = Volley.newRequestQueue(this);
         mMovies = new ArrayList<>();
@@ -74,12 +84,6 @@ public class MovieActivity extends AppCompatActivity {
                                         poster_path,
                                         original_title
                                 ));
-                            }
-
-                            Log.d("LOG_LOG", "### " + mMovies.size());
-
-                            for (Movie m : mMovies) {
-                                Log.d("LOG_LOG__", m.getTitle() + "");
                             }
 
                             SimilarMovieAdapter adapter = new SimilarMovieAdapter(getApplicationContext(), mMovies);

@@ -15,17 +15,23 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".Activity.StartActivity"
-            android:label="@string/title_activity_start">
+            android:name=".activity.StartActivity"
+            android:label="@string/title_activity_start" />
+
+        <activity
+            android:name=".activity.YoutubePlayer"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
+        <activity
+            android:name=".activity.MovieActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".Activity.MovieActivity"
-            android:label="@string/app_name" />
 
     </application>
 

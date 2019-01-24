@@ -1,4 +1,4 @@
-package com.mythio.movii.Model;
+package com.mythio.movii.model;
 
 import java.util.List;
 
