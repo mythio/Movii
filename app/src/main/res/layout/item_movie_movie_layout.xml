@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="192dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -17,25 +18,26 @@
             android:layout_height="132dp"
             android:layout_marginStart="28dp"
             android:layout_marginEnd="28dp"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="#2c2c2c"
+            android:layout_marginBottom="8dp"
+            android:elevation="0dp"
+            app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
 
+        </android.support.v7.widget.CardView>
 
         <ImageView
             android:id="@+id/image_view_poster"
-            android:layout_width="96dp"
-            android:layout_height="144dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:elevation="17dp"
-            android:src="#fff"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:adjustViewBounds="true"
+            android:elevation="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView" />
-
 
         <LinearLayout
             android:layout_width="0dp"
@@ -44,22 +46,35 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
-            android:elevation="18dp"
+            android:elevation="8dp"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingLeft="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/image_view_poster"
             app:layout_constraintTop_toTopOf="@+id/imageView">
 
             <TextView
-                android:id="@+id/text_view_title"
-                android:layout_width="match_parent"
+                android:id="@+id/text_view_title_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:includeFontPadding="false"
+                android:maxLines="1"
                 android:text="Skyscraper"
                 android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/text_view_title_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.3"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:text="Skyscraper"
+                android:textSize="12dp" />
 
             <Space
                 android:layout_width="0dp"
@@ -93,4 +108,4 @@
 
     </android.support.constraint.ConstraintLayout>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

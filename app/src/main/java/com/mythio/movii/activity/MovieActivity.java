@@ -36,7 +36,7 @@ public class MovieActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movies);
+        setContentView(R.layout.activity_movie);
 
         final ImageView mImageView = findViewById(R.id.image_view_poster_bg);
 
@@ -77,12 +77,23 @@ public class MovieActivity extends AppCompatActivity {
 
                             for (int i = 0; i < jsonArray.length(); ++i) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String original_title = jsonObject.getString("title");
+                                String title = jsonObject.getString("title");
                                 String poster_path = jsonObject.getString("poster_path");
+
+                                String[] title_arr = title.split(": ");
+                                String title1;
+                                String title2 = null;
+                                if (title_arr.length == 2) {
+                                    title1 = title_arr[0].trim();
+                                    title2 = title_arr[1].trim();
+                                } else {
+                                    title1 = title_arr[0];
+                                }
 
                                 mMovies.add(new Movie(
                                         poster_path,
-                                        original_title
+                                        title1,
+                                        title2
                                 ));
                             }
 

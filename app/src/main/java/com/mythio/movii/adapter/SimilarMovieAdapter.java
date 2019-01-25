@@ -35,7 +35,7 @@ public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapte
     @Override
     public void onBindViewHolder(@NonNull MovieHolder movieHolder, int i) {
         Movie movie = mMovieList.get(i);
-        movieHolder.mTextViewTitle.setText(movie.getTitle());
+        movieHolder.mTextViewTitle.setText(movie.getTitle1());
         String url = "https://image.tmdb.org/t/p/w500";
         url += movie.getPoster_path();
         Picasso.get().load(url).resize(120,180).centerCrop().into(movieHolder.mImageViewPoster);

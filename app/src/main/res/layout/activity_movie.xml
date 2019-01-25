@@ -34,45 +34,44 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/text_view_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/text_view_year"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="2018"
-                    android:textSize="12dp" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:background="@android:color/white" />
-
-                <TextView
-                    android:id="@+id/text_view_genre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="Action" />
-
-            </LinearLayout>
+                android:includeFontPadding="true"
+                android:text="2018"
+                android:textSize="12dp" />
 
             <TextView
-                android:id="@+id/text_view_title"
+                android:id="@+id/text_view_genre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
+                android:text="Action" />
+
+
+            <TextView
+                android:id="@+id/text_view_title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="Mission Impossible"
+                android:textSize="36dp" />
+
+            <TextView
+                android:id="@+id/text_view_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.4"
+                android:includeFontPadding="false"
                 android:text="Fallout"
-                android:textSize="42dp" />
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:visibility="visible" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="12dp" />
 
             <TextView
                 android:id="@+id/text_view_length"
@@ -155,10 +154,10 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_similar_movie"
                 android:layout_width="match_parent"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
                 android:layout_height="240dp"
-                android:background="@drawable/bg_similar_movies_list">
+                android:background="@drawable/bg_similar_movies_list"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp">
 
             </android.support.v7.widget.RecyclerView>
 

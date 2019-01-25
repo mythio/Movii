@@ -5,7 +5,8 @@ import java.util.List;
 public class Movie {
     private String imdb;
     private String poster_path;
-    private String title;
+    private String title1;
+    private String title2;
     private String imdb_id;
     private String tmdb_id;
     private String release_date;
@@ -16,14 +17,16 @@ public class Movie {
     private Integer ratingsCount;
     private String genre;
 
-    public Movie(String poster_path, String title) {
+    public Movie(String poster_path, String title1, String title2) {
         this.poster_path = poster_path;
-        this.title = title;
+        this.title1 = title1;
+        this.title2 = title2;
     }
 
-    public Movie(String poster_path, String title, String tmdb_id, String genre) {
+    public Movie(String poster_path, String title1, String title2, String tmdb_id, String genre, String release_date) {
         this.poster_path = poster_path;
-        this.title = title;
+        this.title1 = title1;
+        this.title2 = title2;
         this.tmdb_id = tmdb_id;
         this.genre = genre;
     }
@@ -44,12 +47,20 @@ public class Movie {
         this.poster_path = poster_path;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitle1() {
+        return title1;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle1(String title1) {
+        this.title1 = title1;
+    }
+
+    public String getTitle2() {
+        return title2;
+    }
+
+    public void setTitle2(String title2) {
+        this.title2 = title2;
     }
 
     public String getImdb_id() {

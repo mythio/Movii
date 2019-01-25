@@ -27,7 +27,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.mythio.movii.constant.ApiKeys.TMDB_MOVIES_POPULAR;
+import static com.mythio.movii.constant.constants.GENRE;
+import static com.mythio.movii.constant.constants.TMDB_MOVIES_POPULAR;
 
 public class MoviesFragmentPopular extends Fragment {
 
@@ -65,18 +66,9 @@ public class MoviesFragmentPopular extends Fragment {
                             JSONArray jsonArray = response.getJSONArray("results");
 
                             for (int i = 0; i < jsonArray.length(); ++i) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String title = jsonObject.getString("title");
-                                String poster_path = jsonObject.getString("poster_path");
-                                String id = String.valueOf(jsonObject.getInt("id"));
-                                JSONArray genre = jsonObject.getJSONArray("genre_ids");
 
-                                mMovies.add(new Movie(
-                                        poster_path,
-                                        title,
-                                        id,
-                                        " "
-                                ));
+                                addToList(jsonArray.getJSONObject(i));
+
                             }
 
                             MovieAdapter adapter = new MovieAdapter(getContext(), mMovies);
@@ -93,5 +85,44 @@ public class MoviesFragmentPopular extends Fragment {
             }
         });
         mRequestQueue.add(jsonObjectRequest);
+    }
+
+    private void addToList(JSONObject jsonObject) throws JSONException {
+        String title = jsonObject.getString("title");
+        String poster_path = jsonObject.getString("poster_path");
+        String id = String.valueOf(jsonObject.getInt("id"));
+        JSONArray genreArr = jsonObject.getJSONArray("genre_ids");
+        String release_date = jsonObject.getString("release_date");
+        String overview = jsonObject.getString("overview");
+
+        StringBuilder genre = null;
+        String[] title_arr = title.split(": ");
+        String title1;
+        String title2 = "";
+
+        if (title_arr.length == 2) {
+            title1 = title_arr[0].trim();
+            title2 = title_arr[1].trim();
+        } else {
+            title1 = title_arr[0].trim();
+        }
+
+        int l = Math.min(genreArr.length(), 2);
+
+        for (int j = 0; j < l; ++j) {
+            genre = (genre == null ? new StringBuilder() : genre).append(GENRE.get(genreArr.getInt(j)));
+            if (j != l - 1) {
+                genre.append("  |  ");
+            }
+        }
+
+        mMovies.add(new Movie(
+                poster_path,
+                title1,
+                title2,
+                id,
+                genre == null ? null : genre.toString(),
+                release_date
+        ));
     }
 }
