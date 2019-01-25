@@ -28,7 +28,7 @@ public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapte
     @NonNull
     @Override
     public MovieHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_movie, null, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_movie, viewGroup, false);
         return new MovieHolder(view);
     }
 

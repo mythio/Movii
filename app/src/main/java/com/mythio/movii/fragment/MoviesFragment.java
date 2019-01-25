@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mythio.movii.R;
-import com.mythio.movii.temp.Fragment1;
 import com.mythio.movii.temp.Fragment2;
 import com.mythio.movii.temp.Fragment3;
 import com.mythio.movii.temp.Fragment5;
@@ -36,7 +35,7 @@ public class MoviesFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new Fragment1(), "Popular");
+        adapter.addFragment(new MoviesFragmentPopular(), "Popular");
         adapter.addFragment(new Fragment2(), "Latest");
         adapter.addFragment(new Fragment3(), "Trending");
         adapter.addFragment(new Fragment5(), "Highest Rated");

@@ -21,6 +21,13 @@ public class Movie {
         this.title = title;
     }
 
+    public Movie(String poster_path, String title, String tmdb_id, String genre) {
+        this.poster_path = poster_path;
+        this.title = title;
+        this.tmdb_id = tmdb_id;
+        this.genre = genre;
+    }
+
     public String getImdb() {
         return imdb;
     }
@@ -51,6 +58,14 @@ public class Movie {
 
     public void setImdb_id(String imdb_id) {
         this.imdb_id = imdb_id;
+    }
+
+    public String getTmdb_id() {
+        return tmdb_id;
+    }
+
+    public void setTmdb_id(String tmdb_id) {
+        this.tmdb_id = tmdb_id;
     }
 
     public String getRelease_date() {
@@ -91,5 +106,21 @@ public class Movie {
 
     public void setRatings(Double ratings) {
         this.ratings = ratings;
+    }
+
+    public Integer getRatingsCount() {
+        return ratingsCount;
+    }
+
+    public void setRatingsCount(Integer ratingsCount) {
+        this.ratingsCount = ratingsCount;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }
