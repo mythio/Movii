@@ -19,24 +19,24 @@ public class constants {
     public static final String OMDB_GET_END = "&plot=full";
 
     public static final Map<Integer, String> GENRE = new HashMap<Integer, String>() {{
-        put(28, "Action");
         put(12, "Adventure");
+        put(14, "Fantasy");
         put(16, "Animation");
+        put(18, "Drama");
+        put(27, "Horror");
+        put(28, "Action");
         put(35, "Comedy");
+        put(36, "History");
+        put(37, "Western");
+        put(53, "Thriller");
         put(80, "Crime");
         put(99, "Documentary");
-        put(18, "Drama");
-        put(10751, "Family");
-        put(14, "Fantasy");
-        put(36, "History");
-        put(27, "Horror");
-        put(10749, "Romance");
         put(878, "Science Fiction");
-        put(10770, "TV Movie");
-        put(53, "Thriller");
-        put(10752, "War");
-        put(37, "Western");
         put(10402, "Music");
+        put(10749, "Romance");
+        put(10751, "Family");
+        put(10752, "War");
+        put(10770, "TV Movie");
     }};
 
 }

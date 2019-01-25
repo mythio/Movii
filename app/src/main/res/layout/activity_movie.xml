@@ -39,7 +39,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="true"
-                android:text="2018"
                 android:textSize="12dp" />
 
             <TextView
@@ -47,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="Action" />
+                />
 
 
             <TextView
@@ -55,16 +54,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="Mission Impossible"
                 android:textSize="36dp" />
 
             <TextView
+                android:textStyle="bold"
             	android:id="@+id/text_view_title_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
                 android:includeFontPadding="false"
-                android:text="Fallout"
                 android:textAllCaps="true"
                 android:textSize="16dp"
                 android:visibility="visible" />
@@ -78,7 +76,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="2 h 38 min"
                 android:textSize="12dp" />
 
             <Space
@@ -90,7 +87,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="Ethan Hunt and his IMF team, along with some familiar allies, face against time after a mission gone wrong."
                 android:textSize="12dp" />
 
             <Space
@@ -124,7 +120,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:text="437 rating"
                     android:textSize="12dp" />
 
             </LinearLayout>
@@ -137,14 +132,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="Stars"
                 android:textSize="16dp" />
 
             <TextView
             	android:id="@+id/text_view_cast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tom Cruise | Henry Cavill | Rebecca Ferguson"
                 android:textSize="12dp" />
 
             <Space
