@@ -96,13 +96,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         public void onClick(View v) {
             Movie movie = mMovies.get(getAdapterPosition());
             Intent intent = new Intent(mContext, MovieActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("YEAR", movie.getRelease_date());
-            intent.putExtra("GENRE", movie.getGenre());
-            intent.putExtra("TITLE_1", movie.getTitle1());
-            intent.putExtra("TITLE_2", movie.getTitle2());
-            intent.putExtra("OVERVIEW", movie.getOverview());
-            intent.putExtra("ID", movie.getTmdb_id());
+
+            intent.putExtra("EXTRA", movie);
+
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.putExtra("YEAR", movie.getRelease_date());
+//            intent.putExtra("GENRE", movie.getGenre());
+//            intent.putExtra("TITLE_1", movie.getTitle1());
+//            intent.putExtra("TITLE_2", movie.getTitle2());
+//            intent.putExtra("OVERVIEW", movie.getOverview());
+//            intent.putExtra("ID", movie.getTmdb_id());
             mContext.startActivity(intent);
         }
     }

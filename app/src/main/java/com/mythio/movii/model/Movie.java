@@ -13,10 +13,11 @@ public class Movie implements Serializable {
     private String release_date;
     private String overview;
     private String length;
-    private List<String> starCast;
+    private String cast;
     private Double ratings;
-    private Integer ratingsCount;
+    private String voteCount;
     private String genre;
+    private String video_key;
 
     public Movie(String poster_path, String title1, String title2) {
         this.poster_path = poster_path;
@@ -106,12 +107,12 @@ public class Movie implements Serializable {
         this.length = length;
     }
 
-    public List<String> getStarCast() {
-        return starCast;
+    public String getCast() {
+        return cast;
     }
 
-    public void setStarCast(List<String> starCast) {
-        this.starCast = starCast;
+    public void setCast(String cast) {
+        this.cast = cast;
     }
 
     public Double getRatings() {
@@ -122,12 +123,12 @@ public class Movie implements Serializable {
         this.ratings = ratings;
     }
 
-    public Integer getRatingsCount() {
-        return ratingsCount;
+    public String getVoteCount() {
+        return voteCount;
     }
 
-    public void setRatingsCount(Integer ratingsCount) {
-        this.ratingsCount = ratingsCount;
+    public void setVoteCount(String ratingsCount) {
+        this.voteCount = ratingsCount;
     }
 
     public String getGenre() {
@@ -136,5 +137,13 @@ public class Movie implements Serializable {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getVideo_key() {
+        return video_key;
+    }
+
+    public void setVideo_key(String video_key) {
+        this.video_key = video_key;
     }
 }
