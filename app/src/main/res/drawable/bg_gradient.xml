@@ -8,4 +8,5 @@
         android:endColor="@color/bg_color_end"
         android:startColor="@color/bg_color_start"
         android:type="linear" />
+
 </shape>
