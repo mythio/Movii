@@ -9,7 +9,7 @@
     tools:context=".activity.MovieActivity">
 
     <ImageView
-        android:id="@+id/image_view_poster_bg"
+        android:id="@+id/image_view_poster"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/text_view_year"
+            	android:id="@+id/text_view_release"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="true"
@@ -51,7 +51,7 @@
 
 
             <TextView
-                android:id="@+id/text_view_title1"
+            	android:id="@+id/text_view_title_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
@@ -59,7 +59,7 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:id="@+id/text_view_title2"
+            	android:id="@+id/text_view_title_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
@@ -74,7 +74,7 @@
                 android:layout_height="12dp" />
 
             <TextView
-                android:id="@+id/text_view_length"
+            	android:id="@+id/text_view_runtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
@@ -86,7 +86,7 @@
                 android:layout_height="12dp" />
 
             <TextView
-                android:id="@+id/text_view_overview"
+            	android:id="@+id/text_view_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
@@ -103,7 +103,7 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.AppCompatRatingBar
-                    android:id="@+id/rating_bar_stars"
+                    android:id="@+id/rating_bar"
                     style="@style/Base.Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                     android:layout_height="0dp" />
 
                 <TextView
-                    android:id="@+id/text_view_ratings"
+                	android:id="@+id/text_view_rate_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -141,7 +141,7 @@
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/text_view_stars"
+            	android:id="@+id/text_view_cast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tom Cruise | Henry Cavill | Rebecca Ferguson"
@@ -152,7 +152,7 @@
                 android:layout_height="16dp" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_similar_movie"
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:background="@drawable/bg_similar_movies_list"

@@ -1,8 +1,9 @@
 package com.mythio.movii.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Movie {
+public class Movie implements Serializable {
     private String imdb;
     private String poster_path;
     private String title1;
@@ -23,12 +24,14 @@ public class Movie {
         this.title2 = title2;
     }
 
-    public Movie(String poster_path, String title1, String title2, String tmdb_id, String genre, String release_date) {
+    public Movie(String poster_path, String title1, String title2, String tmdb_id, String genre, String overview, String release_date) {
         this.poster_path = poster_path;
         this.title1 = title1;
         this.title2 = title2;
         this.tmdb_id = tmdb_id;
         this.genre = genre;
+        this.overview = overview;
+        this.release_date = release_date;
     }
 
     public String getImdb() {

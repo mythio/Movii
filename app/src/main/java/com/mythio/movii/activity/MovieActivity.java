@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,28 +34,38 @@ public class MovieActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     private RecyclerView recyclerView;
 
+    private ImageView mImageViewPoster;
+    private TextView mTextViewRelease;
+    private TextView mTextViewGenre;
+    private TextView mTextViewTitle1;
+    private TextView mTextViewTitle2;
+    private TextView mTextViewRunTime;
+    private TextView mTextViewOverview;
+    private RatingBar mRatingBar;
+    private TextView mTextViewRateCount;
+    private TextView mTextViewCast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
 
-        final ImageView mImageView = findViewById(R.id.image_view_poster_bg);
+        initView();
 
-        mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                YouTubeIntents.canResolvePlayVideoIntent(MovieActivity.this);
-                startActivity(new Intent(MovieActivity.this, YoutubePlayer.class));
-            }
-        });
+//        mImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                YouTubeIntents.canResolvePlayVideoIntent(MovieActivity.this);
+//                startActivity(new Intent(MovieActivity.this, YoutubePlayer.class));
+//            }
+//        });
 
         mRequestQueue = Volley.newRequestQueue(this);
         mMovies = new ArrayList<>();
-        recyclerView = findViewById(R.id.recycler_view_similar_movie);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        RatingBar ratingBar = findViewById(R.id.rating_bar_stars);
+        RatingBar ratingBar = findViewById(R.id.rating_bar);
 
         ratingBar.setRating((float) 4.5);
 
@@ -63,6 +74,25 @@ public class MovieActivity extends AppCompatActivity {
         Picasso.get().load(url).placeholder(R.color.colorAccent).resize(2000, 3000).centerInside().into(mImageView);
 
         parse();
+    }
+
+    private void initView() {
+
+        Intent intent = getIntent();
+
+        mImageViewPoster = findViewById(R.id.image_view_poster);
+        mTextViewRelease = findViewById(R.id.text_view_release);
+        mTextViewGenre = findViewById(R.id.text_view_genre);
+        mTextViewTitle1 = findViewById(R.id.text_view_title_1);
+        mTextViewTitle2 = findViewById(R.id.text_view_title_2);
+        mTextViewRunTime = findViewById(R.id.text_view_runtime);
+        mTextViewOverview = findViewById(R.id.text_view_overview);
+        mRatingBar = findViewById(R.id.rating_bar);
+        mTextViewRateCount = findViewById(R.id.text_view_rate_count);
+        mTextViewCast = findViewById(R.id.text_view_cast);
+        recyclerView = findViewById(R.id.recycler_view);
+
+
     }
 
     private void parse() {

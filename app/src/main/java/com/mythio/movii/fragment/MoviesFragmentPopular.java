@@ -122,6 +122,7 @@ public class MoviesFragmentPopular extends Fragment {
                 title2,
                 id,
                 genre == null ? null : genre.toString(),
+                overview,
                 release_date
         ));
     }

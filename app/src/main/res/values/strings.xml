@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Movii</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_activity_start">StartActivity</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
 </resources>
