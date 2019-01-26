@@ -25,7 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.youtube.player.YouTubeIntents;
 import com.mythio.movii.R;
-import com.mythio.movii.Singleton.VolleySingletonTMDB;
+import com.mythio.movii.adapter.VolleySingleton;
 import com.mythio.movii.adapter.SimilarMovieAdapter;
 import com.mythio.movii.model.Movie;
 import com.squareup.picasso.Picasso;
@@ -71,7 +71,7 @@ public class MovieActivity extends AppCompatActivity {
 
         movie = (Movie) getIntent().getSerializableExtra("EXTRA");
 
-        mRequestQueue = VolleySingletonTMDB.getInstance(this).getmRequestQueue();
+        mRequestQueue = VolleySingleton.getInstance(this).getmRequestQueue();
 
         parseDataTMDB();
         parseDataOMDB();

@@ -1,21 +1,21 @@
-package com.mythio.movii.Singleton;
+package com.mythio.movii.adapter;
 
 import android.content.Context;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class VolleySingletonTMDB {
-    private static VolleySingletonTMDB mInstance;
+public class VolleySingleton {
+    private static VolleySingleton mInstance;
     private RequestQueue mRequestQueue;
 
-    private VolleySingletonTMDB(Context context) {
+    private VolleySingleton(Context context) {
         mRequestQueue = Volley.newRequestQueue(context.getApplicationContext());
     }
 
-    public static synchronized VolleySingletonTMDB getInstance(Context context) {
+    public static synchronized VolleySingleton getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new VolleySingletonTMDB(context);
+            mInstance = new VolleySingleton(context);
         }
 
         return mInstance;
