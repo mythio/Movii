@@ -93,7 +93,7 @@ public class MoviesFragmentPopular extends Fragment {
         String id = String.valueOf(jsonObject.getInt("id"));
         JSONArray genreArr = jsonObject.getJSONArray("genre_ids");
         String release_date = jsonObject.getString("release_date");
-        String overview = jsonObject.getString("overview");
+//        String overview = jsonObject.getString("overview");
 
         StringBuilder genre = null;
         String[] title_arr = title.split(": ");
@@ -122,7 +122,6 @@ public class MoviesFragmentPopular extends Fragment {
                 title2,
                 id,
                 genre == null ? null : genre.toString(),
-                overview,
                 release_date
         ));
     }

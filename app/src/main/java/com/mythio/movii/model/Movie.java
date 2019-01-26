@@ -25,7 +25,7 @@ public class Movie implements Serializable {
         this.title2 = title2;
     }
 
-    public Movie(String poster_path, String title1, String title2, String tmdb_id, String genre, String overview, String release_date) {
+    public Movie(String poster_path, String title1, String title2, String tmdb_id, String genre, String overview) {
         this.poster_path = poster_path;
         this.title1 = title1;
         this.title2 = title2;
