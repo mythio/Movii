@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,10 +26,10 @@
         <ImageView
             android:id="@+id/image_view_play"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_play_circle"
             android:alpha="1"
+            android:src="@drawable/ic_play_circle"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +55,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-            	android:id="@+id/text_view_release"
+                android:id="@+id/text_view_release"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="true"
@@ -64,34 +65,31 @@
                 android:id="@+id/text_view_genre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                />
-
+                android:includeFontPadding="false" />
 
             <TextView
-            	android:id="@+id/text_view_title_1"
+                android:id="@+id/text_view_title_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:textSize="36dp" />
 
             <TextView
-                android:textStyle="bold"
-            	android:id="@+id/text_view_title_2"
+                android:id="@+id/text_view_title_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
                 android:includeFontPadding="false"
                 android:textAllCaps="true"
                 android:textSize="16dp"
-                android:visibility="visible" />
+                android:textStyle="bold" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="12dp" />
 
             <TextView
-            	android:id="@+id/text_view_length"
+                android:id="@+id/text_view_length"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
@@ -102,7 +100,7 @@
                 android:layout_height="12dp" />
 
             <TextView
-            	android:id="@+id/text_view_overview"
+                android:id="@+id/text_view_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
@@ -127,14 +125,15 @@
                     android:outlineProvider="paddedBounds"
                     android:progressBackgroundTint="#FFFFFF"
                     android:progressTint="#FECE00"
-                    android:stepSize="0.5" />
+                    android:stepSize="0.5"
+                    android:visibility="invisible" />
 
                 <Space
                     android:layout_width="12dp"
                     android:layout_height="0dp" />
 
                 <TextView
-                	android:id="@+id/text_view_vote_count"
+                    android:id="@+id/text_view_vote_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -148,16 +147,35 @@
                 android:layout_height="18dp" />
 
             <TextView
+                android:id="@+id/text_view_cast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:textSize="16dp" />
+                android:text="CAST"
+                android:textSize="16dp"
+                android:visibility="invisible" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="4dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_cast"
+                android:layout_width="match_parent"
+                android:layout_height="64dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="4dp" />
 
             <TextView
-            	android:id="@+id/text_view_cast"
+                android:id="@+id/text_view_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12dp" />
+                android:layout_gravity="end"
+                android:text="MORE"
+                android:textSize="12dp"
+                android:visibility="invisible" />
 
             <Space
                 android:layout_width="0dp"

@@ -25,8 +25,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.youtube.player.YouTubeIntents;
 import com.mythio.movii.R;
-import com.mythio.movii.adapter.VolleySingleton;
+import com.mythio.movii.adapter.CastAdapter;
 import com.mythio.movii.adapter.SimilarMovieAdapter;
+import com.mythio.movii.adapter.VolleySingleton;
 import com.mythio.movii.model.Movie;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -36,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.mythio.movii.constant.constants.OMDB_GET;
 import static com.mythio.movii.constant.constants.OMDB_GET_END;
@@ -45,8 +47,10 @@ import static com.mythio.movii.constant.constants.TMDB_IMAGE;
 public class MovieActivity extends AppCompatActivity {
 
     private ArrayList<Movie> mMovies;
+    private ArrayList<String> cast;
     private RequestQueue mRequestQueue;
     private RecyclerView recyclerView;
+    private RecyclerView recyclerViewCast;
     private Animation fadeIn;
     private Movie movie;
 
@@ -61,6 +65,7 @@ public class MovieActivity extends AppCompatActivity {
     private RatingBar mRatingBar;
     private TextView mTextViewVoteCount;
     private TextView mTextViewCast;
+    private TextView mTextViewMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +80,7 @@ public class MovieActivity extends AppCompatActivity {
 
         parseDataTMDB();
         parseDataOMDB();
+        parseCast();
         parseRecyclerView();
 
         mImageViewPlay.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +93,19 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
 
+        mTextViewMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        cast = new ArrayList<>();
         mMovies = new ArrayList<>();
+
+        recyclerViewCast.setHasFixedSize(true);
+        recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
@@ -132,10 +150,13 @@ public class MovieActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             String length = response.getString("Runtime");
-                            movie.setCast(response.getString("Actors"));
+                            String cast = response.getString("Actors");
                             movie.setImdb(response.getString("imdbRating"));
                             movie.setVoteCount(response.getString("imdbVotes"));
                             movie.setOverview(response.getString("Plot"));
+                            movie.setRelease_date(response.getString("Year"));
+
+                            movie.setCast(cast.replace(", ", "  |  "));
 
                             if (length.equals("N/A")) {
                                 movie.setLength(length);
@@ -148,6 +169,38 @@ public class MovieActivity extends AppCompatActivity {
                             }
 
                             updateView();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mRequestQueue.add(jsonObjectRequest);
+    }
+
+    private void parseCast() {
+        String url = "https://api.themoviedb.org/3/movie/" + movie.getTmdb_id() + "/credits?api_key=a781dd694991f0ea8dcf9050ec3e7a20";
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("cast");
+
+                            for (int i = 0; i < jsonArray.length(); ++i) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String castt = jsonObject.getString("profile_path");
+                                if (!castt.equals("null")) {
+                                    cast.add(castt);
+                                }
+                            }
+
+                            CastAdapter adapter = new CastAdapter(cast, getApplicationContext());
+                            recyclerViewCast.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -219,10 +272,13 @@ public class MovieActivity extends AppCompatActivity {
         mRatingBar = findViewById(R.id.rating_bar);
         mTextViewVoteCount = findViewById(R.id.text_view_vote_count);
         mTextViewCast = findViewById(R.id.text_view_cast);
+        mTextViewMore = findViewById(R.id.text_view_more);
+        recyclerViewCast = findViewById(R.id.recycler_view_cast);
+        mTextViewMore = findViewById(R.id.text_view_more);
         recyclerView = findViewById(R.id.recycler_view);
         fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator());
-        fadeIn.setDuration(3000);
+        fadeIn.setDuration(1500);
     }
 
     private void updateView() {
@@ -232,18 +288,20 @@ public class MovieActivity extends AppCompatActivity {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 mImageViewPoster.setImageBitmap(bitmap);
+                mImageViewPoster.setAlpha(0f);
+                mImageViewPoster.animate().setDuration(1000).alpha(1f).start();
 
                 Palette.from(bitmap)
                         .generate(new Palette.PaletteAsyncListener() {
                             @Override
                             public void onGenerated(Palette palette) {
-                                Palette.Swatch textSwatch = palette.getDarkMutedSwatch();
+                                Palette.Swatch textSwatch = palette.getMutedSwatch();
 
                                 mImageViewPlay.setVisibility(View.VISIBLE);
                                 fadeIn.reset();
 
                                 mImageViewPlay.setAnimation(fadeIn);
-                                mImageViewPlay.setImageTintList(ColorStateList.valueOf(textSwatch.getRgb()));
+                                mImageViewPlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
                             }
                         });
             }
@@ -263,15 +321,14 @@ public class MovieActivity extends AppCompatActivity {
                 .resize(2000, 3000)
                 .centerInside()
                 .into(target);
+
         mImageViewPoster.setTag(target);
-//                .into(mImageViewPoster);
 
         mTextViewRelease.setText(movie.getRelease_date());
         mTextViewGenre.setText(movie.getGenre());
         mTextViewLength.setText(movie.getLength());
         mTextViewOverview.setText(movie.getOverview());
         mTextViewVoteCount.setText(movie.getVoteCount());
-        mTextViewCast.setText(movie.getCast());
 
         if (movie.getTitle2().equals("")) {
             mTextViewTitle1.setText(movie.getTitle1());
@@ -291,8 +348,14 @@ public class MovieActivity extends AppCompatActivity {
             mRatingBar.setRating(Float.parseFloat(movie.getImdb()));
         }
 
-        mRatingBar.setAnimation(fadeIn);
-        mImageViewPlay.setAnimation(fadeIn);
+        mImageViewPoster.setVisibility(View.VISIBLE);
+        mRatingBar.setVisibility(View.VISIBLE);
+        mTextViewCast.setVisibility(View.VISIBLE);
+        mTextViewMore.setVisibility(View.VISIBLE);
+
+        mRatingBar.startAnimation(fadeIn);
+        mImageViewPoster.startAnimation(fadeIn);
+        mImageViewPlay.startAnimation(fadeIn);
         mTextViewTitle1.startAnimation(fadeIn);
         mTextViewTitle2.startAnimation(fadeIn);
         mTextViewRelease.startAnimation(fadeIn);
@@ -301,6 +364,7 @@ public class MovieActivity extends AppCompatActivity {
         mTextViewOverview.startAnimation(fadeIn);
         mRatingBar.startAnimation(fadeIn);
         mTextViewVoteCount.startAnimation(fadeIn);
+        mTextViewMore.startAnimation(fadeIn);
         mTextViewCast.startAnimation(fadeIn);
     }
 }

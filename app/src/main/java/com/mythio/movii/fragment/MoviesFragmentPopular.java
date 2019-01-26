@@ -50,8 +50,8 @@ public class MoviesFragmentPopular extends Fragment {
         mRequestQueue = Volley.newRequestQueue(getContext());
         mMovies = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//
         parse();
     }
 
@@ -66,9 +66,7 @@ public class MoviesFragmentPopular extends Fragment {
                             JSONArray jsonArray = response.getJSONArray("results");
 
                             for (int i = 0; i < jsonArray.length(); ++i) {
-
                                 addToList(jsonArray.getJSONObject(i));
-
                             }
 
                             MovieAdapter adapter = new MovieAdapter(getContext(), mMovies);
@@ -93,7 +91,6 @@ public class MoviesFragmentPopular extends Fragment {
         String id = String.valueOf(jsonObject.getInt("id"));
         JSONArray genreArr = jsonObject.getJSONArray("genre_ids");
         String release_date = jsonObject.getString("release_date");
-//        String overview = jsonObject.getString("overview");
 
         StringBuilder genre = null;
         String[] title_arr = title.split(": ");

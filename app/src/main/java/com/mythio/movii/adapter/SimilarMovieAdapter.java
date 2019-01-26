@@ -46,12 +46,12 @@ public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapte
         return mMovieList.size();
     }
 
-    public class MovieHolder extends RecyclerView.ViewHolder {
+    class MovieHolder extends RecyclerView.ViewHolder {
 
         private ImageView mImageViewPoster;
         private TextView mTextViewTitle;
 
-        public MovieHolder(@NonNull View itemView) {
+        MovieHolder(@NonNull View itemView) {
             super(itemView);
 
             mImageViewPoster = itemView.findViewById(R.id.list_image_movie);
