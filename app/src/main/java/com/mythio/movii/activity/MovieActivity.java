@@ -23,6 +23,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bumptech.glide.Glide;
 import com.google.android.youtube.player.YouTubeIntents;
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.CastAdapter;
@@ -190,7 +191,7 @@ public class MovieActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("cast");
-
+                            cast.clear();
                             for (int i = 0; i < jsonArray.length(); ++i) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String castt = jsonObject.getString("profile_path");
@@ -316,11 +317,13 @@ public class MovieActivity extends AppCompatActivity {
             }
         };
 
-        Picasso.get().load(url)
-                .placeholder(R.color.colorAccent)
-                .resize(2000, 3000)
-                .centerInside()
-                .into(target);
+//        Picasso.get().load(url)
+//                .placeholder(R.color.colorAccent)
+//                .resize(2000, 3000)
+//                .centerInside()
+//                .into(target);
+
+        Glide.with(getApplicationContext()).load(url).into(mImageViewPoster);
 
         mImageViewPoster.setTag(target);
 

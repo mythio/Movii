@@ -11,16 +11,15 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.MovieActivity;
 import com.mythio.movii.model.Movie;
-import com.mythio.movii.model.Rounded;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.List;
-
-import static com.mythio.movii.model.Rounded.Corners.ALL;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
 
@@ -54,15 +53,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         movieHolder.mTextViewGenre.setText(movie.getGenre());
         movieHolder.mRatingBar.setRating((float) 4.5);
-        String url = "https://image.tmdb.org/t/p/w200";
+        String url = "https://image.tmdb.org/t/p/w100";
         url += movie.getPoster_path();
-
-        Transformation transformation = new Rounded(8, ALL);
-
-        Picasso.get().load(url)
-                .resize(100, 150)
-                .centerCrop()
-                .transform(transformation)
+        Glide.with(mContext).load(url)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(12)))
                 .into(movieHolder.mImageViewPoster);
     }
 

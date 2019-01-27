@@ -9,9 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mythio.movii.model.Movie;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.mythio.movii.R;
-import com.squareup.picasso.Picasso;
+import com.mythio.movii.model.Movie;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapte
         movieHolder.mTextViewTitle.setText(movie.getTitle1());
         String url = "https://image.tmdb.org/t/p/w500";
         url += movie.getPoster_path();
-        Picasso.get().load(url).resize(120,180).centerCrop().into(movieHolder.mImageViewPoster);
+        Glide.with(mContext).load(url).transition(DrawableTransitionOptions.withCrossFade()).into(movieHolder.mImageViewPoster);
     }
 
     @Override

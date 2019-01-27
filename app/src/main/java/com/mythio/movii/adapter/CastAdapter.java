@@ -1,21 +1,19 @@
 package com.mythio.movii.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.mythio.movii.R;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.mythio.movii.constant.constants.TMDB_IMAGE;
 
@@ -36,9 +34,15 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CastHolder castHolder, int i) {
+    public void onBindViewHolder(@NonNull final CastHolder castHolder, int i) {
         String url = TMDB_IMAGE + "w185" + cast.get(i);
-        Picasso.get().load(url).into(castHolder.target);
+//        Animation fadeIn = new AlphaAnimation(0, 1);
+//        fadeIn.setInterpolator(new DecelerateInterpolator());
+//        fadeIn.setDuration(100);
+//        fadeIn.reset();
+//        castHolder.imageView.startAnimation(fadeIn);
+        Glide.with(mContext).load(url).apply(RequestOptions.circleCropTransform()).transition(DrawableTransitionOptions.withCrossFade()).into(castHolder.imageView);
+
     }
 
     @Override
@@ -48,29 +52,11 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
 
     class CastHolder extends RecyclerView.ViewHolder {
 
-        private CircleImageView imageView;
-        Target target;
+        private ImageView imageView;
 
         CastHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.cast);
-            target = new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    imageView.setImageBitmap(bitmap);
-                    imageView.setAlpha(0f);
-                    imageView.animate().setDuration(1000).alpha(1f).start();
-                }
-
-                @Override
-                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-                }
-
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                }
-            };
         }
     }
 }
