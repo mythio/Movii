@@ -28,6 +28,7 @@ import com.mythio.movii.R;
 import com.mythio.movii.adapter.CastAdapter;
 import com.mythio.movii.adapter.SimilarMovieAdapter;
 import com.mythio.movii.adapter.VolleySingleton;
+import com.mythio.movii.constant.constants;
 import com.mythio.movii.model.Movie;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -38,11 +39,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
-import static com.mythio.movii.constant.constants.OMDB_GET;
-import static com.mythio.movii.constant.constants.OMDB_GET_END;
-import static com.mythio.movii.constant.constants.TMDB_API_KEY;
-import static com.mythio.movii.constant.constants.TMDB_IMAGE;
 
 public class MovieActivity extends AppCompatActivity {
 
@@ -111,7 +107,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void parseDataTMDB() {
-        String url = "https://api.themoviedb.org/3/movie/" + movie.getTmdb_id() + "/videos?api_key=" + TMDB_API_KEY;
+        String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/videos?api_key=" + constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -142,7 +138,7 @@ public class MovieActivity extends AppCompatActivity {
             title = movie.getTitle1() + ": " + movie.getTitle2();
         }
 
-        String url = OMDB_GET + Uri.encode(title) + OMDB_GET_END + "&plot=short";
+        String url = constants.OMDB_GET + Uri.encode(title) + constants.OMDB_GET_END;
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -183,7 +179,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void parseCast() {
-        String url = "https://api.themoviedb.org/3/movie/" + movie.getTmdb_id() + "/credits?api_key=a781dd694991f0ea8dcf9050ec3e7a20";
+        String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/credits?api_key=" + constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -215,7 +211,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void parseRecyclerView() {
-        String url = "https://api.themoviedb.org/3/movie/" + movie.getTmdb_id() + "/similar?api_key=a781dd694991f0ea8dcf9050ec3e7a20";
+        String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/similar?api_key=" + constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -282,7 +278,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void updateView() {
-        String url = TMDB_IMAGE + "original" + movie.getPoster_path();
+        String url = constants.TMDB_IMAGE + "original" + movie.getPoster_path();
 
         Target target = new Target() {
             @Override

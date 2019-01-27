@@ -22,6 +22,7 @@
         android:layout_height="48dp"
         android:layout_below="@+id/text_view_label_movie"
         app:tabIndicatorColor="#f00"
+        app:tabMode="scrollable"
         app:tabIndicatorHeight="10dp"
         app:tabBackground="@drawable/tab_bg"
         app:tabTextColor="@android:color/white" />

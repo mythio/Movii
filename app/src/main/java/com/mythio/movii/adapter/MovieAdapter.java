@@ -20,6 +20,7 @@ import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
+import static com.mythio.movii.constant.constants.TMDB_IMAGE;
 import static com.mythio.movii.model.Rounded.Corners.ALL;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
@@ -35,7 +36,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
     @NonNull
     @Override
     public MovieHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_movie_movie_layout, viewGroup, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_movies, viewGroup, false);
         return new MovieHolder(view);
     }
 
@@ -54,8 +55,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         movieHolder.mTextViewGenre.setText(movie.getGenre());
         movieHolder.mRatingBar.setRating((float) 4.5);
-        String url = "https://image.tmdb.org/t/p/w154";
-        url += movie.getPoster_path();
+        String url = TMDB_IMAGE + "w154" + movie.getPoster_path();
 
         Transformation transformation = new Rounded(16, ALL);
 

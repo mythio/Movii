@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static com.mythio.movii.constant.constants.TMDB_IMAGE;
+
 public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapter.MovieHolder> {
 
     private Context mContext;
@@ -28,7 +30,7 @@ public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapte
     @NonNull
     @Override
     public MovieHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_movie, viewGroup, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_movie_similar, viewGroup, false);
         return new MovieHolder(view);
     }
 
@@ -36,9 +38,8 @@ public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapte
     public void onBindViewHolder(@NonNull MovieHolder movieHolder, int i) {
         Movie movie = mMovieList.get(i);
         movieHolder.mTextViewTitle.setText(movie.getTitle1());
-        String url = "https://image.tmdb.org/t/p/w500";
-        url += movie.getPoster_path();
-        Picasso.get().load(url).resize(120,180).centerCrop().into(movieHolder.mImageViewPoster);
+        String url = TMDB_IMAGE + "w500" + movie.getPoster_path();
+        Picasso.get().load(url).resize(120, 180).centerCrop().into(movieHolder.mImageViewPoster);
     }
 
     @Override

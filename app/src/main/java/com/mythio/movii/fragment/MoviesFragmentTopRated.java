@@ -31,8 +31,7 @@ import java.util.ArrayList;
 import static com.mythio.movii.constant.constants.GENRE;
 import static com.mythio.movii.constant.constants.TMDB_API_KEY;
 
-public class MoviesFragmentPopular extends Fragment {
-
+public class MoviesFragmentTopRated extends Fragment {
     private ArrayList<Movie> mMovies;
     private RequestQueue mRequestQueue;
     private RecyclerView recyclerView;
@@ -51,7 +50,7 @@ public class MoviesFragmentPopular extends Fragment {
     }
 
     private void parse() {
-        String url = constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
+        String url = constants.TMDB_MOVIES + "top_rated?api_key=" + TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
