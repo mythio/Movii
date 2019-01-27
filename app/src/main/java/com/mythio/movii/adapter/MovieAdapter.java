@@ -54,14 +54,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         movieHolder.mTextViewGenre.setText(movie.getGenre());
         movieHolder.mRatingBar.setRating((float) 4.5);
-        String url = "https://image.tmdb.org/t/p/w200";
+        String url = "https://image.tmdb.org/t/p/w154";
         url += movie.getPoster_path();
 
-        Transformation transformation = new Rounded(8, ALL);
+        Transformation transformation = new Rounded(16, ALL);
+
 
         Picasso.get().load(url)
-                .resize(100, 150)
-                .centerCrop()
+                .fit()
                 .transform(transformation)
                 .into(movieHolder.mImageViewPoster);
     }
