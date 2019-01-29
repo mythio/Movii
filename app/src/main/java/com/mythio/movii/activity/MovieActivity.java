@@ -326,8 +326,9 @@ public class MovieActivity extends AppCompatActivity {
             }
         };
 
-        Picasso.get().load(url)
-                .placeholder(R.color.colorAccent)
+        Picasso.get()
+                .load(url)
+                .placeholder(R.drawable.movie_placeholder)
                 .resize(2000, 3000)
                 .centerInside()
                 .into(target);

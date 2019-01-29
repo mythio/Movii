@@ -59,9 +59,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         Transformation transformation = new Rounded(16, ALL);
 
-        Picasso.get().load(url)
+        Picasso.get()
+                .load(url)
                 .fit()
                 .transform(transformation)
+                .placeholder(R.drawable.movie_placeholder)
                 .into(movieHolder.mImageViewPoster);
     }
 

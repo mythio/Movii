@@ -39,7 +39,10 @@ public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapte
         Movie movie = mMovieList.get(i);
         movieHolder.mTextViewTitle.setText(movie.getTitle1());
         String url = TMDB_IMAGE + "w500" + movie.getPoster_path();
-        Picasso.get().load(url).resize(120, 180).centerCrop().into(movieHolder.mImageViewPoster);
+        Picasso.get()
+                .load(url)
+                .placeholder(R.drawable.movie_placeholder)
+                .into(movieHolder.mImageViewPoster);
     }
 
     @Override

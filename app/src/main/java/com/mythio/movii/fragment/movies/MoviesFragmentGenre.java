@@ -1,4 +1,4 @@
-package com.mythio.movii.fragment;
+package com.mythio.movii.fragment.movies;
 
 import android.support.v4.app.Fragment;
 

@@ -1,4 +1,4 @@
-package com.mythio.movii.fragment;
+package com.mythio.movii.fragment.movies;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import static com.mythio.movii.constant.constants.GENRE;
 import static com.mythio.movii.constant.constants.TMDB_API_KEY;
 
-public class MoviesFragmentLatest extends Fragment {
+public class MoviesFragmentTrending extends Fragment {
     private ArrayList<Movie> mMovies;
     private RequestQueue mRequestQueue;
     private RecyclerView recyclerView;
@@ -50,7 +50,7 @@ public class MoviesFragmentLatest extends Fragment {
     }
 
     private void parse() {
-        String url = constants.TMDB_MOVIES + "upcoming?api_key=" + TMDB_API_KEY;
+        String url = constants.TMDB_MOVIES + "trending?api_key=" + TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override

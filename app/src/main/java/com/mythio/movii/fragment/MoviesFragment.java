@@ -11,10 +11,14 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 
 import com.mythio.movii.R;
+import com.mythio.movii.fragment.movies.MoviesFragmentGenre;
+import com.mythio.movii.fragment.movies.MoviesFragmentLatest;
+import com.mythio.movii.fragment.movies.MoviesFragmentPopular;
+import com.mythio.movii.fragment.movies.MoviesFragmentTopRated;
+import com.mythio.movii.fragment.movies.MoviesFragmentTrending;
+import com.mythio.movii.fragment.movies.MoviesFragmentUpcoming;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +31,6 @@ public class MoviesFragment extends Fragment {
         ViewPager viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         TabLayout tabs = view.findViewById(R.id.tabs);
-//        tabs.animate();
-        Animation animation = new AlphaAnimation(0, 1);
-        animation.setDuration(200);
-        animation.reset();
-        tabs.setAnimation(animation);
         tabs.setupWithViewPager(viewPager);
         return view;
     }
@@ -45,6 +44,7 @@ public class MoviesFragment extends Fragment {
         adapter.addFragment(new MoviesFragmentTopRated(), "Top Rated");
         adapter.addFragment(new MoviesFragmentGenre(), "Genre");
         viewPager.setAdapter(adapter);
+        viewPager.stopNestedScroll();
         viewPager.setOffscreenPageLimit(3);
     }
 
