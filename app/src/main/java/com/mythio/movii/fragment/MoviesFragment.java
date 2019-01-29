@@ -11,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 
 import com.mythio.movii.R;
 
@@ -25,20 +27,25 @@ public class MoviesFragment extends Fragment {
         ViewPager viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         TabLayout tabs = view.findViewById(R.id.tabs);
+//        tabs.animate();
+        Animation animation = new AlphaAnimation(0, 1);
+        animation.setDuration(200);
+        animation.reset();
+        tabs.setAnimation(animation);
         tabs.setupWithViewPager(viewPager);
-        tabs.setSelectedTabIndicator(R.color.pixel_blue);
         return view;
     }
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new MoviesFragmentPopular("S"), "Popular");
+        adapter.addFragment(new MoviesFragmentPopular(), "Popular");
         adapter.addFragment(new MoviesFragmentUpcoming(), "Upcoming");
         adapter.addFragment(new MoviesFragmentLatest(), "Latest");
         adapter.addFragment(new MoviesFragmentTrending(), "Trending");
         adapter.addFragment(new MoviesFragmentTopRated(), "Top Rated");
         adapter.addFragment(new MoviesFragmentGenre(), "Genre");
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
     }
 
     static class Adapter extends FragmentPagerAdapter {

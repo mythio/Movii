@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
@@ -75,9 +74,9 @@ public class MovieActivity extends AppCompatActivity {
         mRequestQueue = VolleySingleton.getInstance(this).getmRequestQueue();
 
         parseDataTMDB();
-        parseDataOMDB();
         parseCast();
         parseRecyclerView();
+        parseDataTMDBVideo();
 
         mImageViewPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +106,28 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void parseDataTMDB() {
+        String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/external_ids?api_key=" + constants.TMDB_API_KEY;
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            movie.setImdb_id(response.getString("imdb_id"));
+                            parseDataOMDB();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mRequestQueue.add(jsonObjectRequest);
+    }
+
+    private void parseDataTMDBVideo() {
         String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/videos?api_key=" + constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -131,14 +152,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     public void parseDataOMDB() {
-        String title;
-        if (movie.getTitle2().equals("")) {
-            title = movie.getTitle1();
-        } else {
-            title = movie.getTitle1() + ": " + movie.getTitle2();
-        }
-
-        String url = constants.OMDB_GET + Uri.encode(title) + constants.OMDB_GET_END;
+        String url = constants.OMDB_GET + "&i=" + movie.getImdb_id();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {

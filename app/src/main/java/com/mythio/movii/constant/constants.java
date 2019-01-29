@@ -11,11 +11,10 @@ public class constants {
     public static final String OMDB_API_KEY = "e403207b";
 
     //    API endpoints
-    public static final String TMDB_IMAGE = "https://image.tmdb.org/t/p";
+    public static final String TMDB_IMAGE = "https://image.tmdb.org/t/p/";
     public static final String TMDB_MOVIES = "https://api.themoviedb.org/3/movie/";
     public static final String TMDB_TV = "https://api.themoviedb.org/3/tv/popular/";
-    public static final String OMDB_GET = "https://www.omdbapi.com/?apikey=e403207b&t=";
-    public static final String OMDB_GET_END = "&plot=short";
+    public static final String OMDB_GET = "https://www.omdbapi.com/?apikey=e403207b&";
 
     public static final Map<Integer, String> GENRE = new HashMap<Integer, String>() {{
         put(12, "Adventure");

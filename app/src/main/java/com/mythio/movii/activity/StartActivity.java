@@ -7,10 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.mythio.movii.R;
 import com.mythio.movii.fragment.MoviesFragment;
 import com.mythio.movii.fragment.ProfileFragment;
 import com.mythio.movii.fragment.SeriesFragment;
-import com.mythio.movii.R;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -23,7 +23,6 @@ public class StartActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesFragment()).commit();
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

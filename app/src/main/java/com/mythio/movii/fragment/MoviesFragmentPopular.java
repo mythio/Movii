@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.mythio.movii.constant.constants.GENRE;
 import static com.mythio.movii.constant.constants.TMDB_API_KEY;
@@ -41,10 +42,11 @@ public class MoviesFragmentPopular extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movies_popular, container, false);
-        mRequestQueue = Volley.newRequestQueue(getContext());
+        mRequestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
         mMovies = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         parse();
         return view;
@@ -52,6 +54,7 @@ public class MoviesFragmentPopular extends Fragment {
 
     private void parse() {
         String url = constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
+        Log.d("tag_tag", url);
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
