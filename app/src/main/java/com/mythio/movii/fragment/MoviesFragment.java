@@ -32,6 +32,7 @@ public class MoviesFragment extends Fragment {
         setupViewPager(viewPager);
         TabLayout tabs = view.findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+
         return view;
     }
 

@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/text_view_label_movie"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
@@ -24,8 +24,8 @@
         android:layout_marginBottom="16dp"
         app:tabBackground="@android:color/black"
         app:tabIndicatorColor="@color/pixel_blue"
-        app:tabSelectedTextColor="@color/pixel_blue"
         app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/pixel_blue"
         app:tabTextColor="@android:color/white" />
 
     <android.support.v4.view.ViewPager
