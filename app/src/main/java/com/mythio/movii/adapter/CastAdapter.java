@@ -19,17 +19,23 @@ import static com.mythio.movii.constant.constants.TMDB_IMAGE;
 public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
     private List<String> cast;
     private Context mContext;
+    private final ListItemClickListener mOnClickListener;
 
-    public CastAdapter(List<String> cast, Context mContext) {
+    public interface ListItemClickListener{
+        void onClick(View view, int position);
+    }
+
+    public CastAdapter(List<String> cast, Context mContext, ListItemClickListener mOnClickListener) {
         this.cast = cast;
         this.mContext = mContext;
+        this.mOnClickListener = mOnClickListener;
     }
 
     @NonNull
     @Override
     public CastHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_movie_cast, viewGroup, false);
-        return new CastHolder(view);
+        return new CastHolder(view, mOnClickListener);
     }
 
     @Override
@@ -46,13 +52,19 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
         return cast.size();
     }
 
-    class CastHolder extends RecyclerView.ViewHolder {
+    class CastHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private CircleImageView imageView;
 
-        CastHolder(@NonNull View itemView) {
+        CastHolder(@NonNull View itemView, ListItemClickListener mOnClickListener) {
             super(itemView);
             imageView = itemView.findViewById(R.id.cast);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnClickListener.onClick(v, getAdapterPosition());
         }
     }
 }

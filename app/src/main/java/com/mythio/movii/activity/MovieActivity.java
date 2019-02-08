@@ -19,12 +19,11 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.youtube.player.YouTubeIntents;
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.CastAdapter;
+import com.mythio.movii.fragment.CastBottomSheetDialog;
 import com.mythio.movii.adapter.SimilarMovieAdapter;
 import com.mythio.movii.adapter.VolleySingleton;
 import com.mythio.movii.constant.constants;
@@ -78,21 +77,15 @@ public class MovieActivity extends AppCompatActivity {
         parseRecyclerView();
         parseDataTMDBVideo();
 
-        mImageViewPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MovieActivity.this, YoutubePlayerActivity.class);
-                intent.putExtra("EXTRAAA", movie.getVideo_key());
-                YouTubeIntents.canResolvePlayVideoIntent(MovieActivity.this);
-                startActivity(intent);
-            }
+        mImageViewPlay.setOnClickListener(v -> {
+            Intent intent = new Intent(MovieActivity.this, YoutubePlayerActivity.class);
+            intent.putExtra("EXTRAAA", movie.getVideo_key());
+            YouTubeIntents.canResolvePlayVideoIntent(MovieActivity.this);
+            startActivity(intent);
         });
 
-        mTextViewMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mTextViewMore.setOnClickListener(v -> {
 
-            }
         });
 
         cast = new ArrayList<>();
@@ -108,46 +101,30 @@ public class MovieActivity extends AppCompatActivity {
     private void parseDataTMDB() {
         String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/external_ids?api_key=" + constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            movie.setImdb_id(response.getString("imdb_id"));
-                            parseDataOMDB();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                response -> {
+                    try {
+                        movie.setImdb_id(response.getString("imdb_id"));
+                        parseDataOMDB();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
+                }, Throwable::printStackTrace);
         mRequestQueue.add(jsonObjectRequest);
     }
 
     private void parseDataTMDBVideo() {
         String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/videos?api_key=" + constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("results");
-                            JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            String video_key = jsonObject.getString("key");
-                            movie.setVideo_key(video_key);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                response -> {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("results");
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        String video_key = jsonObject.getString("key");
+                        movie.setVideo_key(video_key);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
+                }, Throwable::printStackTrace);
         mRequestQueue.add(jsonObjectRequest);
     }
 
@@ -155,117 +132,101 @@ public class MovieActivity extends AppCompatActivity {
         String url = constants.OMDB_GET + "&i=" + movie.getImdb_id();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String length = response.getString("Runtime");
-                            String cast = response.getString("Actors");
-                            movie.setImdb(response.getString("imdbRating"));
-                            movie.setVoteCount(response.getString("imdbVotes"));
-                            movie.setOverview(response.getString("Plot"));
-                            movie.setRelease_date(response.getString("Year"));
+                response -> {
+                    try {
+                        String length = response.getString("Runtime");
+                        String cast = response.getString("Actors");
+                        movie.setImdb(response.getString("imdbRating"));
+                        movie.setVoteCount(response.getString("imdbVotes"));
+                        movie.setOverview(response.getString("Plot"));
+                        movie.setRelease_date(response.getString("Year"));
 
-                            movie.setCast(cast.replace(", ", "  |  "));
+                        movie.setCast(cast.replace(", ", "  |  "));
 
-                            if (length.equals("N/A")) {
-                                movie.setLength(length);
-                            } else {
-                                String[] time = length.split(" ");
-                                Integer time1 = Integer.valueOf(time[0]);
-                                int HH = time1 / 60;
-                                int MM = time1 % 60;
-                                movie.setLength(HH + " h " + MM + " m");
-                            }
-
-                            updateView();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        if (length.equals("N/A")) {
+                            movie.setLength(length);
+                        } else {
+                            String[] time = length.split(" ");
+                            Integer time1 = Integer.valueOf(time[0]);
+                            int HH = time1 / 60;
+                            int MM = time1 % 60;
+                            movie.setLength(HH + " h " + MM + " m");
                         }
+
+                        updateView();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
+                }, Throwable::printStackTrace);
         mRequestQueue.add(jsonObjectRequest);
     }
 
     private void parseCast() {
         String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/credits?api_key=" + constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("cast");
+                response -> {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("cast");
 
-                            for (int i = 0; i < jsonArray.length(); ++i) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String castt = jsonObject.getString("profile_path");
-                                if (!castt.equals("null")) {
-                                    cast.add(castt);
-                                }
+                        for (int i = 0; i < jsonArray.length(); ++i) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String castt = jsonObject.getString("profile_path");
+                            if (!castt.equals("null")) {
+                                cast.add(castt);
                             }
-
-                            CastAdapter adapter = new CastAdapter(cast, getApplicationContext());
-                            recyclerViewCast.setAdapter(adapter);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
+
+                        CastAdapter.ListItemClickListener listener = (view, position) -> {
+                            CastBottomSheetDialog cast = new CastBottomSheetDialog();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("key", "My String");
+                            cast.setArguments(bundle);
+                            cast.show(getSupportFragmentManager(), "temp_tag");
+                        };
+
+                        CastAdapter adapter = new CastAdapter(cast, getApplicationContext(), listener);
+                        recyclerViewCast.setAdapter(adapter);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
+                }, Throwable::printStackTrace);
         mRequestQueue.add(jsonObjectRequest);
     }
 
     private void parseRecyclerView() {
         String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/similar?api_key=" + constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("results");
+                response -> {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("results");
 
-                            for (int i = 0; i < jsonArray.length(); ++i) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String title = jsonObject.getString("title");
-                                String poster_path = jsonObject.getString("poster_path");
+                        for (int i = 0; i < jsonArray.length(); ++i) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String title = jsonObject.getString("title");
+                            String poster_path = jsonObject.getString("poster_path");
 
-                                String[] title_arr = title.split(": ");
-                                String title1;
-                                String title2 = null;
-                                if (title_arr.length == 2) {
-                                    title1 = title_arr[0].trim();
-                                    title2 = title_arr[1].trim();
-                                } else {
-                                    title1 = title_arr[0];
-                                }
-
-                                mMovies.add(new Movie(
-                                        poster_path,
-                                        title1,
-                                        title2
-                                ));
+                            String[] title_arr = title.split(": ");
+                            String title1;
+                            String title2 = null;
+                            if (title_arr.length == 2) {
+                                title1 = title_arr[0].trim();
+                                title2 = title_arr[1].trim();
+                            } else {
+                                title1 = title_arr[0];
                             }
-                            SimilarMovieAdapter adapter = new SimilarMovieAdapter(getApplicationContext(), mMovies);
-                            recyclerView.setAdapter(adapter);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+                            mMovies.add(new Movie(
+                                    poster_path,
+                                    title1,
+                                    title2
+                            ));
                         }
+                        SimilarMovieAdapter adapter = new SimilarMovieAdapter(getApplicationContext(), mMovies);
+                        recyclerView.setAdapter(adapter);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
+                }, Throwable::printStackTrace);
         mRequestQueue.add(jsonObjectRequest);
     }
 
@@ -302,17 +263,14 @@ public class MovieActivity extends AppCompatActivity {
                 mImageViewPoster.animate().setDuration(1000).alpha(1f).start();
 
                 Palette.from(bitmap)
-                        .generate(new Palette.PaletteAsyncListener() {
-                            @Override
-                            public void onGenerated(Palette palette) {
-                                Palette.Swatch textSwatch = palette.getMutedSwatch();
+                        .generate(palette -> {
+                            Palette.Swatch textSwatch = Objects.requireNonNull(palette).getMutedSwatch();
 
-                                mImageViewPlay.setVisibility(View.VISIBLE);
-                                fadeIn.reset();
+                            mImageViewPlay.setVisibility(View.VISIBLE);
+                            fadeIn.reset();
 
-                                mImageViewPlay.setAnimation(fadeIn);
-                                mImageViewPlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
-                            }
+                            mImageViewPlay.setAnimation(fadeIn);
+                            mImageViewPlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
                         });
             }
 

@@ -7,7 +7,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.util.Log;
 
 import com.squareup.picasso.Transformation;
 
@@ -38,7 +37,6 @@ public class Rounded implements Transformation {
     }
 
     public Rounded(int radius, Corners corners) {
-        Log.d("Rounded", "New Rounded transformation being constructed");
         this.radius = radius;
         this.corners = corners;
     }
@@ -67,11 +65,6 @@ public class Rounded implements Transformation {
         boolean bottom = (corners.getCode() & Corners.BOTTOM.getCode()) > 0;
         boolean left = (corners.getCode() & Corners.LEFT.getCode()) > 0;
         boolean right = (corners.getCode() & Corners.RIGHT.getCode()) > 0;
-        Log.d("Rounded", "top: " + String.valueOf(top) + ", " +
-                "bottom: " + String.valueOf(bottom) + ", " +
-                "left: " + String.valueOf(left) + ", " +
-                "right: " + String.valueOf(right)
-        );
         assert !(left || right);
         assert !(top || bottom);
         canvas.drawRect(left ? roundPx : 0,
