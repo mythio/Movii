@@ -23,11 +23,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.youtube.player.YouTubeIntents;
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.CastAdapter;
-import com.mythio.movii.fragment.CastBottomSheetDialog;
 import com.mythio.movii.adapter.SimilarMovieAdapter;
 import com.mythio.movii.adapter.VolleySingleton;
-import com.mythio.movii.constant.constants;
+import com.mythio.movii.constant.Constants;
+import com.mythio.movii.fragment.CastBottomSheetDialog;
 import com.mythio.movii.model.Movie;
+import com.mythio.movii.model.Person;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -41,7 +42,7 @@ import java.util.Objects;
 public class MovieActivity extends AppCompatActivity {
 
     private ArrayList<Movie> mMovies;
-    private ArrayList<String> cast;
+    private ArrayList<Person> mCasts;
     private RequestQueue mRequestQueue;
     private RecyclerView recyclerView;
     private RecyclerView recyclerViewCast;
@@ -88,7 +89,7 @@ public class MovieActivity extends AppCompatActivity {
 
         });
 
-        cast = new ArrayList<>();
+        mCasts = new ArrayList<>();
         mMovies = new ArrayList<>();
 
         recyclerViewCast.setHasFixedSize(true);
@@ -99,7 +100,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void parseDataTMDB() {
-        String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/external_ids?api_key=" + constants.TMDB_API_KEY;
+        String url = Constants.TMDB_MOVIES + movie.getTmdb_id() + "/external_ids?api_key=" + Constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
@@ -113,7 +114,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void parseDataTMDBVideo() {
-        String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/videos?api_key=" + constants.TMDB_API_KEY;
+        String url = Constants.TMDB_MOVIES + movie.getTmdb_id() + "/videos?api_key=" + Constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
@@ -129,7 +130,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     public void parseDataOMDB() {
-        String url = constants.OMDB_GET + "&i=" + movie.getImdb_id();
+        String url = Constants.OMDB_GET + "&i=" + movie.getImdb_id();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
@@ -162,7 +163,8 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void parseCast() {
-        String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/credits?api_key=" + constants.TMDB_API_KEY;
+        String url = Constants.TMDB_MOVIES + movie.getTmdb_id() + "/credits?api_key=" + Constants.TMDB_API_KEY;
+
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
@@ -170,21 +172,29 @@ public class MovieActivity extends AppCompatActivity {
 
                         for (int i = 0; i < jsonArray.length(); ++i) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String castt = jsonObject.getString("profile_path");
-                            if (!castt.equals("null")) {
-                                cast.add(castt);
+                            String name = jsonObject.getString("name");
+                            int id = jsonObject.getInt("id");
+                            String profile_path = jsonObject.getString("profile_path");
+                            if (!profile_path.equals("null")) {
+                                mCasts.add(new Person(
+                                        name,
+                                        profile_path,
+                                        id));
                             }
                         }
 
                         CastAdapter.ListItemClickListener listener = (view, position) -> {
                             CastBottomSheetDialog cast = new CastBottomSheetDialog();
+
+                            Person person = mCasts.get(position);
+
                             Bundle bundle = new Bundle();
-                            bundle.putString("key", "My String");
+                            bundle.putSerializable("message", person);
                             cast.setArguments(bundle);
                             cast.show(getSupportFragmentManager(), "temp_tag");
                         };
 
-                        CastAdapter adapter = new CastAdapter(cast, getApplicationContext(), listener);
+                        CastAdapter adapter = new CastAdapter(mCasts, getApplicationContext(), listener);
                         recyclerViewCast.setAdapter(adapter);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -194,7 +204,8 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void parseRecyclerView() {
-        String url = constants.TMDB_MOVIES + movie.getTmdb_id() + "/similar?api_key=" + constants.TMDB_API_KEY;
+        String url = Constants.TMDB_MOVIES + movie.getTmdb_id() + "/similar?api_key=" + Constants.TMDB_API_KEY;
+
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
@@ -253,7 +264,7 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void updateView() {
-        String url = constants.TMDB_IMAGE + "original" + movie.getPoster_path();
+        String url = Constants.TMDB_IMAGE + "original" + movie.getPoster_path();
 
         Target target = new Target() {
             @Override

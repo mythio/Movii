@@ -16,7 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.MovieAdapter;
-import com.mythio.movii.constant.constants;
+import com.mythio.movii.constant.Constants;
 import com.mythio.movii.model.Movie;
 
 import org.json.JSONArray;
@@ -26,8 +26,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.mythio.movii.constant.constants.GENRE;
-import static com.mythio.movii.constant.constants.TMDB_API_KEY;
+import static com.mythio.movii.constant.Constants.GENRE;
+import static com.mythio.movii.constant.Constants.TMDB_API_KEY;
 
 public class MoviesFragmentPopular extends Fragment {
 
@@ -50,7 +50,7 @@ public class MoviesFragmentPopular extends Fragment {
     }
 
     private void parse() {
-        String url = constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
+        String url = Constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {

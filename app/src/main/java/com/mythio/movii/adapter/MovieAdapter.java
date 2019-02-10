@@ -20,7 +20,7 @@ import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
-import static com.mythio.movii.constant.constants.TMDB_IMAGE;
+import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
 import static com.mythio.movii.model.Rounded.Corners.ALL;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {

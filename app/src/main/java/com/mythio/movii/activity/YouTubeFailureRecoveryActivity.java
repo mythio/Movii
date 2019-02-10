@@ -9,7 +9,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.mythio.movii.R;
 
-import static com.mythio.movii.constant.constants.YOUTUBE_DEVELOPER_KEY;
+import static com.mythio.movii.constant.Constants.YOUTUBE_DEVELOPER_KEY;
 
 public abstract class YouTubeFailureRecoveryActivity extends YouTubeBaseActivity implements
         YouTubePlayer.OnInitializedListener {

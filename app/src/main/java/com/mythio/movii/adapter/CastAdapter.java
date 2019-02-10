@@ -8,25 +8,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mythio.movii.R;
+import com.mythio.movii.model.Person;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.mythio.movii.constant.constants.TMDB_IMAGE;
+import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
 
 public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
-    private List<String> cast;
+    private List<Person> mCasts;
     private Context mContext;
     private final ListItemClickListener mOnClickListener;
 
-    public interface ListItemClickListener{
+    public interface ListItemClickListener {
         void onClick(View view, int position);
     }
 
-    public CastAdapter(List<String> cast, Context mContext, ListItemClickListener mOnClickListener) {
-        this.cast = cast;
+    public CastAdapter(List<Person> mCasts, Context mContext, ListItemClickListener mOnClickListener) {
+        this.mCasts = mCasts;
         this.mContext = mContext;
         this.mOnClickListener = mOnClickListener;
     }
@@ -40,7 +41,9 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CastHolder castHolder, int i) {
-        String url = TMDB_IMAGE + "w185" + cast.get(i);
+
+
+        String url = TMDB_IMAGE + "w185" + mCasts.get(i).getProfile_path();
         Picasso.get()
                 .load(url)
                 .placeholder(R.drawable.movie_placeholder)
@@ -49,7 +52,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
 
     @Override
     public int getItemCount() {
-        return cast.size();
+        return mCasts.size();
     }
 
     class CastHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

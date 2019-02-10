@@ -7,7 +7,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.mythio.movii.R;
 
-import static com.mythio.movii.constant.constants.YOUTUBE_DEVELOPER_KEY;
+import static com.mythio.movii.constant.Constants.YOUTUBE_DEVELOPER_KEY;
 
 public class YoutubePlayerActivity extends YouTubeFailureRecoveryActivity {
 

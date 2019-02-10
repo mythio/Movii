@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import static com.mythio.movii.constant.constants.TMDB_IMAGE;
+import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
 
 public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapter.MovieHolder> {
 
