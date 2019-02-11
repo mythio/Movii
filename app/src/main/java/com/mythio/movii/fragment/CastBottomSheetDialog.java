@@ -73,13 +73,16 @@ public class CastBottomSheetDialog extends BottomSheetDialogFragment {
 
     private void parse() {
         String url = Constants.TMDB_PERSON + person.getId() + "/movie_credits?api_key=" + TMDB_API_KEY;
+
+        Log.d("tag_tag_tag", url);
+
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
                         JSONArray jsonArray = response.getJSONArray("cast");
                         for (int i = 0; i < jsonArray.length(); ++i) {
-                            addToList(jsonArray.getJSONObject(i));
                             Log.d("TAG_TAG_TAG", jsonArray.getJSONObject(i).toString());
+                            addToList(jsonArray.getJSONObject(i));
                         }
 
                         FeaturedMovieAdapter adapter = new FeaturedMovieAdapter(getContext(), mMovies);
@@ -93,11 +96,17 @@ public class CastBottomSheetDialog extends BottomSheetDialogFragment {
     }
 
     private void addToList(JSONObject jsonObject) throws JSONException {
+
+        String character = jsonObject.getString("character");
+
+        if (character.equals("Himself")) {
+            return;
+        }
+
         String title = jsonObject.getString("title");
         String poster_path = jsonObject.getString("poster_path");
         String id = String.valueOf(jsonObject.getInt("id"));
         JSONArray genreArr = jsonObject.getJSONArray("genre_ids");
-        String release_date = jsonObject.getString("release_date");
 
         StringBuilder genre = null;
         String[] title_arr = title.split(": ");
@@ -126,7 +135,7 @@ public class CastBottomSheetDialog extends BottomSheetDialogFragment {
                 title2,
                 id,
                 genre == null ? null : genre.toString(),
-                release_date
+                ""
         ));
     }
 }

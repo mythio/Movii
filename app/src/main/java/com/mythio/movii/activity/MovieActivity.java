@@ -3,6 +3,7 @@ package com.mythio.movii.activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -62,6 +64,8 @@ public class MovieActivity extends AppCompatActivity {
     private TextView mTextViewCast;
     private TextView mTextViewMore;
 
+    public static final int SPACE = 12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,10 +89,8 @@ public class MovieActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        ImageView imageView = findViewById(R.id.close);
-        imageView.setOnClickListener(v -> {
-            finish();
-        });
+        ImageButton imageButton = findViewById(R.id.close);
+        imageButton.setOnClickListener(v -> finish());
 
         mTextViewMore.setOnClickListener(v -> {
 
@@ -101,6 +103,8 @@ public class MovieActivity extends AppCompatActivity {
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         recyclerView.setHasFixedSize(true);
+
+        recyclerView.addItemDecoration(new SimilarMovieAdapter.VerticalSpaceItemDecoration(24));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
@@ -280,7 +284,7 @@ public class MovieActivity extends AppCompatActivity {
 
                 Palette.from(bitmap)
                         .generate(palette -> {
-                            Palette.Swatch textSwatch = Objects.requireNonNull(palette).getLightMutedSwatch();
+                            Palette.Swatch textSwatch = Objects.requireNonNull(palette).getMutedSwatch();
 
                             mImageViewPlay.setVisibility(View.VISIBLE);
                             fadeIn.reset();
@@ -300,6 +304,9 @@ public class MovieActivity extends AppCompatActivity {
 
             }
         };
+
+        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.movie_placeholder);
+
 
         Picasso.get()
                 .load(url)
@@ -338,6 +345,7 @@ public class MovieActivity extends AppCompatActivity {
         mRatingBar.setVisibility(View.VISIBLE);
         mTextViewCast.setVisibility(View.VISIBLE);
         mTextViewMore.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
 
         mRatingBar.startAnimation(fadeIn);
         mImageViewPoster.startAnimation(fadeIn);
@@ -352,5 +360,6 @@ public class MovieActivity extends AppCompatActivity {
         mTextViewVoteCount.startAnimation(fadeIn);
         mTextViewMore.startAnimation(fadeIn);
         mTextViewCast.startAnimation(fadeIn);
+        recyclerView.startAnimation(fadeIn);
     }
 }

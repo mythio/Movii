@@ -1,6 +1,7 @@
 package com.mythio.movii.adapter;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,11 +12,15 @@ import android.widget.TextView;
 
 import com.mythio.movii.model.Movie;
 import com.mythio.movii.R;
+import com.mythio.movii.model.Rounded;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
+import static com.mythio.movii.model.Rounded.Corners.ALL;
 
 public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapter.MovieHolder> {
 
@@ -38,9 +43,15 @@ public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapte
     public void onBindViewHolder(@NonNull MovieHolder movieHolder, int i) {
         Movie movie = mMovieList.get(i);
         movieHolder.mTextViewTitle.setText(movie.getTitle1());
+
         String url = TMDB_IMAGE + "w500" + movie.getPoster_path();
+
+        Transformation transformation = new Rounded(16, ALL);
+
         Picasso.get()
                 .load(url)
+                .fit()
+                .transform(transformation)
                 .placeholder(R.drawable.movie_placeholder)
                 .into(movieHolder.mImageViewPoster);
     }
@@ -60,6 +71,26 @@ public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapte
 
             mImageViewPoster = itemView.findViewById(R.id.list_image_movie);
             mTextViewTitle = itemView.findViewById(R.id.list_text_view_title);
+        }
+    }
+
+    public static class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
+
+        private final int space;
+
+        public VerticalSpaceItemDecoration(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                                   @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+
+            outRect.right = space;
+
+            if (parent.getChildAdapterPosition(view) == 0) {
+                outRect.left = space;
+            }
         }
     }
 }
