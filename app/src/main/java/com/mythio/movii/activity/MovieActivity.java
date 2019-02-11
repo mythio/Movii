@@ -85,6 +85,11 @@ public class MovieActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        ImageView imageView = findViewById(R.id.close);
+        imageView.setOnClickListener(v -> {
+            finish();
+        });
+
         mTextViewMore.setOnClickListener(v -> {
 
         });
@@ -275,7 +280,7 @@ public class MovieActivity extends AppCompatActivity {
 
                 Palette.from(bitmap)
                         .generate(palette -> {
-                            Palette.Swatch textSwatch = Objects.requireNonNull(palette).getMutedSwatch();
+                            Palette.Swatch textSwatch = Objects.requireNonNull(palette).getLightMutedSwatch();
 
                             mImageViewPlay.setVisibility(View.VISIBLE);
                             fadeIn.reset();
@@ -287,6 +292,7 @@ public class MovieActivity extends AppCompatActivity {
 
             @Override
             public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
             }
 
             @Override

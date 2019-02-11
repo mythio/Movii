@@ -8,6 +8,19 @@
     android:background="@color/colorAccent"
     tools:context=".activity.MovieActivity">
 
+    <ImageButton
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.7"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:elevation="100dp"
+        android:src="@drawable/ic_close"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/image_view_poster"
         android:layout_width="match_parent"
