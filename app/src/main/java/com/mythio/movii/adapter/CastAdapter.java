@@ -42,7 +42,6 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
     @Override
     public void onBindViewHolder(@NonNull CastHolder castHolder, int i) {
 
-
         String url = TMDB_IMAGE + "w185" + mCasts.get(i).getProfile_path();
         Picasso.get()
                 .load(url)
