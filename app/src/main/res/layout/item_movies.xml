@@ -19,7 +19,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             android:adjustViewBounds="true"
-            android:elevation="16dp"
+            android:elevation="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +46,8 @@
             android:elevation="8dp"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toEndOf="@+id/image_view_poster"

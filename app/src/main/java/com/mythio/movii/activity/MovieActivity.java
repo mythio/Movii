@@ -62,9 +62,9 @@ public class MovieActivity extends AppCompatActivity {
     private RatingBar mRatingBar;
     private TextView mTextViewVoteCount;
     private TextView mTextViewCast;
-    private TextView mTextViewMore;
+    private TextView mTextViewSimilarMovies;
 
-    public static final int SPACE = 12;
+    public static final int SPACE = 24;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +92,6 @@ public class MovieActivity extends AppCompatActivity {
         ImageButton imageButton = findViewById(R.id.close);
         imageButton.setOnClickListener(v -> finish());
 
-        mTextViewMore.setOnClickListener(v -> {
-
-        });
-
         mCasts = new ArrayList<>();
         mMovies = new ArrayList<>();
 
@@ -104,7 +100,7 @@ public class MovieActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.addItemDecoration(new SimilarMovieAdapter.VerticalSpaceItemDecoration(24));
+        recyclerView.addItemDecoration(new SimilarMovieAdapter.VerticalSpaceItemDecoration(SPACE));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
@@ -263,9 +259,8 @@ public class MovieActivity extends AppCompatActivity {
         mRatingBar = findViewById(R.id.rating_bar);
         mTextViewVoteCount = findViewById(R.id.text_view_vote_count);
         mTextViewCast = findViewById(R.id.text_view_cast);
-        mTextViewMore = findViewById(R.id.text_view_more);
         recyclerViewCast = findViewById(R.id.recycler_view_cast);
-        mTextViewMore = findViewById(R.id.text_view_more);
+        mTextViewSimilarMovies = findViewById(R.id.text_view_similar_movies);
         recyclerView = findViewById(R.id.recycler_view);
         fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator());
@@ -344,7 +339,7 @@ public class MovieActivity extends AppCompatActivity {
         mImageViewPoster.setVisibility(View.VISIBLE);
         mRatingBar.setVisibility(View.VISIBLE);
         mTextViewCast.setVisibility(View.VISIBLE);
-        mTextViewMore.setVisibility(View.VISIBLE);
+        mTextViewSimilarMovies.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.VISIBLE);
 
         mRatingBar.startAnimation(fadeIn);
@@ -358,8 +353,8 @@ public class MovieActivity extends AppCompatActivity {
         mTextViewOverview.startAnimation(fadeIn);
         mRatingBar.startAnimation(fadeIn);
         mTextViewVoteCount.startAnimation(fadeIn);
-        mTextViewMore.startAnimation(fadeIn);
         mTextViewCast.startAnimation(fadeIn);
+        mTextViewSimilarMovies.setAnimation(fadeIn);
         recyclerView.startAnimation(fadeIn);
     }
 }
