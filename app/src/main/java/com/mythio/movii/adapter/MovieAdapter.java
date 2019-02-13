@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         }
 
         movieHolder.mTextViewGenre.setText(movie.getGenre());
-        movieHolder.mRatingBar.setRating((float) 4.5);
+
+//        movieHolder.mRatingBar.setRating((float) 4.5);
+
+        if (movie.getImdbRatings().equals("N/A")) {
+            movieHolder.mRatingBar.setRating(0);
+        } else {
+            double rating = Double.parseDouble(movie.getImdbRatings());
+            rating /= 2;
+            movie.setImdbRatings(String.valueOf(Math.round(rating * 2) / 2.0));
+            movieHolder.mRatingBar.setRating(Float.parseFloat(movie.getImdbRatings()));
+        }
+
+        Log.d("TAG_TAG_**", i + " " + movie.getImdbRatings() + " " + movie.getTitle1());
+
         String url = TMDB_IMAGE + "w154" + movie.getPoster_path();
 
         Transformation transformation = new Rounded(16, ALL);

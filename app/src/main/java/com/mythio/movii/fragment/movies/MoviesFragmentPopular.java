@@ -27,7 +27,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.mythio.movii.constant.Constants.GENRE;
 import static com.mythio.movii.constant.Constants.TMDB_API_KEY;
 
 public class MoviesFragmentPopular extends Fragment {
@@ -50,45 +49,21 @@ public class MoviesFragmentPopular extends Fragment {
         return view;
     }
 
-    private JSONObject parseTMDB() {
+    private void parseTMDB() {
         String url = Constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
                         JSONArray jsonArray = response.getJSONArray("results");
-
                         for (int i = 0; i < jsonArray.length(); ++i) {
                             addToList(jsonArray.getJSONObject(i));
-                            Log.d("TAG_TAG_TAG_1", i + response.toString());
                             parseDataTMDB(i);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                }, error -> {
-
-                });
+                }, Throwable::printStackTrace);
         mRequestQueue.add(jsonObjectRequest);
-
-        final JSONObject[] re = {null};
-//        AsyncTask.execute(
-//                () -> {
-//                    RequestFuture<JSONObject> future = RequestFuture.newFuture();
-//                    JsonObjectRequest request = new JsonObjectRequest(url, new JSONObject(), future, future);
-//                    mRequestQueue.add(request);
-//
-//                    try {
-//                        re[0] = future.get();
-//                        Log.d("TAG_TAG_JSON", re[0].toString());
-//                    } catch (InterruptedException e) {
-//                        // exception handling
-//                    } catch (ExecutionException e) {
-//                        // exception handling
-//                    }
-//                }
-//        );
-        return re[0];
     }
 
     private void parseDataTMDB(int i) {
@@ -97,7 +72,6 @@ public class MoviesFragmentPopular extends Fragment {
                 response -> {
                     try {
                         mMovies.get(i).setImdb_id(response.getString("imdb_id"));
-                        Log.d("TAG_TAG_TAG_2", i + response.toString());
                         parseDataOMDB(i);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -112,25 +86,25 @@ public class MoviesFragmentPopular extends Fragment {
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
+                        String length = response.getString("Runtime");
                         mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
-//                        mMovies.get(i).setVoteCount(response.getString("imdbVotes"));
-//                        mMovies.get(i).setOverview(response.getString("Plot"));
-//                        mMovies.get(i).setRelease_date(response.getString("Year"));
+                        mMovies.get(i).setVote_count(response.getString("imdbVotes"));
+                        mMovies.get(i).setOverview(response.getString("Plot"));
+                        mMovies.get(i).setYear(response.getString("Year"));
 
-//                        if (length.equals("N/A")) {
-//                            movie.setLength(length);
-//                        } else {
-//                            String[] time = length.split(" ");
-//                            Integer time1 = Integer.valueOf(time[0]);
-//                            int HH = time1 / 60;
-//                            int MM = time1 % 60;
-//                            movie.setLength(HH + " h " + MM + " m");
-//                        }
-                        Log.d("TAG_TAG_TAG3", i + response.toString());
-                        Log.d("TAG_TAG_TAG4", "------------------------------------------------");
-                        Log.d("TAG_TAG_TAG", "===");
-                        if (i == mMovies.size()-1) {
-                            Log.d("TAG_TAG_TAG", "*******");
+                        mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
+                        if (length.equals("N/A")) {
+                            mMovies.get(i).setRuntime(length);
+                        } else {
+                            String[] time = length.split(" ");
+                            Integer time1 = Integer.valueOf(time[0]);
+                            int HH = time1 / 60;
+                            int MM = time1 % 60;
+                            mMovies.get(i).setRuntime(HH + " h " + MM + " m");
+                        }
+                        Log.d("TAG_TAG", i + " " + mMovies.get(i).getImdbRatings());
+
+                        if (i == mMovies.size() - 1) {
                             MovieAdapter adapter = new MovieAdapter(getContext(), mMovies);
                             recyclerView.setAdapter(adapter);
                         }
@@ -145,7 +119,6 @@ public class MoviesFragmentPopular extends Fragment {
         String title = jsonObject.getString("title");
         String poster_path = jsonObject.getString("poster_path");
         String id = String.valueOf(jsonObject.getInt("id"));
-//        String release_date = jsonObject.getString("release_date");
 
         String[] title_arr = title.split(": ");
         String title1;
