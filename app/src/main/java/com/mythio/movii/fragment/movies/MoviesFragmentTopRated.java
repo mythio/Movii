@@ -101,9 +101,7 @@ public class MoviesFragmentTopRated extends Fragment {
                 poster_path,
                 title1,
                 title2,
-                id,
-                genre == null ? null : genre.toString(),
-                release_date
+                id
         ));
     }
 }

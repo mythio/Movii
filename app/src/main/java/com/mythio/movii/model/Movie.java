@@ -1,54 +1,37 @@
 package com.mythio.movii.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Movie implements Serializable {
-    private String imdb;
-    private String poster_path;
+
+//    TMDB HIT 1
     private String title1;
     private String title2;
-    private String imdb_id;
-    private String tmdb_id;
-    private String release_date;
+    private String poster_path;
+    private String id;
+    private String vote_count;
+    private String vote_average;
     private String overview;
-    private String length;
-    private String cast;
-    private Double ratings;
-    private String voteCount;
+
+//    TMDB HIT 2
+    private String imdb_id;
+
+//    TMDB HIT 3
+    private String key;
+
+//    OMDB
+    private String year;
+    private String runtime;
     private String genre;
-    private String video_key;
+    private String plot;
+    private String imdbRatings;
+    private String imdbVotes;
 
-    public Movie(String poster_path, String title1, String title2) {
+    public Movie(String poster_path, String title1, String title2, String id) {
         this.poster_path = poster_path;
         this.title1 = title1;
         this.title2 = title2;
-    }
-
-    public Movie(String poster_path, String title1, String title2, String tmdb_id, String genre, String overview) {
-        this.poster_path = poster_path;
-        this.title1 = title1;
-        this.title2 = title2;
-        this.tmdb_id = tmdb_id;
-        this.genre = genre;
-        this.overview = overview;
-        this.release_date = release_date;
-    }
-
-    public String getImdb() {
-        return imdb;
-    }
-
-    public void setImdb(String imdb) {
-        this.imdb = imdb;
-    }
-
-    public String getPoster_path() {
-        return poster_path;
-    }
-
-    public void setPoster_path(String poster_path) {
-        this.poster_path = poster_path;
+        this.id = id;
     }
 
     public String getTitle1() {
@@ -67,28 +50,36 @@ public class Movie implements Serializable {
         this.title2 = title2;
     }
 
-    public String getImdb_id() {
-        return imdb_id;
+    public String getPoster_path() {
+        return poster_path;
     }
 
-    public void setImdb_id(String imdb_id) {
-        this.imdb_id = imdb_id;
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
     }
 
-    public String getTmdb_id() {
-        return tmdb_id;
+    public String getId() {
+        return id;
     }
 
-    public void setTmdb_id(String tmdb_id) {
-        this.tmdb_id = tmdb_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getRelease_date() {
-        return release_date;
+    public String getVote_count() {
+        return vote_count;
     }
 
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
+    public void setVote_count(String vote_count) {
+        this.vote_count = vote_count;
+    }
+
+    public String getVote_average() {
+        return vote_average;
+    }
+
+    public void setVote_average(String vote_average) {
+        this.vote_average = vote_average;
     }
 
     public String getOverview() {
@@ -99,36 +90,36 @@ public class Movie implements Serializable {
         this.overview = overview;
     }
 
-    public String getLength() {
-        return length;
+    public String getImdb_id() {
+        return imdb_id;
     }
 
-    public void setLength(String length) {
-        this.length = length;
+    public void setImdb_id(String imdb_id) {
+        this.imdb_id = imdb_id;
     }
 
-    public String getCast() {
-        return cast;
+    public String getKey() {
+        return key;
     }
 
-    public void setCast(String cast) {
-        this.cast = cast;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public Double getRatings() {
-        return ratings;
+    public String getYear() {
+        return year;
     }
 
-    public void setRatings(Double ratings) {
-        this.ratings = ratings;
+    public void setYear(String year) {
+        this.year = year;
     }
 
-    public String getVoteCount() {
-        return voteCount;
+    public String getRuntime() {
+        return runtime;
     }
 
-    public void setVoteCount(String ratingsCount) {
-        this.voteCount = ratingsCount;
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
     }
 
     public String getGenre() {
@@ -139,11 +130,27 @@ public class Movie implements Serializable {
         this.genre = genre;
     }
 
-    public String getVideo_key() {
-        return video_key;
+    public String getPlot() {
+        return plot;
     }
 
-    public void setVideo_key(String video_key) {
-        this.video_key = video_key;
+    public void setPlot(String plot) {
+        this.plot = plot;
+    }
+
+    public String getImdbRatings() {
+        return imdbRatings;
+    }
+
+    public void setImdbRatings(String imdbRatings) {
+        this.imdbRatings = imdbRatings;
+    }
+
+    public String getImdbVotes() {
+        return imdbVotes;
+    }
+
+    public void setImdbVotes(String imdbVotes) {
+        this.imdbVotes = imdbVotes;
     }
 }

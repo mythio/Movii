@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,11 +46,11 @@ public class MoviesFragmentPopular extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        parse();
+        parseTMDB();
         return view;
     }
 
-    private void parse() {
+    private JSONObject parseTMDB() {
         String url = Constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
@@ -58,10 +59,9 @@ public class MoviesFragmentPopular extends Fragment {
 
                         for (int i = 0; i < jsonArray.length(); ++i) {
                             addToList(jsonArray.getJSONObject(i));
+                            Log.d("TAG_TAG_TAG_1", i + response.toString());
+                            parseDataTMDB(i);
                         }
-
-                        MovieAdapter adapter = new MovieAdapter(getContext(), mMovies);
-                        recyclerView.setAdapter(adapter);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -70,16 +70,83 @@ public class MoviesFragmentPopular extends Fragment {
 
                 });
         mRequestQueue.add(jsonObjectRequest);
+
+        final JSONObject[] re = {null};
+//        AsyncTask.execute(
+//                () -> {
+//                    RequestFuture<JSONObject> future = RequestFuture.newFuture();
+//                    JsonObjectRequest request = new JsonObjectRequest(url, new JSONObject(), future, future);
+//                    mRequestQueue.add(request);
+//
+//                    try {
+//                        re[0] = future.get();
+//                        Log.d("TAG_TAG_JSON", re[0].toString());
+//                    } catch (InterruptedException e) {
+//                        // exception handling
+//                    } catch (ExecutionException e) {
+//                        // exception handling
+//                    }
+//                }
+//        );
+        return re[0];
+    }
+
+    private void parseDataTMDB(int i) {
+        String url = Constants.TMDB_MOVIES + mMovies.get(i).getId() + "/external_ids?api_key=" + Constants.TMDB_API_KEY;
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        mMovies.get(i).setImdb_id(response.getString("imdb_id"));
+                        Log.d("TAG_TAG_TAG_2", i + response.toString());
+                        parseDataOMDB(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, Throwable::printStackTrace);
+        mRequestQueue.add(jsonObjectRequest);
+    }
+
+    public void parseDataOMDB(int i) {
+        String url = Constants.OMDB_GET + "&i=" + mMovies.get(i).getImdb_id();
+
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
+//                        mMovies.get(i).setVoteCount(response.getString("imdbVotes"));
+//                        mMovies.get(i).setOverview(response.getString("Plot"));
+//                        mMovies.get(i).setRelease_date(response.getString("Year"));
+
+//                        if (length.equals("N/A")) {
+//                            movie.setLength(length);
+//                        } else {
+//                            String[] time = length.split(" ");
+//                            Integer time1 = Integer.valueOf(time[0]);
+//                            int HH = time1 / 60;
+//                            int MM = time1 % 60;
+//                            movie.setLength(HH + " h " + MM + " m");
+//                        }
+                        Log.d("TAG_TAG_TAG3", i + response.toString());
+                        Log.d("TAG_TAG_TAG4", "------------------------------------------------");
+                        Log.d("TAG_TAG_TAG", "===");
+                        if (i == mMovies.size()-1) {
+                            Log.d("TAG_TAG_TAG", "*******");
+                            MovieAdapter adapter = new MovieAdapter(getContext(), mMovies);
+                            recyclerView.setAdapter(adapter);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, Throwable::printStackTrace);
+        mRequestQueue.add(jsonObjectRequest);
     }
 
     private void addToList(JSONObject jsonObject) throws JSONException {
         String title = jsonObject.getString("title");
         String poster_path = jsonObject.getString("poster_path");
         String id = String.valueOf(jsonObject.getInt("id"));
-        JSONArray genreArr = jsonObject.getJSONArray("genre_ids");
-        String release_date = jsonObject.getString("release_date");
+//        String release_date = jsonObject.getString("release_date");
 
-        StringBuilder genre = null;
         String[] title_arr = title.split(": ");
         String title1;
         String title2 = "";
@@ -91,22 +158,11 @@ public class MoviesFragmentPopular extends Fragment {
             title1 = title_arr[0].trim();
         }
 
-        int l = Math.min(genreArr.length(), 2);
-
-        for (int j = 0; j < l; ++j) {
-            genre = (genre == null ? new StringBuilder() : genre).append(GENRE.get(genreArr.getInt(j)));
-            if (j != l - 1) {
-                genre.append("  |  ");
-            }
-        }
-
         mMovies.add(new Movie(
                 poster_path,
                 title1,
                 title2,
-                id,
-                genre == null ? null : genre.toString(),
-                release_date
+                id
         ));
     }
 }

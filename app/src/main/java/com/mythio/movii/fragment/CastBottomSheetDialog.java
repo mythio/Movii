@@ -133,9 +133,7 @@ public class CastBottomSheetDialog extends BottomSheetDialogFragment {
                 poster_path,
                 title1,
                 title2,
-                id,
-                genre == null ? null : genre.toString(),
-                ""
+                id
         ));
     }
 }
