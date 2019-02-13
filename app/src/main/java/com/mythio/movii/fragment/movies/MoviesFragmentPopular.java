@@ -123,6 +123,8 @@ public class MoviesFragmentPopular extends Fragment {
     }
 
     private void addToList(JSONObject jsonObject) throws JSONException {
+        Movie movie = new Movie();
+
         String title = jsonObject.getString("title");
         String poster_path = jsonObject.getString("poster_path");
         String id = String.valueOf(jsonObject.getInt("id"));
@@ -137,12 +139,5 @@ public class MoviesFragmentPopular extends Fragment {
         } else {
             title1 = title_arr[0].trim();
         }
-
-        mMovies.add(new Movie(
-                poster_path,
-                title1,
-                title2,
-                id
-        ));
     }
 }

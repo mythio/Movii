@@ -56,8 +56,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         movieHolder.mTextViewGenre.setText(movie.getGenre());
 
-//        movieHolder.mRatingBar.setRating((float) 4.5);
-
         if (movie.getImdbRatings().equals("N/A")) {
             movieHolder.mRatingBar.setRating(0);
         } else {

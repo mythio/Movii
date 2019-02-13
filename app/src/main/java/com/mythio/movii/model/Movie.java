@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Movie implements Serializable {
 
-//    TMDB HIT 1
+    //    TMDB
     private String title1;
     private String title2;
     private String poster_path;
@@ -12,27 +12,16 @@ public class Movie implements Serializable {
     private String vote_count;
     private String vote_average;
     private String overview;
-
-//    TMDB HIT 2
     private String imdb_id;
-
-//    TMDB HIT 3
     private String key;
 
-//    OMDB
+    //    OMDB
     private String year;
     private String runtime;
     private String genre;
     private String plot;
     private String imdbRatings;
     private String imdbVotes;
-
-    public Movie(String poster_path, String title1, String title2, String id) {
-        this.poster_path = poster_path;
-        this.title1 = title1;
-        this.title2 = title2;
-        this.id = id;
-    }
 
     public String getTitle1() {
         return title1;
