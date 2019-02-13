@@ -93,6 +93,13 @@ public class MoviesFragmentPopular extends Fragment {
                         mMovies.get(i).setYear(response.getString("Year"));
 
                         mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
+
+                        if (!mMovies.get(i).getImdbRatings().equals("N/A")) {
+                            double rating = Double.parseDouble(mMovies.get(i).getImdbRatings());
+                            rating /= 2;
+                            mMovies.get(i).setImdbRatings(String.valueOf(Math.round(rating * 2) / 2.0));
+                        }
+
                         if (length.equals("N/A")) {
                             mMovies.get(i).setRuntime(length);
                         } else {

@@ -61,13 +61,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         if (movie.getImdbRatings().equals("N/A")) {
             movieHolder.mRatingBar.setRating(0);
         } else {
-            double rating = Double.parseDouble(movie.getImdbRatings());
-            rating /= 2;
-            movie.setImdbRatings(String.valueOf(Math.round(rating * 2) / 2.0));
             movieHolder.mRatingBar.setRating(Float.parseFloat(movie.getImdbRatings()));
         }
-
-        Log.d("TAG_TAG_**", i + " " + movie.getImdbRatings() + " " + movie.getTitle1());
 
         String url = TMDB_IMAGE + "w154" + movie.getPoster_path();
 
