@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -87,9 +88,6 @@ public class MovieActivity extends AppCompatActivity {
         ImageButton imageButton = findViewById(R.id.close);
         imageButton.setOnClickListener(v -> finish());
 
-//        mCasts = new ArrayList<>();
-//        mMovies = new ArrayList<>();
-
         recyclerViewCast.setHasFixedSize(true);
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
@@ -120,11 +118,13 @@ public class MovieActivity extends AppCompatActivity {
                             credits.add(person);
                         }
 
+                        Log.d("tag-tag-tag-tag", response.toString());
 //                        Set similar movies
                         JSONArray similarResult = response.getJSONObject("similar")
                                 .getJSONArray("results");
                         L = similarResult.length();
                         for (int j = 0; j < L; ++j) {
+                            Log.d("tag-tag-tag-tag", similarResult.toString());
                             Movie movie = new Movie();
                             movie.setId(String.valueOf(similarResult.getJSONObject(j).getInt("id")));
                             movie.setOverview(similarResult.getJSONObject(j).getString("overview"));
@@ -156,12 +156,32 @@ public class MovieActivity extends AppCompatActivity {
 
                         movie.setCast(credits);
                         movie.setSimilarMovies(similar);
+
                         updateView();
+//                        setCastAdapter();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }, Throwable::printStackTrace);
         mRequestQueue.add(jsonObjectRequest);
+    }
+
+    private void setCastAdapter() {
+        CastAdapter.ListItemClickListener listener = (view, position) -> {
+            CastBottomSheetDialog cast = new CastBottomSheetDialog();
+            Person person = movie.getCast().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("message", person);
+            cast.setArguments(bundle);
+            cast.show(getSupportFragmentManager(), "temp_tag");
+        };
+        CastAdapter adapter = new CastAdapter(movie.getCast(), getApplicationContext(), listener);
+        recyclerViewCast.setAdapter(adapter);
+    }
+
+    private void setSimilarAdapter() {
+        SimilarMovieAdapter adapter = new SimilarMovieAdapter(getApplicationContext(), movie.getSimilarMovies());
+        recyclerView.setAdapter(adapter);
     }
 
     private void initView() {
@@ -218,9 +238,6 @@ public class MovieActivity extends AppCompatActivity {
             }
         };
 
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.movie_placeholder);
-
-
         Picasso.get()
                 .load(url)
                 .placeholder(R.drawable.movie_placeholder)
@@ -246,11 +263,14 @@ public class MovieActivity extends AppCompatActivity {
         }
 
         mRatingBar.setRating(Float.parseFloat(movie.getImdbRatings()));
+        setCastAdapter();
+        setSimilarAdapter();
 
         mImageViewPoster.setVisibility(View.VISIBLE);
         mRatingBar.setVisibility(View.VISIBLE);
         mTextViewCast.setVisibility(View.VISIBLE);
         mTextViewSimilarMovies.setVisibility(View.VISIBLE);
+        recyclerViewCast.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.VISIBLE);
 
         mRatingBar.startAnimation(fadeIn);
@@ -266,6 +286,7 @@ public class MovieActivity extends AppCompatActivity {
         mTextViewVoteCount.startAnimation(fadeIn);
         mTextViewCast.startAnimation(fadeIn);
         mTextViewSimilarMovies.setAnimation(fadeIn);
+        recyclerViewCast.startAnimation(fadeIn);
         recyclerView.startAnimation(fadeIn);
     }
 }

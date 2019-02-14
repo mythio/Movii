@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
@@ -25,9 +26,9 @@ import static com.mythio.movii.model.Rounded.Corners.ALL;
 public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapter.MovieHolder> {
 
     private Context mContext;
-    private ArrayList<Movie> mMovieList;
+    private List<Movie> mMovieList;
 
-    public SimilarMovieAdapter(Context mContext, ArrayList<Movie> mMovieList) {
+    public SimilarMovieAdapter(Context mContext, List<Movie> mMovieList) {
         this.mContext = mContext;
         this.mMovieList = mMovieList;
     }

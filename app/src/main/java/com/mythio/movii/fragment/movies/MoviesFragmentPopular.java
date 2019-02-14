@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +50,9 @@ public class MoviesFragmentPopular extends Fragment {
 
     private void parseTMDB() {
         String url = Constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
-        Log.d("tag_tag_tag", url);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        Log.d("tag_tag_tag", response.toString());
                         JSONArray jsonArray = response.getJSONArray("results");
                         for (int i = 0; i < jsonArray.length(); ++i) {
                             addToList(jsonArray.getJSONObject(i));
@@ -85,9 +82,7 @@ public class MoviesFragmentPopular extends Fragment {
     }
 
     public void parseDataOMDB(int i) {
-        String url = Constants.OMDB_GET + "&i=" + mMovies.get(i).getImdb_id();
-//        url = "https://www.omdbapi.com/?apikey=e403207b&i=tt2395427";
-
+        String url = Constants.OMDB_GET + "i=" + mMovies.get(i).getImdb_id();
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
@@ -104,7 +99,6 @@ public class MoviesFragmentPopular extends Fragment {
                             rating /= 2;
                             mMovies.get(i).setImdbRatings(String.valueOf(Math.round(rating * 2) / 2.0));
                         }
-
                         if (i == mMovies.size() - 1) {
                             MovieAdapter adapter = new MovieAdapter(getContext(), mMovies);
                             recyclerView.setAdapter(adapter);

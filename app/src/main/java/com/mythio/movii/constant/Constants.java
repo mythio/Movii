@@ -37,7 +37,4 @@ public class Constants {
         put(10752, "War");
         put(10770, "TV Movie");
     }};
-
-    //  Intent names
-//    public static final String
 }
