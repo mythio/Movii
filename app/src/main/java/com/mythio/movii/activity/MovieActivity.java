@@ -43,8 +43,6 @@ import java.util.Objects;
 
 public class MovieActivity extends AppCompatActivity {
 
-    private ArrayList<Movie> mMovies;
-    private ArrayList<Person> mCasts;
     private RequestQueue mRequestQueue;
     private RecyclerView recyclerView;
     private RecyclerView recyclerViewCast;
@@ -73,27 +71,24 @@ public class MovieActivity extends AppCompatActivity {
 
         initView();
 
-        movie = (Movie) getIntent().getSerializableExtra("EXTRA");
+        movie = (Movie) getIntent().getSerializableExtra("MOVIE_ACTIVITY");
 
         mRequestQueue = VolleySingleton.getInstance(this).getmRequestQueue();
 
-//        parseDataTMDB();
-//        parseCast();
-//        parseRecyclerView();
-//        parseDataTMDBVideo();
+        parseDataTMDB();
 
         mImageViewPlay.setOnClickListener(v -> {
             Intent intent = new Intent(MovieActivity.this, YoutubePlayerActivity.class);
-//            intent.putExtra("EXTRAAA", movie.getVideo_key());
-//            YouTubeIntents.canResolvePlayVideoIntent(MovieActivity.this);
-//            startActivity(intent);
+            intent.putExtra("MOVIE_YOUTUBE_KEY", movie.getKey());
+            YouTubeIntents.canResolvePlayVideoIntent(MovieActivity.this);
+            startActivity(intent);
         });
 
         ImageButton imageButton = findViewById(R.id.close);
         imageButton.setOnClickListener(v -> finish());
 
-        mCasts = new ArrayList<>();
-        mMovies = new ArrayList<>();
+//        mCasts = new ArrayList<>();
+//        mMovies = new ArrayList<>();
 
         recyclerViewCast.setHasFixedSize(true);
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -104,147 +99,70 @@ public class MovieActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
-//    private void parseDataTMDB() {
-//        String url = Constants.TMDB_MOVIES + movie.getTmdb_id() + "/external_ids?api_key=" + Constants.TMDB_API_KEY;
-//        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-//                response -> {
-//                    try {
-//                        movie.setImdb_id(response.getString("imdb_id"));
-//                        parseDataOMDB();
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }, Throwable::printStackTrace);
-//        mRequestQueue.add(jsonObjectRequest);
-//    }
-//
-//    private void parseDataTMDBVideo() {
-//        String url = Constants.TMDB_MOVIES + movie.getId() + "/videos?api_key=" + Constants.TMDB_API_KEY;
-//        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-//                response -> {
-//                    try {
-//                        JSONArray jsonArray = response.getJSONArray("results");
-//                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-//                        String video_key = jsonObject.getString("key");
-//                        movie.setKey(video_key);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }, Throwable::printStackTrace);
-//        mRequestQueue.add(jsonObjectRequest);
-//    }
-//
-//    public void parseDataOMDB() {
-//        String url = Constants.OMDB_GET + "&i=" + movie.getImdb_id();
-//
-//        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-//                response -> {
-//                    try {
-//                        String length = response.getString("Runtime");
-//                        String cast = response.getString("Actors");
-//                        movie.setImdb(response.getString("imdbRating"));
-//                        movie.setVoteCount(response.getString("imdbVotes"));
-//                        movie.setOverview(response.getString("Plot"));
-//                        movie.setRelease_date(response.getString("Year"));
-//
-//                        movie.setCast(cast.replace(", ", "  |  "));
-//
-//                        if (length.equals("N/A")) {
-//                            movie.setLength(length);
-//                        } else {
-//                            String[] time = length.split(" ");
-//                            Integer time1 = Integer.valueOf(time[0]);
-//                            int HH = time1 / 60;
-//                            int MM = time1 % 60;
-//                            movie.setLength(HH + " h " + MM + " m");
-//                        }
-//
-//                        updateView();
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }, Throwable::printStackTrace);
-//        mRequestQueue.add(jsonObjectRequest);
-//    }
-//
-//    private void parseCast() {
-//        String url = Constants.TMDB_MOVIES + movie.getTmdb_id() + "/credits?api_key=" + Constants.TMDB_API_KEY;
-//
-//        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-//                response -> {
-//                    try {
-//                        JSONArray jsonArray = response.getJSONArray("cast");
-//
-//                        for (int i = 0; i < jsonArray.length(); ++i) {
-//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                            String name = jsonObject.getString("name");
-//                            int id = jsonObject.getInt("id");
-//                            String profile_path = jsonObject.getString("profile_path");
-//                            if (!profile_path.equals("null")) {
-//                                mCasts.add(new Person(
-//                                        name,
-//                                        profile_path,
-//                                        id));
-//                            }
-//                        }
-//
-//                        CastAdapter.ListItemClickListener listener = (view, position) -> {
-//                            CastBottomSheetDialog cast = new CastBottomSheetDialog();
-//
-//                            Person person = mCasts.get(position);
-//
-//                            Bundle bundle = new Bundle();
-//                            bundle.putSerializable("message", person);
-//                            cast.setArguments(bundle);
-//                            cast.show(getSupportFragmentManager(), "temp_tag");
-//                        };
-//
-//                        CastAdapter adapter = new CastAdapter(mCasts, getApplicationContext(), listener);
-//                        recyclerViewCast.setAdapter(adapter);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }, Throwable::printStackTrace);
-//        mRequestQueue.add(jsonObjectRequest);
-//    }
-//
-//    private void parseRecyclerView() {
-//        String url = Constants.TMDB_MOVIES + movie.getTmdb_id() + "/similar?api_key=" + Constants.TMDB_API_KEY;
-//
-//        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-//                response -> {
-//                    try {
-//                        JSONArray jsonArray = response.getJSONArray("results");
-//
-//                        for (int i = 0; i < jsonArray.length(); ++i) {
-//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                            String title = jsonObject.getString("title");
-//                            String poster_path = jsonObject.getString("poster_path");
-//
-//                            String[] title_arr = title.split(": ");
-//                            String title1;
-//                            String title2 = null;
-//                            if (title_arr.length == 2) {
-//                                title1 = title_arr[0].trim();
-//                                title2 = title_arr[1].trim();
-//                            } else {
-//                                title1 = title_arr[0];
-//                            }
-//
-//                            mMovies.add(new Movie(
-//                                    poster_path,
-//                                    title1,
-//                                    title2
-//                            ));
-//                        }
-//                        SimilarMovieAdapter adapter = new SimilarMovieAdapter(getApplicationContext(), mMovies);
-//                        recyclerView.setAdapter(adapter);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }, Throwable::printStackTrace);
-//        mRequestQueue.add(jsonObjectRequest);
-//    }
+    private void parseDataTMDB() {
+        String url = Constants.TMDB_MOVIES + movie.getId() + "?api_key=" + Constants.TMDB_API_KEY + "&append_to_response=credits,similar,videos";
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        ArrayList<Person> credits = new ArrayList<>();
+                        ArrayList<Movie> similar = new ArrayList<>();
+                        int L;
+
+//                        Set cast
+                        JSONArray creditsResult = response.getJSONObject("credits")
+                                .getJSONArray("cast");
+                        L = creditsResult.length();
+                        for (int j = 0; j < L; ++j) {
+                            Person person = new Person();
+                            person.setId(creditsResult.getJSONObject(j).getInt("id"));
+                            person.setName(creditsResult.getJSONObject(j).getString("name"));
+                            person.setProfile_path(creditsResult.getJSONObject(j).getString("profile_path"));
+                            credits.add(person);
+                        }
+
+//                        Set similar movies
+                        JSONArray similarResult = response.getJSONObject("similar")
+                                .getJSONArray("results");
+                        L = similarResult.length();
+                        for (int j = 0; j < L; ++j) {
+                            Movie movie = new Movie();
+                            movie.setId(String.valueOf(similarResult.getJSONObject(j).getInt("id")));
+                            movie.setOverview(similarResult.getJSONObject(j).getString("overview"));
+                            movie.setPoster_path(similarResult.getJSONObject(j).getString("poster_path"));
+                            movie.setVote_average(similarResult.getJSONObject(j).getString("vote_average"));
+                            movie.setVote_count(similarResult.getJSONObject(j).getString("vote_count"));
+                            String title = similarResult.getJSONObject(j).getString("title");
+
+                            String[] title_arr = title.split(": ");
+                            String title1;
+                            String title2 = "";
+
+                            if (title_arr.length == 2) {
+                                title1 = title_arr[0].trim();
+                                title2 = title_arr[1].trim();
+                            } else {
+                                title1 = title_arr[0].trim();
+                            }
+
+                            movie.setTitle1(title1);
+                            movie.setTitle2(title2);
+                            similar.add(movie);
+                        }
+
+//                        Set video key.
+                        movie.setKey(response.getJSONObject("videos")
+                                .getJSONArray("results")
+                                .getJSONObject(0).getString("key"));
+
+                        movie.setCast(credits);
+                        movie.setSimilarMovies(similar);
+                        updateView();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, Throwable::printStackTrace);
+        mRequestQueue.add(jsonObjectRequest);
+    }
 
     private void initView() {
 
@@ -267,94 +185,87 @@ public class MovieActivity extends AppCompatActivity {
         fadeIn.setDuration(1500);
     }
 
-//    private void updateView() {
-//        String url = Constants.TMDB_IMAGE + "original" + movie.getPoster_path();
-//
-//        Target target = new Target() {
-//            @Override
-//            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-//                mImageViewPoster.setImageBitmap(bitmap);
-//                mImageViewPoster.setAlpha(0f);
-//                mImageViewPoster.animate().setDuration(1000).alpha(1f).start();
-//
-//                Palette.from(bitmap)
-//                        .generate(palette -> {
-//                            Palette.Swatch textSwatch = Objects.requireNonNull(palette).getMutedSwatch();
-//
-//                            mImageViewPlay.setVisibility(View.VISIBLE);
-//                            fadeIn.reset();
-//
-//                            mImageViewPlay.setAnimation(fadeIn);
-//                            mImageViewPlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
-//                        });
-//            }
-//
-//            @Override
-//            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-//
-//            }
-//
-//            @Override
-//            public void onPrepareLoad(Drawable placeHolderDrawable) {
-//
-//            }
-//        };
-//
-//        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.movie_placeholder);
-//
-//
-//        Picasso.get()
-//                .load(url)
-//                .placeholder(R.drawable.movie_placeholder)
-//                .resize(2000, 3000)
-//                .centerInside()
-//                .into(target);
-//
-//        mImageViewPoster.setTag(target);
-//
-//        mTextViewRelease.setText(movie.getRelease_date());
-//        mTextViewGenre.setText(movie.getGenre());
-//        mTextViewLength.setText(movie.getLength());
-//        mTextViewOverview.setText(movie.getOverview());
-//        mTextViewVoteCount.setText(movie.getVoteCount());
-//
-//        if (movie.getTitle2().equals("")) {
-//            mTextViewTitle1.setText(movie.getTitle1());
-//            mTextViewTitle2.setVisibility(View.GONE);
-//        } else {
-//            mTextViewTitle1.setText(movie.getTitle1());
-//            mTextViewTitle2.setVisibility(View.VISIBLE);
-//            mTextViewTitle2.setText(movie.getTitle2());
-//        }
-//
-//        if (movie.getImdb().equals("N/A")) {
-//            mRatingBar.setRating(0);
-//        } else {
-//            double rating = Double.parseDouble(movie.getImdb());
-//            rating /= 2;
-//            movie.setImdb(String.valueOf(Math.round(rating * 2) / 2.0));
-//            mRatingBar.setRating(Float.parseFloat(movie.getImdb()));
-//        }
-//
-//        mImageViewPoster.setVisibility(View.VISIBLE);
-//        mRatingBar.setVisibility(View.VISIBLE);
-//        mTextViewCast.setVisibility(View.VISIBLE);
-//        mTextViewSimilarMovies.setVisibility(View.VISIBLE);
-//        recyclerView.setVisibility(View.VISIBLE);
-//
-//        mRatingBar.startAnimation(fadeIn);
-//        mImageViewPoster.startAnimation(fadeIn);
-//        mImageViewPlay.startAnimation(fadeIn);
-//        mTextViewTitle1.startAnimation(fadeIn);
-//        mTextViewTitle2.startAnimation(fadeIn);
-//        mTextViewRelease.startAnimation(fadeIn);
-//        mTextViewGenre.startAnimation(fadeIn);
-//        mTextViewLength.startAnimation(fadeIn);
-//        mTextViewOverview.startAnimation(fadeIn);
-//        mRatingBar.startAnimation(fadeIn);
-//        mTextViewVoteCount.startAnimation(fadeIn);
-//        mTextViewCast.startAnimation(fadeIn);
-//        mTextViewSimilarMovies.setAnimation(fadeIn);
-//        recyclerView.startAnimation(fadeIn);
-//    }
+    private void updateView() {
+        String url = Constants.TMDB_IMAGE + "original" + movie.getPoster_path();
+
+        Target target = new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                mImageViewPoster.setImageBitmap(bitmap);
+                mImageViewPoster.setAlpha(0f);
+                mImageViewPoster.animate().setDuration(1000).alpha(1f).start();
+
+                Palette.from(bitmap)
+                        .generate(palette -> {
+                            Palette.Swatch textSwatch = Objects.requireNonNull(palette).getMutedSwatch();
+
+                            mImageViewPlay.setVisibility(View.VISIBLE);
+                            fadeIn.reset();
+
+                            mImageViewPlay.setAnimation(fadeIn);
+                            mImageViewPlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
+                        });
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+
+        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.movie_placeholder);
+
+
+        Picasso.get()
+                .load(url)
+                .placeholder(R.drawable.movie_placeholder)
+                .resize(2000, 3000)
+                .centerInside()
+                .into(target);
+
+        mImageViewPoster.setTag(target);
+
+        mTextViewRelease.setText(movie.getYear());
+        mTextViewGenre.setText(movie.getGenre());
+        mTextViewLength.setText(movie.getRuntime());
+        mTextViewOverview.setText(movie.getOverview());
+        mTextViewVoteCount.setText(movie.getVote_count());
+
+        if (movie.getTitle2().equals("")) {
+            mTextViewTitle1.setText(movie.getTitle1());
+            mTextViewTitle2.setVisibility(View.GONE);
+        } else {
+            mTextViewTitle1.setText(movie.getTitle1());
+            mTextViewTitle2.setVisibility(View.VISIBLE);
+            mTextViewTitle2.setText(movie.getTitle2());
+        }
+
+        mRatingBar.setRating(Float.parseFloat(movie.getImdbRatings()));
+
+        mImageViewPoster.setVisibility(View.VISIBLE);
+        mRatingBar.setVisibility(View.VISIBLE);
+        mTextViewCast.setVisibility(View.VISIBLE);
+        mTextViewSimilarMovies.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+
+        mRatingBar.startAnimation(fadeIn);
+        mImageViewPoster.startAnimation(fadeIn);
+        mImageViewPlay.startAnimation(fadeIn);
+        mTextViewTitle1.startAnimation(fadeIn);
+        mTextViewTitle2.startAnimation(fadeIn);
+        mTextViewRelease.startAnimation(fadeIn);
+        mTextViewGenre.startAnimation(fadeIn);
+        mTextViewLength.startAnimation(fadeIn);
+        mTextViewOverview.startAnimation(fadeIn);
+        mRatingBar.startAnimation(fadeIn);
+        mTextViewVoteCount.startAnimation(fadeIn);
+        mTextViewCast.startAnimation(fadeIn);
+        mTextViewSimilarMovies.setAnimation(fadeIn);
+        recyclerView.startAnimation(fadeIn);
+    }
 }

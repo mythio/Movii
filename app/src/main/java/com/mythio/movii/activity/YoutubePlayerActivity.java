@@ -19,7 +19,7 @@ public class YoutubePlayerActivity extends YouTubeFailureRecoveryActivity {
         super.onCreate(bundle);
         setContentView(R.layout.player_youtube);
 
-        url = getIntent().getStringExtra("EXTRAAA");
+        url = getIntent().getStringExtra("MOVIE_YOUTUBE_KEY");
 
         playerView = findViewById(R.id.player);
         playerView.initialize(YOUTUBE_DEVELOPER_KEY, this);

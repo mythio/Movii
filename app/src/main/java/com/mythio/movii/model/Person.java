@@ -7,12 +7,6 @@ public class Person implements Serializable {
     private String profile_path;
     private int id;
 
-    public Person(String name, String profile_path, int id) {
-        this.name = name;
-        this.profile_path = profile_path;
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

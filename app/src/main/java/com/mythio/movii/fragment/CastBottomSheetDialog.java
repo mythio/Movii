@@ -129,11 +129,11 @@ public class CastBottomSheetDialog extends BottomSheetDialogFragment {
             }
         }
 
-        mMovies.add(new Movie(
-                poster_path,
-                title1,
-                title2,
-                id
-        ));
+//        mMovies.add(new Movie(
+//                poster_path,
+//                title1,
+//                title2,
+//                id
+//        ));
     }
 }

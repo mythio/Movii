@@ -1,6 +1,7 @@
 package com.mythio.movii.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Movie implements Serializable {
 
@@ -14,6 +15,8 @@ public class Movie implements Serializable {
     private String overview;
     private String imdb_id;
     private String key;
+    private List<Person> cast;
+    private List<Movie> similarMovies;
 
     //    OMDB
     private String year;
@@ -93,6 +96,22 @@ public class Movie implements Serializable {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public List<Person> getCast() {
+        return cast;
+    }
+
+    public void setCast(List<Person> cast) {
+        this.cast = cast;
+    }
+
+    public List<Movie> getSimilarMovies() {
+        return similarMovies;
+    }
+
+    public void setSimilarMovies(List<Movie> similarMovies) {
+        this.similarMovies = similarMovies;
     }
 
     public String getYear() {

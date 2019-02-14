@@ -51,9 +51,11 @@ public class MoviesFragmentPopular extends Fragment {
 
     private void parseTMDB() {
         String url = Constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
+        Log.d("tag_tag_tag", url);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
+                        Log.d("tag_tag_tag", response.toString());
                         JSONArray jsonArray = response.getJSONArray("results");
                         for (int i = 0; i < jsonArray.length(); ++i) {
                             addToList(jsonArray.getJSONObject(i));
@@ -67,11 +69,13 @@ public class MoviesFragmentPopular extends Fragment {
     }
 
     private void parseDataTMDB(int i) {
-        String url = Constants.TMDB_MOVIES + mMovies.get(i).getId() + "/external_ids?api_key=" + Constants.TMDB_API_KEY;
+        //        Requesting cast and similar movies from the activity itself to enable the view recycling.
+        String url = Constants.TMDB_MOVIES + mMovies.get(i).getId() + "?api_key=" + Constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
                         mMovies.get(i).setImdb_id(response.getString("imdb_id"));
+                        mMovies.get(i).setRuntime(response.getString("runtime"));
                         parseDataOMDB(i);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -82,34 +86,24 @@ public class MoviesFragmentPopular extends Fragment {
 
     public void parseDataOMDB(int i) {
         String url = Constants.OMDB_GET + "&i=" + mMovies.get(i).getImdb_id();
+//        url = "https://www.omdbapi.com/?apikey=e403207b&i=tt2395427";
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        String length = response.getString("Runtime");
                         mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
                         mMovies.get(i).setVote_count(response.getString("imdbVotes"));
                         mMovies.get(i).setOverview(response.getString("Plot"));
                         mMovies.get(i).setYear(response.getString("Year"));
-
                         mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
 
-                        if (!mMovies.get(i).getImdbRatings().equals("N/A")) {
+                        if (mMovies.get(i).getImdbRatings().equals("N/A")) {
+                            mMovies.get(i).setImdbRatings(mMovies.get(i).getVote_average());
+                        } else {
                             double rating = Double.parseDouble(mMovies.get(i).getImdbRatings());
                             rating /= 2;
                             mMovies.get(i).setImdbRatings(String.valueOf(Math.round(rating * 2) / 2.0));
                         }
-
-                        if (length.equals("N/A")) {
-                            mMovies.get(i).setRuntime(length);
-                        } else {
-                            String[] time = length.split(" ");
-                            Integer time1 = Integer.valueOf(time[0]);
-                            int HH = time1 / 60;
-                            int MM = time1 % 60;
-                            mMovies.get(i).setRuntime(HH + " h " + MM + " m");
-                        }
-                        Log.d("TAG_TAG", i + " " + mMovies.get(i).getImdbRatings());
 
                         if (i == mMovies.size() - 1) {
                             MovieAdapter adapter = new MovieAdapter(getContext(), mMovies);
@@ -125,9 +119,12 @@ public class MoviesFragmentPopular extends Fragment {
     private void addToList(JSONObject jsonObject) throws JSONException {
         Movie movie = new Movie();
 
+        movie.setVote_count(String.valueOf(jsonObject.getInt("vote_count")));
+        movie.setVote_average(String.valueOf(jsonObject.getDouble("vote_average")));
+        movie.setId(String.valueOf(jsonObject.getInt("id")));
+        movie.setPoster_path(jsonObject.getString("poster_path"));
+        movie.setOverview(jsonObject.getString("overview"));
         String title = jsonObject.getString("title");
-        String poster_path = jsonObject.getString("poster_path");
-        String id = String.valueOf(jsonObject.getInt("id"));
 
         String[] title_arr = title.split(": ");
         String title1;
@@ -139,5 +136,9 @@ public class MoviesFragmentPopular extends Fragment {
         } else {
             title1 = title_arr[0].trim();
         }
+
+        movie.setTitle1(title1);
+        movie.setTitle2(title2);
+        mMovies.add(movie);
     }
 }

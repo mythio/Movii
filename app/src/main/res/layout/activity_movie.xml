@@ -195,6 +195,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
+                android:requiresFadingEdge="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="204dp"
                 android:background="@drawable/bg_similar_movies_list"
