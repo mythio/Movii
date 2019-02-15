@@ -96,9 +96,16 @@ public class MoviesFragmentPopular extends Fragment {
                         String[] listGenre = genre.split(", ");
 
                         genre = "";
-                        for (int k = 0; k < Math.min(2, listGenre.length); ++k) {
-                            genre += listGenre[k] + "  |  ";
+                        int L = Math.min(2, listGenre.length);
+                        StringBuilder genreBuilder = new StringBuilder(genre);
+                        for (int k = 0; k < L; ++k) {
+                            if (k != L - 1) {
+                                genreBuilder.append(listGenre[k]).append("  |  ");
+                            } else {
+                                genreBuilder.append(listGenre[k]);
+                            }
                         }
+                        genre = genreBuilder.toString();
 
                         mMovies.get(i).setGenre(genre);
 
