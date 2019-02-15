@@ -19,7 +19,8 @@
         android:elevation="100dp"
         android:src="@drawable/ic_close"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/image_view_poster"
@@ -30,7 +31,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -47,7 +49,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.20" />
+            app:layout_constraintVertical_bias="0.20"
+            tools:ignore="ContentDescription" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -174,9 +177,9 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_cast"
-                android:visibility="invisible"
                 android:layout_width="match_parent"
-                android:layout_height="64dp" />
+                android:layout_height="64dp"
+                android:visibility="invisible" />
 
             <Space
                 android:layout_width="0dp"
@@ -196,12 +199,12 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
-                android:requiresFadingEdge="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="204dp"
                 android:background="@drawable/bg_similar_movies_list"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
+                android:requiresFadingEdge="vertical"
                 android:visibility="invisible">
 
             </android.support.v7.widget.RecyclerView>
