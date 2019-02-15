@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textView_popular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
@@ -51,23 +52,58 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/view_pager"
+                android:id="@+id/view_pager_popular"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_margin="8dp"
                 app:layout_constraintDimensionRatio="H,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView">
+                app:layout_constraintTop_toBottomOf="@+id/textView_popular" />
+
+            <TextView
+                android:id="@+id/textView_popular_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Show All"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_pager_popular" />
+
+            <TextView
+                android:id="@+id/textView_trending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="TRENDING"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_popular_show" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager_trending"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                app:layout_constraintDimensionRatio="H,16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_trending"
+                tools:layout_editor_absoluteY="47dp">
 
             </android.support.v4.view.ViewPager>
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="500dp"
                 android:layout_marginTop="8dp"
-                android:text="Show All"
-                app:layout_constraintEnd_toEndOf="@+id/view_pager"
-                app:layout_constraintTop_toBottomOf="@+id/view_pager" />
+                android:layout_marginEnd="16dp"
+                android:text="Show Allaaa"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_pager_trending" />
 
         </android.support.constraint.ConstraintLayout>
 

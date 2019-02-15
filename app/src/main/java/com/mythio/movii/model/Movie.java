@@ -9,6 +9,7 @@ public class Movie implements Serializable {
     private String title1;
     private String title2;
     private String poster_path;
+    private String backdrop;
     private String id;
     private String vote_count;
     private String vote_average;
@@ -48,6 +49,14 @@ public class Movie implements Serializable {
 
     public void setPoster_path(String poster_path) {
         this.poster_path = poster_path;
+    }
+
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
     }
 
     public String getId() {

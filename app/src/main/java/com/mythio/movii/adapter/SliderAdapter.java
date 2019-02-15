@@ -13,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mythio.movii.R;
+import com.mythio.movii.model.Movie;
 import com.mythio.movii.model.Rounded;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -23,19 +25,21 @@ import com.squareup.picasso.Transformation;
 import java.util.List;
 import java.util.Objects;
 
+import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
+
 public class SliderAdapter extends PagerAdapter {
 
     private Context context;
-    private List<String> url;
+    private List<Movie> movies;
 
-    public SliderAdapter(Context context, List<String> url) {
+    public SliderAdapter(Context context, List<Movie> movies) {
         this.context = context;
-        this.url = url;
+        this.movies = movies;
     }
 
     @Override
     public int getCount() {
-        return url.size();
+        return movies.size();
     }
 
     @Override
@@ -45,23 +49,28 @@ public class SliderAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, int i) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.item_slider, null);
-        ImageView imageView = view.findViewById(R.id.img);
-        ImageView bg = view.findViewById(R.id.bg);
+
+        Movie movie = movies.get(i);
+
+        View view = inflater.inflate(R.layout.item_movie_ss, null);
+        ImageView imageViewBackdrop = view.findViewById(R.id.imageView_backdrop);
+        ImageView imageViewOverlay = view.findViewById(R.id.imageView_overlay);
+        TextView textViewTitle1 = view.findViewById(R.id.textView_title1);
+        TextView textViewTitle2 = view.findViewById(R.id.textView_title2);
+        TextView textViewRating = view.findViewById(R.id.textView_imdb_rating);
 
         Transformation transformation = new Rounded(32, Rounded.Corners.ALL);
 
         Target target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                imageView.setImageBitmap(bitmap);
-
+                imageViewBackdrop.setImageBitmap(bitmap);
                 Palette.from(bitmap)
                         .generate(palette -> {
-                            Palette.Swatch textSwatch = Objects.requireNonNull(palette).getVibrantSwatch();
-                            bg.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
+                            Palette.Swatch textSwatch = Objects.requireNonNull(palette).getDominantSwatch();
+                            imageViewOverlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
                         });
             }
 
@@ -76,12 +85,23 @@ public class SliderAdapter extends PagerAdapter {
             }
         };
 
+        textViewRating.setText(movie.getImdbRatings());
+
+        if (movie.getTitle2().equals("")) {
+            textViewTitle1.setText(movie.getTitle1());
+            textViewTitle2.setVisibility(View.GONE);
+        } else {
+            textViewTitle1.setText(movie.getTitle1());
+            textViewTitle2.setVisibility(View.VISIBLE);
+            textViewTitle2.setText(movie.getTitle2());
+        }
+
+        String url = TMDB_IMAGE + "w780" + movie.getBackdrop();
+
         Picasso.get()
-                .load(url.get(position))
+                .load(url)
                 .transform(transformation)
                 .into(target);
-
-        Log.d("TAG_TAG_TAG", url.get(position));
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);
