@@ -75,20 +75,18 @@ public class SimilarMovieAdapter extends RecyclerView.Adapter<SimilarMovieAdapte
         }
     }
 
-    public static class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
+    public static class ItemDecorator extends RecyclerView.ItemDecoration {
 
         private final int space;
 
-        public VerticalSpaceItemDecoration(int space) {
+        public ItemDecorator(int space) {
             this.space = space;
         }
 
         @Override
         public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
                                    @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-
             outRect.right = space;
-
             if (parent.getChildAdapterPosition(view) == 0) {
                 outRect.left = space;
             }

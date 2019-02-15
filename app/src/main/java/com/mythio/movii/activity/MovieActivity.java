@@ -93,7 +93,7 @@ public class MovieActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.addItemDecoration(new SimilarMovieAdapter.VerticalSpaceItemDecoration(SPACE));
+        recyclerView.addItemDecoration(new SimilarMovieAdapter.ItemDecorator(SPACE));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 

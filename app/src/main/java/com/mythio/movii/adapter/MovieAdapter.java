@@ -2,6 +2,7 @@ package com.mythio.movii.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -104,6 +105,24 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
             Intent intent = new Intent(mContext, MovieActivity.class);
             intent.putExtra("MOVIE_ACTIVITY", movie);
             mContext.startActivity(intent);
+        }
+    }
+
+    public static class ItemDecorator extends RecyclerView.ItemDecoration {
+
+        private final int space;
+
+        public ItemDecorator(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                                   @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+            outRect.bottom = space;
+            if (parent.getChildAdapterPosition(view) == 0) {
+                outRect.top = space;
+            }
         }
     }
 }

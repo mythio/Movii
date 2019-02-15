@@ -43,6 +43,7 @@ public class MoviesFragmentPopular extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.addItemDecoration(new MovieAdapter.ItemDecorator(32));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         parseTMDB();
         return view;
