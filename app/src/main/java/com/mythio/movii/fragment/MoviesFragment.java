@@ -3,7 +3,6 @@ package com.mythio.movii.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -41,13 +40,10 @@ public class MoviesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie, container, false);
         mMovies = new ArrayList<>();
         mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
         viewPager = view.findViewById(R.id.view_pager_popular);
-        TabLayout indicator = view.findViewById(R.id.indicator);
-//        viewPager.setAdapter(new SliderAdapter(getContext(), movies));
-        indicator.setupWithViewPager(viewPager, true);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new SliderTimer(), 4000, 4000);
 
