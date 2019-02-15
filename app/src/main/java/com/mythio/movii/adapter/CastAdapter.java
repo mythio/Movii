@@ -1,6 +1,7 @@
 package com.mythio.movii.adapter;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -67,6 +68,23 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
         @Override
         public void onClick(View v) {
             mOnClickListener.onClick(v, getAdapterPosition());
+        }
+    }
+
+    public static class ItemDecorator extends RecyclerView.ItemDecoration {
+
+        private final int space;
+
+        public ItemDecorator(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                                   @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+            if (parent.getChildAdapterPosition(view) != 0) {
+                outRect.left = space;
+            }
         }
     }
 }

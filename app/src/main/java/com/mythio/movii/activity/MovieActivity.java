@@ -3,7 +3,6 @@ package com.mythio.movii.activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +36,6 @@ import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -89,10 +87,10 @@ public class MovieActivity extends AppCompatActivity {
         imageButton.setOnClickListener(v -> finish());
 
         recyclerViewCast.setHasFixedSize(true);
+        recyclerViewCast.addItemDecoration(new CastAdapter.ItemDecorator(SPACE));
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         recyclerView.setHasFixedSize(true);
-
         recyclerView.addItemDecoration(new SimilarMovieAdapter.ItemDecorator(SPACE));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
