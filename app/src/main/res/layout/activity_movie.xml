@@ -71,7 +71,7 @@
                 android:id="@+id/text_view_release"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="true"
+                android:includeFontPadding="false"
                 android:textSize="12sp" />
 
             <TextView
@@ -114,7 +114,7 @@
 
             <TextView
                 android:id="@+id/text_view_overview"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:textSize="12sp" />
