@@ -2,11 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="174dp">
+    android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="174dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -16,7 +16,6 @@
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             android:adjustViewBounds="true"
             android:elevation="24dp"
