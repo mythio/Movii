@@ -73,6 +73,10 @@ public class MoviesFragmentPopular extends Fragment {
                     try {
                         mMovies.get(i).setImdb_id(response.getString("imdb_id"));
                         mMovies.get(i).setRuntime(response.getString("runtime"));
+
+                        String string = response.getString("runtime");
+
+
                         parseDataOMDB(i);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -95,9 +99,8 @@ public class MoviesFragmentPopular extends Fragment {
                         String genre = response.getString("Genre");
                         String[] listGenre = genre.split(", ");
 
-                        genre = "";
                         int L = Math.min(2, listGenre.length);
-                        StringBuilder genreBuilder = new StringBuilder(genre);
+                        StringBuilder genreBuilder = new StringBuilder();
                         for (int k = 0; k < L; ++k) {
                             if (k != L - 1) {
                                 genreBuilder.append(listGenre[k]).append("  |  ");
@@ -130,9 +133,9 @@ public class MoviesFragmentPopular extends Fragment {
     private void addToList(JSONObject jsonObject) throws JSONException {
         Movie movie = new Movie();
 
-        movie.setVote_count(String.valueOf(jsonObject.getInt("vote_count")));
-        movie.setVote_average(String.valueOf(jsonObject.getDouble("vote_average")));
-        movie.setId(String.valueOf(jsonObject.getInt("id")));
+        movie.setVote_count(jsonObject.getString("vote_count"));
+        movie.setVote_average(jsonObject.getString("vote_average"));
+        movie.setId(jsonObject.getString("id"));
         movie.setPoster_path(jsonObject.getString("poster_path"));
         movie.setOverview(jsonObject.getString("overview"));
         String title = jsonObject.getString("title");
