@@ -113,6 +113,9 @@ public class MovieActivity extends AppCompatActivity {
                             person.setId(creditsResult.getJSONObject(j).getInt("id"));
                             person.setName(creditsResult.getJSONObject(j).getString("name"));
                             person.setProfile_path(creditsResult.getJSONObject(j).getString("profile_path"));
+                            if (person.getProfile_path().equals("null")) {
+                                continue;
+                            }
                             credits.add(person);
                         }
 
