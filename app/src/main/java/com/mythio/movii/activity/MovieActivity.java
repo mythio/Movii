@@ -61,8 +61,6 @@ public class MovieActivity extends AppCompatActivity {
     private TextView mTextViewCast;
     private TextView mTextViewSimilarMovies;
 
-    public static final int SPACE = 24;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,11 +85,11 @@ public class MovieActivity extends AppCompatActivity {
         imageButton.setOnClickListener(v -> finish());
 
         recyclerViewCast.setHasFixedSize(true);
-        recyclerViewCast.addItemDecoration(new CastAdapter.ItemDecorator(SPACE));
+        recyclerViewCast.addItemDecoration(new CastAdapter.ItemDecorator(24));
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new SimilarMovieAdapter.ItemDecorator(SPACE));
+        recyclerView.addItemDecoration(new SimilarMovieAdapter.ItemDecorator(24));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 

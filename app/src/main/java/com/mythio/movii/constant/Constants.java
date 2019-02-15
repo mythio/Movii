@@ -1,8 +1,5 @@
 package com.mythio.movii.constant;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Constants {
 
     //    API keys for the API used
@@ -16,25 +13,4 @@ public class Constants {
     public static final String TMDB_TV     = "https://api.themoviedb.org/3/tv/popular/";
     public static final String TMDB_PERSON = "https://api.themoviedb.org/3/person/";
     public static final String OMDB_GET    = "https://www.omdbapi.com/?apikey=e403207b&";
-
-    public static final Map<Integer, String> GENRE = new HashMap<Integer, String>() {{
-        put(12, "Adventure");
-        put(14, "Fantasy");
-        put(16, "Animation");
-        put(18, "Drama");
-        put(27, "Horror");
-        put(28, "Action");
-        put(35, "Comedy");
-        put(36, "History");
-        put(37, "Western");
-        put(53, "Thriller");
-        put(80, "Crime");
-        put(99, "Documentary");
-        put(878, "Science Fiction");
-        put(10402, "Music");
-        put(10749, "Romance");
-        put(10751, "Family");
-        put(10752, "War");
-        put(10770, "TV Movie");
-    }};
 }

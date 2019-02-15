@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mythio.movii.R;
+import com.mythio.movii.adapter.SliderAdapter;
 import com.mythio.movii.fragment.movies.MoviesFragmentGenre;
 import com.mythio.movii.fragment.movies.MoviesFragmentLatest;
 import com.mythio.movii.fragment.movies.MoviesFragmentPopular;
@@ -22,59 +23,45 @@ import com.mythio.movii.fragment.movies.MoviesFragmentUpcoming;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MoviesFragment extends Fragment {
+
+    private ViewPager viewPager;
+    List<String> url;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_movies, container, false);
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        TabLayout tabs = view.findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
+        View view = inflater.inflate(R.layout.fragment_movies_temp, container, false);
+        url  = new ArrayList<>();
+        url.add("https://image.tmdb.org/t/p/w780/8RKBHHRqOMOLh5qW3sS6TSFTd8h.jpg");
+        url.add("https://image.tmdb.org/t/p/w780/8yqLPNwNCtpOPc3XkOlkSMnghzw.jpg");
+        url.add("https://image.tmdb.org/t/p/w780/lvjscO8wmpEbIfOEZi92Je8Ktlg.jpg");
+        url.add("https://image.tmdb.org/t/p/w780/8yqLPNwNCtpOPc3XkOlkSMnghzw.jpg");
+        viewPager = view.findViewById(R.id.view_pager);
+//        indicator = findViewById(R.id.indicator);
+        viewPager.setAdapter(new SliderAdapter(getContext(), url));
+//        indicator.setupWithViewPager(viewPager, true);
 
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new SliderTimer(), 4000,  4000);
         return view;
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new MoviesFragmentPopular(), "Popular");
-        adapter.addFragment(new MoviesFragmentUpcoming(), "Upcoming");
-        adapter.addFragment(new MoviesFragmentLatest(), "Latest");
-        adapter.addFragment(new MoviesFragmentTrending(), "Trending");
-        adapter.addFragment(new MoviesFragmentTopRated(), "Top Rated");
-        adapter.addFragment(new MoviesFragmentGenre(), "Genre");
-        viewPager.setAdapter(adapter);
-        viewPager.stopNestedScroll();
-        viewPager.setOffscreenPageLimit(3);
-    }
-
-    static class Adapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        Adapter(FragmentManager manager) {
-            super(manager);
-        }
+    private class SliderTimer extends TimerTask {
 
         @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
+        public void run() {
+            Objects.requireNonNull(getActivity()).runOnUiThread(() -> {
+                if (viewPager.getCurrentItem() < url.size() - 1) {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                } else {
+                    viewPager.setCurrentItem(0);
+                }
+            });
         }
     }
 }

@@ -31,7 +31,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.mythio.movii.constant.Constants.GENRE;
 import static com.mythio.movii.constant.Constants.TMDB_API_KEY;
 import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
 
@@ -47,7 +46,7 @@ public class CastBottomSheetDialog extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        mMovies = new ArrayList<>();
+//        mMovies = new ArrayList<>();
 
         person = (Person) Objects.requireNonNull(getArguments()).getSerializable("message");
 
@@ -64,76 +63,76 @@ public class CastBottomSheetDialog extends BottomSheetDialogFragment {
                 .into(mImageViewProfile);
         mTextViewName.setText(person.getName());
 
-        recyclerView = view.findViewById(R.id.recycler_view_cast_featured_movies);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        parse();
+//        recyclerView = view.findViewById(R.id.recycler_view_cast_featured_movies);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        parse();
         return view;
     }
 
-    private void parse() {
-        String url = Constants.TMDB_PERSON + person.getId() + "/movie_credits?api_key=" + TMDB_API_KEY;
-
-        Log.d("tag_tag_tag", url);
-
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
-                    try {
-                        JSONArray jsonArray = response.getJSONArray("cast");
-                        for (int i = 0; i < jsonArray.length(); ++i) {
-                            Log.d("TAG_TAG_TAG", jsonArray.getJSONObject(i).toString());
-                            addToList(jsonArray.getJSONObject(i));
-                        }
-
-                        FeaturedMovieAdapter adapter = new FeaturedMovieAdapter(getContext(), mMovies);
-                        recyclerView.setAdapter(adapter);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }, error -> {
-        });
-        mRequestQueue.add(jsonObjectRequest);
-    }
-
-    private void addToList(JSONObject jsonObject) throws JSONException {
-
-        String character = jsonObject.getString("character");
-
-        if (character.equals("Himself")) {
-            return;
-        }
-
-        String title = jsonObject.getString("title");
-        String poster_path = jsonObject.getString("poster_path");
-        String id = String.valueOf(jsonObject.getInt("id"));
-        JSONArray genreArr = jsonObject.getJSONArray("genre_ids");
-
-        StringBuilder genre = null;
-        String[] title_arr = title.split(": ");
-        String title1;
-        String title2 = "";
-
-        if (title_arr.length == 2) {
-            title1 = title_arr[0].trim();
-            title2 = title_arr[1].trim();
-        } else {
-            title1 = title_arr[0].trim();
-        }
-
-        int l = Math.min(genreArr.length(), 2);
-
-        for (int j = 0; j < l; ++j) {
-            genre = (genre == null ? new StringBuilder() : genre).append(GENRE.get(genreArr.getInt(j)));
-            if (j != l - 1) {
-                genre.append("  |  ");
-            }
-        }
-
-//        mMovies.add(new Movie(
-//                poster_path,
-//                title1,
-//                title2,
-//                id
-//        ));
-    }
+//    private void parse() {
+//        String url = Constants.TMDB_PERSON + person.getId() + "/movie_credits?api_key=" + TMDB_API_KEY;
+//
+//        Log.d("tag_tag_tag", url);
+//
+//        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+//                response -> {
+//                    try {
+//                        JSONArray jsonArray = response.getJSONArray("cast");
+//                        for (int i = 0; i < jsonArray.length(); ++i) {
+//                            Log.d("TAG_TAG_TAG", jsonArray.getJSONObject(i).toString());
+//                            addToList(jsonArray.getJSONObject(i));
+//                        }
+//
+//                        FeaturedMovieAdapter adapter = new FeaturedMovieAdapter(getContext(), mMovies);
+//                        recyclerView.setAdapter(adapter);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }, error -> {
+//        });
+//        mRequestQueue.add(jsonObjectRequest);
+//    }
+//
+//    private void addToList(JSONObject jsonObject) throws JSONException {
+//
+//        String character = jsonObject.getString("character");
+//
+//        if (character.equals("Himself")) {
+//            return;
+//        }
+//
+//        String title = jsonObject.getString("title");
+//        String poster_path = jsonObject.getString("poster_path");
+//        String id = String.valueOf(jsonObject.getInt("id"));
+//        JSONArray genreArr = jsonObject.getJSONArray("genre_ids");
+//
+//        StringBuilder genre = null;
+//        String[] title_arr = title.split(": ");
+//        String title1;
+//        String title2 = "";
+//
+//        if (title_arr.length == 2) {
+//            title1 = title_arr[0].trim();
+//            title2 = title_arr[1].trim();
+//        } else {
+//            title1 = title_arr[0].trim();
+//        }
+//
+//        int l = Math.min(genreArr.length(), 2);
+//
+//        for (int j = 0; j < l; ++j) {
+//            genre = (genre == null ? new StringBuilder() : genre).append(GENRE.get(genreArr.getInt(j)));
+//            if (j != l - 1) {
+//                genre.append("  |  ");
+//            }
+//        }
+//
+////        mMovies.add(new Movie(
+////                poster_path,
+////                title1,
+////                title2,
+////                id
+////        ));
+//    }
 }
