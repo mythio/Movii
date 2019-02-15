@@ -71,11 +71,9 @@ public class MoviesFragmentPopular extends Fragment {
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
+                        int s = response.getInt("runtime");
                         mMovies.get(i).setImdb_id(response.getString("imdb_id"));
-                        mMovies.get(i).setRuntime(response.getString("runtime"));
-
-                        String string = response.getString("runtime");
-
+                        mMovies.get(i).setRuntime(s/60 + " h " + s%60 + " m");
 
                         parseDataOMDB(i);
                     } catch (JSONException e) {
