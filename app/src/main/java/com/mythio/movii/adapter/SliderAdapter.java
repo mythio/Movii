@@ -5,10 +5,10 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.graphics.Palette;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.model.Movie;
-import com.mythio.movii.model.Rounded;
+import com.mythio.movii.model.RoundedCorners;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.squareup.picasso.Transformation;
@@ -54,23 +54,26 @@ public class SliderAdapter extends PagerAdapter {
 
         Movie movie = movies.get(i);
 
-        View view = inflater.inflate(R.layout.item_movie_ss, null);
-        ImageView imageViewBackdrop = view.findViewById(R.id.imageView_backdrop);
-        ImageView imageViewOverlay = view.findViewById(R.id.imageView_overlay);
+        View view = inflater.inflate(R.layout.item_home_slideshow, null);
+        final ImageView imageViewBackdrop = view.findViewById(R.id.imageView_backdrop);
+        final ImageView imageViewOverlay = view.findViewById(R.id.imageView_overlay);
         TextView textViewTitle1 = view.findViewById(R.id.textView_title1);
         TextView textViewTitle2 = view.findViewById(R.id.textView_title2);
         TextView textViewRating = view.findViewById(R.id.textView_imdb_rating);
 
-        Transformation transformation = new Rounded(32, Rounded.Corners.ALL);
+        Transformation transformation = new RoundedCorners(32, RoundedCorners.Corners.ALL);
 
         Target target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 imageViewBackdrop.setImageBitmap(bitmap);
                 Palette.from(bitmap)
-                        .generate(palette -> {
-                            Palette.Swatch textSwatch = Objects.requireNonNull(palette).getDominantSwatch();
-                            imageViewOverlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
+                        .generate(new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(@Nullable Palette palette) {
+                                Palette.Swatch textSwatch = Objects.requireNonNull(palette).getDominantSwatch();
+                                imageViewOverlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
+                            }
                         });
             }
 

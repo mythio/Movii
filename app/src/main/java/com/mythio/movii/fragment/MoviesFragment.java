@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest
         ;
 import com.mythio.movii.R;
@@ -54,61 +56,85 @@ public class MoviesFragment extends Fragment {
     private void parseTMDB() {
         String url = Constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
-                    try {
-                        JSONArray jsonArray = response.getJSONArray("results");
-                        for (int i = 0; i < jsonArray.length(); ++i) {
-                            addToList(jsonArray.getJSONObject(i));
-                            parseDataTMDB(i);
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("results");
+                            for (int i = 0; i < jsonArray.length(); ++i) {
+                                MoviesFragment.this.addToList(jsonArray.getJSONObject(i));
+                                MoviesFragment.this.parseDataTMDB(i);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }, Throwable::printStackTrace);
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
         mRequestQueue.add(jsonObjectRequest);
     }
 
-    private void parseDataTMDB(int i) {
+    private void parseDataTMDB(final int i) {
         String url = Constants.TMDB_MOVIES + mMovies.get(i).getId() + "?api_key=" + Constants.TMDB_API_KEY;
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
-                    try {
-                        mMovies.get(i).setImdb_id(response.getString("imdb_id"));
-                        mMovies.get(i).setRuntime(response.getString("runtime"));
-                        parseDataOMDB(i);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            mMovies.get(i).setImdb_id(response.getString("imdb_id"));
+                            mMovies.get(i).setRuntime(response.getString("runtime"));
+                            MoviesFragment.this.parseDataOMDB(i);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }, Throwable::printStackTrace);
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
         mRequestQueue.add(jsonObjectRequest);
     }
 
-    public void parseDataOMDB(int i) {
+    public void parseDataOMDB(final int i) {
         String url = Constants.OMDB_GET + "&i=" + mMovies.get(i).getImdb_id();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
-                    try {
-                        mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
-                        mMovies.get(i).setVote_count(response.getString("imdbVotes"));
-                        mMovies.get(i).setOverview(response.getString("Plot"));
-                        mMovies.get(i).setYear(response.getString("Year"));
-                        mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
+                            mMovies.get(i).setVote_count(response.getString("imdbVotes"));
+                            mMovies.get(i).setOverview(response.getString("Plot"));
+                            mMovies.get(i).setYear(response.getString("Year"));
+                            mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
 
-                        if (mMovies.get(i).getImdbRatings().equals("N/A")) {
-                            mMovies.get(i).setImdbRatings(mMovies.get(i).getVote_average());
-                        } else {
-                            double rating = Double.parseDouble(mMovies.get(i).getImdbRatings());
-                            mMovies.get(i).setImdbRatings(String.valueOf(Math.round(rating * 2) / 2.0));
-                        }
+                            if (mMovies.get(i).getImdbRatings().equals("N/A")) {
+                                mMovies.get(i).setImdbRatings(mMovies.get(i).getVote_average());
+                            } else {
+                                double rating = Double.parseDouble(mMovies.get(i).getImdbRatings());
+                                mMovies.get(i).setImdbRatings(String.valueOf(Math.round(rating * 2) / 2.0));
+                            }
 
-                        if (i == mMovies.size() - 1) {
-                            viewPager.setAdapter(new SliderAdapter(getContext(), mMovies));
+                            if (i == mMovies.size() - 1) {
+                                viewPager.setAdapter(new SliderAdapter(MoviesFragment.this.getContext(), mMovies));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }, Throwable::printStackTrace);
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
         mRequestQueue.add(jsonObjectRequest);
     }
 
@@ -142,11 +168,14 @@ public class MoviesFragment extends Fragment {
     private class SliderTimer extends TimerTask {
         @Override
         public void run() {
-            Objects.requireNonNull(getActivity()).runOnUiThread(() -> {
-                if (viewPager.getCurrentItem() < mMovies.size() - 1) {
-                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                } else {
-                    viewPager.setCurrentItem(0);
+            Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (viewPager.getCurrentItem() < mMovies.size() - 1) {
+                        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                    } else {
+                        viewPager.setCurrentItem(0);
+                    }
                 }
             });
         }

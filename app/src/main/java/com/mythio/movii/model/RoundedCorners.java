@@ -10,7 +10,7 @@ import android.graphics.RectF;
 
 import com.squareup.picasso.Transformation;
 
-public class Rounded implements Transformation {
+public class RoundedCorners implements Transformation {
     private final int radius;
     private final Corners corners;
 
@@ -36,13 +36,13 @@ public class Rounded implements Transformation {
         }
     }
 
-    public Rounded(int radius, Corners corners) {
+    public RoundedCorners(int radius, Corners corners) {
         this.radius = radius;
         this.corners = corners;
     }
 
-    @Override public Bitmap transform(Bitmap source) {
-        assert radius > 0;
+    @Override
+    public Bitmap transform(Bitmap source) {
         int w = source.getWidth();
         int h = source.getHeight();
         Bitmap output = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
@@ -55,32 +55,27 @@ public class Rounded implements Transformation {
         final float roundPx = radius;
 
         paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);  // Zero everything out, I guess.
-        paint.setColor(color);  // Grayish.
-        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);  // Grayish round rect.
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
 
-        // Draw selected rounded corners only.
-        // This turns unwanted rounded corners into square corners.
         boolean top = (corners.getCode() & Corners.TOP.getCode()) > 0;
         boolean bottom = (corners.getCode() & Corners.BOTTOM.getCode()) > 0;
         boolean left = (corners.getCode() & Corners.LEFT.getCode()) > 0;
         boolean right = (corners.getCode() & Corners.RIGHT.getCode()) > 0;
-        assert !(left || right);
-        assert !(top || bottom);
         canvas.drawRect(left ? roundPx : 0,
                 top ? roundPx : 0,
                 right ? w - roundPx : w,
                 bottom ? h - roundPx : h,
                 paint);
-
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(source, rect, rect, paint);
-
         source.recycle();
         return output;
     }
 
-    @Override public String key() {
+    @Override
+    public String key() {
         return "rounded();";
     }
 }

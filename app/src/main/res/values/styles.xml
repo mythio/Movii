@@ -7,20 +7,6 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:fontFamily">@font/gsans_medium</item>
         <item name="android:windowTranslucentStatus">false</item>
-        <item name="colorControlHighlight">@color/pixel_blue</item>
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
-
-    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog" >
-        <item name="bottomSheetStyle">@style/AppModalStyle</item>
-    </style>
-
-    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal" >
-        <item name="android:background">@drawable/bg_cast_bottom_sheet</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

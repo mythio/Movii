@@ -21,7 +21,7 @@
         android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:alpha="0.65"
-        android:src="@drawable/bg_movies"
+        android:src="@drawable/bg_dark_rounded_rectangle"
         app:layout_constraintBottom_toBottomOf="@+id/imageView_backdrop"
         app:layout_constraintEnd_toEndOf="@+id/imageView_backdrop"
         app:layout_constraintStart_toStartOf="@+id/imageView_backdrop"
