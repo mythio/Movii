@@ -8,8 +8,8 @@
 
     <item
         android:id="@+id/navigation_tv"
-        android:icon="@drawable/ic_tv"
-        android:title="Series" />
+        android:icon="@drawable/ic_search"
+        android:title="TV" />
 
     <item
         android:id="@+id/navigation_profiles"

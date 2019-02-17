@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.mythio.movii.R;
 
-public class SeriesFragment extends Fragment {
+public class TvFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

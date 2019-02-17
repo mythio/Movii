@@ -1,71 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/imageView_backdrop"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="16dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintDimensionRatio="H,16:9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.v7.widget.CardView
+        app:cardCornerRadius="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView_overlay"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:alpha="0.65"
-        android:src="@drawable/bg_dark_rounded_rectangle"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView_backdrop"
-        app:layout_constraintEnd_toEndOf="@+id/imageView_backdrop"
-        app:layout_constraintStart_toStartOf="@+id/imageView_backdrop"
-        app:layout_constraintTop_toTopOf="@+id/imageView_backdrop" />
+        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="bottom|right"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView_overlay"
-        app:layout_constraintEnd_toEndOf="@+id/imageView_overlay">
+            <ImageView
+                android:id="@+id/imageView_backdrop"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:src="@drawable/musical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="H,16:9"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView_imdb_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:includeFontPadding="false"
-            android:textSize="24dp" />
+            <ImageView
+                android:id="@+id/imageView_overlay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.65"
+                android:src="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView_backdrop"
+                app:layout_constraintEnd_toEndOf="@+id/imageView_backdrop"
+                app:layout_constraintStart_toStartOf="@+id/imageView_backdrop"
+                app:layout_constraintTop_toTopOf="@+id/imageView_backdrop" />
 
-        <TextView
-            android:id="@+id/textView_title1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:includeFontPadding="false"
-            android:textSize="16dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|right"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView_overlay"
+                app:layout_constraintEnd_toEndOf="@+id/imageView_overlay">
 
-        <TextView
-            android:id="@+id/textView_title2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:alpha="0.6"
-            android:includeFontPadding="false"
-            android:textAllCaps="true"
-            android:textSize="12dp" />
+                <TextView
+                    android:id="@+id/textView_imdb_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:includeFontPadding="false"
+                    android:textSize="24dp" />
 
-        <Space
-            android:id="@+id/space"
-            android:layout_width="24dp"
-            android:layout_height="24dp" />
+                <TextView
+                    android:id="@+id/textView_title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:includeFontPadding="false"
+                    android:textSize="16dp" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textView_title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:alpha="0.6"
+                    android:includeFontPadding="false"
+                    android:textAllCaps="true"
+                    android:textSize="12dp" />
 
-</android.support.constraint.ConstraintLayout>
+                <Space
+                    android:id="@+id/space"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+
+            </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
