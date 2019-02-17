@@ -25,12 +25,12 @@ import java.util.Objects;
 
 import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
 
-public class SliderAdapter extends PagerAdapter {
+public class MovieSliderAdapter extends PagerAdapter {
 
     private Context context;
     private List<Movie> movies;
 
-    public SliderAdapter(Context context, List<Movie> movies) {
+    public MovieSliderAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
     }

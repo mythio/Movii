@@ -2,6 +2,7 @@ package com.mythio.movii.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.ListActivity;
-import com.mythio.movii.adapter.SliderAdapter;
+import com.mythio.movii.adapter.MovieSliderAdapter;
 import com.mythio.movii.adapter.VolleySingleton;
 import com.mythio.movii.constant.Constants;
 import com.mythio.movii.model.Movie;
@@ -40,6 +41,7 @@ public class MoviesFragment extends Fragment {
     private RequestQueue mRequestQueue;
     private ViewPager viewPager;
     private ArrayList<Movie> mMovies;
+    private int currentPage = 0;
 
     @Nullable
     @Override
@@ -69,8 +71,23 @@ public class MoviesFragment extends Fragment {
             }
         });
 
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new SliderTimer(), 4000, 4000);
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == 19) {
+                    currentPage = 0;
+                }
+                viewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
+        Timer mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 5000, 5000);
 
         parseTMDB();
         return view;
@@ -152,7 +169,7 @@ public class MoviesFragment extends Fragment {
                                         return o2.getImdbRatings().compareTo(o1.getImdbRatings());
                                     }
                                 });
-                                viewPager.setAdapter(new SliderAdapter(MoviesFragment.this.getContext(), mMovies));
+                                viewPager.setAdapter(new MovieSliderAdapter(MoviesFragment.this.getContext(), mMovies));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
