@@ -1,5 +1,6 @@
 package com.mythio.movii.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.mythio.movii.R;
+import com.mythio.movii.activity.ListActivity;
 import com.mythio.movii.adapter.SliderAdapter;
 import com.mythio.movii.adapter.VolleySingleton;
 import com.mythio.movii.constant.Constants;
@@ -25,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,7 +37,7 @@ public class MoviesFragment extends Fragment {
 
     private RequestQueue mRequestQueue;
     private ViewPager viewPager;
-    private List<Movie> mMovies;
+    private ArrayList<Movie> mMovies;
 
     @Nullable
     @Override
@@ -54,6 +55,15 @@ public class MoviesFragment extends Fragment {
                 view.findViewById(R.id.textView_title1).setAlpha(1.0F - Math.abs(v) * 2);
                 view.findViewById(R.id.textView_title2).setAlpha(0.65F * (1.0F - Math.abs(v) * 2));
                 view.findViewById(R.id.textView_imdb_rating).setAlpha(1.0F - Math.abs(v) * 2);
+            }
+        });
+
+        view.findViewById(R.id.textView_popular_show).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ListActivity.class);
+                intent.putExtra("POPULAR_MOVIES_LIST", mMovies);
+                startActivity(intent);
             }
         });
 
