@@ -19,8 +19,8 @@
         android:layout_alignParentBottom="true"
         android:background="@android:color/black"
         android:elevation="16dp"
-        app:itemIconTint="@drawable/nav_bg"
-        app:itemTextColor="@drawable/nav_bg"
+        app:itemIconTint="@drawable/bg_navigation_bar"
+        app:itemTextColor="@drawable/bg_navigation_bar"
         app:menu="@menu/navigation_tabs">
 
     </android.support.design.widget.BottomNavigationView>

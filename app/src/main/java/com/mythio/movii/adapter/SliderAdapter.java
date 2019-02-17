@@ -17,10 +17,8 @@ import android.widget.TextView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.model.Movie;
-import com.mythio.movii.model.RoundedCorners;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-import com.squareup.picasso.Transformation;
 
 import java.util.List;
 import java.util.Objects;
@@ -54,7 +52,7 @@ public class SliderAdapter extends PagerAdapter {
 
         Movie movie = movies.get(i);
 
-        View view = inflater.inflate(R.layout.item_home_slideshow, null);
+        View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.imageView_backdrop);
         final ImageView imageViewOverlay = view.findViewById(R.id.imageView_overlay);
         TextView textViewTitle1 = view.findViewById(R.id.textView_title1);

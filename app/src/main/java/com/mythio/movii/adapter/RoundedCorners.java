@@ -1,4 +1,4 @@
-package com.mythio.movii.model;
+package com.mythio.movii.adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
