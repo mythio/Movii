@@ -3,6 +3,7 @@ package com.mythio.movii.adapter;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -67,7 +68,10 @@ public class MovieSliderAdapter extends PagerAdapter {
                         .generate(new Palette.PaletteAsyncListener() {
                             @Override
                             public void onGenerated(@Nullable Palette palette) {
-                                Palette.Swatch textSwatch = Objects.requireNonNull(palette).getDominantSwatch();
+                                Palette.Swatch textSwatch = Objects.requireNonNull(palette).getDarkVibrantSwatch();
+                                if (textSwatch == null) {
+                                    textSwatch = Objects.requireNonNull(palette).getDominantSwatch();
+                                }
                                 imageViewOverlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
                             }
                         });

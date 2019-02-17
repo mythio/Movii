@@ -47,7 +47,7 @@ public class TvFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
         mSeries = new ArrayList<>();
         mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
@@ -75,10 +75,8 @@ public class TvFragment extends Fragment {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == mSeries.size()) {
-                    currentPage = 0;
-                }
-                viewPager.setCurrentItem(currentPage++, true);
+                currentPage = viewPager.getCurrentItem();
+                viewPager.setCurrentItem(currentPage + 1 % mSeries.size(), true);
             }
         };
 
@@ -94,8 +92,7 @@ public class TvFragment extends Fragment {
     }
 
     private void parseTMDB() {
-        String url = Constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
-        url = "https://api.themoviedb.org/3/tv/popular?api_key=a781dd694991f0ea8dcf9050ec3e7a20";
+        String url = Constants.TMDB_TV + "popular?api_key=" + TMDB_API_KEY;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -120,8 +117,7 @@ public class TvFragment extends Fragment {
     }
 
     private void parseDataTMDB(final int i) {
-        String url = Constants.TMDB_MOVIES + mSeries.get(i).getId() + "?api_key=" + Constants.TMDB_API_KEY;
-        url = "https://api.themoviedb.org/3/tv/" + mSeries.get(i).getId() + "?api_key=a781dd694991f0ea8dcf9050ec3e7a20" + "&append_to_response=external_ids";
+        String url = Constants.TMDB_TV + mSeries.get(i).getId() + "?api_key=" + Constants.TMDB_API_KEY + "&append_to_response=external_ids";
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
