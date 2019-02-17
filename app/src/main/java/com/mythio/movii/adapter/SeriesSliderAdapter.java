@@ -56,8 +56,7 @@ public class SeriesSliderAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.imageView_backdrop);
         final ImageView imageViewOverlay = view.findViewById(R.id.imageView_overlay);
-        TextView textViewTitle1 = view.findViewById(R.id.textView_title1);
-        TextView textViewTitle2 = view.findViewById(R.id.textView_title2);
+        TextView textViewName = view.findViewById(R.id.textView_title1);
         TextView textViewRating = view.findViewById(R.id.textView_imdb_rating);
 
         Target target = new Target() {
@@ -86,15 +85,7 @@ public class SeriesSliderAdapter extends PagerAdapter {
         };
 
         textViewRating.setText(series.getImdbRatings());
-
-        if (series.getTitle2().equals("")) {
-            textViewTitle1.setText(series.getTitle1());
-            textViewTitle2.setVisibility(View.GONE);
-        } else {
-            textViewTitle1.setText(series.getTitle1());
-            textViewTitle2.setVisibility(View.VISIBLE);
-            textViewTitle2.setText(series.getTitle2());
-        }
+        textViewName.setText(series.getName());
 
         String url = TMDB_IMAGE + "w780" + series.getBackdrop();
 

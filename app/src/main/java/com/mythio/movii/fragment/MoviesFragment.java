@@ -54,7 +54,6 @@ public class MoviesFragment extends Fragment {
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(@NonNull View view, float v) {
-
                 view.findViewById(R.id.imageView_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
                 view.findViewById(R.id.textView_title1).setAlpha(1.0F - Math.abs(v) * 2);
                 view.findViewById(R.id.textView_title2).setAlpha(0.65F * (1.0F - Math.abs(v) * 2));
@@ -74,7 +73,7 @@ public class MoviesFragment extends Fragment {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == 19) {
+                if (currentPage == mMovies.size()) {
                     currentPage = 0;
                 }
                 viewPager.setCurrentItem(currentPage++, true);
@@ -157,9 +156,6 @@ public class MoviesFragment extends Fragment {
 
                             if (mMovies.get(i).getImdbRatings().equals("N/A")) {
                                 mMovies.get(i).setImdbRatings(mMovies.get(i).getVote_average());
-                            } else {
-                                double rating = Double.parseDouble(mMovies.get(i).getImdbRatings());
-                                mMovies.get(i).setImdbRatings(String.valueOf(Math.round(rating * 2) / 2.0));
                             }
 
                             if (i == mMovies.size() - 1) {
@@ -209,21 +205,5 @@ public class MoviesFragment extends Fragment {
         movie.setTitle1(title1);
         movie.setTitle2(title2);
         mMovies.add(movie);
-    }
-
-    private class SliderTimer extends TimerTask {
-        @Override
-        public void run() {
-            Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (viewPager.getCurrentItem() < mMovies.size() - 1) {
-                        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                    } else {
-                        viewPager.setCurrentItem(0);
-                    }
-                }
-            });
-        }
     }
 }

@@ -7,8 +7,7 @@ import java.util.List;
 public class Series implements Serializable {
 
     //    TMDB
-    private String title1;
-    private String title2;
+    private String name;
     private String poster_path;
     private String backdrop;
     private String id;
@@ -28,20 +27,12 @@ public class Series implements Serializable {
     private String imdbRatings;
     private String imdbVotes;
 
-    public String getTitle1() {
-        return title1;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle1(String title1) {
-        this.title1 = title1;
-    }
-
-    public String getTitle2() {
-        return title2;
-    }
-
-    public void setTitle2(String title2) {
-        this.title2 = title2;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPoster_path() {

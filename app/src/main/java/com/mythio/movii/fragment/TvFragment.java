@@ -56,7 +56,6 @@ public class TvFragment extends Fragment {
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(@NonNull View view, float v) {
-
                 view.findViewById(R.id.imageView_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
                 view.findViewById(R.id.textView_title1).setAlpha(1.0F - Math.abs(v) * 2);
                 view.findViewById(R.id.textView_title2).setAlpha(0.65F * (1.0F - Math.abs(v) * 2));
@@ -76,7 +75,7 @@ public class TvFragment extends Fragment {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == 19) {
+                if (currentPage == mSeries.size()) {
                     currentPage = 0;
                 }
                 viewPager.setCurrentItem(currentPage++, true);
@@ -161,18 +160,15 @@ public class TvFragment extends Fragment {
 
                             if (mSeries.get(i).getImdbRatings().equals("N/A")) {
                                 mSeries.get(i).setImdbRatings(mSeries.get(i).getVote_average());
-                            } else {
-                                double rating = Double.parseDouble(mSeries.get(i).getImdbRatings());
-                                mSeries.get(i).setImdbRatings(String.valueOf(Math.round(rating * 2) / 2.0));
                             }
 
                             if (i == mSeries.size() - 1) {
-//                                Collections.sort(mSeries, new Comparator<Series>() {
-//                                    @Override
-//                                    public int compare(Series o1, Series o2) {
-//                                        return o2.getImdbRatings().compareTo(o1.getImdbRatings());
-//                                    }
-//                                });
+                                Collections.sort(mSeries, new Comparator<Series>() {
+                                    @Override
+                                    public int compare(Series o1, Series o2) {
+                                        return o2.getImdbRatings().compareTo(o1.getImdbRatings());
+                                    }
+                                });
                                 viewPager.setAdapter(new SeriesSliderAdapter(TvFragment.this.getContext(), mSeries));
                             }
                         } catch (JSONException e) {
@@ -196,21 +192,7 @@ public class TvFragment extends Fragment {
         series.setPoster_path(jsonObject.getString("poster_path"));
         series.setBackdrop(jsonObject.getString("backdrop_path"));
         series.setOverview(jsonObject.getString("overview"));
-        series.setTitle1(jsonObject.getString("name"));
-        series.setTitle2("");
-//        String[] title_arr = title.split(": ");
-//        String title1;
-//        String title2 = "";
-//
-//        if (title_arr.length == 2) {
-//            title1 = title_arr[0].trim();
-//            title2 = title_arr[1].trim();
-//        } else {
-//            title1 = title_arr[0].trim();
-//        }
-//
-//        series.setTitle1(title1);
-//        series.setTitle2(title2);
+        series.setName(jsonObject.getString("name"));
         mSeries.add(series);
     }
 
