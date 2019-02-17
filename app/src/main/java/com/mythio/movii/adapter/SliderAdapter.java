@@ -61,8 +61,6 @@ public class SliderAdapter extends PagerAdapter {
         TextView textViewTitle2 = view.findViewById(R.id.textView_title2);
         TextView textViewRating = view.findViewById(R.id.textView_imdb_rating);
 
-        Transformation transformation = new RoundedCorners(32, RoundedCorners.Corners.ALL);
-
         Target target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {

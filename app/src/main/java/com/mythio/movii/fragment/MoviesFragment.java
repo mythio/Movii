@@ -45,15 +45,15 @@ public class MoviesFragment extends Fragment {
         mMovies = new ArrayList<>();
         mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
         viewPager = view.findViewById(R.id.view_pager_popular);
-        viewPager.setPageMargin(24);
+        viewPager.setPageMargin(0);
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(@NonNull View view, float v) {
 
-                view.findViewById(R.id.imageView_backdrop).setTranslationX(-v * (viewPager.getWidth() / 4));
-                view.findViewById(R.id.textView_title1).setAlpha(1.0F - Math.abs(v)*2);
-                view.findViewById(R.id.textView_imdb_rating).setAlpha(1.0F - Math.abs(v)*2);
-                view.findViewById(R.id.textView_title2).setAlpha(1.0F - Math.abs(v)*2);
+                view.findViewById(R.id.imageView_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
+                view.findViewById(R.id.textView_title1).setAlpha(1.0F - Math.abs(v) * 2);
+                view.findViewById(R.id.textView_title2).setAlpha(0.65F * (1.0F - Math.abs(v) * 2));
+                view.findViewById(R.id.textView_imdb_rating).setAlpha(1.0F - Math.abs(v) * 2);
             }
         });
 
