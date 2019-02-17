@@ -43,12 +43,11 @@ public class TvFragment extends Fragment {
     private RequestQueue mRequestQueue;
     private ViewPager viewPager;
     private ArrayList<Series> mSeries;
-    private int currentPage = 0;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_movie, container, false);
+        final View view = inflater.inflate(R.layout.fragment_movie, container, false);
         mSeries = new ArrayList<>();
         mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
         viewPager = view.findViewById(R.id.view_pager_popular);
@@ -75,8 +74,7 @@ public class TvFragment extends Fragment {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                currentPage = viewPager.getCurrentItem();
-                viewPager.setCurrentItem(currentPage + 1 % mSeries.size(), true);
+                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % mSeries.size(), true);
             }
         };
 

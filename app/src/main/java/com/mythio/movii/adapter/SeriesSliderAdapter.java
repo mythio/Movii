@@ -91,7 +91,6 @@ public class SeriesSliderAdapter extends PagerAdapter {
 
         Picasso.get()
                 .load(url)
-//                .transform(transformation)
                 .into(target);
 
         ViewPager viewPager = (ViewPager) container;

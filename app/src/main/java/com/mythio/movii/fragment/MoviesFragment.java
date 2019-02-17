@@ -42,7 +42,6 @@ public class MoviesFragment extends Fragment {
     private RequestQueue mRequestQueue;
     private ViewPager viewPager;
     private ArrayList<Movie> mMovies;
-    private int currentPage = 0;
 
     @Nullable
     @Override
@@ -51,7 +50,6 @@ public class MoviesFragment extends Fragment {
         mMovies = new ArrayList<>();
         mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
         viewPager = view.findViewById(R.id.view_pager_popular);
-        viewPager.setPageMargin(0);
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(@NonNull View view, float v) {
@@ -74,8 +72,7 @@ public class MoviesFragment extends Fragment {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                currentPage = viewPager.getCurrentItem();
-                viewPager.setCurrentItem(currentPage + 1 % mMovies.size(), true);
+                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % mMovies.size(), true);
             }
         };
 
