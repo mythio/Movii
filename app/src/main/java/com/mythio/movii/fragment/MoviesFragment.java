@@ -27,6 +27,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -144,6 +146,12 @@ public class MoviesFragment extends Fragment {
                             }
 
                             if (i == mMovies.size() - 1) {
+                                Collections.sort(mMovies, new Comparator<Movie>() {
+                                    @Override
+                                    public int compare(Movie o1, Movie o2) {
+                                        return o2.getImdbRatings().compareTo(o1.getImdbRatings());
+                                    }
+                                });
                                 viewPager.setAdapter(new SliderAdapter(MoviesFragment.this.getContext(), mMovies));
                             }
                         } catch (JSONException e) {
