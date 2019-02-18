@@ -24,6 +24,7 @@ import com.mythio.movii.adapter.VolleySingleton;
 import com.mythio.movii.constant.Constants;
 import com.mythio.movii.model.Movie;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,7 +73,11 @@ public class MoviesFragment extends Fragment {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % mMovies.size(), true);
+                if (viewPager.getCurrentItem() == mMovies.size() - 1) {
+                    viewPager.setCurrentItem(0, true);
+                } else {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % mMovies.size(), true);
+                }
             }
         };
 
@@ -176,7 +181,7 @@ public class MoviesFragment extends Fragment {
         mRequestQueue.add(jsonObjectRequest);
     }
 
-    private void addToList(JSONObject jsonObject) throws JSONException {
+    private void addToList(@NotNull JSONObject jsonObject) throws JSONException {
         Movie movie = new Movie();
 
         movie.setVote_count(String.valueOf(jsonObject.getInt("vote_count")));

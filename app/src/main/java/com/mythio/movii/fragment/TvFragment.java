@@ -25,6 +25,7 @@ import com.mythio.movii.adapter.VolleySingleton;
 import com.mythio.movii.constant.Constants;
 import com.mythio.movii.model.Series;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,7 +75,11 @@ public class TvFragment extends Fragment {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % mSeries.size(), true);
+                if (viewPager.getCurrentItem() == mSeries.size() - 1) {
+                    viewPager.setCurrentItem(0, true);
+                } else {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % mSeries.size(), true);
+                }
             }
         };
 
@@ -178,7 +183,7 @@ public class TvFragment extends Fragment {
         mRequestQueue.add(jsonObjectRequest);
     }
 
-    private void addToList(JSONObject jsonObject) throws JSONException {
+    private void addToList(@NotNull JSONObject jsonObject) throws JSONException {
         Series series = new Series();
         series.setVote_count(String.valueOf(jsonObject.getInt("vote_count")));
         series.setVote_average(String.valueOf(jsonObject.getDouble("vote_average")));
