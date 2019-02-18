@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.ListActivity;
-import com.mythio.movii.adapter.MovieSliderAdapter;
 import com.mythio.movii.adapter.SeriesSliderAdapter;
 import com.mythio.movii.adapter.VolleySingleton;
 import com.mythio.movii.constant.Constants;
@@ -33,7 +31,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -162,12 +159,6 @@ public class TvFragment extends Fragment {
                             }
 
                             if (i == mSeries.size() - 1) {
-                                Collections.sort(mSeries, new Comparator<Series>() {
-                                    @Override
-                                    public int compare(Series o1, Series o2) {
-                                        return o2.getImdbRatings().compareTo(o1.getImdbRatings());
-                                    }
-                                });
                                 viewPager.setAdapter(new SeriesSliderAdapter(TvFragment.this.getContext(), mSeries));
                             }
                         } catch (JSONException e) {
@@ -193,21 +184,5 @@ public class TvFragment extends Fragment {
         series.setOverview(jsonObject.getString("overview"));
         series.setName(jsonObject.getString("name"));
         mSeries.add(series);
-    }
-
-    private class SliderTimer extends TimerTask {
-        @Override
-        public void run() {
-            Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (viewPager.getCurrentItem() < mSeries.size() - 1) {
-                        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                    } else {
-                        viewPager.setCurrentItem(0);
-                    }
-                }
-            });
-        }
     }
 }

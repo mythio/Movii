@@ -19,6 +19,8 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        mMovies = new ArrayList<>();
+
         Intent i = getIntent();
         mMovies = (ArrayList<Movie>) i.getSerializableExtra("POPULAR_MOVIES_LIST");
     }

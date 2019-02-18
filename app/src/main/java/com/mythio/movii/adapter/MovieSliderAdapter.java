@@ -20,6 +20,10 @@ import com.mythio.movii.model.Movie;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,6 +37,12 @@ public class MovieSliderAdapter extends PagerAdapter {
     public MovieSliderAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
+        Collections.sort(movies, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return o2.getImdbRatings().compareTo(o1.getImdbRatings());
+            }
+        });
     }
 
     @Override
@@ -47,7 +57,7 @@ public class MovieSliderAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int i) {
+    public Object instantiateItem(@NotNull ViewGroup container, int i) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         Movie movie = movies.get(i);
