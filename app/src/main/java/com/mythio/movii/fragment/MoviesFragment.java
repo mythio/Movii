@@ -33,6 +33,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.mythio.movii.constant.Constants.TMDB_API_KEY;
+import static java.lang.Math.max;
 
 public class MoviesFragment extends Fragment {
 
@@ -66,13 +67,21 @@ public class MoviesFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(getContext(), SearchMovieActivity.class);
+//                startActivity(intent);
+            }
+        });
+
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
                 if (viewPager.getCurrentItem() == mMovies.size() - 1) {
                     viewPager.setCurrentItem(0, true);
                 } else {
-                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % mMovies.size(), true);
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % max(mMovies.size(), 1), true);
                 }
             }
         };

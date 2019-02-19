@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -44,7 +45,9 @@ public class StartActivity extends AppCompatActivity {
                     }
 
                     assert fragment != null;
-                    StartActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    ft.replace(R.id.fragment_container, fragment).commit();
                     return true;
                 }
             };

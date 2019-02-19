@@ -7,9 +7,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,8 +35,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,14 +46,22 @@ public class TvFragment extends Fragment {
     private ViewPager viewPager;
     private ArrayList<Series> mSeries;
 
+    private ImageButton mSearchGo;
+    private ImageButton mSearchClose;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_movie, container, false);
-        mSeries = new ArrayList<>();
+        final View view = inflater.inflate(R.layout.fragment_tv, container, false);
+
         mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
+
+        mSeries = new ArrayList<>();
+
         viewPager = view.findViewById(R.id.view_pager_popular);
-        viewPager.setPageMargin(0);
+        mSearchGo = view.findViewById(R.id.search_go_btn);
+        mSearchClose = view.findViewById(R.id.search_close_btn);
+
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(@NonNull View view, float v) {
@@ -57,6 +69,48 @@ public class TvFragment extends Fragment {
                 view.findViewById(R.id.textView_title1).setAlpha(1.0F - Math.abs(v) * 2);
                 view.findViewById(R.id.textView_title2).setAlpha(0.65F * (1.0F - Math.abs(v) * 2));
                 view.findViewById(R.id.textView_imdb_rating).setAlpha(1.0F - Math.abs(v) * 2);
+            }
+        });
+
+        mSearchGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation fadeIn = new AlphaAnimation(0, 1);
+                Animation fadeOut = new AlphaAnimation(1, 0);
+                fadeIn.setDuration(240);
+                fadeOut.setDuration(240);
+                fadeIn.setInterpolator(new AccelerateDecelerateInterpolator());
+                fadeOut.setInterpolator(new AccelerateDecelerateInterpolator());
+
+                mSearchGo.setAnimation(fadeOut);
+                mSearchClose.setAnimation(fadeIn);
+
+                mSearchGo.setVisibility(View.INVISIBLE);
+                mSearchClose.setVisibility(View.VISIBLE);
+
+                view.findViewById(R.id.search_bg).setAnimation(fadeIn);
+                view.findViewById(R.id.search_bg).setVisibility(View.VISIBLE);
+            }
+        });
+
+        mSearchClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation fadeIn = new AlphaAnimation(0, 1);
+                Animation fadeOut = new AlphaAnimation(1, 0);
+                fadeIn.setDuration(240);
+                fadeOut.setDuration(240);
+                fadeIn.setInterpolator(new AccelerateDecelerateInterpolator());
+                fadeOut.setInterpolator(new AccelerateDecelerateInterpolator());
+
+                view.findViewById(R.id.search_bg).setAnimation(fadeOut);
+                view.findViewById(R.id.search_bg).setVisibility(View.INVISIBLE);
+
+                mSearchGo.setAnimation(fadeIn);
+                mSearchClose.setAnimation(fadeOut);
+
+                mSearchGo.setVisibility(View.VISIBLE);
+                mSearchClose.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -69,24 +123,8 @@ public class TvFragment extends Fragment {
             }
         });
 
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (viewPager.getCurrentItem() == mSeries.size() - 1) {
-                    viewPager.setCurrentItem(0, true);
-                } else {
-                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % mSeries.size(), true);
-                }
-            }
-        };
+        autoScroll();
 
-        Timer mTimer = new Timer();
-        mTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        }, 5000, 5000);
         parseTMDB();
         return view;
     }
@@ -159,6 +197,9 @@ public class TvFragment extends Fragment {
                             }
 
                             if (i == mSeries.size() - 1) {
+                                for (Series series : mSeries) {
+                                    Log.d("TEMP_TEMP", series.getImdbRatings() + "");
+                                }
                                 viewPager.setAdapter(new SeriesSliderAdapter(TvFragment.this.getContext(), mSeries));
                             }
                         } catch (JSONException e) {
@@ -184,5 +225,26 @@ public class TvFragment extends Fragment {
         series.setOverview(jsonObject.getString("overview"));
         series.setName(jsonObject.getString("name"));
         mSeries.add(series);
+    }
+
+    private void autoScroll() {
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (viewPager.getCurrentItem() == mSeries.size() - 1) {
+                    viewPager.setCurrentItem(0, true);
+                } else {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % mSeries.size(), true);
+                }
+            }
+        };
+
+        Timer mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 5000, 5000);
     }
 }

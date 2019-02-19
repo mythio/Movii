@@ -38,12 +38,12 @@ public class SeriesSliderAdapter extends PagerAdapter {
     public SeriesSliderAdapter(Context context, List<Series> mSeries) {
         this.context = context;
         this.mSeries = mSeries;
-        Collections.sort(mSeries, new Comparator<Series>() {
-            @Override
-            public int compare(Series o1, Series o2) {
-                return o2.getImdbRatings().compareTo(o1.getImdbRatings());
-            }
-        });
+//        Collections.sort(mSeries, new Comparator<Series>() {
+//            @Override
+//            public int compare(Series o1, Series o2) {
+//                return o2.getImdbRatings().compareTo(o1.getImdbRatings());
+//            }
+//        });
     }
 
     @Override
