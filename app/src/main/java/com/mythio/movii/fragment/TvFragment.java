@@ -15,6 +15,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.android.volley.Request;
@@ -39,6 +40,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.mythio.movii.constant.Constants.TMDB_API_KEY;
+import static java.lang.Integer.max;
 
 public class TvFragment extends Fragment {
 
@@ -46,8 +48,10 @@ public class TvFragment extends Fragment {
     private ViewPager viewPager;
     private ArrayList<Series> mSeries;
 
+    private EditText mSearchField;
     private ImageButton mSearchGo;
     private ImageButton mSearchClose;
+    private View mSearchBg;
 
     @Nullable
     @Override
@@ -59,8 +63,10 @@ public class TvFragment extends Fragment {
         mSeries = new ArrayList<>();
 
         viewPager = view.findViewById(R.id.view_pager_popular);
+        mSearchField = view.findViewById(R.id.edit_text_search);
         mSearchGo = view.findViewById(R.id.search_go_btn);
         mSearchClose = view.findViewById(R.id.search_close_btn);
+        mSearchBg = view.findViewById(R.id.search_bg);
 
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
@@ -75,42 +81,84 @@ public class TvFragment extends Fragment {
         mSearchGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Animation fadeIn = new AlphaAnimation(0, 1);
+                final Animation fadeIn = new AlphaAnimation(0, 1);
                 Animation fadeOut = new AlphaAnimation(1, 0);
                 fadeIn.setDuration(240);
                 fadeOut.setDuration(240);
                 fadeIn.setInterpolator(new AccelerateDecelerateInterpolator());
                 fadeOut.setInterpolator(new AccelerateDecelerateInterpolator());
 
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.reveal_search);
+
+                anim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        fadeIn.setDuration(1000);
+                        mSearchClose.setAnimation(fadeIn);
+                        mSearchClose.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
+                mSearchField.setAnimation(anim);
                 mSearchGo.setAnimation(fadeOut);
-                mSearchClose.setAnimation(fadeIn);
+                mSearchBg.setAnimation(fadeIn);
 
+                mSearchField.setVisibility(View.VISIBLE);
                 mSearchGo.setVisibility(View.INVISIBLE);
-                mSearchClose.setVisibility(View.VISIBLE);
-
-                view.findViewById(R.id.search_bg).setAnimation(fadeIn);
-                view.findViewById(R.id.search_bg).setVisibility(View.VISIBLE);
+                mSearchBg.setVisibility(View.VISIBLE);
             }
         });
 
         mSearchClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Animation fadeIn = new AlphaAnimation(0, 1);
-                Animation fadeOut = new AlphaAnimation(1, 0);
+                final Animation fadeIn = new AlphaAnimation(0, 1);
+                final Animation fadeOut = new AlphaAnimation(1, 0);
                 fadeIn.setDuration(240);
                 fadeOut.setDuration(240);
                 fadeIn.setInterpolator(new AccelerateDecelerateInterpolator());
                 fadeOut.setInterpolator(new AccelerateDecelerateInterpolator());
 
-                view.findViewById(R.id.search_bg).setAnimation(fadeOut);
-                view.findViewById(R.id.search_bg).setVisibility(View.INVISIBLE);
+                final Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.hide_search);
 
-                mSearchGo.setAnimation(fadeIn);
+                final Animation fa = new AlphaAnimation(1, 0);
+                fa.setDuration(240);
+
+                fa.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        mSearchGo.setAnimation(fadeIn);
+                        mSearchGo.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
+                mSearchField.setAnimation(fa);
                 mSearchClose.setAnimation(fadeOut);
+                mSearchBg.setAnimation(fadeOut);
 
-                mSearchGo.setVisibility(View.VISIBLE);
+                mSearchField.setVisibility(View.INVISIBLE);
                 mSearchClose.setVisibility(View.INVISIBLE);
+                mSearchBg.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -234,7 +282,7 @@ public class TvFragment extends Fragment {
                 if (viewPager.getCurrentItem() == mSeries.size() - 1) {
                     viewPager.setCurrentItem(0, true);
                 } else {
-                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1 % mSeries.size(), true);
+                    viewPager.setCurrentItem((viewPager.getCurrentItem() + 1) % max(1, mSeries.size()), true);
                 }
             }
         };
