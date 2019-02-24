@@ -48,6 +48,9 @@ public class TvFragment extends Fragment {
     private ViewPager viewPager;
     private ArrayList<Series> mSeries;
 
+    private Animation fadeIn;
+    private Animation fadeOut;
+
     private EditText mSearchField;
     private ImageButton mSearchGo;
     private ImageButton mSearchClose;
@@ -61,6 +64,13 @@ public class TvFragment extends Fragment {
         mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
 
         mSeries = new ArrayList<>();
+
+        fadeIn = new AlphaAnimation(0, 1);
+        fadeOut = new AlphaAnimation(1, 0);
+        fadeIn.setDuration(240);
+        fadeOut.setDuration(240);
+        fadeIn.setInterpolator(new AccelerateDecelerateInterpolator());
+        fadeOut.setInterpolator(new AccelerateDecelerateInterpolator());
 
         viewPager = view.findViewById(R.id.view_pager_popular);
         mSearchField = view.findViewById(R.id.edit_text_search);
@@ -81,84 +91,14 @@ public class TvFragment extends Fragment {
         mSearchGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Animation fadeIn = new AlphaAnimation(0, 1);
-                Animation fadeOut = new AlphaAnimation(1, 0);
-                fadeIn.setDuration(240);
-                fadeOut.setDuration(240);
-                fadeIn.setInterpolator(new AccelerateDecelerateInterpolator());
-                fadeOut.setInterpolator(new AccelerateDecelerateInterpolator());
-
-                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.reveal_search);
-
-                anim.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        fadeIn.setDuration(1000);
-                        mSearchClose.setAnimation(fadeIn);
-                        mSearchClose.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-
-                mSearchField.setAnimation(anim);
-                mSearchGo.setAnimation(fadeOut);
-                mSearchBg.setAnimation(fadeIn);
-
-                mSearchField.setVisibility(View.VISIBLE);
-                mSearchGo.setVisibility(View.INVISIBLE);
-                mSearchBg.setVisibility(View.VISIBLE);
+                startAnimation();
             }
         });
 
         mSearchClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Animation fadeIn = new AlphaAnimation(0, 1);
-                final Animation fadeOut = new AlphaAnimation(1, 0);
-                fadeIn.setDuration(240);
-                fadeOut.setDuration(240);
-                fadeIn.setInterpolator(new AccelerateDecelerateInterpolator());
-                fadeOut.setInterpolator(new AccelerateDecelerateInterpolator());
-
-                final Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.hide_search);
-
-                final Animation fa = new AlphaAnimation(1, 0);
-                fa.setDuration(240);
-
-                fa.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        mSearchGo.setAnimation(fadeIn);
-                        mSearchGo.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-
-                mSearchField.setAnimation(fa);
-                mSearchClose.setAnimation(fadeOut);
-                mSearchBg.setAnimation(fadeOut);
-
-                mSearchField.setVisibility(View.INVISIBLE);
-                mSearchClose.setVisibility(View.INVISIBLE);
-                mSearchBg.setVisibility(View.INVISIBLE);
+                stopAnimation();
             }
         });
 
@@ -273,6 +213,65 @@ public class TvFragment extends Fragment {
         series.setOverview(jsonObject.getString("overview"));
         series.setName(jsonObject.getString("name"));
         mSeries.add(series);
+    }
+
+    private void startAnimation() {
+        Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.reveal_search);
+        anim.setInterpolator(new AccelerateDecelerateInterpolator());
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                fadeIn.setDuration(1000);
+                mSearchClose.setAnimation(fadeIn);
+                mSearchClose.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        mSearchField.setAnimation(anim);
+        mSearchGo.setAnimation(fadeOut);
+        mSearchBg.setAnimation(fadeIn);
+
+        mSearchField.setVisibility(View.VISIBLE);
+        mSearchGo.setVisibility(View.INVISIBLE);
+        mSearchBg.setVisibility(View.VISIBLE);
+    }
+
+    private void stopAnimation() {
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mSearchGo.setAnimation(fadeIn);
+                mSearchGo.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        mSearchField.setAnimation(fadeOut);
+        mSearchClose.setAnimation(fadeOut);
+        mSearchBg.setAnimation(fadeOut);
+
+        mSearchField.setVisibility(View.INVISIBLE);
+        mSearchClose.setVisibility(View.INVISIBLE);
+        mSearchBg.setVisibility(View.INVISIBLE);
     }
 
     private void autoScroll() {
