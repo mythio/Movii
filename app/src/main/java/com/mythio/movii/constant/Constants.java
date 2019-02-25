@@ -12,5 +12,6 @@ public class Constants {
     public static final String TMDB_TV = "https://api.themoviedb.org/3/tv/";
     public static final String TMDB_PERSON = "https://api.themoviedb.org/3/person/";
     public static final String TMDB_IMAGE = "https://image.tmdb.org/t/p/";
+    public static final String TMDB_SEARCH = "https://api.themoviedb.org/3/search/";
     public static final String OMDB_GET = "https://www.omdbapi.com/?apikey=e403207b&";
 }

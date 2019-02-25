@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.ListActivity;
+import com.mythio.movii.activity.SearchActivity;
 import com.mythio.movii.adapter.SeriesSliderAdapter;
 import com.mythio.movii.adapter.VolleySingleton;
 import com.mythio.movii.constant.Constants;
@@ -48,14 +49,6 @@ public class TvFragment extends Fragment {
     private ViewPager viewPager;
     private ArrayList<Series> mSeries;
 
-    private Animation fadeIn;
-    private Animation fadeOut;
-
-    private EditText mSearchField;
-    private ImageButton mSearchGo;
-    private ImageButton mSearchClose;
-    private View mSearchBg;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,48 +58,31 @@ public class TvFragment extends Fragment {
 
         mSeries = new ArrayList<>();
 
-        fadeIn = new AlphaAnimation(0, 1);
-        fadeOut = new AlphaAnimation(1, 0);
-        fadeIn.setDuration(240);
-        fadeOut.setDuration(240);
-        fadeIn.setInterpolator(new AccelerateDecelerateInterpolator());
-        fadeOut.setInterpolator(new AccelerateDecelerateInterpolator());
-
         viewPager = view.findViewById(R.id.view_pager_popular);
-        mSearchField = view.findViewById(R.id.edit_text_search);
-        mSearchGo = view.findViewById(R.id.search_go_btn);
-        mSearchClose = view.findViewById(R.id.search_close_btn);
-        mSearchBg = view.findViewById(R.id.search_bg);
-
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(@NonNull View view, float v) {
-                view.findViewById(R.id.imageView_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
-                view.findViewById(R.id.textView_title1).setAlpha(1.0F - Math.abs(v) * 2);
-                view.findViewById(R.id.textView_title2).setAlpha(0.65F * (1.0F - Math.abs(v) * 2));
-                view.findViewById(R.id.textView_imdb_rating).setAlpha(1.0F - Math.abs(v) * 2);
+                view.findViewById(R.id.image_view_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
+                view.findViewById(R.id.text_view_title1).setAlpha(1.0F - Math.abs(v) * 2);
+                view.findViewById(R.id.text_view_title2).setAlpha(0.65F * (1.0F - Math.abs(v) * 2));
+                view.findViewById(R.id.text_view_imdb_rating).setAlpha(1.0F - Math.abs(v) * 2);
             }
         });
 
-        mSearchGo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startAnimation();
-            }
-        });
-
-        mSearchClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopAnimation();
-            }
-        });
-
-        view.findViewById(R.id.textView_popular_show).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.text_view_popular_show).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ListActivity.class);
                 intent.putExtra("POPULAR_MOVIES_LIST", mSeries);
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.search_go_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SearchActivity.class);
+                intent.putExtra("SEARCH_ENDPOINT", "TV_SHOWS");
                 startActivity(intent);
             }
         });
@@ -213,65 +189,6 @@ public class TvFragment extends Fragment {
         series.setOverview(jsonObject.getString("overview"));
         series.setName(jsonObject.getString("name"));
         mSeries.add(series);
-    }
-
-    private void startAnimation() {
-        Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.reveal_search);
-        anim.setInterpolator(new AccelerateDecelerateInterpolator());
-        anim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                fadeIn.setDuration(1000);
-                mSearchClose.setAnimation(fadeIn);
-                mSearchClose.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
-        mSearchField.setAnimation(anim);
-        mSearchGo.setAnimation(fadeOut);
-        mSearchBg.setAnimation(fadeIn);
-
-        mSearchField.setVisibility(View.VISIBLE);
-        mSearchGo.setVisibility(View.INVISIBLE);
-        mSearchBg.setVisibility(View.VISIBLE);
-    }
-
-    private void stopAnimation() {
-        fadeOut.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                mSearchGo.setAnimation(fadeIn);
-                mSearchGo.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
-        mSearchField.setAnimation(fadeOut);
-        mSearchClose.setAnimation(fadeOut);
-        mSearchBg.setAnimation(fadeOut);
-
-        mSearchField.setVisibility(View.INVISIBLE);
-        mSearchClose.setVisibility(View.INVISIBLE);
-        mSearchBg.setVisibility(View.INVISIBLE);
     }
 
     private void autoScroll() {

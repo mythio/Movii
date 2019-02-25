@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.SearchActivity"></activity>
         <activity android:name=".activity.ListActivity" />
         <activity android:name=".activity.StartActivity">
             <intent-filter>

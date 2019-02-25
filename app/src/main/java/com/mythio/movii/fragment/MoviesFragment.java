@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.ListActivity;
+import com.mythio.movii.activity.SearchActivity;
 import com.mythio.movii.adapter.MovieSliderAdapter;
 import com.mythio.movii.adapter.VolleySingleton;
 import com.mythio.movii.constant.Constants;
@@ -44,7 +45,7 @@ public class MoviesFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_movie, container, false);
         mMovies = new ArrayList<>();
         mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
@@ -52,14 +53,14 @@ public class MoviesFragment extends Fragment {
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(@NonNull View view, float v) {
-                view.findViewById(R.id.imageView_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
-                view.findViewById(R.id.textView_title1).setAlpha(1.0F - Math.abs(v) * 2);
-                view.findViewById(R.id.textView_title2).setAlpha(0.65F * (1.0F - Math.abs(v) * 2));
-                view.findViewById(R.id.textView_imdb_rating).setAlpha(1.0F - Math.abs(v) * 2);
+                view.findViewById(R.id.image_view_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
+                view.findViewById(R.id.text_view_title1).setAlpha(1.0F - Math.abs(v) * 2);
+                view.findViewById(R.id.text_view_title2).setAlpha(0.65F * (1.0F - Math.abs(v) * 2));
+                view.findViewById(R.id.text_view_imdb_rating).setAlpha(1.0F - Math.abs(v) * 2);
             }
         });
 
-        view.findViewById(R.id.textView_popular_show).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.text_view_popular_show).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ListActivity.class);
@@ -68,11 +69,12 @@ public class MoviesFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.search_go_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), SearchMovieActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getContext(), SearchActivity.class);
+                intent.putExtra("SEARCH_ENDPOINT", "movie");
+                startActivity(intent);
             }
         });
 

@@ -17,54 +17,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edit_text_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/bg_seachbar"
-        android:elevation="2dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
+    <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/search_go_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="8dp"
-        android:background="@android:color/transparent"
-        android:elevation="4dp"
-        android:padding="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/bg_ripple"
+        android:padding="12dp"
         android:src="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_text_search"
-        app:layout_constraintEnd_toEndOf="@+id/edit_text_search"
-        app:layout_constraintTop_toTopOf="@+id/edit_text_search" />
-
-    <ImageButton
-        android:id="@+id/search_close_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="5dp"
-        android:tint="@android:color/black"
-        android:layout_marginBottom="8dp"
-        android:background="@android:color/transparent"
-        android:elevation="4dp"
-        android:padding="8dp"
-        android:src="@drawable/ic_close"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_text_search"
-        app:layout_constraintEnd_toEndOf="@+id/edit_text_search"
-        app:layout_constraintTop_toTopOf="@+id/edit_text_search" />
+        android:tint="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/scroll_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/scrollView3"
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -78,7 +46,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView_popular"
+                android:id="@+id/text_view_popular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
@@ -96,10 +64,10 @@
                 app:layout_constraintDimensionRatio="H,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_popular" />
+                app:layout_constraintTop_toBottomOf="@+id/text_view_popular" />
 
             <TextView
-                android:id="@+id/textView_popular_show"
+                android:id="@+id/text_view_popular_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -112,7 +80,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view_pager_popular" />
 
             <TextView
-                android:id="@+id/textView_trending"
+                android:id="@+id/text_view_trending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
@@ -120,7 +88,7 @@
                 android:text="GENRES"
                 android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_popular_show" />
+                app:layout_constraintTop_toBottomOf="@+id/text_view_popular_show" />
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager_trending"
@@ -130,7 +98,7 @@
                 app:layout_constraintDimensionRatio="H,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_trending"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_trending"
                 tools:layout_editor_absoluteY="47dp">
 
             </android.support.v4.view.ViewPager>
@@ -148,16 +116,5 @@
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
-
-
-    <View
-        android:id="@+id/search_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#dd000000"
-        android:elevation="1dp"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="41dp" />
 
 </android.support.constraint.ConstraintLayout>

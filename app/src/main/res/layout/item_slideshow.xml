@@ -11,13 +11,12 @@
         app:mask="@drawable/bg_rounded_rectangle"
         app:porterduffxfermode="DST_IN">
 
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView_backdrop"
+                android:id="@+id/image_view_backdrop"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:cropToPadding="true"
@@ -30,15 +29,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView_overlay"
+                android:id="@+id/image_view_overlay"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:alpha="0.65"
                 android:src="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView_backdrop"
-                app:layout_constraintEnd_toEndOf="@+id/imageView_backdrop"
-                app:layout_constraintStart_toStartOf="@+id/imageView_backdrop"
-                app:layout_constraintTop_toTopOf="@+id/imageView_backdrop" />
+                app:layout_constraintBottom_toBottomOf="@+id/image_view_backdrop"
+                app:layout_constraintEnd_toEndOf="@+id/image_view_backdrop"
+                app:layout_constraintStart_toStartOf="@+id/image_view_backdrop"
+                app:layout_constraintTop_toTopOf="@+id/image_view_backdrop" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -47,25 +46,25 @@
                 android:layout_marginBottom="28dp"
                 android:gravity="end|right"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView_overlay"
-                app:layout_constraintEnd_toEndOf="@+id/imageView_overlay">
+                app:layout_constraintBottom_toBottomOf="@+id/image_view_overlay"
+                app:layout_constraintEnd_toEndOf="@+id/image_view_overlay">
 
                 <TextView
-                    android:id="@+id/textView_imdb_rating"
+                    android:id="@+id/text_view_imdb_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
                     android:textSize="36dp" />
 
                 <TextView
-                    android:id="@+id/textView_title1"
+                    android:id="@+id/text_view_title1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
                     android:textSize="16dp" />
 
                 <TextView
-                    android:id="@+id/textView_title2"
+                    android:id="@+id/text_view_title2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="0.6"

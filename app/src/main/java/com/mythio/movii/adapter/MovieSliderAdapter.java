@@ -63,11 +63,11 @@ public class MovieSliderAdapter extends PagerAdapter {
         Movie movie = movies.get(i);
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
-        final ImageView imageViewBackdrop = view.findViewById(R.id.imageView_backdrop);
-        final ImageView imageViewOverlay = view.findViewById(R.id.imageView_overlay);
-        TextView textViewTitle1 = view.findViewById(R.id.textView_title1);
-        TextView textViewTitle2 = view.findViewById(R.id.textView_title2);
-        TextView textViewRating = view.findViewById(R.id.textView_imdb_rating);
+        final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
+        final ImageView imageViewOverlay = view.findViewById(R.id.image_view_overlay);
+        TextView textViewTitle1 = view.findViewById(R.id.text_view_title1);
+        TextView textViewTitle2 = view.findViewById(R.id.text_view_title2);
+        TextView textViewRating = view.findViewById(R.id.text_view_imdb_rating);
 
         Target target = new Target() {
             @Override

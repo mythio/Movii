@@ -16,15 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.model.Movie;
 import com.mythio.movii.model.Series;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -64,10 +61,10 @@ public class SeriesSliderAdapter extends PagerAdapter {
         Series series = mSeries.get(i);
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
-        final ImageView imageViewBackdrop = view.findViewById(R.id.imageView_backdrop);
-        final ImageView imageViewOverlay = view.findViewById(R.id.imageView_overlay);
-        TextView textViewName = view.findViewById(R.id.textView_title1);
-        TextView textViewRating = view.findViewById(R.id.textView_imdb_rating);
+        final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
+        final ImageView imageViewOverlay = view.findViewById(R.id.image_view_overlay);
+        TextView textViewName = view.findViewById(R.id.text_view_title1);
+        TextView textViewRating = view.findViewById(R.id.text_view_imdb_rating);
 
         Target target = new Target() {
             @Override
