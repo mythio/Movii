@@ -11,12 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.EditText;
-import android.widget.ImageButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,7 +21,7 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.ListActivity;
 import com.mythio.movii.activity.SearchActivity;
 import com.mythio.movii.adapter.SeriesSliderAdapter;
-import com.mythio.movii.adapter.VolleySingleton;
+import com.mythio.movii.util.VolleySingleton;
 import com.mythio.movii.constant.Constants;
 import com.mythio.movii.model.Series;
 

@@ -33,7 +33,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:alpha="0.65"
-                android:src="@android:color/black"
+                android:src="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="@+id/image_view_backdrop"
                 app:layout_constraintEnd_toEndOf="@+id/image_view_backdrop"
                 app:layout_constraintStart_toStartOf="@+id/image_view_backdrop"

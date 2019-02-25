@@ -28,7 +28,7 @@
         android:background="@drawable/bg_ripple"
         android:padding="12dp"
         android:src="@drawable/ic_close"
-        android:tint="@android:color/black"
+        android:tint="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

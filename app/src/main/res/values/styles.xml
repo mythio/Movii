@@ -7,6 +7,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:fontFamily">@font/gsans_medium</item>
         <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowBackground">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

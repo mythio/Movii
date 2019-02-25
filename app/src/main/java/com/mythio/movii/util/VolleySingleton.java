@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter;
+package com.mythio.movii.util;
 
 import android.content.Context;
 

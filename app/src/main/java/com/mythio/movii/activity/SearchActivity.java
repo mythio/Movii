@@ -3,11 +3,13 @@ package com.mythio.movii.activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,7 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.mythio.movii.R;
-import com.mythio.movii.adapter.VolleySingleton;
+import com.mythio.movii.adapter.MovieSearchAdapter;
+import com.mythio.movii.util.VolleySingleton;
 import com.mythio.movii.model.Movie;
 import com.mythio.movii.model.Series;
 
@@ -24,22 +27,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static com.mythio.movii.constant.Constants.TMDB_API_KEY;
 import static com.mythio.movii.constant.Constants.TMDB_SEARCH;
+import static java.lang.Math.min;
 
 public class SearchActivity extends AppCompatActivity {
 
     private String search_endpoint;
     private RequestQueue mRequestQueue;
+
+    private RecyclerView mRecyclerView;
     private EditText mSearchBar;
+
     private List<Movie> mMovies;
     private List<Series> mSeries;
-    private String s = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +56,11 @@ public class SearchActivity extends AppCompatActivity {
 
         mMovies = new ArrayList<>();
 
+        mRecyclerView = findViewById(R.id.recycler_view);
         mSearchBar = findViewById(R.id.search_bar);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setHasFixedSize(true);
 
         mSearchBar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,16 +83,32 @@ public class SearchActivity extends AppCompatActivity {
 
     public void searchForMovies(String query) {
         String URL = TMDB_SEARCH + "movie?api_key=" + TMDB_API_KEY + "&query=" + Uri.encode(query);
+
+        mMovies.clear();
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
-                            s = "";
-                            for (int i = 0; i < jsonArray.length(); ++i) {
+                            int p = min(jsonArray.length(), 7);
+
+                            for (int i = 0; i < p; ++i) {
                                 addToMoviesList(jsonArray.getJSONObject(i));
                             }
+
+//                            AsyncTask.execute(new Runnable() {
+//                                @Override
+//                                public void run() {
+
+                            LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(SearchActivity.this, R.anim.layout_anim_fall);
+                            mRecyclerView.setLayoutAnimation(controller);
+                            mRecyclerView.scheduleLayoutAnimation();
+                            mRecyclerView.setAdapter(new MovieSearchAdapter(SearchActivity.this, mMovies));
+//                                }
+//                            });
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -141,7 +166,6 @@ public class SearchActivity extends AppCompatActivity {
         } else {
             title1 = title_arr[0].trim();
         }
-        s += title1 + ": " + title2 + "\n";
 
         movie.setTitle1(title1);
         movie.setTitle2(title2);

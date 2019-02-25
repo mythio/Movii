@@ -30,7 +30,16 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MovieSearchHolder movieSearchHolder, int i) {
+        Movie movie = mMovies.get(i);
 
+        if (movie.getTitle2().equals("")) {
+            movieSearchHolder.textViewTitle1.setText(movie.getTitle1());
+            movieSearchHolder.textViewTitle2.setVisibility(View.GONE);
+        } else {
+            movieSearchHolder.textViewTitle1.setText(movie.getTitle1());
+            movieSearchHolder.textViewTitle2.setVisibility(View.VISIBLE);
+            movieSearchHolder.textViewTitle2.setText(movie.getTitle2());
+        }
     }
 
     @Override
