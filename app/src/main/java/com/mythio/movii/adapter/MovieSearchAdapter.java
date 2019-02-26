@@ -21,7 +21,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
     private Context mContext;
     private List<Movie> mMovies;
 
-    public MovieSearchAdapter(Context mContext, List mMovies) {
+    public MovieSearchAdapter(Context mContext, List<Movie> mMovies) {
         this.mContext = mContext;
         this.mMovies = mMovies;
     }
@@ -37,7 +37,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
         Movie movie = mMovies.get(i);
 
         if (movie.getTitle2().equals("")) {
-            movieSearchHolder.textViewTitle1.setText(movie.getTitle1() + " " + movie.getImdbRatings());
+            movieSearchHolder.textViewTitle1.setText(movie.getTitle1());
             movieSearchHolder.textViewTitle2.setVisibility(View.GONE);
         } else {
             movieSearchHolder.textViewTitle1.setText(movie.getTitle1());
@@ -45,7 +45,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
             movieSearchHolder.textViewTitle2.setText(movie.getTitle2());
         }
 
-        Picasso.get().load(TMDB_IMAGE + "w500" + movie.getPoster_path()).into(movieSearchHolder.imageView);
+        Picasso.get().load(TMDB_IMAGE + "w342" + movie.getPoster_path()).into(movieSearchHolder.imageView);
 
     }
 

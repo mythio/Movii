@@ -2,7 +2,6 @@ package com.mythio.movii.activity;
 
 import android.os.Bundle;
 
-
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.mythio.movii.R;

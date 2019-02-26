@@ -3,7 +3,6 @@ package com.mythio.movii.activity;
 import android.content.Intent;
 import android.widget.Toast;
 
-
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;

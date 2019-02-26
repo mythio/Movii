@@ -19,9 +19,9 @@
                 android:id="@+id/play_btn"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:elevation="2dp"
-                android:alpha="0.6"
                 android:layout_marginStart="8dp"
+                android:alpha="0.6"
+                android:elevation="2dp"
                 android:src="@drawable/ic_play"
                 app:layout_constraintBottom_toBottomOf="@+id/image_view_backdrop"
                 app:layout_constraintEnd_toEndOf="@+id/image_view_backdrop"
@@ -67,26 +67,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
-                    android:text="7.9"
                     android:textSize="36dp" />
 
                 <TextView
                     android:id="@+id/text_view_title1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Avengers"
                     android:includeFontPadding="false"
                     android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/text_view_title2"
-                    android:text="Endgame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="0.6"
                     android:includeFontPadding="false"
                     android:textAllCaps="true"
                     android:textSize="12dp"
+                    android:textStyle="bold"
                     android:visibility="visible" />
 
             </LinearLayout>

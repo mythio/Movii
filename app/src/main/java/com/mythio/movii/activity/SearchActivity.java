@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.EditText;
@@ -19,12 +18,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.MovieSearchAdapter;
-import com.mythio.movii.adapter.MovieSliderAdapter;
-import com.mythio.movii.constant.Constants;
-import com.mythio.movii.fragment.MoviesFragment;
+import com.mythio.movii.model.Movie;
 import com.mythio.movii.model.TvShow;
 import com.mythio.movii.util.VolleySingleton;
-import com.mythio.movii.model.Movie;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -48,7 +44,6 @@ public class SearchActivity extends AppCompatActivity {
     private EditText mSearchBar;
 
     private List<Movie> mMovies;
-    int size = 0;
     private List<TvShow> mTvShows;
 
     @Override
@@ -85,7 +80,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
-    int si = 0;
 
     public void searchForMovies(String query) {
         String URL = TMDB_SEARCH + "movie?api_key=" + TMDB_API_KEY + "&query=" + Uri.encode(query);
@@ -99,17 +93,14 @@ public class SearchActivity extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
                             int p = min(jsonArray.length(), 7);
-                            si = p;
-                            size = 0;
                             for (int i = 0; i < p; ++i) {
                                 addToMoviesList(jsonArray.getJSONObject(i));
                             }
 
-//                            AsyncTask.execute(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                }
-//                            });
+                            LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(SearchActivity.this, R.anim.layout_anim_fall);
+                            mRecyclerView.setLayoutAnimation(controller);
+                            mRecyclerView.scheduleLayoutAnimation();
+                            mRecyclerView.setAdapter(new MovieSearchAdapter(SearchActivity.this, mMovies));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -123,73 +114,6 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         mRequestQueue.add(request);
-    }
-
-//
-// test
-//
-
-
-    private void parseDataTMDB(final int i) {
-        String url = Constants.TMDB_MOVIES + mMovies.get(i).getId() + "?api_key=" + Constants.TMDB_API_KEY;
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            mMovies.get(i).setImdb_id(response.getString("imdb_id"));
-                            mMovies.get(i).setRuntime(response.getString("runtime"));
-                            parseDataOMDB(i);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        mRequestQueue.add(jsonObjectRequest);
-    }
-
-    public void parseDataOMDB(final int i) {
-        String url = Constants.OMDB_GET + "&i=" + mMovies.get(i).getImdb_id();
-        Log.v("TAG_TAG_TAG*********", url);
-
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
-                            mMovies.get(i).setVote_count(response.getString("imdbVotes"));
-                            mMovies.get(i).setOverview(response.getString("Plot"));
-                            mMovies.get(i).setYear(response.getString("Year"));
-                            mMovies.get(i).setImdbRatings(response.getString("imdbRating"));
-
-                            if (mMovies.get(i).getImdbRatings().equals("N/A")) {
-                                mMovies.get(i).setImdbRatings(mMovies.get(i).getVote_average());
-                            }
-
-                            if (i == si - 1) {
-                                LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(SearchActivity.this, R.anim.layout_anim_fall);
-                                mRecyclerView.setLayoutAnimation(controller);
-                                mRecyclerView.scheduleLayoutAnimation();
-                                mRecyclerView.setAdapter(new MovieSearchAdapter(SearchActivity.this, mMovies));
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        mRequestQueue.add(jsonObjectRequest);
     }
 
     public void searchForShows(String query) {
@@ -239,8 +163,6 @@ public class SearchActivity extends AppCompatActivity {
         movie.setTitle1(title1);
         movie.setTitle2(title2);
         mMovies.add(movie);
-//        parseDataTMDB(size);
-//        size++;
     }
 
     private void addToShowsList(@NotNull JSONObject jsonObject) throws JSONException {

@@ -1,7 +1,6 @@
 package com.mythio.movii.model;
 
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.List;
 
 public class Movie implements Serializable {

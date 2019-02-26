@@ -1,9 +1,8 @@
 package com.mythio.movii.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
 
 import com.mythio.movii.R;
 import com.mythio.movii.model.Movie;

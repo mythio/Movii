@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +20,9 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.ListActivity;
 import com.mythio.movii.activity.SearchActivity;
 import com.mythio.movii.adapter.TvShowSliderAdapter;
+import com.mythio.movii.constant.Constants;
 import com.mythio.movii.model.TvShow;
 import com.mythio.movii.util.VolleySingleton;
-import com.mythio.movii.constant.Constants;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;

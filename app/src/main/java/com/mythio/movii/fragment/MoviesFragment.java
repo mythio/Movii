@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextSwitcher;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,15 +20,13 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.ListActivity;
 import com.mythio.movii.activity.SearchActivity;
 import com.mythio.movii.adapter.MovieSliderAdapter;
-import com.mythio.movii.util.VolleySingleton;
-import com.mythio.movii.constant.Constants;
 import com.mythio.movii.model.Movie;
+import com.mythio.movii.util.VolleySingleton;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Timer;
