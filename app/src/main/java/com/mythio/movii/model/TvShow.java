@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 
-public class Series implements Serializable {
+public class TvShow implements Serializable {
 
     //    TMDB
     private String name;

@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import com.mythio.movii.R;
 import com.mythio.movii.fragment.MoviesFragment;
 import com.mythio.movii.fragment.ProfileFragment;
-import com.mythio.movii.fragment.TvFragment;
+import com.mythio.movii.fragment.TvShowsFragment;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -36,8 +36,8 @@ public class StartActivity extends AppCompatActivity {
                         case R.id.navigation_movies:
                             fragment = new MoviesFragment();
                             break;
-                        case R.id.navigation_tv:
-                            fragment = new TvFragment();
+                        case R.id.navigation_tv_shows:
+                            fragment = new TvShowsFragment();
                             break;
                         case R.id.navigation_profiles:
                             fragment = new ProfileFragment();

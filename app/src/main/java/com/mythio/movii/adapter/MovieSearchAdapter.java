@@ -6,12 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.model.Movie;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
 
 public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.MovieSearchHolder> {
     private Context mContext;
@@ -33,13 +37,16 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
         Movie movie = mMovies.get(i);
 
         if (movie.getTitle2().equals("")) {
-            movieSearchHolder.textViewTitle1.setText(movie.getTitle1());
+            movieSearchHolder.textViewTitle1.setText(movie.getTitle1() + " " + movie.getImdbRatings());
             movieSearchHolder.textViewTitle2.setVisibility(View.GONE);
         } else {
             movieSearchHolder.textViewTitle1.setText(movie.getTitle1());
             movieSearchHolder.textViewTitle2.setVisibility(View.VISIBLE);
             movieSearchHolder.textViewTitle2.setText(movie.getTitle2());
         }
+
+        Picasso.get().load(TMDB_IMAGE + "w500" + movie.getPoster_path()).into(movieSearchHolder.imageView);
+
     }
 
     @Override
@@ -51,12 +58,14 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
 
         private TextView textViewTitle1;
         private TextView textViewTitle2;
+        private ImageView imageView;
 
         public MovieSearchHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle1 = itemView.findViewById(R.id.text_view_title1);
             textViewTitle2 = itemView.findViewById(R.id.text_view_title2);
+            imageView = itemView.findViewById(R.id.poster);
         }
     }
 }

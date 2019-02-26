@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextSwitcher;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,12 +29,15 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.mythio.movii.constant.Constants.OMDB_GET;
 import static com.mythio.movii.constant.Constants.TMDB_API_KEY;
+import static com.mythio.movii.constant.Constants.TMDB_MOVIES;
 import static java.lang.Math.max;
 
 public class MoviesFragment extends Fragment {
@@ -54,7 +58,8 @@ public class MoviesFragment extends Fragment {
             public void transformPage(@NonNull View view, float v) {
                 view.findViewById(R.id.image_view_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
                 view.findViewById(R.id.text_view_title1).setAlpha(1.0F - Math.abs(v) * 2);
-                view.findViewById(R.id.text_view_title2).setAlpha(0.65F * (1.0F - Math.abs(v) * 2));
+                view.findViewById(R.id.text_view_title2).setAlpha(0.6F * (1.0F - Math.abs(v) * 2));
+                view.findViewById(R.id.play_btn).setAlpha(0.6F * (1.0F - Math.abs(v) * 2));
                 view.findViewById(R.id.text_view_imdb_rating).setAlpha(1.0F - Math.abs(v) * 2);
             }
         });
@@ -97,11 +102,12 @@ public class MoviesFragment extends Fragment {
         }, 5000, 5000);
 
         parseTMDB();
+
         return view;
     }
 
     private void parseTMDB() {
-        String url = Constants.TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
+        String url = TMDB_MOVIES + "popular?api_key=" + TMDB_API_KEY;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -126,7 +132,7 @@ public class MoviesFragment extends Fragment {
     }
 
     private void parseDataTMDB(final int i) {
-        String url = Constants.TMDB_MOVIES + mMovies.get(i).getId() + "?api_key=" + Constants.TMDB_API_KEY;
+        String url = TMDB_MOVIES + mMovies.get(i).getId() + "?api_key=" + TMDB_API_KEY + "&append_to_response=videos";
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -134,6 +140,16 @@ public class MoviesFragment extends Fragment {
                         try {
                             mMovies.get(i).setImdb_id(response.getString("imdb_id"));
                             mMovies.get(i).setRuntime(response.getString("runtime"));
+
+                            JSONArray videosResult = response.getJSONObject("videos").getJSONArray("results");
+
+                            for (int k = 0; k < videosResult.length(); ++k) {
+                                if (videosResult.getJSONObject(k).getString("key").equals("Trailer")) {
+                                    mMovies.get(i).setKey(videosResult.getJSONObject(k).getString("key"));
+                                    break;
+                                }
+                            }
+
                             MoviesFragment.this.parseDataOMDB(i);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -149,7 +165,7 @@ public class MoviesFragment extends Fragment {
     }
 
     public void parseDataOMDB(final int i) {
-        String url = Constants.OMDB_GET + "&i=" + mMovies.get(i).getImdb_id();
+        String url = OMDB_GET + "&i=" + mMovies.get(i).getImdb_id();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {

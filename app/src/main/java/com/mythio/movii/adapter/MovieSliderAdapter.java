@@ -1,6 +1,7 @@
 package com.mythio.movii.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -15,15 +16,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.youtube.player.YouTubeIntents;
 import com.mythio.movii.R;
+import com.mythio.movii.activity.YoutubePlayerActivity;
 import com.mythio.movii.model.Movie;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,18 +32,18 @@ import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
 
 public class MovieSliderAdapter extends PagerAdapter {
 
-    private Context context;
+    private Context mContext;
     private List<Movie> movies;
 
-    public MovieSliderAdapter(Context context, List<Movie> movies) {
-        this.context = context;
+    public MovieSliderAdapter(Context mContext, List<Movie> movies) {
+        this.mContext = mContext;
         this.movies = movies;
-        Collections.sort(movies, new Comparator<Movie>() {
-            @Override
-            public int compare(Movie o1, Movie o2) {
-                return o2.getImdbRatings().compareTo(o1.getImdbRatings());
-            }
-        });
+//        Collections.sort(movies, new Comparator<Movie>() {
+//            @Override
+//            public int compare(Movie o1, Movie o2) {
+//                return o2.getImdbRatings().compareTo(o1.getImdbRatings());
+//            }
+//        });
     }
 
     @Override
@@ -58,9 +59,9 @@ public class MovieSliderAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NotNull ViewGroup container, int i) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final Movie movie = movies.get(i);
 
-        Movie movie = movies.get(i);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
@@ -68,6 +69,16 @@ public class MovieSliderAdapter extends PagerAdapter {
         TextView textViewTitle1 = view.findViewById(R.id.text_view_title1);
         TextView textViewTitle2 = view.findViewById(R.id.text_view_title2);
         TextView textViewRating = view.findViewById(R.id.text_view_imdb_rating);
+
+        view.findViewById(R.id.play_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, YoutubePlayerActivity.class);
+                intent.putExtra("MOVIE_YOUTUBE_KEY", movie.getKey());
+                YouTubeIntents.canResolvePlayVideoIntent(mContext);
+                mContext.startActivity(intent);
+            }
+        });
 
         Target target = new Target() {
             @Override

@@ -7,8 +7,8 @@
         android:title="Movies" />
 
     <item
-        android:id="@+id/navigation_tv"
-        android:icon="@drawable/ic_search"
+        android:id="@+id/navigation_tv_shows"
+        android:icon="@drawable/ic_tv_shows"
         android:title="TV" />
 
     <item

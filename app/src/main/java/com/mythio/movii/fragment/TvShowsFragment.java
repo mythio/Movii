@@ -20,10 +20,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.ListActivity;
 import com.mythio.movii.activity.SearchActivity;
-import com.mythio.movii.adapter.SeriesSliderAdapter;
+import com.mythio.movii.adapter.TvShowSliderAdapter;
+import com.mythio.movii.model.TvShow;
 import com.mythio.movii.util.VolleySingleton;
 import com.mythio.movii.constant.Constants;
-import com.mythio.movii.model.Series;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -37,11 +37,11 @@ import java.util.TimerTask;
 import static com.mythio.movii.constant.Constants.TMDB_API_KEY;
 import static java.lang.Integer.max;
 
-public class TvFragment extends Fragment {
+public class TvShowsFragment extends Fragment {
 
     private RequestQueue mRequestQueue;
     private ViewPager viewPager;
-    private ArrayList<Series> mSeries;
+    private ArrayList<TvShow> mTvShows;
 
     @Nullable
     @Override
@@ -50,7 +50,7 @@ public class TvFragment extends Fragment {
 
         mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
 
-        mSeries = new ArrayList<>();
+        mTvShows = new ArrayList<>();
 
         viewPager = view.findViewById(R.id.view_pager_popular);
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
@@ -67,7 +67,7 @@ public class TvFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ListActivity.class);
-                intent.putExtra("POPULAR_MOVIES_LIST", mSeries);
+                intent.putExtra("POPULAR_MOVIES_LIST", mTvShows);
                 startActivity(intent);
             }
         });
@@ -96,8 +96,8 @@ public class TvFragment extends Fragment {
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
                             for (int i = 0; i < jsonArray.length(); ++i) {
-                                TvFragment.this.addToList(jsonArray.getJSONObject(i));
-                                TvFragment.this.parseDataTMDB(i);
+                                TvShowsFragment.this.addToList(jsonArray.getJSONObject(i));
+                                TvShowsFragment.this.parseDataTMDB(i);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -113,16 +113,16 @@ public class TvFragment extends Fragment {
     }
 
     private void parseDataTMDB(final int i) {
-        String url = Constants.TMDB_TV + mSeries.get(i).getId() + "?api_key=" + Constants.TMDB_API_KEY + "&append_to_response=external_ids";
+        String url = Constants.TMDB_TV + mTvShows.get(i).getId() + "?api_key=" + Constants.TMDB_API_KEY + "&append_to_response=external_ids";
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            mSeries.get(i).setRuntime(/*response.getString("runtime")*/ "20");
+                            mTvShows.get(i).setRuntime(/*response.getString("runtime")*/ "20");
                             response = response.getJSONObject("external_ids");
-                            mSeries.get(i).setImdb_id(response.getString("imdb_id"));
-                            TvFragment.this.parseDataOMDB(i);
+                            mTvShows.get(i).setImdb_id(response.getString("imdb_id"));
+                            TvShowsFragment.this.parseDataOMDB(i);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -137,28 +137,28 @@ public class TvFragment extends Fragment {
     }
 
     public void parseDataOMDB(final int i) {
-        String url = Constants.OMDB_GET + "&i=" + mSeries.get(i).getImdb_id();
+        String url = Constants.OMDB_GET + "&i=" + mTvShows.get(i).getImdb_id();
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            mSeries.get(i).setImdbRatings(response.getString("imdbRating"));
-                            mSeries.get(i).setVote_count(response.getString("imdbVotes"));
-                            mSeries.get(i).setOverview(response.getString("Plot"));
-                            mSeries.get(i).setYear(response.getString("Year"));
-                            mSeries.get(i).setImdbRatings(response.getString("imdbRating"));
+                            mTvShows.get(i).setImdbRatings(response.getString("imdbRating"));
+                            mTvShows.get(i).setVote_count(response.getString("imdbVotes"));
+                            mTvShows.get(i).setOverview(response.getString("Plot"));
+                            mTvShows.get(i).setYear(response.getString("Year"));
+                            mTvShows.get(i).setImdbRatings(response.getString("imdbRating"));
 
-                            if (mSeries.get(i).getImdbRatings().equals("N/A")) {
-                                mSeries.get(i).setImdbRatings(mSeries.get(i).getVote_average());
+                            if (mTvShows.get(i).getImdbRatings().equals("N/A")) {
+                                mTvShows.get(i).setImdbRatings(mTvShows.get(i).getVote_average());
                             }
 
-                            if (i == mSeries.size() - 1) {
-                                for (Series series : mSeries) {
-                                    Log.d("TEMP_TEMP", series.getImdbRatings() + "");
-                                }
-                                viewPager.setAdapter(new SeriesSliderAdapter(TvFragment.this.getContext(), mSeries));
+                            if (i == mTvShows.size() - 1) {
+//                                for (TvShow series : mTvShows) {
+////                                    Log.d("TEMP_TEMP", series.getImdbRatings() + "");
+//                                }
+                                viewPager.setAdapter(new TvShowSliderAdapter(TvShowsFragment.this.getContext(), mTvShows));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -174,25 +174,25 @@ public class TvFragment extends Fragment {
     }
 
     private void addToList(@NotNull JSONObject jsonObject) throws JSONException {
-        Series series = new Series();
-        series.setVote_count(String.valueOf(jsonObject.getInt("vote_count")));
-        series.setVote_average(String.valueOf(jsonObject.getDouble("vote_average")));
-        series.setId(String.valueOf(jsonObject.getInt("id")));
-        series.setPoster_path(jsonObject.getString("poster_path"));
-        series.setBackdrop(jsonObject.getString("backdrop_path"));
-        series.setOverview(jsonObject.getString("overview"));
-        series.setName(jsonObject.getString("name"));
-        mSeries.add(series);
+        TvShow tvShow = new TvShow();
+        tvShow.setVote_count(String.valueOf(jsonObject.getInt("vote_count")));
+        tvShow.setVote_average(String.valueOf(jsonObject.getDouble("vote_average")));
+        tvShow.setId(String.valueOf(jsonObject.getInt("id")));
+        tvShow.setPoster_path(jsonObject.getString("poster_path"));
+        tvShow.setBackdrop(jsonObject.getString("backdrop_path"));
+        tvShow.setOverview(jsonObject.getString("overview"));
+        tvShow.setName(jsonObject.getString("name"));
+        mTvShows.add(tvShow);
     }
 
     private void autoScroll() {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (viewPager.getCurrentItem() == mSeries.size() - 1) {
+                if (viewPager.getCurrentItem() == mTvShows.size() - 1) {
                     viewPager.setCurrentItem(0, true);
                 } else {
-                    viewPager.setCurrentItem((viewPager.getCurrentItem() + 1) % max(1, mSeries.size()), true);
+                    viewPager.setCurrentItem((viewPager.getCurrentItem() + 1) % max(1, mTvShows.size()), true);
                 }
             }
         };

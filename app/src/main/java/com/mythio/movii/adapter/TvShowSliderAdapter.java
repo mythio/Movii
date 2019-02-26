@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.model.Series;
+import com.mythio.movii.model.TvShow;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -27,17 +27,17 @@ import java.util.Objects;
 
 import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
 
-public class SeriesSliderAdapter extends PagerAdapter {
+public class TvShowSliderAdapter extends PagerAdapter {
 
-    private Context context;
-    private List<Series> mSeries;
+    private Context mContext;
+    private List<TvShow> mTvShows;
 
-    public SeriesSliderAdapter(Context context, List<Series> mSeries) {
-        this.context = context;
-        this.mSeries = mSeries;
-//        Collections.sort(mSeries, new Comparator<Series>() {
+    public TvShowSliderAdapter(Context mContext, List<TvShow> mTvShows) {
+        this.mContext = mContext;
+        this.mTvShows = mTvShows;
+//        Collections.sort(mSeries, new Comparator<TvShow>() {
 //            @Override
-//            public int compare(Series o1, Series o2) {
+//            public int compare(TvShow o1, TvShow o2) {
 //                return o2.getImdbRatings().compareTo(o1.getImdbRatings());
 //            }
 //        });
@@ -45,7 +45,7 @@ public class SeriesSliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mSeries.size();
+        return mTvShows.size();
     }
 
     @Override
@@ -56,9 +56,9 @@ public class SeriesSliderAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NotNull ViewGroup container, int i) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        Series series = mSeries.get(i);
+        TvShow tvShow = mTvShows.get(i);
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
@@ -91,10 +91,10 @@ public class SeriesSliderAdapter extends PagerAdapter {
             }
         };
 
-        textViewRating.setText(series.getImdbRatings());
-        textViewName.setText(series.getName());
+        textViewRating.setText(tvShow.getImdbRatings());
+        textViewName.setText(tvShow.getName());
 
-        String url = TMDB_IMAGE + "w780" + series.getBackdrop();
+        String url = TMDB_IMAGE + "w780" + tvShow.getBackdrop();
 
         Picasso.get()
                 .load(url)
