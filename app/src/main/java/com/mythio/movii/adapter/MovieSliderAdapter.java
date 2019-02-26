@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubeIntents;
 import com.mythio.movii.R;
-import com.mythio.movii.activity.YoutubePlayerActivity;
+import com.mythio.movii.activity.YouTubePlayerActivity;
 import com.mythio.movii.model.Movie;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -65,7 +65,6 @@ public class MovieSliderAdapter extends PagerAdapter {
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
-        final ImageView imageViewOverlay = view.findViewById(R.id.image_view_overlay);
         TextView textViewTitle1 = view.findViewById(R.id.text_view_title1);
         TextView textViewTitle2 = view.findViewById(R.id.text_view_title2);
         TextView textViewRating = view.findViewById(R.id.text_view_imdb_rating);
@@ -73,40 +72,12 @@ public class MovieSliderAdapter extends PagerAdapter {
         view.findViewById(R.id.play_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, YoutubePlayerActivity.class);
+                Intent intent = new Intent(mContext, YouTubePlayerActivity.class);
                 intent.putExtra("MOVIE_YOUTUBE_KEY", movie.getKey());
                 YouTubeIntents.canResolvePlayVideoIntent(mContext);
                 mContext.startActivity(intent);
             }
         });
-
-        Target target = new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                imageViewBackdrop.setImageBitmap(bitmap);
-                Palette.from(bitmap)
-                        .generate(new Palette.PaletteAsyncListener() {
-                            @Override
-                            public void onGenerated(@Nullable Palette palette) {
-                                Palette.Swatch textSwatch = Objects.requireNonNull(palette).getDarkVibrantSwatch();
-                                if (textSwatch == null) {
-                                    textSwatch = Objects.requireNonNull(palette).getDominantSwatch();
-                                }
-                                imageViewOverlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
-                            }
-                        });
-            }
-
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        };
 
         textViewRating.setText(movie.getImdbRatings());
 
@@ -123,7 +94,7 @@ public class MovieSliderAdapter extends PagerAdapter {
 
         Picasso.get()
                 .load(url)
-                .into(target);
+                .into(imageViewBackdrop);
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);

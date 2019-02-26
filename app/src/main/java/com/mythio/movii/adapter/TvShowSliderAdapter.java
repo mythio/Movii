@@ -62,34 +62,8 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
-        final ImageView imageViewOverlay = view.findViewById(R.id.image_view_overlay);
         TextView textViewName = view.findViewById(R.id.text_view_title1);
         TextView textViewRating = view.findViewById(R.id.text_view_imdb_rating);
-
-        Target target = new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                imageViewBackdrop.setImageBitmap(bitmap);
-                Palette.from(bitmap)
-                        .generate(new Palette.PaletteAsyncListener() {
-                            @Override
-                            public void onGenerated(@Nullable Palette palette) {
-                                Palette.Swatch textSwatch = Objects.requireNonNull(palette).getDominantSwatch();
-                                imageViewOverlay.setImageTintList(ColorStateList.valueOf(Objects.requireNonNull(textSwatch).getRgb()));
-                            }
-                        });
-            }
-
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        };
 
         textViewRating.setText(tvShow.getImdbRatings());
         textViewName.setText(tvShow.getName());
@@ -98,7 +72,7 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
         Picasso.get()
                 .load(url)
-                .into(target);
+                .into(imageViewBackdrop);
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);

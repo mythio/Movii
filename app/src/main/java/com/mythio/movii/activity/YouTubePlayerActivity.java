@@ -8,7 +8,7 @@ import com.mythio.movii.R;
 
 import static com.mythio.movii.constant.Constants.YOUTUBE_DEVELOPER_KEY;
 
-public class YoutubePlayerActivity extends YouTubeFailureRecoveryActivity {
+public class YouTubePlayerActivity extends YouTubeFailureRecoveryActivity {
 
     private YouTubePlayerView playerView;
     private String url;
