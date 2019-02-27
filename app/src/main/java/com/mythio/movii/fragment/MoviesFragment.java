@@ -18,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.ListActivity;
-import com.mythio.movii.activity.SearchActivity;
+import com.mythio.movii.activity.SearchMovieActivity;
 import com.mythio.movii.adapter.MovieSliderAdapter;
 import com.mythio.movii.model.Movie;
 import com.mythio.movii.util.VolleySingleton;
@@ -73,7 +73,7 @@ public class MoviesFragment extends Fragment {
         view.findViewById(R.id.search_go_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SearchActivity.class);
+                Intent intent = new Intent(getContext(), SearchMovieActivity.class);
                 intent.putExtra("SEARCH_ENDPOINT", "movie");
                 startActivity(intent);
             }

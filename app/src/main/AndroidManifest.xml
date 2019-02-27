@@ -21,7 +21,9 @@
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
 
-        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.SearchMovieActivity" />
+
+        <activity android:name=".activity.SearchTvShowActivity" />
 
         <activity android:name=".activity.ListActivity" />
 

@@ -18,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.ListActivity;
-import com.mythio.movii.activity.SearchActivity;
+import com.mythio.movii.activity.SearchTvShowActivity;
 import com.mythio.movii.adapter.TvShowSliderAdapter;
 import com.mythio.movii.constant.Constants;
 import com.mythio.movii.model.TvShow;
@@ -74,8 +74,7 @@ public class TvShowsFragment extends Fragment {
         view.findViewById(R.id.search_go_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SearchActivity.class);
-                intent.putExtra("SEARCH_ENDPOINT", "TV_SHOWS");
+                Intent intent = new Intent(getContext(), SearchTvShowActivity.class);
                 startActivity(intent);
             }
         });
