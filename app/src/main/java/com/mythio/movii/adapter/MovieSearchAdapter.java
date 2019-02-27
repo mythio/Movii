@@ -1,6 +1,7 @@
 package com.mythio.movii.adapter;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,8 +46,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
             movieSearchHolder.textViewTitle2.setText(movie.getTitle2());
         }
 
-        Picasso.get().load(TMDB_IMAGE + "w342" + movie.getPoster_path()).into(movieSearchHolder.imageView);
-
+        Picasso.get().load(TMDB_IMAGE + "w185" + movie.getPoster_path()).into(movieSearchHolder.imageView);
     }
 
     @Override
@@ -66,6 +66,24 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
             textViewTitle1 = itemView.findViewById(R.id.text_view_title1);
             textViewTitle2 = itemView.findViewById(R.id.text_view_title2);
             imageView = itemView.findViewById(R.id.poster);
+        }
+    }
+
+    public static class ItemDecorator extends RecyclerView.ItemDecoration {
+
+        private final int space;
+
+        public ItemDecorator(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                                   @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+            outRect.bottom = space;
+            if (parent.getChildAdapterPosition(view) == 0) {
+                outRect.top = space;
+            }
         }
     }
 }

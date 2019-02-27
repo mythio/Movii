@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.EditText;
@@ -60,6 +61,7 @@ public class SearchActivity extends AppCompatActivity {
         mSearchBar = findViewById(R.id.search_bar);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new MovieSearchAdapter.ItemDecorator(16));
         mRecyclerView.setHasFixedSize(true);
 
         mSearchBar.addTextChangedListener(new TextWatcher() {
@@ -70,13 +72,14 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String query = String.valueOf(s);
-                searchForMovies(query);
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                String query = String.valueOf(s);
+                searchForMovies(query);
+                findViewById(R.id.search_plate).setVisibility(View.GONE);
             }
         });
     }

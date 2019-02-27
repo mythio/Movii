@@ -6,6 +6,8 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.mythio.movii.R;
 
+import java.util.ArrayList;
+
 import static com.mythio.movii.constant.Constants.YOUTUBE_DEVELOPER_KEY;
 
 public class YouTubePlayerActivity extends YouTubeFailureRecoveryActivity {
@@ -37,6 +39,7 @@ public class YouTubePlayerActivity extends YouTubeFailureRecoveryActivity {
 
         if (!wasRestored) {
             player.loadVideo(url);
+            player.loadVideos(new ArrayList<String>());
         }
     }
 }
