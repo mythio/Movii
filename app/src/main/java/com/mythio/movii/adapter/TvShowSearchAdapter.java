@@ -40,7 +40,7 @@ public class TvShowSearchAdapter extends RecyclerView.Adapter<TvShowSearchAdapte
         tvShowSearchHolder.textViewTitle1.setText(tvShow.getName());
         tvShowSearchHolder.textViewTitle2.setVisibility(View.GONE);
 
-        Picasso.get().load(TMDB_IMAGE + "w185" + tvShow.getPoster_path()).into(tvShowSearchHolder.imageView);
+        Picasso.get().load(TMDB_IMAGE + "w154" + tvShow.getPoster_path()).into(tvShowSearchHolder.imageView);
     }
 
     @Override

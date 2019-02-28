@@ -46,7 +46,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
             movieSearchHolder.textViewTitle2.setText(movie.getTitle2());
         }
 
-        Picasso.get().load(TMDB_IMAGE + "w185" + movie.getPoster_path()).into(movieSearchHolder.imageView);
+        Picasso.get().load(TMDB_IMAGE + "w154" + movie.getPoster_path()).into(movieSearchHolder.imageView);
     }
 
     @Override

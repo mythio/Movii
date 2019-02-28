@@ -83,8 +83,6 @@ public class SearchTvShowActivity extends AppCompatActivity {
     public void searchFor(String query) {
         String URL = TMDB_SEARCH + "tv?api_key=" + TMDB_API_KEY + "&query=" + Uri.encode(query);
 
-        mTvShows.clear();
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -92,9 +90,9 @@ public class SearchTvShowActivity extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
 
+                            mTvShows.clear();
                             int p = min(jsonArray.length(), 7);
                             for (int i = 0; i < p; ++i) {
-                                Log.d("TAG_TAG_TAG", response.toString());
                                 addToList(jsonArray.getJSONObject(i));
                             }
 

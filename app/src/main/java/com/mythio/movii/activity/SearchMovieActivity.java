@@ -82,14 +82,14 @@ public class SearchMovieActivity extends AppCompatActivity {
     public void searchFor(String query) {
         String URL = TMDB_SEARCH + "movie?api_key=" + TMDB_API_KEY + "&query=" + Uri.encode(query);
 
-        mMovies.clear();
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("results");
+
+                            mMovies.clear();
 
                             int p = min(jsonArray.length(), 7);
                             for (int i = 0; i < p; ++i) {
