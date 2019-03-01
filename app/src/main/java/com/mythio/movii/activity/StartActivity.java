@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.mythio.movii.R;
@@ -36,8 +37,9 @@ public class StartActivity extends AppCompatActivity {
                         case R.id.navigation_movies:
                             fragment = new MoviesFragment();
                             break;
-                        case R.id.navigation_tv_shows:
+                        case R.id.navigation_tv:
                             fragment = new TvShowsFragment();
+                            menuItem.setIcon(R.drawable.ic_search);
                             break;
                         case R.id.navigation_profiles:
                             fragment = new ProfileFragment();
@@ -46,7 +48,7 @@ public class StartActivity extends AppCompatActivity {
 
                     assert fragment != null;
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    ft.setAllowOptimization(true);
                     ft.replace(R.id.fragment_container, fragment).commit();
                     return true;
                 }

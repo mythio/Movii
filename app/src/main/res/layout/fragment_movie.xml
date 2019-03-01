@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/f">
+    android:background="@drawable/bg_movie">
 
     <TextView
         android:id="@+id/text_view_label_movie"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="36dp"
-        android:background="@drawable/bg_btn_go_ripple"
+        android:background="@drawable/bg_btn_go_ripple_movie"
         android:padding="12dp"
         android:src="@drawable/ic_search"
         android:tint="@android:color/white"
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/bg_btn_go_ripple"
+                android:background="@drawable/bg_btn_go_ripple_movie"
                 android:clickable="true"
                 android:padding="12dp"
                 android:text="Show All"

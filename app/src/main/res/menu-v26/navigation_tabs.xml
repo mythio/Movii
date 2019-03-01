@@ -3,16 +3,19 @@
 
     <item
         android:id="@+id/navigation_movies"
+        android:iconTint="@color/colorTmdbMovie"
         android:icon="@drawable/ic_movie"
         android:title="Movies" />
 
     <item
         android:id="@+id/navigation_tv"
+        android:iconTint="@color/colorTmdbTv"
         android:icon="@drawable/ic_tv"
         android:title="TV" />
 
     <item
         android:id="@+id/navigation_profiles"
+        android:iconTint="@color/colorTmdbDefault"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />
 

@@ -12,7 +12,7 @@
     <color name="colorTmdbDefaultDark">#074034</color>
     <color name="colorTmdbMovieDark">#30172a</color>
     <color name="colorTmdbTvDark">#20284a</color>
-    <color name="colorTmdbPeopleDark">072e46</color>
+    <color name="colorTmdbPeopleDark">#072e46</color>
     <color name="colorTmdbCollectionDark">#2f331d</color>
     <color name="bgColorCenter">#FF000000</color>
     <color name="bgColorEnd">#00000000</color>

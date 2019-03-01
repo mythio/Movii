@@ -1,14 +1,9 @@
 package com.mythio.movii.adapter;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.graphics.Palette;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +13,10 @@ import android.widget.TextView;
 import com.mythio.movii.R;
 import com.mythio.movii.model.TvShow;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Objects;
 
 import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
 
@@ -62,8 +55,11 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
+        ImageView im = view.findViewById(R.id.image_view_overlay);
         TextView textViewName = view.findViewById(R.id.text_view_title1);
         TextView textViewRating = view.findViewById(R.id.text_view_imdb_rating);
+
+        im.setImageDrawable(mContext.getDrawable(R.drawable.bg_gradient_tv));
 
         textViewRating.setText(tvShow.getImdbRatings());
         textViewName.setText(tvShow.getName());
