@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubeIntents;
 import com.mythio.movii.R;
+import com.mythio.movii.activity.MovieActivity;
 import com.mythio.movii.activity.YouTubePlayerActivity;
 import com.mythio.movii.model.Movie;
 import com.squareup.picasso.Picasso;
@@ -79,6 +80,15 @@ public class MovieSliderAdapter extends PagerAdapter {
                 Intent intent = new Intent(mContext, YouTubePlayerActivity.class);
                 intent.putExtra("MOVIE_YOUTUBE_KEY", movie.getKey());
                 YouTubeIntents.canResolvePlayVideoIntent(mContext);
+                mContext.startActivity(intent);
+            }
+        });
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MovieActivity.class);
+                intent.putExtra("MOVIE_ACTIVITY", movie);
                 mContext.startActivity(intent);
             }
         });
