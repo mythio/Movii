@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -93,6 +94,7 @@ public class MovieActivity extends AppCompatActivity {
                 MovieActivity.this.finish();
             }
         });
+
 
 //        recyclerViewCast.setHasFixedSize(true);
 //        recyclerViewCast.addItemDecoration(new CastAdapter.ItemDecorator(24));
