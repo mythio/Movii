@@ -9,6 +9,7 @@
         android:top="12dp" />
 
     <solid android:color="#ffffff" />
+
     <corners android:radius="32dp" />
 
 </shape>

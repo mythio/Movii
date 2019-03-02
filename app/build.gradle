@@ -32,7 +32,7 @@ dependencies {
     implementation 'com.android.support:palette-v7:28.0.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.github.christophesmet:android_maskable_layout:v1.3.1'
-    implementation 'com.github.mmin18:realtimeblurview:1.1.2'
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.2'
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
     testImplementation 'junit:junit:4.12'
