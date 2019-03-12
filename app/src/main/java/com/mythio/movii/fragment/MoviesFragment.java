@@ -136,7 +136,12 @@ public class MoviesFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             mMovies.get(i).setImdb_id(response.getString("imdb_id"));
-                            mMovies.get(i).setRuntime(response.getString("runtime"));
+
+                            String runtime = response.getString("runtime");
+                            int HH = Integer.valueOf(runtime) / 60;
+                            int MM = Integer.valueOf(runtime) % 60;
+
+                            mMovies.get(i).setRuntime(HH + " h " + MM + " m");
 
                             JSONArray videosResult = response.getJSONObject("videos").getJSONArray("results");
 

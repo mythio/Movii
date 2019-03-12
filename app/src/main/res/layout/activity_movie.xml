@@ -167,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="CAST"
+                android:text="Cast"
                 android:textSize="16sp"
                 android:visibility="invisible" />
 
@@ -190,7 +190,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="SIMILAR MOVIES"
+                android:text="Similar movies"
+                android:textSize="16dp"
                 android:visibility="invisible" />
 
             <Space
