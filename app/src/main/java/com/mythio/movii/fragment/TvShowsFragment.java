@@ -46,11 +46,9 @@ public class TvShowsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_tv, container, false);
-
-        mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
-
         mTvShows = new ArrayList<>();
 
+        mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
         viewPager = view.findViewById(R.id.view_pager_popular);
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
