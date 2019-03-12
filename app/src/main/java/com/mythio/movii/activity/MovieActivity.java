@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.youtube.player.YouTubeIntents;
 import com.mythio.movii.R;
+import com.mythio.movii.adapter.CastAdapter;
 import com.mythio.movii.adapter.SimilarMovieAdapter;
 import com.mythio.movii.constant.Constants;
 import com.mythio.movii.model.Movie;
@@ -95,10 +96,9 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
 
-
-//        recyclerViewCast.setHasFixedSize(true);
-//        recyclerViewCast.addItemDecoration(new CastAdapter.ItemDecorator(24));
-//        recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCast.setHasFixedSize(true);
+        recyclerViewCast.addItemDecoration(new CastAdapter.ItemDecorator(24));
+        recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new SimilarMovieAdapter.ItemDecorator(24));
@@ -131,13 +131,11 @@ public class MovieActivity extends AppCompatActivity {
                                 credits.add(person);
                             }
 
-                            Log.d("tag-tag-tag-tag", response.toString());
 //                        Set similar movies
                             JSONArray similarResult = response.getJSONObject("similar")
                                     .getJSONArray("results");
                             L = similarResult.length();
                             for (int j = 0; j < L; ++j) {
-                                Log.d("tag-tag-tag-tag", similarResult.toString());
                                 Movie movie = new Movie();
                                 movie.setId(String.valueOf(similarResult.getJSONObject(j).getInt("id")));
                                 movie.setOverview(similarResult.getJSONObject(j).getString("overview"));
@@ -185,18 +183,21 @@ public class MovieActivity extends AppCompatActivity {
         mRequestQueue.add(jsonObjectRequest);
     }
 
-//    private void setCastAdapter() {
-//        CastAdapter.ListItemClickListener listener = (view, position) -> {
+    private void setCastAdapter() {
+        CastAdapter.ListItemClickListener listener = new CastAdapter.ListItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
 //            CastBottomSheetDialog cast = new CastBottomSheetDialog();
 //            Person person = movie.getCast().get(position);
 //            Bundle bundle = new Bundle();
 //            bundle.putSerializable("message", person);
 //            cast.setArguments(bundle);
 //            cast.show(getSupportFragmentManager(), "temp_tag");
-//        };
-//        CastAdapter adapter = new CastAdapter(movie.getCast(), getApplicationContext(), listener);
-//        recyclerViewCast.setAdapter(adapter);
-//    }
+            }
+        };
+        CastAdapter adapter = new CastAdapter(movie.getCast(), getApplicationContext(), listener);
+        recyclerViewCast.setAdapter(adapter);
+    }
 
     private void setSimilarAdapter() {
         SimilarMovieAdapter adapter = new SimilarMovieAdapter(getApplicationContext(), movie.getSimilarMovies());
@@ -204,7 +205,6 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void initView() {
-
         mImageViewPoster = findViewById(R.id.image_view_poster);
         mImageViewPlay = findViewById(R.id.image_view_play);
         mTextViewRelease = findViewById(R.id.text_view_release);
@@ -284,8 +284,8 @@ public class MovieActivity extends AppCompatActivity {
             mTextViewTitle2.setText(movie.getTitle2());
         }
 
-        mRatingBar.setRating(Float.parseFloat(movie.getImdbRatings()));
-//        setCastAdapter();
+        mRatingBar.setRating(Float.parseFloat(movie.getImdbRatings())/2);
+        setCastAdapter();
         setSimilarAdapter();
 
         mImageViewPoster.setVisibility(View.VISIBLE);
