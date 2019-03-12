@@ -48,6 +48,7 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_movie, container, false);
         mMovies = new ArrayList<>();
+
         mRequestQueue = VolleySingleton.getInstance(getContext()).getmRequestQueue();
         viewPager = view.findViewById(R.id.view_pager_popular);
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
@@ -70,8 +71,7 @@ public class MoviesFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.search_go_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
+        view.findViewById(R.id.search_go_btn).setOnClickListener(new View.OnClickListener() {@Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SearchMovieActivity.class);
                 intent.putExtra("SEARCH_ENDPOINT", "movie");

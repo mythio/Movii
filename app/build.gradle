@@ -33,6 +33,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.github.christophesmet:android_maskable_layout:v1.3.1'
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.2'
+    implementation 'com.github.se-bastiaan:TorrentStream-Android:2.6.1'
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
     testImplementation 'junit:junit:4.12'

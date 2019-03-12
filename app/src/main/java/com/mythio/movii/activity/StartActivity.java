@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -31,6 +32,8 @@ public class StartActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoviesFragment()).commit();
 
+        navBar.setSelected(true);
+
         navBar.setNavigationChangeListener(new BubbleNavigationChangeListener() {
             @Override
             public void onNavigationChanged(View view, int position) {
@@ -47,7 +50,9 @@ public class StartActivity extends AppCompatActivity {
                         break;
                 }
                 if (fragment != null) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+                    ft.replace(R.id.fragment_container, fragment).commit();
                 }
             }
         });
