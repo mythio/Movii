@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Movii</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="_0">0</string>
 </resources>

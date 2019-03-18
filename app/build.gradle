@@ -22,6 +22,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
 
     implementation 'com.android.support:design:28.0.0'
@@ -35,6 +36,9 @@ dependencies {
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.2'
     implementation 'com.github.se-bastiaan:TorrentStream-Android:2.6.1'
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation 'org.jsoup:jsoup:1.11.3'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
