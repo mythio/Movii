@@ -1,8 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activity.StartActivity">
+    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation" />
+
+    <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        app:bnc_mode="spread">
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/id1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="20dp"
+            app:bt_active="true"
+            app:bt_colorActive="@color/colorTmdbMovie"
+            app:bt_colorInactive="#90000C"
+            app:bt_icon="@drawable/ic_movie"
+            app:bt_shape="@drawable/bg_bub_active_movie"
+            app:bt_title="Movies" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/id2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/colorTmdbTv"
+            app:bt_colorInactive="#180AA5"
+            app:bt_icon="@drawable/ic_tv"
+            app:bt_shape="@drawable/bg_bub_active_tv"
+            app:bt_title="Tv Shows" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/id3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/colorTmdbDefault"
+            app:bt_colorInactive="#005808"
+            app:bt_icon="@drawable/ic_profile"
+            app:bt_shape="@drawable/bg_bub_active_profile"
+            app:bt_title="Profile" />
+
+    </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
+
+</RelativeLayout>
