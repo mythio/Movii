@@ -1,8 +1,8 @@
-package com.mythio.movii.contract;
+package com.mythio.movii.contract.StartActivity;
 
 import android.support.v4.app.Fragment;
 
-public interface StartActivityContract {
+public interface Contract {
 
     interface View {
         void showFragment(Fragment fragment);

@@ -2,16 +2,16 @@ package com.mythio.movii.presenter;
 
 import android.support.v4.app.Fragment;
 
-import com.mythio.movii.contract.StartActivityContract;
+import com.mythio.movii.contract.StartActivity.Contract;
 import com.mythio.movii.fragment.MoviesFragment;
 import com.mythio.movii.fragment.ProfileFragment;
 import com.mythio.movii.fragment.TvShowsFragment;
 
-public class StartActivityPresenter implements StartActivityContract.Presenter {
+public class StartActivityPresenter implements Contract.Presenter {
 
-    private StartActivityContract.View view;
+    private Contract.View view;
 
-    public StartActivityPresenter(StartActivityContract.View view) {
+    public StartActivityPresenter(Contract.View view) {
         this.view = view;
     }
 
