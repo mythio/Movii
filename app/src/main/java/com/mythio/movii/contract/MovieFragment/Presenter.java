@@ -1,6 +1,7 @@
 package com.mythio.movii.contract.MovieFragment;
 
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import com.mythio.movii.model.movie.Movie;
 
@@ -33,6 +34,6 @@ public class Presenter implements Contract.Presenter, Contract.Model.OnFinishedL
 
     @Override
     public void onFailure(Throwable throwable) {
-
+        Log.v("TAG_TAG_ERROR", throwable.getLocalizedMessage());
     }
 }

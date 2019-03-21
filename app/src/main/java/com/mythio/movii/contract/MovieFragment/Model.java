@@ -41,7 +41,7 @@ public class Model implements Contract.Model {
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-
+                onFinishedListener.onFailure(t);
             }
         });
     }
@@ -66,7 +66,7 @@ public class Model implements Contract.Model {
 
                 @Override
                 public void onFailure(Call<MovieTmdb> call, Throwable t) {
-
+                    onFinishedListener.onFailure(t);
                 }
             });
         }
@@ -106,7 +106,7 @@ public class Model implements Contract.Model {
 
                 @Override
                 public void onFailure(Call<MovieOmdb> call, Throwable t) {
-                    Log.v("TAG_TAG", t.getLocalizedMessage());
+                    onFinishedListener.onFailure(t);
                 }
             });
         }
