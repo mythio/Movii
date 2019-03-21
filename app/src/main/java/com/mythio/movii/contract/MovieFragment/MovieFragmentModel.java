@@ -50,7 +50,7 @@ public class MovieFragmentModel implements MovieFragmentContract.Model {
         final int[] pos = {0};
         for (final MovieTmdb movieTmdb : movies) {
 
-            call = apiServiceTmdb.getTmdbDetail(movieTmdb.getId(), "2e901364c3d103dcb00ced520e9bca3c", "");
+            call = apiServiceTmdb.getMovieDetail(movieTmdb.getId(), "2e901364c3d103dcb00ced520e9bca3c", "");
             call.enqueue(new Callback<MovieTmdb>() {
                 @Override
                 public void onResponse(Call<MovieTmdb> call, Response<MovieTmdb> response) {

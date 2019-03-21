@@ -18,6 +18,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
+
 //import com.mythio.movii.activity.YouTubePlayerActivity;
 //import com.mythio.movii.model.Movie;
 //import org.jetbrains.annotations.NotNull;
@@ -98,7 +100,7 @@ public class MovieSliderAdapter extends PagerAdapter {
             textViewTitle2.setVisibility(View.GONE);
         }
 
-        String url = "https://image.tmdb.org/t/p/" + "w780" + movie.getBackdropPath();
+        String url = IMAGE_BASE_URL + "w780" + movie.getBackdropPath();
 
         Picasso.get()
                 .load(url)

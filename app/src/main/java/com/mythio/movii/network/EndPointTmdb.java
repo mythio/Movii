@@ -14,5 +14,5 @@ public interface EndPointTmdb {
     Call<MovieResponse> getPopularMovies(@Query("api_key") String apiKey);
 
     @GET("movie/{movie_id}")
-    Call<MovieTmdb> getTmdbDetail(@Path("movie_id") int movieId, @Query("api_key") String apiKey, @Query("append_to_response") String attribs);
+    Call<MovieTmdb> getMovieDetail(@Path("movie_id") int movieId, @Query("api_key") String apiKey, @Query("append_to_response") String attribs);
 }
