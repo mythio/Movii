@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.MovieSliderAdapter;
-import com.mythio.movii.contract.MovieFragment.Contract;
-import com.mythio.movii.contract.MovieFragment.Presenter;
+import com.mythio.movii.contract.MovieFragment.MovieFragmentContract;
+import com.mythio.movii.contract.MovieFragment.MovieFragmentPresenter;
 import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
@@ -19,12 +19,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MoviesFragment extends Fragment implements Contract.View {
+public class MoviesFragment extends Fragment implements MovieFragmentContract.View {
 
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
 
-    private Presenter presenter;
+    private MovieFragmentPresenter movieFragmentPresenter;
 
     public MoviesFragment() {
 
@@ -37,9 +37,9 @@ public class MoviesFragment extends Fragment implements Contract.View {
         View view = inflater.inflate(R.layout.fragment_movies, container, false);
         ButterKnife.bind(this, view);
 
-        presenter = new Presenter(this);
-        presenter.requestData();
-        presenter.initView(viewPager);
+        movieFragmentPresenter = new MovieFragmentPresenter(this);
+        movieFragmentPresenter.requestData();
+        movieFragmentPresenter.initView(viewPager);
 
         return view;
     }

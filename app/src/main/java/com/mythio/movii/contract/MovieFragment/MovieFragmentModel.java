@@ -1,7 +1,5 @@
 package com.mythio.movii.contract.MovieFragment;
 
-import android.util.Log;
-
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieOmdb;
 import com.mythio.movii.model.movie.MovieResponse;
@@ -18,7 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Model implements Contract.Model {
+public class MovieFragmentModel implements MovieFragmentContract.Model {
 
     private OnFinishedListener onFinishedListener;
     private ApiEndTmdb apiServiceTmdb = ApiClientTmdb.getClient().create(ApiEndTmdb.class);

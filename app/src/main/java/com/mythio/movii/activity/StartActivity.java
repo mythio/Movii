@@ -8,19 +8,19 @@ import android.view.View;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
-import com.mythio.movii.contract.StartActivity.Contract;
-import com.mythio.movii.presenter.StartActivityPresenter;
 import com.mythio.movii.R;
+import com.mythio.movii.contract.StartActivity.StartActivityContract;
+import com.mythio.movii.contract.StartActivity.StartActivityPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class StartActivity extends AppCompatActivity implements Contract.View {
+public class StartActivity extends AppCompatActivity implements StartActivityContract.View {
 
     @BindView(R.id.bottom_navigation)
     BubbleNavigationConstraintView navBar;
 
-    Contract.Presenter presenter;
+    StartActivityContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

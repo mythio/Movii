@@ -7,14 +7,14 @@ import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
 
-public class Presenter implements Contract.Presenter, Contract.Model.OnFinishedListener {
+public class MovieFragmentPresenter implements MovieFragmentContract.Presenter, MovieFragmentContract.Model.OnFinishedListener {
 
-    private Contract.View view;
-    private Contract.Model model;
+    private MovieFragmentContract.View view;
+    private MovieFragmentContract.Model model;
 
-    public Presenter(Contract.View view) {
+    public MovieFragmentPresenter(MovieFragmentContract.View view) {
         this.view = view;
-        model = new Model();
+        model = new MovieFragmentModel();
     }
 
     @Override

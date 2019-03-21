@@ -6,7 +6,7 @@ import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
 
-public interface Contract {
+public interface MovieFragmentContract {
 
     interface View {
 
