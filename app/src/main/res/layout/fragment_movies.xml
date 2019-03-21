@@ -80,7 +80,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view_pager_popular" />
 
             <TextView
-                android:id="@+id/text_view_trending"
+                android:id="@+id/text_view_genres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
@@ -90,28 +90,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_popular_show" />
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/view_pager_trending"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="8dp"
-                app:layout_constraintDimensionRatio="H,16:9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_trending"
-                tools:layout_editor_absoluteY="47dp">
+            <!--<android.support.v4.view.ViewPager-->
+                <!--android:id="@+id/view_pager_trending"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_margin="8dp"-->
+                <!--app:layout_constraintDimensionRatio="H,16:9"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/text_view_genres"-->
+                <!--tools:layout_editor_absoluteY="47dp">-->
 
-            </android.support.v4.view.ViewPager>
+            <!--</android.support.v4.view.ViewPager>-->
 
-            <TextView
-                android:id="@+id/text_view3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="36dp"
-                android:text="Show All"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_pager_trending" />
+            <!--<TextView-->
+                <!--android:id="@+id/text_view3"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_marginEnd="36dp"-->
+                <!--android:text="Show All"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/view_pager_trending" />-->
 
         </android.support.constraint.ConstraintLayout>
 
