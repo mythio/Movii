@@ -1,5 +1,7 @@
 package com.mythio.movii.contract.MovieFragment;
 
+import android.support.v4.view.ViewPager;
+
 import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
@@ -20,8 +22,13 @@ public class Presenter implements Contract.Presenter, Contract.Model.OnFinishedL
     }
 
     @Override
+    public void initView(ViewPager viewPager) {
+        view.initSlideShow(viewPager);
+    }
+
+    @Override
     public void onFinished(List<Movie> movies) {
-        view.showText(movies);
+        view.showSlideShow(movies);
     }
 
     @Override
