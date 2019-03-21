@@ -4,10 +4,10 @@ import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieOmdb;
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.mythio.movii.network.ApiClientOmdb;
-import com.mythio.movii.network.ApiClientTmdb;
-import com.mythio.movii.network.ApiEndOmdb;
-import com.mythio.movii.network.ApiEndTmdb;
+import com.mythio.movii.network.ApiClientBuilderOmdb;
+import com.mythio.movii.network.ApiClientBuilderTmdb;
+import com.mythio.movii.network.EndPointTmdb;
+import com.mythio.movii.network.EndPointsOmdb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,8 @@ import retrofit2.Response;
 public class MovieFragmentModel implements MovieFragmentContract.Model {
 
     private OnFinishedListener onFinishedListener;
-    private ApiEndTmdb apiServiceTmdb = ApiClientTmdb.getClient().create(ApiEndTmdb.class);
-    private ApiEndOmdb apiServiceOmdb = ApiClientOmdb.getClient().create(ApiEndOmdb.class);
+    private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
+    private EndPointsOmdb apiServiceOmdb = ApiClientBuilderOmdb.getClient().create(EndPointsOmdb.class);
     private List<MovieTmdb> movieTmdbList = new ArrayList<>();
     private List<Movie> movies = new ArrayList<>();
 

@@ -3,7 +3,7 @@ package com.mythio.movii.network;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiClientOmdb {
+public class ApiClientBuilderOmdb {
 
     public static final String BASE_URL = "http://www.omdbapi.com/";
     private static Retrofit retrofit = null;

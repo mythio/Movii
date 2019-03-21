@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface ApiEndTmdb {
+public interface EndPointTmdb {
 
     @GET("movie/popular")
     Call<MovieResponse> getPopularMovies(@Query("api_key") String apiKey);

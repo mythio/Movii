@@ -38,14 +38,14 @@ public class MoviesFragment extends Fragment implements MovieFragmentContract.Vi
         ButterKnife.bind(this, view);
 
         movieFragmentPresenter = new MovieFragmentPresenter(this);
-        movieFragmentPresenter.requestData();
-        movieFragmentPresenter.initView(viewPager);
+        movieFragmentPresenter.onDataRequest();
+        movieFragmentPresenter.onInitViewPager(viewPager);
 
         return view;
     }
 
     @Override
-    public void initSlideShow(final ViewPager viewPager) {
+    public void setSlideShow(final ViewPager viewPager) {
 
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override

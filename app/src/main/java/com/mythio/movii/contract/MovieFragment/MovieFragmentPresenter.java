@@ -18,13 +18,13 @@ public class MovieFragmentPresenter implements MovieFragmentContract.Presenter, 
     }
 
     @Override
-    public void requestData() {
+    public void onDataRequest() {
         model.getData(this);
     }
 
     @Override
-    public void initView(ViewPager viewPager) {
-        view.initSlideShow(viewPager);
+    public void onInitViewPager(ViewPager viewPager) {
+        view.setSlideShow(viewPager);
     }
 
     @Override

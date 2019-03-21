@@ -10,14 +10,15 @@ public interface MovieFragmentContract {
 
     interface View {
 
-        void initSlideShow(ViewPager viewPager);
+        void setSlideShow(ViewPager viewPager);
         void showSlideShow(List<Movie> movies);
     }
 
     interface Presenter {
 
-        void requestData();
-        void initView(ViewPager viewPager);
+        void onDataRequest();
+
+        void onInitViewPager(ViewPager viewPager);
     }
 
     interface Model {
