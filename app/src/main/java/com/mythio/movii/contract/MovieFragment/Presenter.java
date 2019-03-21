@@ -1,6 +1,6 @@
 package com.mythio.movii.contract.MovieFragment;
 
-import com.mythio.movii.model.Movie;
+import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
 

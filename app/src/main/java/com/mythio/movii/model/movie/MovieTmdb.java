@@ -1,32 +1,35 @@
-package com.mythio.movii.model;
+package com.mythio.movii.model.movie;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Movie {
+public class MovieTmdb {
 
     @SerializedName("poster_path")
-    public String posterPath;
+    private String posterPath;
 
-    @SerializedName(value = "overview", alternate = {"plot"})
-    public String overview;
+    @SerializedName(value = "overview", alternate = "plot")
+    private String overview;
 
     @SerializedName("release_date")
-    public String releaseDate;
+    private String releaseDate;
 
     @SerializedName("id")
-    public Integer id;
+    private Integer id;
 
     @SerializedName("title")
-    public String title;
+    private String title;
 
     @SerializedName("backdrop_path")
-    public String backdropPath;
+    private String backdropPath;
 
-    @SerializedName(value = "vote_count", alternate = {""})
-    public Integer voteCount;
+    @SerializedName("vote_count")
+    private Integer voteCount;
 
     @SerializedName("vote_average")
-    public Double voteAverage;
+    private Double voteAverage;
+
+    @SerializedName("imdb_id")
+    private String imdb;
 
     public String getPosterPath() {
         return posterPath;
@@ -34,6 +37,14 @@ public class Movie {
 
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
+    }
+
+    public String getImdb() {
+        return imdb;
+    }
+
+    public void setImdb(String imdb) {
+        this.imdb = imdb;
     }
 
     public String getOverview() {

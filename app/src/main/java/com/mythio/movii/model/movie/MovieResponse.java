@@ -1,4 +1,4 @@
-package com.mythio.movii.model;
+package com.mythio.movii.model.movie;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,13 +7,13 @@ import java.util.List;
 public class MovieResponse {
 
     @SerializedName("results")
-    public List<Movie> results = null;
+    private List<MovieTmdb> results = null;
 
-    public List<Movie> getResults() {
+    public List<MovieTmdb> getResults() {
         return results;
     }
 
-    public void setResults(List<Movie> results) {
+    public void setResults(List<MovieTmdb> results) {
         this.results = results;
     }
 }
