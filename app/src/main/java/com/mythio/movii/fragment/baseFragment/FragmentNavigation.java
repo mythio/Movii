@@ -7,6 +7,6 @@ public interface FragmentNavigation {
     }
 
     interface Presenter {
-        void addFragment(BaseFragment fragment);
+        void setFragment(BaseFragment fragment);
     }
 }

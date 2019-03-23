@@ -7,15 +7,22 @@ import android.view.View;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.mythio.movii.R;
-import com.mythio.movii.fragment.MoviesFragment;
 import com.mythio.movii.fragment.baseFragment.BaseFragment;
+import com.mythio.movii.fragment.moviesFragment.ModelCallback;
+import com.mythio.movii.fragment.moviesFragment.MoviesFragment;
+import com.mythio.movii.fragment.profileFragment.ProfileFragment;
+import com.mythio.movii.fragment.tvShowsFragment.TvShowsFragment;
 
 public class StartActivity extends AppCompatActivity implements Contract.View {
 
 //    @BindView(R.id.bottom_navigation)
 //    BubbleNavigationConstraintView navBar;
 
-    private BubbleNavigationConstraintView navBar;
+    private MoviesFragment moviesFragment = new MoviesFragment();
+    private TvShowsFragment tvShowsFragment = new TvShowsFragment();
+    private ProfileFragment profileFragment = new ProfileFragment();
+
+    private ModelCallback modelCallback;
 
     private Presenter presenter;
 
@@ -26,20 +33,35 @@ public class StartActivity extends AppCompatActivity implements Contract.View {
 //        ButterKnife.bind(this);
 
         presenter = new Presenter(this);
-        setFragment(new MoviesFragment());
+        presenter.setFragment(moviesFragment);
 
-        navBar = findViewById(R.id.bottom_navigation);
+        BubbleNavigationConstraintView navBar = findViewById(R.id.bottom_navigation);
 
         navBar.setNavigationChangeListener(new BubbleNavigationChangeListener() {
             @Override
             public void onNavigationChanged(View view, int position) {
-                presenter.onFragmentSelected(position);
+                switch (position) {
+                    case 0:
+                        presenter.setFragment(moviesFragment);
+                        break;
+                    case 1:
+                        presenter.setFragment(tvShowsFragment);
+                        break;
+                    case 2:
+                        presenter.setFragment(profileFragment);
+                        break;
+                }
             }
         });
+
+        if (moviesFragment instanceof MoviesFragment) {
+            modelCallback = moviesFragment;
+        }
+        modelCallback.onDataRecieved("Hey!");
     }
 
     @Override
-    public void setFragment(BaseFragment fragment) {
+    public void showFragment(BaseFragment fragment) {
         fragment.attachPresenter(presenter);
 
         getSupportFragmentManager()

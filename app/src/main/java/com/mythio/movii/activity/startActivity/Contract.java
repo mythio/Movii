@@ -5,10 +5,10 @@ import com.mythio.movii.fragment.baseFragment.BaseFragment;
 public interface Contract {
 
     interface View {
-        void setFragment(BaseFragment fragment);
+        void showFragment(BaseFragment fragment);
     }
 
     interface Presenter {
-        void onFragmentSelected(int pos);
+
     }
 }
