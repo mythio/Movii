@@ -8,8 +8,8 @@ import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.mythio.movii.R;
 import com.mythio.movii.fragment.baseFragment.BaseFragment;
-import com.mythio.movii.fragment.moviesFragment.ModelCallback;
 import com.mythio.movii.fragment.moviesFragment.MoviesFragment;
+import com.mythio.movii.fragment.moviesFragment.MoviesFragmentContract;
 import com.mythio.movii.fragment.profileFragment.ProfileFragment;
 import com.mythio.movii.fragment.tvShowsFragment.TvShowsFragment;
 import com.mythio.movii.model.movie.Movie;
@@ -25,7 +25,7 @@ public class StartActivity extends AppCompatActivity implements StartActivityCon
     private TvShowsFragment tvShowsFragment = new TvShowsFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
 
-    private ModelCallback modelCallback;
+    private MoviesFragmentContract.Callback moviesCallback;
 
     private StartActivityPresenter movieStartActivityPresenter;
 
@@ -58,8 +58,8 @@ public class StartActivity extends AppCompatActivity implements StartActivityCon
             }
         });
 
-        if (moviesFragment instanceof MoviesFragment) {
-            modelCallback = moviesFragment;
+        if (moviesFragment != null) {
+            moviesCallback = moviesFragment;
         }
     }
 
@@ -76,6 +76,6 @@ public class StartActivity extends AppCompatActivity implements StartActivityCon
 
     @Override
     public void sendToFragment(List<Movie> movies) {
-        modelCallback.onDataReceived(movies);
+        moviesCallback.onDataReceived(movies);
     }
 }
