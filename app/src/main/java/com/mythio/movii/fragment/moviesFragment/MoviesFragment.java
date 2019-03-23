@@ -24,7 +24,6 @@ public class MoviesFragment extends BaseFragment implements MoviesFragmentContra
 
     private MoviesFragmentContract.Presenter presenter;
     private List<Movie> movies = new ArrayList<>();
-    private MovieSliderAdapter adapter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -68,7 +67,6 @@ public class MoviesFragment extends BaseFragment implements MoviesFragmentContra
     public void showSlideShow(List<Movie> movies) {
 
         this.movies = movies;
-        adapter = new MovieSliderAdapter(this.getContext(), movies);
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(new MovieSliderAdapter(this.getContext(), movies));
     }
 }

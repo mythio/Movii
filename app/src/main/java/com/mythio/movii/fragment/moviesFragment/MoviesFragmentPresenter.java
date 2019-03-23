@@ -8,7 +8,7 @@ public class MoviesFragmentPresenter implements MoviesFragmentContract.Presenter
 
     private MoviesFragmentContract.View view;
 
-    public MoviesFragmentPresenter(MoviesFragmentContract.View view) {
+    MoviesFragmentPresenter(MoviesFragmentContract.View view) {
         this.view = view;
     }
 
