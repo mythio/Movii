@@ -1,14 +1,19 @@
 package com.mythio.movii.model.movie;
 
 import com.google.gson.annotations.SerializedName;
+import com.mythio.movii.model.genre.Genre;
+import com.mythio.movii.model.video.VideoResponse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MovieTmdb {
 
     @SerializedName("poster_path")
     private String posterPath;
 
-    @SerializedName(value = "overview", alternate = "plot")
-    private String overview;
+    @SerializedName("videos")
+    public VideoResponse videoResponse;
 
     @SerializedName("release_date")
     private String releaseDate;
@@ -21,6 +26,8 @@ public class MovieTmdb {
 
     @SerializedName("backdrop_path")
     private String backdropPath;
+    @SerializedName("overview")
+    private String overview;
 
     @SerializedName("vote_count")
     private Integer voteCount;
@@ -30,6 +37,8 @@ public class MovieTmdb {
 
     @SerializedName("imdb_id")
     private String imdb;
+    @SerializedName("genres")
+    private List<Genre> genres = new ArrayList<>();
 
     public String getPosterPath() {
         return posterPath;
@@ -37,14 +46,6 @@ public class MovieTmdb {
 
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
-    }
-
-    public String getImdb() {
-        return imdb;
-    }
-
-    public void setImdb(String imdb) {
-        this.imdb = imdb;
     }
 
     public String getOverview() {
@@ -87,6 +88,14 @@ public class MovieTmdb {
         this.backdropPath = backdropPath;
     }
 
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
     public Integer getVoteCount() {
         return voteCount;
     }
@@ -101,5 +110,21 @@ public class MovieTmdb {
 
     public void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
+    }
+
+    public String getImdb() {
+        return imdb;
+    }
+
+    public void setImdb(String imdb) {
+        this.imdb = imdb;
+    }
+
+    public VideoResponse getVideoResponse() {
+        return videoResponse;
+    }
+
+    public void setVideoResponse(VideoResponse videoResponse) {
+        this.videoResponse = videoResponse;
     }
 }

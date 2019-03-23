@@ -1,30 +1,22 @@
 package com.mythio.movii.fragment;
 
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.mythio.movii.R;
+import com.mythio.movii.fragment.baseFragment.BaseFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ProfileFragment extends Fragment {
-
-
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
-
+public class ProfileFragment extends BaseFragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
+    @Override
+    public int getLayout() {
+        return R.layout.fragment_profile;
+    }
 }

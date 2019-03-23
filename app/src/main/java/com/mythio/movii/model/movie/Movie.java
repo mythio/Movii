@@ -1,10 +1,14 @@
 package com.mythio.movii.model.movie;
 
+import com.mythio.movii.model.video.Video;
+
+import java.util.List;
+
 public class Movie {
 
     private String posterPath;
     private String overview;
-    private String id;
+    private Integer id;
     private String title;
     private String backdropPath;
     private String votes;
@@ -13,20 +17,7 @@ public class Movie {
     private String genres;
     private String year;
     private String runtime;
-
-    public Movie(String posterPath, String overview, String id, String title, String backdropPath, String votes, String rating, String imdb, String genres, String year, String runtime) {
-        this.posterPath = posterPath;
-        this.overview = overview;
-        this.id = id;
-        this.title = title;
-        this.backdropPath = backdropPath;
-        this.votes = votes;
-        this.rating = rating;
-        this.imdb = imdb;
-        this.genres = genres;
-        this.year = year;
-        this.runtime = runtime;
-    }
+    private List<Video> videos;
 
     public String getPosterPath() {
         return posterPath;
@@ -44,11 +35,11 @@ public class Movie {
         this.overview = overview;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -114,5 +105,13 @@ public class Movie {
 
     public void setRuntime(String runtime) {
         this.runtime = runtime;
+    }
+
+    public List<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<Video> videos) {
+        this.videos = videos;
     }
 }

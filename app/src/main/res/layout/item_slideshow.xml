@@ -43,7 +43,7 @@
                 android:id="@+id/image_view_overlay"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:alpha="0.7"
+                android:alpha="0"
                 android:src="@drawable/bg_gradient_movie"
                 app:layout_constraintBottom_toBottomOf="@+id/image_view_backdrop"
                 app:layout_constraintEnd_toEndOf="@+id/image_view_backdrop"
