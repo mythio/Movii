@@ -6,14 +6,14 @@ import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
 
-public class Presenter implements Contract.Presenter, FragmentNavigation.Presenter, Contract.Model.OnDataReceived {
+public class StartActivityPresenter implements StartActivityContract.Presenter, FragmentNavigation.Presenter, StartActivityContract.Model.MoviesModel.MoviesListener {
 
-    private Contract.View view;
-    private Contract.Model model;
+    private StartActivityContract.View view;
+    private StartActivityContract.Model.MoviesModel model;
 
-    public Presenter(Contract.View view) {
+    public StartActivityPresenter(StartActivityContract.View view) {
         this.view = view;
-        model = new Model();
+        model = new StartActivityMoviesModel();
     }
 
     @Override
@@ -23,7 +23,7 @@ public class Presenter implements Contract.Presenter, FragmentNavigation.Present
 
     @Override
     public void onDataRequest() {
-        model.getData(this);
+        model.getMovies(this);
     }
 
     @Override

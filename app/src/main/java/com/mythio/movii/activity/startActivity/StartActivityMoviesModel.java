@@ -2,6 +2,7 @@ package com.mythio.movii.activity.startActivity;
 
 import android.util.Log;
 
+import com.mythio.movii.activity.startActivity.StartActivityContract.Model;
 import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieOmdb;
@@ -22,18 +23,21 @@ import retrofit2.Response;
 import static com.mythio.movii.util.Constant.API_KEY_OMDB;
 import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
-public class Model implements Contract.Model {
+public class StartActivityMoviesModel implements Model.MoviesModel {
 
-    private OnDataReceived onDataReceived;
+    /*
+    MOVIE FRAGMENT DATA
+     */
+
+    private Model.MoviesModel.MoviesListener moviesListener;
     private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
     private EndPointsOmdb apiServiceOmdb = ApiClientBuilderOmdb.getClient().create(EndPointsOmdb.class);
     private List<MovieTmdb> movieTmdbList = new ArrayList<>();
     private List<Movie> movies = new ArrayList<>();
 
-
     @Override
-    public void getData(final OnDataReceived onDataReceived) {
-        this.onDataReceived = onDataReceived;
+    public void getMovies(final Model.MoviesModel.MoviesListener moviesListener) {
+        this.moviesListener = moviesListener;
 
         Call<MovieResponse> call = apiServiceTmdb.getPopularMovies(API_KEY_TMDB);
         call.enqueue(new Callback<MovieResponse>() {
@@ -45,7 +49,7 @@ public class Model implements Contract.Model {
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                onDataReceived.onFailure(t);
+                moviesListener.onFailure(t);
                 Log.v("TAG_TAG", t.getLocalizedMessage());
             }
         });
@@ -71,7 +75,7 @@ public class Model implements Contract.Model {
 
                 @Override
                 public void onFailure(Call<MovieTmdb> call, Throwable t) {
-                    onDataReceived.onFailure(t);
+                    moviesListener.onFailure(t);
                     Log.v("TAG_TAG", t.getLocalizedMessage());
                 }
             });
@@ -133,13 +137,13 @@ public class Model implements Contract.Model {
                     ++pos[0];
 
                     if (pos[0] == 20) {
-                        onDataReceived.onFinished(movies);
+                        moviesListener.onFinished(movies);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<MovieOmdb> call, Throwable t) {
-                    onDataReceived.onFailure(t);
+                    moviesListener.onFailure(t);
                     Log.v("TAG_TAG", t.getLocalizedMessage());
                 }
             });

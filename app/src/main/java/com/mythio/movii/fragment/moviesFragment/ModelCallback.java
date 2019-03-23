@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ModelCallback {
 
-    void onDataRecieved(List<Movie> movies);
+    void onDataReceived(List<Movie> movies);
 }

@@ -25,7 +25,7 @@ public class MoviesFragment extends BaseFragment implements ModelCallback {
     }
 
     @Override
-    public void onDataRecieved(List<Movie> movies) {
+    public void onDataReceived(List<Movie> movies) {
         for (Movie movie : movies) {
             Log.d("TAG_TAG", movie.getTitle());
         }

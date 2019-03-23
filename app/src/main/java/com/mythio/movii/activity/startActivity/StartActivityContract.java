@@ -5,7 +5,7 @@ import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
 
-public interface Contract {
+public interface StartActivityContract {
 
     interface View {
 
@@ -21,13 +21,20 @@ public interface Contract {
 
     interface Model {
 
-        void getData(OnDataReceived onDataReceived);
+        interface MoviesModel {
 
-        interface OnDataReceived {
+            void getMovies(MoviesListener moviesListener);
 
-            void onFinished(List<Movie> movies);
+            interface MoviesListener {
 
-            void onFailure(Throwable throwable);
+                void onFinished(List<Movie> movies);
+
+                void onFailure(Throwable throwable);
+            }
+        }
+
+        interface TvShowsModel {
+            // TODO: 3/24/19 Create tv shows model
         }
     }
 }
