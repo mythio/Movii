@@ -12,6 +12,9 @@ import com.mythio.movii.fragment.moviesFragment.ModelCallback;
 import com.mythio.movii.fragment.moviesFragment.MoviesFragment;
 import com.mythio.movii.fragment.profileFragment.ProfileFragment;
 import com.mythio.movii.fragment.tvShowsFragment.TvShowsFragment;
+import com.mythio.movii.model.movie.Movie;
+
+import java.util.List;
 
 public class StartActivity extends AppCompatActivity implements Contract.View {
 
@@ -24,7 +27,7 @@ public class StartActivity extends AppCompatActivity implements Contract.View {
 
     private ModelCallback modelCallback;
 
-    private Presenter presenter;
+    private Presenter moviePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +35,9 @@ public class StartActivity extends AppCompatActivity implements Contract.View {
         setContentView(R.layout.activity_start);
 //        ButterKnife.bind(this);
 
-        presenter = new Presenter(this);
-        presenter.setFragment(moviesFragment);
+        moviePresenter = new Presenter(this);
+        moviePresenter.onDataRequest();
+        moviePresenter.setFragment(moviesFragment);
 
         BubbleNavigationConstraintView navBar = findViewById(R.id.bottom_navigation);
 
@@ -42,13 +46,13 @@ public class StartActivity extends AppCompatActivity implements Contract.View {
             public void onNavigationChanged(View view, int position) {
                 switch (position) {
                     case 0:
-                        presenter.setFragment(moviesFragment);
+                        moviePresenter.setFragment(moviesFragment);
                         break;
                     case 1:
-                        presenter.setFragment(tvShowsFragment);
+                        moviePresenter.setFragment(tvShowsFragment);
                         break;
                     case 2:
-                        presenter.setFragment(profileFragment);
+                        moviePresenter.setFragment(profileFragment);
                         break;
                 }
             }
@@ -57,17 +61,21 @@ public class StartActivity extends AppCompatActivity implements Contract.View {
         if (moviesFragment instanceof MoviesFragment) {
             modelCallback = moviesFragment;
         }
-        modelCallback.onDataRecieved("Hey!");
     }
 
     @Override
     public void showFragment(BaseFragment fragment) {
-        fragment.attachPresenter(presenter);
+        fragment.attachPresenter(moviePresenter);
 
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .replace(R.id.fragment_container, fragment)
                 .commit();
+    }
+
+    @Override
+    public void sendToFragment(List<Movie> movies) {
+        modelCallback.onDataRecieved(movies);
     }
 }

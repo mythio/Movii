@@ -8,6 +8,9 @@ import android.view.View;
 
 import com.mythio.movii.R;
 import com.mythio.movii.fragment.baseFragment.BaseFragment;
+import com.mythio.movii.model.movie.Movie;
+
+import java.util.List;
 
 public class MoviesFragment extends BaseFragment implements ModelCallback {
 
@@ -22,7 +25,9 @@ public class MoviesFragment extends BaseFragment implements ModelCallback {
     }
 
     @Override
-    public void onDataRecieved(String string) {
-        Log.v("TAG_TAG", string);
+    public void onDataRecieved(List<Movie> movies) {
+        for (Movie movie : movies) {
+            Log.d("TAG_TAG", movie.getTitle());
+        }
     }
 }

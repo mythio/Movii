@@ -11,10 +11,6 @@ public abstract class BaseFragment extends Fragment implements FragmentNavigatio
     protected View rootView;
     protected FragmentNavigation.Presenter navigationPresenter;
 
-    public BaseFragment() {
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
