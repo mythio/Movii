@@ -1,5 +1,6 @@
 package com.mythio.movii.fragment.moviesFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.mythio.movii.R;
+import com.mythio.movii.activity.youtubeActivity.YouTubePlayerActivity;
 import com.mythio.movii.adapter.MovieSliderAdapter;
 import com.mythio.movii.fragment.baseFragment.BaseFragment;
 import com.mythio.movii.model.movie.Movie;
@@ -17,12 +19,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MoviesFragment extends BaseFragment implements MoviesFragmentContract.View, MoviesFragmentContract.Callback {
+public class MoviesFragment extends BaseFragment implements MoviesContract.View, MoviesContract.Callback {
 
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
 
-    private MoviesFragmentContract.Presenter presenter;
+    private MoviesContract.Presenter presenter;
     private List<Movie> movies = new ArrayList<>();
 
     @Override
@@ -31,7 +33,7 @@ public class MoviesFragment extends BaseFragment implements MoviesFragmentContra
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        presenter = new MoviesFragmentPresenter(this);
+        presenter = new MoviesPresenter(this);
         presenter.initViews();
         presenter.setDataToViewPager(movies);
     }
@@ -67,6 +69,15 @@ public class MoviesFragment extends BaseFragment implements MoviesFragmentContra
     public void showSlideShow(List<Movie> movies) {
 
         this.movies = movies;
-        viewPager.setAdapter(new MovieSliderAdapter(this.getContext(), movies));
+        viewPager.setAdapter(new MovieSliderAdapter(this.getContext(), movies, new OnItemClickListener() {
+            @Override
+            public void onItemClick(Movie movie) {
+                Intent intent = new Intent(getContext(), YouTubePlayerActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("data", movie.getVideos());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        }));
     }
 }

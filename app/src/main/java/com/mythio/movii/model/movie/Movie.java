@@ -2,7 +2,7 @@ package com.mythio.movii.model.movie;
 
 import com.mythio.movii.model.video.Video;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Movie {
 
@@ -17,7 +17,7 @@ public class Movie {
     private String genres;
     private String year;
     private String runtime;
-    private List<Video> videos;
+    private ArrayList<Video> videos;
 
     public String getPosterPath() {
         return posterPath;
@@ -107,11 +107,11 @@ public class Movie {
         this.runtime = runtime;
     }
 
-    public List<Video> getVideos() {
+    public ArrayList<Video> getVideos() {
         return videos;
     }
 
-    public void setVideos(List<Video> videos) {
+    public void setVideos(ArrayList<Video> videos) {
         this.videos = videos;
     }
 }

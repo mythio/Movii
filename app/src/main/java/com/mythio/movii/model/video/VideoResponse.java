@@ -3,18 +3,17 @@ package com.mythio.movii.model.video;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class VideoResponse {
 
     @SerializedName("results")
-    private List<Video> videos = new ArrayList<>();
+    private ArrayList<Video> videos = new ArrayList<>();
 
-    public List<Video> getVideos() {
+    public ArrayList<Video> getVideos() {
         return videos;
     }
 
-    public void setVideos(List<Video> videos) {
+    public void setVideos(ArrayList<Video> videos) {
         this.videos = videos;
     }
 }

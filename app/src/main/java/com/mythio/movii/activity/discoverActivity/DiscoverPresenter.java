@@ -1,4 +1,4 @@
-package com.mythio.movii.activity.startActivity;
+package com.mythio.movii.activity.discoverActivity;
 
 import com.mythio.movii.fragment.baseFragment.BaseFragment;
 import com.mythio.movii.fragment.baseFragment.FragmentNavigation;
@@ -6,14 +6,14 @@ import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
 
-public class StartActivityPresenter implements StartActivityContract.Presenter, FragmentNavigation.Presenter, StartActivityContract.Model.MoviesModel.MoviesListener {
+public class DiscoverPresenter implements DiscoverContract.Presenter, FragmentNavigation.Presenter, DiscoverContract.Model.MoviesModel.MoviesListener {
 
-    private StartActivityContract.View view;
-    private StartActivityContract.Model.MoviesModel model;
+    private DiscoverContract.View view;
+    private DiscoverContract.Model.MoviesModel model;
 
-    public StartActivityPresenter(StartActivityContract.View view) {
+    public DiscoverPresenter(DiscoverContract.View view) {
         this.view = view;
-        model = new StartActivityMoviesModel();
+        model = new DiscoverMoviesModel();
     }
 
     @Override

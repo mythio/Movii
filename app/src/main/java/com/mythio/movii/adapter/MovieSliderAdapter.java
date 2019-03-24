@@ -11,11 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
+import com.mythio.movii.fragment.moviesFragment.OnItemClickListener;
 import com.mythio.movii.model.movie.Movie;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
@@ -29,17 +32,19 @@ import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 public class MovieSliderAdapter extends PagerAdapter {
 
     private Context mContext;
-    private List<Movie> movies;
+    private final List<Movie> movies;
+    private final OnItemClickListener listener;
 
-    public MovieSliderAdapter(Context mContext, List<Movie> movies) {
+    public MovieSliderAdapter(Context mContext, List<Movie> movies, OnItemClickListener listener) {
         this.mContext = mContext;
         this.movies = movies;
-//        Collections.sort(movies, new Comparator<Movie>() {
-//            @Override
-//            public int compare(Movie o1, Movie o2) {
-//                return o2.getImdbRatings().compareTo(o1.getImdbRatings());
-//            }
-//        });
+        this.listener = listener;
+        Collections.sort(movies, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return o2.getRating().compareTo(o1.getRating());
+            }
+        });
     }
 
     @Override
@@ -57,7 +62,7 @@ public class MovieSliderAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int i) {
         final Movie movie = movies.get(i);
 
-        LayoutInflater inflater = (LayoutInflater) mContext
+        final LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
@@ -72,10 +77,7 @@ public class MovieSliderAdapter extends PagerAdapter {
         view.findViewById(R.id.play_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(mContext, YouTubePlayerActivity.class);
-//                intent.putExtra("MOVIE_YOUTUBE_KEY", movie.getKey());
-//                YouTubeIntents.canResolvePlayVideoIntent(mContext);
-//                mContext.startActivity(intent);
+                listener.onItemClick(movie);
             }
         });
 

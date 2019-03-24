@@ -4,11 +4,11 @@ import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
 
-public class MoviesFragmentPresenter implements MoviesFragmentContract.Presenter {
+public class MoviesPresenter implements MoviesContract.Presenter {
 
-    private MoviesFragmentContract.View view;
+    private MoviesContract.View view;
 
-    MoviesFragmentPresenter(MoviesFragmentContract.View view) {
+    MoviesPresenter(MoviesContract.View view) {
         this.view = view;
     }
 

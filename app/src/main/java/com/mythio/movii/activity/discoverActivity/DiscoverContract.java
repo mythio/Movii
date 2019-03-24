@@ -1,11 +1,11 @@
-package com.mythio.movii.activity.startActivity;
+package com.mythio.movii.activity.discoverActivity;
 
 import com.mythio.movii.fragment.baseFragment.BaseFragment;
 import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
 
-public interface StartActivityContract {
+public interface DiscoverContract {
 
     interface View {
 

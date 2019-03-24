@@ -1,8 +1,8 @@
-package com.mythio.movii.activity.startActivity;
+package com.mythio.movii.activity.discoverActivity;
 
 import android.util.Log;
 
-import com.mythio.movii.activity.startActivity.StartActivityContract.Model;
+import com.mythio.movii.activity.discoverActivity.DiscoverContract.Model;
 import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieOmdb;
@@ -23,7 +23,7 @@ import retrofit2.Response;
 import static com.mythio.movii.util.Constant.API_KEY_OMDB;
 import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
-public class StartActivityMoviesModel implements Model.MoviesModel {
+public class DiscoverMoviesModel implements Model.MoviesModel {
 
     /*
     MOVIE FRAGMENT DATA

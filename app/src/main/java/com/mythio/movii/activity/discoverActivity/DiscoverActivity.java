@@ -1,4 +1,4 @@
-package com.mythio.movii.activity.startActivity;
+package com.mythio.movii.activity.discoverActivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,15 +8,15 @@ import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.mythio.movii.R;
 import com.mythio.movii.fragment.baseFragment.BaseFragment;
+import com.mythio.movii.fragment.moviesFragment.MoviesContract;
 import com.mythio.movii.fragment.moviesFragment.MoviesFragment;
-import com.mythio.movii.fragment.moviesFragment.MoviesFragmentContract;
 import com.mythio.movii.fragment.profileFragment.ProfileFragment;
 import com.mythio.movii.fragment.tvShowsFragment.TvShowsFragment;
 import com.mythio.movii.model.movie.Movie;
 
 import java.util.List;
 
-public class StartActivity extends AppCompatActivity implements StartActivityContract.View {
+public class DiscoverActivity extends AppCompatActivity implements DiscoverContract.View {
 
 //    @BindView(R.id.bottom_navigation)
 //    BubbleNavigationConstraintView navBar;
@@ -25,9 +25,9 @@ public class StartActivity extends AppCompatActivity implements StartActivityCon
     private TvShowsFragment tvShowsFragment = new TvShowsFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
 
-    private MoviesFragmentContract.Callback moviesCallback;
+    private MoviesContract.Callback moviesCallback;
 
-    private StartActivityPresenter movieStartActivityPresenter;
+    private DiscoverPresenter movieDiscoverPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,9 @@ public class StartActivity extends AppCompatActivity implements StartActivityCon
         setContentView(R.layout.activity_start);
 //        ButterKnife.bind(this);
 
-        movieStartActivityPresenter = new StartActivityPresenter(this);
-        movieStartActivityPresenter.onDataRequest();
-        movieStartActivityPresenter.setFragment(moviesFragment);
+        movieDiscoverPresenter = new DiscoverPresenter(this);
+        movieDiscoverPresenter.onDataRequest();
+        movieDiscoverPresenter.setFragment(moviesFragment);
 
         BubbleNavigationConstraintView navBar = findViewById(R.id.bottom_navigation);
 
@@ -46,13 +46,13 @@ public class StartActivity extends AppCompatActivity implements StartActivityCon
             public void onNavigationChanged(View view, int position) {
                 switch (position) {
                     case 0:
-                        movieStartActivityPresenter.setFragment(moviesFragment);
+                        movieDiscoverPresenter.setFragment(moviesFragment);
                         break;
                     case 1:
-                        movieStartActivityPresenter.setFragment(tvShowsFragment);
+                        movieDiscoverPresenter.setFragment(tvShowsFragment);
                         break;
                     case 2:
-                        movieStartActivityPresenter.setFragment(profileFragment);
+                        movieDiscoverPresenter.setFragment(profileFragment);
                         break;
                 }
             }
@@ -65,7 +65,7 @@ public class StartActivity extends AppCompatActivity implements StartActivityCon
 
     @Override
     public void showFragment(BaseFragment fragment) {
-        fragment.attachPresenter(movieStartActivityPresenter);
+        fragment.attachPresenter(movieDiscoverPresenter);
 
         getSupportFragmentManager()
                 .beginTransaction()
