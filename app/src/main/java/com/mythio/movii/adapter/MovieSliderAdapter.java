@@ -17,34 +17,23 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.ArrayList;
 
 import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
-//import com.mythio.movii.activity.YouTubePlayerActivity;
-//import com.mythio.movii.model.Movie;
-//import org.jetbrains.annotations.NotNull;
-
-//import static com.mythio.movii.constant.Constants.TMDB_IMAGE;
-
 public class MovieSliderAdapter extends PagerAdapter {
 
-    private Context mContext;
-    private final List<Movie> movies;
-    private final OnItemClickListener listener;
+    private final Context mContext;
+    private final ArrayList<Movie> movies;
+    private OnItemClickListener listener;
 
-    public MovieSliderAdapter(Context mContext, List<Movie> movies, OnItemClickListener listener) {
+    public MovieSliderAdapter(Context mContext, ArrayList<Movie> movies) {
         this.mContext = mContext;
         this.movies = movies;
+    }
+
+    public void setOnClickListener(OnItemClickListener listener) {
         this.listener = listener;
-        Collections.sort(movies, new Comparator<Movie>() {
-            @Override
-            public int compare(Movie o1, Movie o2) {
-                return o2.getRating().compareTo(o1.getRating());
-            }
-        });
     }
 
     @Override

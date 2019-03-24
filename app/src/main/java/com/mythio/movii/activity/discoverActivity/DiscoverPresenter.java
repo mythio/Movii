@@ -4,7 +4,7 @@ import com.mythio.movii.fragment.baseFragment.BaseFragment;
 import com.mythio.movii.fragment.baseFragment.FragmentNavigation;
 import com.mythio.movii.model.movie.Movie;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class DiscoverPresenter implements DiscoverContract.Presenter, FragmentNavigation.Presenter, DiscoverContract.Model.MoviesModel.MoviesListener {
 
@@ -27,7 +27,7 @@ public class DiscoverPresenter implements DiscoverContract.Presenter, FragmentNa
     }
 
     @Override
-    public void onFinished(List<Movie> movies) {
+    public void onFinished(ArrayList<Movie> movies) {
         view.sendToFragment(movies);
     }
 

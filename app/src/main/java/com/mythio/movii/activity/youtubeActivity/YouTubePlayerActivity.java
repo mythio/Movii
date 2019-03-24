@@ -8,14 +8,13 @@ import com.mythio.movii.R;
 import com.mythio.movii.model.video.Video;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.mythio.movii.util.Constant.YOUTUBE_DEV_KEY;
 
 public class YouTubePlayerActivity extends YouTubeFailureRecoveryActivity {
 
     private YouTubePlayerView playerView;
-    private List<String> urls = new ArrayList<>();
+    private ArrayList<String> urls = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle bundle) {

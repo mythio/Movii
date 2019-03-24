@@ -14,7 +14,7 @@ import com.mythio.movii.fragment.profileFragment.ProfileFragment;
 import com.mythio.movii.fragment.tvShowsFragment.TvShowsFragment;
 import com.mythio.movii.model.movie.Movie;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class DiscoverActivity extends AppCompatActivity implements DiscoverContract.View {
 
@@ -75,7 +75,7 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
     }
 
     @Override
-    public void sendToFragment(List<Movie> movies) {
+    public void sendToFragment(ArrayList<Movie> movies) {
         moviesCallback.onDataReceived(movies);
     }
 }

@@ -8,34 +8,41 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.mythio.movii.R;
+import com.mythio.movii.activity.searchMovieActivity.SearchMovieActivity;
 import com.mythio.movii.activity.youtubeActivity.YouTubePlayerActivity;
 import com.mythio.movii.adapter.MovieSliderAdapter;
 import com.mythio.movii.fragment.baseFragment.BaseFragment;
 import com.mythio.movii.model.movie.Movie;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MoviesFragment extends BaseFragment implements MoviesContract.View, MoviesContract.Callback {
+public class MoviesFragment extends BaseFragment implements MoviesContract.View,
+        MoviesContract.Callback, OnItemClickListener {
 
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
 
-    private MoviesContract.Presenter presenter;
-    private List<Movie> movies = new ArrayList<>();
+    private MoviesContract.Presenter mPresenter;
+    private ArrayList<Movie> mMovies = new ArrayList<>();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        presenter = new MoviesPresenter(this);
-        presenter.initViews();
-        presenter.setDataToViewPager(movies);
+        mPresenter = new MoviesPresenter(this);
+        mPresenter.initViews();
+        mPresenter.setDataToViewPager(mMovies);
+    }
+
+    @OnClick(R.id.search_btn_go)
+    public void send() {
+
+        startActivity(new Intent(getContext(), SearchMovieActivity.class));
     }
 
     @Override
@@ -45,9 +52,9 @@ public class MoviesFragment extends BaseFragment implements MoviesContract.View,
     }
 
     @Override
-    public void onDataReceived(List<Movie> movies) {
+    public void onDataReceived(ArrayList<Movie> mMovies) {
 
-        presenter.setDataToViewPager(movies);
+        mPresenter.setDataToViewPager(mMovies);
     }
 
     @Override
@@ -66,18 +73,21 @@ public class MoviesFragment extends BaseFragment implements MoviesContract.View,
     }
 
     @Override
-    public void showSlideShow(List<Movie> movies) {
+    public void showSlideShow(ArrayList<Movie> mMovies) {
 
-        this.movies = movies;
-        viewPager.setAdapter(new MovieSliderAdapter(this.getContext(), movies, new OnItemClickListener() {
-            @Override
-            public void onItemClick(Movie movie) {
-                Intent intent = new Intent(getContext(), YouTubePlayerActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("data", movie.getVideos());
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        }));
+        this.mMovies = mMovies;
+        MovieSliderAdapter adapter = new MovieSliderAdapter(getContext(), mMovies);
+        adapter.setOnClickListener(this);
+        viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClick(Movie movie) {
+
+        Intent intent = new Intent(getContext(), YouTubePlayerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("data", movie.getVideos());
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

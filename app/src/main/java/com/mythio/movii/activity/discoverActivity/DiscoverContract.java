@@ -3,7 +3,7 @@ package com.mythio.movii.activity.discoverActivity;
 import com.mythio.movii.fragment.baseFragment.BaseFragment;
 import com.mythio.movii.model.movie.Movie;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface DiscoverContract {
 
@@ -11,7 +11,7 @@ public interface DiscoverContract {
 
         void showFragment(BaseFragment fragment);
 
-        void sendToFragment(List<Movie> movies);
+        void sendToFragment(ArrayList<Movie> movies);
     }
 
     interface Presenter {
@@ -27,7 +27,7 @@ public interface DiscoverContract {
 
             interface MoviesListener {
 
-                void onFinished(List<Movie> movies);
+                void onFinished(ArrayList<Movie> movies);
 
                 void onFailure(Throwable throwable);
             }

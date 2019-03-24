@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.AppCompatImageButton
-        android:id="@+id/search_go_btn"
+        android:id="@+id/search_btn_go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"

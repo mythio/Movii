@@ -5,7 +5,6 @@ import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.video.VideoResponse;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MovieTmdb {
 
@@ -38,7 +37,7 @@ public class MovieTmdb {
     @SerializedName("imdb_id")
     private String imdb;
     @SerializedName("genres")
-    private List<Genre> genres = new ArrayList<>();
+    private ArrayList<Genre> genres = new ArrayList<>();
 
     public String getPosterPath() {
         return posterPath;
@@ -88,11 +87,11 @@ public class MovieTmdb {
         this.backdropPath = backdropPath;
     }
 
-    public List<Genre> getGenres() {
+    public ArrayList<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(ArrayList<Genre> genres) {
         this.genres = genres;
     }
 

@@ -14,7 +14,8 @@ import com.mythio.movii.network.EndPointTmdb;
 import com.mythio.movii.network.EndPointsOmdb;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,8 +33,8 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
     private Model.MoviesModel.MoviesListener moviesListener;
     private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
     private EndPointsOmdb apiServiceOmdb = ApiClientBuilderOmdb.getClient().create(EndPointsOmdb.class);
-    private List<MovieTmdb> movieTmdbList = new ArrayList<>();
-    private List<Movie> movies = new ArrayList<>();
+    private ArrayList<MovieTmdb> movieTmdbList = new ArrayList<>();
+    private ArrayList<Movie> movies = new ArrayList<>();
 
     @Override
     public void getMovies(final Model.MoviesModel.MoviesListener moviesListener) {
@@ -43,7 +44,7 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                List<MovieTmdb> movieTmdbList = response.body().getResults();
+                ArrayList<MovieTmdb> movieTmdbList = response.body().getResults();
                 getTMDB(movieTmdbList);
             }
 
@@ -55,7 +56,7 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
         });
     }
 
-    private void getTMDB(final List<MovieTmdb> movies) {
+    private void getTMDB(final ArrayList<MovieTmdb> movies) {
 
         Call<MovieTmdb> call;
         final int[] pos = {0};
@@ -137,6 +138,13 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
                     ++pos[0];
 
                     if (pos[0] == 20) {
+
+                        Collections.sort(movies, new Comparator<Movie>() {
+                            @Override
+                            public int compare(Movie o1, Movie o2) {
+                                return o2.getRating().compareTo(o1.getRating());
+                            }
+                        });
                         moviesListener.onFinished(movies);
                     }
                 }
