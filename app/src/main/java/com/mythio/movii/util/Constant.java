@@ -8,6 +8,7 @@ public class Constant {
     public static final String API_KEY_TMDB = "a781dd694991f0ea8dcf9050ec3e7a20";
     public static final String API_KEY_OMDB = "e403207b";
     public static final String YOUTUBE_DEV_KEY = "AIzaSyCNTF1Wn34PQtvaJIUB4_iAB2KF8Wrympg";
+
     /*
     Base url(s)
      */

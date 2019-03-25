@@ -42,7 +42,7 @@ public class MovieSliderAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
@@ -56,7 +56,7 @@ public class MovieSliderAdapter extends PagerAdapter {
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
-        ImageView im = view.findViewById(R.id.image_view_overlay);
+        final ImageView im = view.findViewById(R.id.image_view_overlay);
         TextView textViewTitle1 = view.findViewById(R.id.text_view_title1);
         TextView textViewTitle2 = view.findViewById(R.id.text_view_title2);
         TextView textViewRating = view.findViewById(R.id.text_view_imdb_rating);
