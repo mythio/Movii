@@ -10,6 +10,8 @@ public interface SearchMovieContract {
 
         void showPlate();
 
+        void hidePlate();
+
         void showRes(ArrayList<MovieTmdb> movieTmdbArrayList);
     }
 

@@ -7,16 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.MovieSearchHolder> {
     private Context mContext;
@@ -37,18 +33,10 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
     public void onBindViewHolder(@NonNull MovieSearchHolder movieSearchHolder, int i) {
         MovieTmdb movie = mMovies.get(i);
 
-        String[] title_arr = movie.getTitle().split(": ");
+        String[] date = movie.getReleaseDate().split("-");
 
-        if (title_arr.length == 2) {
-            movieSearchHolder.textViewTitle1.setText(title_arr[0].trim());
-            movieSearchHolder.textViewTitle2.setVisibility(View.VISIBLE);
-            movieSearchHolder.textViewTitle2.setText(title_arr[1].trim());
-        } else {
-            movieSearchHolder.textViewTitle1.setText(title_arr[0].trim());
-            movieSearchHolder.textViewTitle2.setVisibility(View.GONE);
-        }
-
-        Picasso.get().load(IMAGE_BASE_URL + "w154" + movie.getPosterPath()).into(movieSearchHolder.imageView);
+        movieSearchHolder.textViewTitle.setText(movie.getTitle());
+        movieSearchHolder.textViewYear.setText(date[0]);
     }
 
     @Override
@@ -76,16 +64,14 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
 
     public class MovieSearchHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewTitle1;
-        private TextView textViewTitle2;
-        private ImageView imageView;
+        private TextView textViewTitle;
+        private TextView textViewYear;
 
         public MovieSearchHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewTitle1 = itemView.findViewById(R.id.text_view_title1);
-            textViewTitle2 = itemView.findViewById(R.id.text_view_title2);
-            imageView = itemView.findViewById(R.id.poster);
+            textViewTitle = itemView.findViewById(R.id.text_view_title);
+            textViewYear = itemView.findViewById(R.id.text_view_year);
         }
     }
 }

@@ -24,6 +24,7 @@ public class SearchMoviePresenter implements SearchMovieContract.Presenter, Sear
     @Override
     public void onSearchParam(String string) {
         model.getSearchResults(this, string);
+        view.hidePlate();
     }
 
     @Override
@@ -33,6 +34,6 @@ public class SearchMoviePresenter implements SearchMovieContract.Presenter, Sear
 
     @Override
     public void onFailure(Throwable throwable) {
-        Log.v("TAG_TAG", "123123");
+        Log.v("TAG_TAG", throwable.getLocalizedMessage());
     }
 }
