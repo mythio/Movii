@@ -2,6 +2,8 @@ package com.mythio.movii.network;
 
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.tvShow.TvShowResponse;
+import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -18,4 +20,13 @@ public interface EndPointTmdb {
 
     @GET("search/movie")
     Call<MovieResponse> getMovieSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
+
+    @GET("tv/popular")
+    Call<TvShowResponse> getPopularTvShows(@Query("api_key") String apiKey);
+
+    @GET("tv/{tv_show_id}")
+    Call<TvShowTmdb> getTvShowDetail(@Path("tv_show_id") String tvShowId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
+
+    @GET("search/tv")
+    Call<TvShowResponse> getTvShowSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
 }
