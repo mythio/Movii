@@ -2,6 +2,7 @@ package com.mythio.movii.activity.discoverActivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
@@ -13,6 +14,7 @@ import com.mythio.movii.fragment.moviesFragment.MoviesFragment;
 import com.mythio.movii.fragment.profileFragment.ProfileFragment;
 import com.mythio.movii.fragment.tvShowsFragment.TvShowsFragment;
 import com.mythio.movii.model.movie.Movie;
+import com.mythio.movii.model.tvShow.TvShow;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
 
     private MoviesContract.Callback moviesCallback;
 
-    private DiscoverPresenter movieDiscoverPresenter;
+    private DiscoverPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +37,8 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
         setContentView(R.layout.activity_start);
 //        ButterKnife.bind(this);
 
-        movieDiscoverPresenter = new DiscoverPresenter(this);
-        movieDiscoverPresenter.onDataRequest();
-        movieDiscoverPresenter.setFragment(moviesFragment);
-
-        getCacheDir();
+        presenter = new DiscoverPresenter(this);
+        presenter.setFragment(moviesFragment);
 
         BubbleNavigationConstraintView navBar = findViewById(R.id.bottom_navigation);
 
@@ -48,13 +47,15 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
             public void onNavigationChanged(View view, int position) {
                 switch (position) {
                     case 0:
-                        movieDiscoverPresenter.setFragment(moviesFragment);
+                        presenter.setFragment(moviesFragment);
+                        presenter.onMovieDataRequest();
                         break;
                     case 1:
-                        movieDiscoverPresenter.setFragment(tvShowsFragment);
+                        presenter.setFragment(tvShowsFragment);
+                        presenter.onTvShowDataRequest();
                         break;
                     case 2:
-                        movieDiscoverPresenter.setFragment(profileFragment);
+                        presenter.setFragment(profileFragment);
                         break;
                 }
             }
@@ -67,7 +68,7 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
 
     @Override
     public void showFragment(BaseFragment fragment) {
-        fragment.attachPresenter(movieDiscoverPresenter);
+        fragment.attachPresenter(presenter);
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -77,7 +78,14 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
     }
 
     @Override
-    public void sendToFragment(ArrayList<Movie> movies) {
+    public void sendToFragmentMovies(ArrayList<Movie> movies) {
         moviesCallback.onDataReceived(movies);
+    }
+
+    @Override
+    public void sendToFragmentTvShows(ArrayList<TvShow> tvShows) {
+        for (TvShow tvShow : tvShows) {
+            Log.d("TAG_TAG_ACTIVITY", tvShow.getName() + tvShow.getRating());
+        }
     }
 }

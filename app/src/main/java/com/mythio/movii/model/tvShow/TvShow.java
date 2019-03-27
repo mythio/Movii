@@ -1,84 +1,35 @@
 package com.mythio.movii.model.tvShow;
 
-import com.google.gson.annotations.SerializedName;
 import com.mythio.movii.model.episode.Episode;
-import com.mythio.movii.model.externalIds.ExternalIds;
-import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.season.Season;
-import com.mythio.movii.model.video.VideoResponse;
+import com.mythio.movii.model.video.Video;
 
 import java.util.ArrayList;
 
-public class TvShowTmdb {
+public class TvShow {
 
-    @SerializedName("backdrop_path")
     private String backdropPath;
-
-    @SerializedName("episode_run_time")
-    private ArrayList<Integer> episodeRunTime = null;
-
-    @SerializedName("first_air_date")
+    private ArrayList<Integer> episodeRunTime;
     private String firstAirDate;
-
-    @SerializedName("genres")
-    private ArrayList<Genre> genres = null;
-
-    @SerializedName("homepage")
-    private String homepage;
-
-    @SerializedName("id")
-    private Integer id;
-
-    @SerializedName("in_production")
-    private Boolean inProduction;
-
-    @SerializedName("languages")
-    private ArrayList<String> languages = null;
-
-    @SerializedName("last_air_date")
+    private String genres;
+    private String id;
     private String lastAirDate;
-
-    @SerializedName("last_episode_to_air")
     private Episode lastEpisodeToAir;
-
-    @SerializedName("name")
     private String name;
-
-    @SerializedName("next_episode_to_air")
     private Episode nextEpisodeToAir;
-
-    @SerializedName("number_of_episodes")
     private Integer numberOfEpisodes;
-
-    @SerializedName("number_of_seasons")
-    private Integer numberOfSeasons;
-
-    @SerializedName("overview")
+    private String numberOfSeasons;
     private String overview;
-
-    @SerializedName("poster_path")
     private String posterPath;
-
-    @SerializedName("seasons")
-    private ArrayList<Season> seasons = null;
-
-    @SerializedName("status")
+    private ArrayList<Season> seasons;
     private String status;
-
-    @SerializedName("type")
     private String type;
-
-    @SerializedName("vote_average")
-    private Double voteAverage;
-
-    @SerializedName("vote_count")
-    private Integer voteCount;
-
-    @SerializedName("videos")
-    private VideoResponse videoResponse;
-
-    @SerializedName("external_ids")
-    private ExternalIds externalIds;
+    private ArrayList<Video> videos;
+    private String imdb;
+    private String year;
+    private String runtime;
+    private String rating;
+    private String votes;
 
     public String getBackdropPath() {
         return backdropPath;
@@ -104,44 +55,20 @@ public class TvShowTmdb {
         this.firstAirDate = firstAirDate;
     }
 
-    public ArrayList<Genre> getGenres() {
+    public String getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<Genre> genres) {
+    public void setGenres(String genres) {
         this.genres = genres;
     }
 
-    public String getHomepage() {
-        return homepage;
-    }
-
-    public void setHomepage(String homepage) {
-        this.homepage = homepage;
-    }
-
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Boolean getInProduction() {
-        return inProduction;
-    }
-
-    public void setInProduction(Boolean inProduction) {
-        this.inProduction = inProduction;
-    }
-
-    public ArrayList<String> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(ArrayList<String> languages) {
-        this.languages = languages;
     }
 
     public String getLastAirDate() {
@@ -184,11 +111,11 @@ public class TvShowTmdb {
         this.numberOfEpisodes = numberOfEpisodes;
     }
 
-    public Integer getNumberOfSeasons() {
+    public String getNumberOfSeasons() {
         return numberOfSeasons;
     }
 
-    public void setNumberOfSeasons(Integer numberOfSeasons) {
+    public void setNumberOfSeasons(String numberOfSeasons) {
         this.numberOfSeasons = numberOfSeasons;
     }
 
@@ -232,35 +159,51 @@ public class TvShowTmdb {
         this.type = type;
     }
 
-    public Double getVoteAverage() {
-        return voteAverage;
+    public ArrayList<Video> getVideos() {
+        return videos;
     }
 
-    public void setVoteAverage(Double voteAverage) {
-        this.voteAverage = voteAverage;
+    public void setVideos(ArrayList<Video> videos) {
+        this.videos = videos;
     }
 
-    public Integer getVoteCount() {
-        return voteCount;
+    public String getImdb() {
+        return imdb;
     }
 
-    public void setVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
+    public void setImdb(String imdb) {
+        this.imdb = imdb;
     }
 
-    public VideoResponse getVideoResponse() {
-        return videoResponse;
+    public String getYear() {
+        return year;
     }
 
-    public void setVideoResponse(VideoResponse videoResponse) {
-        this.videoResponse = videoResponse;
+    public void setYear(String year) {
+        this.year = year;
     }
 
-    public ExternalIds getExternalIds() {
-        return externalIds;
+    public String getRuntime() {
+        return runtime;
     }
 
-    public void setExternalIds(ExternalIds externalIds) {
-        this.externalIds = externalIds;
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getVotes() {
+        return votes;
+    }
+
+    public void setVotes(String votes) {
+        this.votes = votes;
     }
 }

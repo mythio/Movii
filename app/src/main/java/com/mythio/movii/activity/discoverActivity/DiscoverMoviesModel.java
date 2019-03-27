@@ -26,15 +26,15 @@ import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
 public class DiscoverMoviesModel implements Model.MoviesModel {
 
-    /*
-    MOVIE FRAGMENT DATA
-     */
-
     private Model.MoviesModel.MoviesListener moviesListener;
     private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
     private EndPointsOmdb apiServiceOmdb = ApiClientBuilderOmdb.getClient().create(EndPointsOmdb.class);
-    private ArrayList<MovieTmdb> movieTmdbList = new ArrayList<>();
+    private ArrayList<MovieTmdb> movieTmdbArrayList = new ArrayList<>();
     private ArrayList<Movie> movies = new ArrayList<>();
+
+    /*
+    MOVIE FRAGMENT DATA
+     */
 
     @Override
     public void getMovies(final Model.MoviesModel.MoviesListener moviesListener) {
@@ -45,18 +45,18 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 ArrayList<MovieTmdb> movieTmdbList = response.body().getResults();
-                getTMDB(movieTmdbList);
+                getMovieTmdb(movieTmdbList);
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                moviesListener.onFailure(t);
+                moviesListener.onFailureMovies(t);
                 Log.v("TAG_TAG", t.getLocalizedMessage());
             }
         });
     }
 
-    private void getTMDB(final ArrayList<MovieTmdb> movies) {
+    private void getMovieTmdb(final ArrayList<MovieTmdb> movies) {
 
         Call<MovieTmdb> call;
         final int[] pos = {0};
@@ -67,28 +67,31 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
                 @Override
                 public void onResponse(Call<MovieTmdb> call, Response<MovieTmdb> response) {
 
-                    movieTmdbList.add(response.body());
+                    Log.v("TAG_TAG_MOVIE_TMDB", pos[0] + response.toString());
+
+                    movieTmdbArrayList.add(response.body());
                     ++pos[0];
                     if (pos[0] == 20) {
-                        getOMDB();
+                        getMovieOmdb();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<MovieTmdb> call, Throwable t) {
-                    moviesListener.onFailure(t);
+                    moviesListener.onFailureMovies(t);
                     Log.v("TAG_TAG", t.getLocalizedMessage());
                 }
             });
         }
     }
 
-    private void getOMDB() {
+    private void getMovieOmdb() {
 
         final int[] pos = {0};
-        for (final MovieTmdb movieTmdb : movieTmdbList) {
 
-            Call<MovieOmdb> call = apiServiceOmdb.getOmdbDetail(API_KEY_OMDB, movieTmdb.getImdb());
+        for (final MovieTmdb movieTmdb : movieTmdbArrayList) {
+
+            Call<MovieOmdb> call = apiServiceOmdb.getMovieDetailOmdb(API_KEY_OMDB, movieTmdb.getImdb());
             call.enqueue(new Callback<MovieOmdb>() {
                 @Override
                 public void onResponse(Call<MovieOmdb> call, Response<MovieOmdb> response) {
@@ -96,6 +99,7 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
                     Movie movie = new Movie();
 
                     if (movieTmdb.getImdb() == null) {
+
                         movie.setPosterPath(movieTmdb.getPosterPath());
                         movie.setId(movieTmdb.getId());
                         movie.setTitle(movieTmdb.getTitle());
@@ -168,13 +172,13 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
                                 return o2.getRating().compareTo(o1.getRating());
                             }
                         });
-                        moviesListener.onFinished(movies);
+                        moviesListener.onFinishedMovies(movies);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<MovieOmdb> call, Throwable t) {
-                    moviesListener.onFailure(t);
+                    moviesListener.onFailureMovies(t);
                     Log.v("TAG_TAG", t.getLocalizedMessage());
                 }
             });

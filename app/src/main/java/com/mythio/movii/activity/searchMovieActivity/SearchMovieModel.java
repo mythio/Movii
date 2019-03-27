@@ -1,7 +1,5 @@
 package com.mythio.movii.activity.searchMovieActivity;
 
-import android.util.Log;
-
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
@@ -23,7 +21,6 @@ public class SearchMovieModel implements SearchMovieContract.Model {
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                Log.v("TAG_TAG", response.toString());
                 if (response != null) {
                     listener.onFinished(response.body().getResults());
                 }
