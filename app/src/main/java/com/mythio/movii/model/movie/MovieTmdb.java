@@ -17,6 +17,9 @@ public class MovieTmdb {
     @SerializedName("release_date")
     private String releaseDate;
 
+    @SerializedName("runtime")
+    private Integer runtime;
+
     @SerializedName("id")
     private Integer id;
 
@@ -25,6 +28,7 @@ public class MovieTmdb {
 
     @SerializedName("backdrop_path")
     private String backdropPath;
+
     @SerializedName("overview")
     private String overview;
 
@@ -36,6 +40,7 @@ public class MovieTmdb {
 
     @SerializedName("imdb_id")
     private String imdb;
+
     @SerializedName("genres")
     private ArrayList<Genre> genres = new ArrayList<>();
 
@@ -47,12 +52,12 @@ public class MovieTmdb {
         this.posterPath = posterPath;
     }
 
-    public String getOverview() {
-        return overview;
+    public VideoResponse getVideoResponse() {
+        return videoResponse;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
+    public void setVideoResponse(VideoResponse videoResponse) {
+        this.videoResponse = videoResponse;
     }
 
     public String getReleaseDate() {
@@ -61,6 +66,14 @@ public class MovieTmdb {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public Integer getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(Integer runtime) {
+        this.runtime = runtime;
     }
 
     public Integer getId() {
@@ -87,12 +100,12 @@ public class MovieTmdb {
         this.backdropPath = backdropPath;
     }
 
-    public ArrayList<Genre> getGenres() {
-        return genres;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setGenres(ArrayList<Genre> genres) {
-        this.genres = genres;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public Integer getVoteCount() {
@@ -119,11 +132,11 @@ public class MovieTmdb {
         this.imdb = imdb;
     }
 
-    public VideoResponse getVideoResponse() {
-        return videoResponse;
+    public ArrayList<Genre> getGenres() {
+        return genres;
     }
 
-    public void setVideoResponse(VideoResponse videoResponse) {
-        this.videoResponse = videoResponse;
+    public void setGenres(ArrayList<Genre> genres) {
+        this.genres = genres;
     }
 }

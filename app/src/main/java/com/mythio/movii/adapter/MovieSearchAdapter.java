@@ -12,13 +12,13 @@ import android.widget.TextView;
 import com.mythio.movii.R;
 import com.mythio.movii.model.movie.MovieTmdb;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.MovieSearchHolder> {
     private Context mContext;
-    private List<MovieTmdb> mMovies;
+    private ArrayList<MovieTmdb> mMovies;
 
-    public MovieSearchAdapter(Context mContext, List<MovieTmdb> mMovies) {
+    public MovieSearchAdapter(Context mContext, ArrayList<MovieTmdb> mMovies) {
         this.mContext = mContext;
         this.mMovies = mMovies;
     }

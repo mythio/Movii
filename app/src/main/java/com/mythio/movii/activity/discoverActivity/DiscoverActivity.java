@@ -39,6 +39,8 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
         movieDiscoverPresenter.onDataRequest();
         movieDiscoverPresenter.setFragment(moviesFragment);
 
+        getCacheDir();
+
         BubbleNavigationConstraintView navBar = findViewById(R.id.bottom_navigation);
 
         navBar.setNavigationChangeListener(new BubbleNavigationChangeListener() {

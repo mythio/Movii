@@ -93,25 +93,21 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
                 @Override
                 public void onResponse(Call<MovieOmdb> call, Response<MovieOmdb> response) {
 
-                    MovieOmdb movieOmdb = response.body();
-
                     Movie movie = new Movie();
 
-                    movie.setPosterPath(movieTmdb.getPosterPath());
-                    movie.setId(movieTmdb.getId());
-                    movie.setTitle(movieTmdb.getTitle());
-                    movie.setBackdropPath(movieTmdb.getBackdropPath());
-                    movie.setImdb(movieTmdb.getImdb());
-                    movie.setOverview(movieOmdb.getPlot().equals("N/A") ? movieTmdb.getOverview() : movieOmdb.getPlot());
-                    movie.setVotes(movieOmdb.getImdbVotes().equals("N/A") ? String.valueOf(movieTmdb.getVoteCount()) : movieOmdb.getImdbVotes());
-                    movie.setRating(movieOmdb.getImdbRating().equals("N/A") ? String.valueOf(movieTmdb.getVoteAverage()) : movieOmdb.getImdbRating());
-                    movie.setYear(movieOmdb.getYear());
-                    movie.setRuntime(movieOmdb.getRuntime());
-                    movie.setVideos(movieTmdb.getVideoResponse().getVideos());
+                    if (movieTmdb.getImdb() == null) {
+                        movie.setPosterPath(movieTmdb.getPosterPath());
+                        movie.setId(movieTmdb.getId());
+                        movie.setTitle(movieTmdb.getTitle());
+                        movie.setBackdropPath(movieTmdb.getBackdropPath());
+                        movie.setImdb(movieTmdb.getImdb());
+                        movie.setOverview(movieTmdb.getOverview());
+                        movie.setVotes(String.valueOf(movieTmdb.getVoteCount()));
+                        movie.setRating(String.valueOf(movieTmdb.getVoteAverage()));
+                        movie.setRuntime(String.valueOf(movieTmdb.getRuntime()));
+                        movie.setVideos(movieTmdb.getVideoResponse().getVideos());
 
-                    StringBuilder genreString = new StringBuilder();
-                    if (movieOmdb.getGenre().equals("N/A")) {
-
+                        StringBuilder genreString = new StringBuilder();
                         int s = movieTmdb.getGenres().size();
                         for (Genre genre : movieTmdb.getGenres()) {
                             genreString.append(genre.getName());
@@ -120,19 +116,46 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
                                 genreString.append(" | ");
                             }
                         }
+                        movie.setGenres(genreString.toString());
                     } else {
+                        MovieOmdb movieOmdb = response.body();
 
-                        String[] genre = movieOmdb.getGenre().split(", ");
-                        int s = genre.length;
-                        for (String gen : genre) {
-                            genreString.append(gen);
-                            s--;
-                            if (s > 0) {
-                                genreString.append(" | ");
+                        movie.setPosterPath(movieTmdb.getPosterPath());
+                        movie.setId(movieTmdb.getId());
+                        movie.setTitle(movieTmdb.getTitle());
+                        movie.setBackdropPath(movieTmdb.getBackdropPath());
+                        movie.setImdb(movieTmdb.getImdb());
+                        movie.setOverview(movieOmdb.getPlot() == null || movieOmdb.getPlot().equals("N/A") ? movieTmdb.getOverview() : movieOmdb.getPlot());
+                        movie.setVotes(movieOmdb.getPlot() == null || movieOmdb.getImdbVotes().equals("N/A") ? String.valueOf(movieTmdb.getVoteCount()) : movieOmdb.getImdbVotes());
+                        movie.setRating(movieOmdb.getPlot() == null || movieOmdb.getImdbRating().equals("N/A") ? String.valueOf(movieTmdb.getVoteAverage()) : movieOmdb.getImdbRating());
+                        movie.setRuntime(movieOmdb.getRuntime());
+                        movie.setVideos(movieTmdb.getVideoResponse().getVideos());
+
+                        StringBuilder genreString = new StringBuilder();
+                        if (movieOmdb.getGenre() == null || movieOmdb.getGenre().equals("N/A")) {
+
+                            int s = movieTmdb.getGenres().size();
+                            for (Genre genre : movieTmdb.getGenres()) {
+                                genreString.append(genre.getName());
+                                s--;
+                                if (s > 0) {
+                                    genreString.append(" | ");
+                                }
+                            }
+                        } else {
+
+                            String[] genre = movieOmdb.getGenre().split(", ");
+                            int s = genre.length;
+                            for (String gen : genre) {
+                                genreString.append(gen);
+                                s--;
+                                if (s > 0) {
+                                    genreString.append(" | ");
+                                }
                             }
                         }
+                        movie.setGenres(genreString.toString());
                     }
-                    movie.setGenres(genreString.toString());
 
                     movies.add(movie);
                     ++pos[0];
