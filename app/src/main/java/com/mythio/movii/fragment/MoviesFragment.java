@@ -1,4 +1,4 @@
-package com.mythio.movii.fragment.moviesFragment;
+package com.mythio.movii.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.mythio.movii.R;
-import com.mythio.movii.activity.searchMovieActivity.SearchMovieActivity;
+import com.mythio.movii.activity.SearchMovieActivity;
 import com.mythio.movii.activity.youtubeActivity.YouTubePlayerActivity;
 import com.mythio.movii.adapter.MovieSliderAdapter;
-import com.mythio.movii.fragment.baseFragment.BaseFragment;
+import com.mythio.movii.contract.fragment.moviesFragment.MoviesContract;
+import com.mythio.movii.contract.fragment.moviesFragment.MoviesPresenter;
+import com.mythio.movii.contract.fragment.moviesFragment.OnItemClickListener;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;

@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.fragment.moviesFragment.OnItemClickListener;
+import com.mythio.movii.contract.fragment.moviesFragment.OnItemClickListener;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 import com.squareup.picasso.Picasso;
 

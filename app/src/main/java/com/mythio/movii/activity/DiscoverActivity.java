@@ -1,4 +1,4 @@
-package com.mythio.movii.activity.discoverActivity;
+package com.mythio.movii.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,12 +7,14 @@ import android.view.View;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.mythio.movii.R;
-import com.mythio.movii.fragment.baseFragment.BaseFragment;
-import com.mythio.movii.fragment.moviesFragment.MoviesContract;
-import com.mythio.movii.fragment.moviesFragment.MoviesFragment;
-import com.mythio.movii.fragment.profileFragment.ProfileFragment;
-import com.mythio.movii.fragment.tvShowsFragment.TvShowsContract;
-import com.mythio.movii.fragment.tvShowsFragment.TvShowsFragment;
+import com.mythio.movii.contract.activity.discoverActivity.DiscoverContract;
+import com.mythio.movii.contract.activity.discoverActivity.DiscoverPresenter;
+import com.mythio.movii.contract.fragment.moviesFragment.MoviesContract;
+import com.mythio.movii.contract.fragment.tvShowsFragment.TvShowsContract;
+import com.mythio.movii.fragment.BaseFragment;
+import com.mythio.movii.fragment.MoviesFragment;
+import com.mythio.movii.fragment.ProfileFragment;
+import com.mythio.movii.fragment.TvShowsFragment;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 

@@ -1,4 +1,4 @@
-package com.mythio.movii.fragment.moviesFragment;
+package com.mythio.movii.contract.fragment.moviesFragment;
 
 import com.mythio.movii.model.movie.MovieTmdb;
 
@@ -8,7 +8,7 @@ public class MoviesPresenter implements MoviesContract.Presenter {
 
     private MoviesContract.View view;
 
-    MoviesPresenter(MoviesContract.View view) {
+    public MoviesPresenter(MoviesContract.View view) {
         this.view = view;
     }
 

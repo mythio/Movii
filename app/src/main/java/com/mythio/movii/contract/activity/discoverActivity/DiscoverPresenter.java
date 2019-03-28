@@ -1,7 +1,7 @@
-package com.mythio.movii.activity.discoverActivity;
+package com.mythio.movii.contract.activity.discoverActivity;
 
-import com.mythio.movii.fragment.baseFragment.BaseFragment;
-import com.mythio.movii.fragment.baseFragment.FragmentNavigation;
+import com.mythio.movii.contract.fragment.baseFragment.FragmentNavigation;
+import com.mythio.movii.fragment.BaseFragment;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 

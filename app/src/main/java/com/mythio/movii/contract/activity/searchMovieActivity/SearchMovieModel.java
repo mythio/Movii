@@ -1,8 +1,5 @@
-package com.mythio.movii.activity.discoverActivity;
+package com.mythio.movii.contract.activity.searchMovieActivity;
 
-import android.util.Log;
-
-import com.mythio.movii.activity.discoverActivity.DiscoverContract.Model;
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
@@ -13,28 +10,25 @@ import retrofit2.Response;
 
 import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
-public class DiscoverMoviesModel implements Model.MoviesModel {
+public class SearchMovieModel implements SearchMovieContract.Model {
 
     private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
 
-    /*
-    MOVIE FRAGMENT DATA
-     */
-
     @Override
-    public void getMovies(final MoviesListener moviesListener) {
+    public void getSearchResults(final OnMoviesSearchListener listener, String query) {
 
-        Call<MovieResponse> call = apiServiceTmdb.getPopularMovies(API_KEY_TMDB);
+        Call<MovieResponse> call = apiServiceTmdb.getMovieSearchResults(API_KEY_TMDB, query);
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                moviesListener.onFinishedMovies(response.body().getResults());
+                if (response != null) {
+                    listener.onFinished(response.body().getResults());
+                }
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                moviesListener.onFailureMovies(t);
-                Log.v("TAG_TAG", t.getLocalizedMessage());
+                listener.onFailure(t);
             }
         });
     }

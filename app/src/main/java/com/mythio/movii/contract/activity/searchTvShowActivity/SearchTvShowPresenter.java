@@ -1,4 +1,4 @@
-package com.mythio.movii.activity.searchMovieActivity;
+package com.mythio.movii.contract.activity.searchTvShowActivity;
 
 import android.util.Log;
 
@@ -6,14 +6,14 @@ import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
 
-public class SearchMoviePresenter implements SearchMovieContract.Presenter, SearchMovieContract.Model.OnMoviesSearchListener {
+public class SearchTvShowPresenter implements SearchTvShowContract.Presenter, SearchTvShowContract.Model.OnMoviesSearchListener {
 
-    private SearchMovieContract.View view;
-    private SearchMovieContract.Model model;
+    private SearchTvShowContract.View view;
+    private SearchTvShowContract.Model model;
 
-    SearchMoviePresenter(SearchMovieContract.View view) {
+    public SearchTvShowPresenter(SearchTvShowContract.View view) {
         this.view = view;
-        model = new SearchMovieModel();
+        model = new SearchTvShowModel();
     }
 
     @Override

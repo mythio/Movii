@@ -1,4 +1,4 @@
-package com.mythio.movii.fragment.tvShowsFragment;
+package com.mythio.movii.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,8 @@ import android.view.View;
 
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.TvShowSliderAdapter;
-import com.mythio.movii.fragment.baseFragment.BaseFragment;
+import com.mythio.movii.contract.fragment.tvShowsFragment.TvShowsContract;
+import com.mythio.movii.contract.fragment.tvShowsFragment.TvShowsPresenter;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;

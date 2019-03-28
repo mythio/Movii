@@ -1,4 +1,4 @@
-package com.mythio.movii.activity.searchMovieActivity;
+package com.mythio.movii.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.MovieSearchAdapter;
+import com.mythio.movii.contract.activity.searchMovieActivity.SearchMovieContract;
+import com.mythio.movii.contract.activity.searchMovieActivity.SearchMoviePresenter;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
@@ -95,8 +97,8 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchMovi
     }
 
     @Override
-    public void showRes(ArrayList<MovieTmdb> movieTmdbArrayList) {
-        MovieSearchAdapter adapter = new MovieSearchAdapter(this, movieTmdbArrayList);
+    public void showRes(ArrayList<MovieTmdb> movies) {
+        MovieSearchAdapter adapter = new MovieSearchAdapter(this, movies);
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.setAdapter(adapter);
     }

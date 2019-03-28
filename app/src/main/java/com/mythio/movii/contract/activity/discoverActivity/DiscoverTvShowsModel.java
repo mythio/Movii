@@ -1,8 +1,8 @@
-package com.mythio.movii.activity.discoverActivity;
+package com.mythio.movii.contract.activity.discoverActivity;
 
 import android.util.Log;
 
-import com.mythio.movii.activity.discoverActivity.DiscoverContract.Model;
+import com.mythio.movii.contract.activity.discoverActivity.DiscoverContract.Model;
 import com.mythio.movii.model.tvShow.TvShowResponse;
 import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
