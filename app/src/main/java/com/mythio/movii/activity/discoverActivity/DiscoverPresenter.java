@@ -2,8 +2,8 @@ package com.mythio.movii.activity.discoverActivity;
 
 import com.mythio.movii.fragment.baseFragment.BaseFragment;
 import com.mythio.movii.fragment.baseFragment.FragmentNavigation;
-import com.mythio.movii.model.movie.Movie;
-import com.mythio.movii.model.tvShow.TvShow;
+import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
 
@@ -25,17 +25,13 @@ public class DiscoverPresenter implements DiscoverContract.Presenter, FragmentNa
     }
 
     @Override
-    public void onMovieDataRequest() {
+    public void onDataRequest() {
         moviesModel.getMovies(this);
-    }
-
-    @Override
-    public void onTvShowDataRequest() {
         tvShowsModel.getTvShows(this);
     }
 
     @Override
-    public void onFinishedMovies(ArrayList<Movie> movies) {
+    public void onFinishedMovies(ArrayList<MovieTmdb> movies) {
         view.sendToFragmentMovies(movies);
     }
 
@@ -45,7 +41,7 @@ public class DiscoverPresenter implements DiscoverContract.Presenter, FragmentNa
     }
 
     @Override
-    public void onFinishedTvShows(ArrayList<TvShow> tvShows) {
+    public void onFinishedTvShows(ArrayList<TvShowTmdb> tvShows) {
         view.sendToFragmentTvShows(tvShows);
     }
 

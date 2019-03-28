@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.fragment.moviesFragment.OnItemClickListener;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.tvShow.TvShowTmdb;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -21,15 +21,15 @@ import java.util.ArrayList;
 
 import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
-public class MovieSliderAdapter extends PagerAdapter {
+public class TvShowSliderAdapter extends PagerAdapter {
 
     private final Context mContext;
-    private final ArrayList<MovieTmdb> movies;
+    private final ArrayList<TvShowTmdb> tvShows;
     private OnItemClickListener listener;
 
-    public MovieSliderAdapter(Context mContext, ArrayList<MovieTmdb> movies) {
+    public TvShowSliderAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows) {
         this.mContext = mContext;
-        this.movies = movies;
+        this.tvShows = tvShows;
     }
 
     public void setOnClickListener(OnItemClickListener listener) {
@@ -38,7 +38,7 @@ public class MovieSliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return movies.size();
+        return tvShows.size();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class MovieSliderAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int i) {
-        final MovieTmdb movie = movies.get(i);
+        final TvShowTmdb tvShow = tvShows.get(i);
 
         final LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -62,18 +62,17 @@ public class MovieSliderAdapter extends PagerAdapter {
 
         im.setImageDrawable(mContext.getDrawable(R.drawable.bg_gradient_movie));
 
-        String[] title_arr = movie.getTitle().split(": ");
 
-        if (title_arr.length == 2) {
-            textViewTitle1.setText(title_arr[0].trim());
-            textViewTitle2.setVisibility(View.VISIBLE);
-            textViewTitle2.setText(title_arr[1].trim());
-        } else {
-            textViewTitle1.setText(title_arr[0].trim());
-            textViewTitle2.setVisibility(View.GONE);
-        }
+//        if (title_arr.length == 2) {
+//            textViewTitle1.setText(title_arr[0].trim());
+//            textViewTitle2.setVisibility(View.VISIBLE);
+//            textViewTitle2.setText(title_arr[1].trim());
+//        } else {
+        textViewTitle1.setText(tvShow.getName());
+        textViewTitle2.setVisibility(View.GONE);
+//        }
 
-        String url = IMAGE_BASE_URL + "w780" + movie.getBackdropPath();
+        String url = IMAGE_BASE_URL + "w780" + tvShow.getBackdropPath();
 
         Picasso.get()
                 .load(url)

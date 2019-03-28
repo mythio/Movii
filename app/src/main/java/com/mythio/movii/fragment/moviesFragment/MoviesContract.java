@@ -1,6 +1,6 @@
 package com.mythio.movii.fragment.moviesFragment;
 
-import com.mythio.movii.model.movie.Movie;
+import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
 
@@ -10,18 +10,18 @@ public interface MoviesContract {
 
         void initViewPager();
 
-        void showSlideShow(ArrayList<Movie> movies);
+        void showSlideShow(ArrayList<MovieTmdb> movies);
     }
 
     interface Presenter {
 
         void initViews();
 
-        void setDataToViewPager(ArrayList<Movie> movies);
+        void setDataToViewPager(ArrayList<MovieTmdb> movies);
     }
 
     interface Callback {
 
-        void onDataReceived(ArrayList<Movie> movies);
+        void onDataReceived(ArrayList<MovieTmdb> movies);
     }
 }

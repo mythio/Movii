@@ -1,6 +1,6 @@
 package com.mythio.movii.fragment.moviesFragment;
 
-import com.mythio.movii.model.movie.Movie;
+import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class MoviesPresenter implements MoviesContract.Presenter {
     }
 
     @Override
-    public void setDataToViewPager(ArrayList<Movie> movies) {
+    public void setDataToViewPager(ArrayList<MovieTmdb> movies) {
         view.showSlideShow(movies);
     }
 }

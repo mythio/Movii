@@ -1,4 +1,4 @@
-package com.mythio.movii.fragment.moviesFragment;
+package com.mythio.movii.fragment.tvShowsFragment;
 
 import com.mythio.movii.model.movie.MovieTmdb;
 

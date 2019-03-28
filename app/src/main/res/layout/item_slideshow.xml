@@ -16,18 +16,6 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/play_btn"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:alpha="0.6"
-                android:elevation="2dp"
-                android:src="@drawable/ic_play"
-                app:layout_constraintBottom_toBottomOf="@+id/image_view_backdrop"
-                app:layout_constraintEnd_toEndOf="@+id/image_view_backdrop"
-                app:layout_constraintStart_toStartOf="@+id/image_view_backdrop"
-                app:layout_constraintTop_toTopOf="@id/image_view_backdrop" />
-
-            <ImageView
                 android:id="@+id/image_view_backdrop"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -61,18 +49,11 @@
                 app:layout_constraintEnd_toEndOf="@+id/image_view_overlay">
 
                 <TextView
-                    android:id="@+id/text_view_imdb_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:textSize="36dp" />
-
-                <TextView
                     android:id="@+id/text_view_title1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
-                    android:textSize="16dp" />
+                    android:textSize="24dp" />
 
                 <TextView
                     android:id="@+id/text_view_title2"
