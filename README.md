@@ -3,7 +3,7 @@ A handcrafted Android application to show everything you want to know about your
 
 * Current status:
 
-<img src="https://github.com/mythio/Movii/blob/master/res/home_movie.png" width="200">    <img src="https://github.com/mythio/Movii/blob/master/res/home_tv.png" width="200">    <img src="https://github.com/mythio/Movii/blob/master/res/movie_activity.png" width="200"> <img src="https://github.com/mythio/Movii/blob/master/res/search_activity.png" width="200"> <img src="https://github.com/mythio/Movii/blob/master/res/search_results.png" width="200">
+<img src="https://github.com/mythio/Movii/blob/mvp/res/home_movie.png" width="200">    <img src="https://github.com/mythio/Movii/blob/mvp/res/home_tv.png" width="200">    <img src="https://github.com/mythio/Movii/blob/mvp/res/movie_activity.png" width="200"> <img src="https://github.com/mythio/Movii/blob/mvp/res/search_activity.png" width="200"> <img src="https://github.com/mythio/Movii/blob/mvp/res/search_results.png" width="200">
 
 * Upcoming:
 Search activity to search what's on their minds.
