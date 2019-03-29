@@ -13,9 +13,10 @@ import android.widget.LinearLayout;
 
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.MovieSearchAdapter;
+import com.mythio.movii.adapter.TvShowSearchAdapter;
 import com.mythio.movii.contract.activity.searchTvShowActivity.SearchTvShowContract;
 import com.mythio.movii.contract.activity.searchTvShowActivity.SearchTvShowPresenter;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
 
@@ -97,9 +98,9 @@ public class SearchTvShowActivity extends AppCompatActivity implements SearchTvS
     }
 
     @Override
-    public void showRes(ArrayList<MovieTmdb> movies) {
+    public void showRes(ArrayList<TvShowTmdb> tvShows) {
 
-        MovieSearchAdapter adapter = new MovieSearchAdapter(this, movies);
+        TvShowSearchAdapter adapter = new TvShowSearchAdapter(this, tvShows);
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.setAdapter(adapter);
     }

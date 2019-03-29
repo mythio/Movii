@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.contract.fragment.moviesFragment.OnItemClickListener;
+import com.mythio.movii.contract.fragment.baseFragment.OnItemClickListener;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.squareup.picasso.Picasso;
 
@@ -81,6 +81,14 @@ public class MovieSliderAdapter extends PagerAdapter {
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return view;
     }
 

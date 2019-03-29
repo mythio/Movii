@@ -9,11 +9,10 @@ import android.view.View;
 
 import com.mythio.movii.R;
 import com.mythio.movii.activity.SearchMovieActivity;
-import com.mythio.movii.activity.youtubeActivity.YouTubePlayerActivity;
 import com.mythio.movii.adapter.MovieSliderAdapter;
+import com.mythio.movii.contract.fragment.baseFragment.OnItemClickListener;
 import com.mythio.movii.contract.fragment.moviesFragment.MoviesContract;
 import com.mythio.movii.contract.fragment.moviesFragment.MoviesPresenter;
-import com.mythio.movii.contract.fragment.moviesFragment.OnItemClickListener;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
@@ -89,12 +88,7 @@ public class MoviesFragment extends BaseFragment implements MoviesContract.View,
     }
 
     @Override
-    public void onItemClick(MovieTmdb movie) {
+    public void onItemClick(int position) {
 
-        Intent intent = new Intent(getContext(), YouTubePlayerActivity.class);
-        Bundle bundle = new Bundle();
-//        bundle.putParcelableArrayList("data", movie.getVideos());
-        intent.putExtras(bundle);
-        startActivity(intent);
     }
 }

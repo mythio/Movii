@@ -1,6 +1,8 @@
 package com.mythio.movii.contract.activity.searchTvShowActivity;
 
-import com.mythio.movii.model.movie.MovieResponse;
+import android.support.annotation.NonNull;
+
+import com.mythio.movii.model.tvShow.TvShowResponse;
 import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 
@@ -15,19 +17,19 @@ public class SearchTvShowModel implements SearchTvShowContract.Model {
     private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
 
     @Override
-    public void getSearchResults(final OnMoviesSearchListener listener, String query) {
+    public void getSearchResults(final OnTvShowSearchListener listener, String query) {
 
-        Call<MovieResponse> call = apiServiceTmdb.getMovieSearchResults(API_KEY_TMDB, query);
-        call.enqueue(new Callback<MovieResponse>() {
+        Call<TvShowResponse> call = apiServiceTmdb.getTvShowSearchResults(API_KEY_TMDB, query);
+        call.enqueue(new Callback<TvShowResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                if (response != null) {
+            public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
+                if (response.body() != null) {
                     listener.onFinished(response.body().getResults());
                 }
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
                 listener.onFailure(t);
             }
         });

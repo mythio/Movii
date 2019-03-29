@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search for your favourite \nmovies"
+            android:text="Search for your favourite \n tv shows"
             android:textAlignment="center" />
 
     </LinearLayout>
@@ -34,12 +34,12 @@
         android:layout_height="0dp"
         android:layout_marginStart="36dp"
         android:layout_marginEnd="36dp"
-        android:hint="Search ..."
-        android:paddingStart="16dp"
-        android:textColor="@color/colorTmdbDefaultDark"
         android:background="@drawable/bg_searchbar"
+        android:hint="Search ..."
         android:inputType="text"
         android:maxLines="1"
+        android:paddingStart="16dp"
+        android:textColor="@color/colorTmdbDefaultDark"
         app:layout_constraintBottom_toBottomOf="@+id/search_close_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

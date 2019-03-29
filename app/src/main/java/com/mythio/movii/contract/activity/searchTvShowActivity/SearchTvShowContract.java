@@ -1,6 +1,6 @@
 package com.mythio.movii.contract.activity.searchTvShowActivity;
 
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public interface SearchTvShowContract {
 
         void hidePlate();
 
-        void showRes(ArrayList<MovieTmdb> movies);
+        void showRes(ArrayList<TvShowTmdb> tvShows);
     }
 
     interface Presenter {
@@ -24,11 +24,11 @@ public interface SearchTvShowContract {
 
     interface Model {
 
-        void getSearchResults(OnMoviesSearchListener listener, String query);
+        void getSearchResults(OnTvShowSearchListener listener, String query);
 
-        interface OnMoviesSearchListener {
+        interface OnTvShowSearchListener {
 
-            void onFinished(ArrayList<MovieTmdb> movies);
+            void onFinished(ArrayList<TvShowTmdb> tvShows);
 
             void onFailure(Throwable throwable);
         }

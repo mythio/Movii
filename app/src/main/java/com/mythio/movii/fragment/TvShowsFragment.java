@@ -1,5 +1,6 @@
 package com.mythio.movii.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,7 +8,9 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.mythio.movii.R;
+import com.mythio.movii.activity.SearchTvShowActivity;
 import com.mythio.movii.adapter.TvShowSliderAdapter;
+import com.mythio.movii.contract.fragment.baseFragment.OnItemClickListener;
 import com.mythio.movii.contract.fragment.tvShowsFragment.TvShowsContract;
 import com.mythio.movii.contract.fragment.tvShowsFragment.TvShowsPresenter;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
@@ -16,9 +19,10 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class TvShowsFragment extends BaseFragment implements TvShowsContract.View,
-        TvShowsContract.Callback {
+        TvShowsContract.Callback, OnItemClickListener {
 
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
@@ -38,6 +42,12 @@ public class TvShowsFragment extends BaseFragment implements TvShowsContract.Vie
         if (hasReceived) {
             mPresenter.setDataToViewPager(tvShows);
         }
+    }
+
+    @OnClick(R.id.search_btn_go)
+    public void send() {
+
+        startActivity(new Intent(getContext(), SearchTvShowActivity.class));
     }
 
     @Override
@@ -72,6 +82,12 @@ public class TvShowsFragment extends BaseFragment implements TvShowsContract.Vie
     public void showSlideShow(ArrayList<TvShowTmdb> tvShows) {
 
         TvShowSliderAdapter adapter = new TvShowSliderAdapter(getContext(), tvShows);
+        adapter.setOnClickListener(this);
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
     }
 }

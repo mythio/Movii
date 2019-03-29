@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.contract.fragment.moviesFragment.OnItemClickListener;
+import com.mythio.movii.contract.fragment.baseFragment.OnItemClickListener;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 import com.squareup.picasso.Picasso;
 
@@ -48,7 +48,7 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int i) {
+    public Object instantiateItem(@NonNull ViewGroup container, final int i) {
         final TvShowTmdb tvShow = tvShows.get(i);
 
         final LayoutInflater inflater = (LayoutInflater) mContext
@@ -62,15 +62,8 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
         im.setImageDrawable(mContext.getDrawable(R.drawable.bg_gradient_movie));
 
-
-//        if (title_arr.length == 2) {
-//            textViewTitle1.setText(title_arr[0].trim());
-//            textViewTitle2.setVisibility(View.VISIBLE);
-//            textViewTitle2.setText(title_arr[1].trim());
-//        } else {
         textViewTitle1.setText(tvShow.getName());
         textViewTitle2.setVisibility(View.GONE);
-//        }
 
         String url = IMAGE_BASE_URL + "w780" + tvShow.getBackdropPath();
 
@@ -80,6 +73,14 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(i);
+            }
+        });
+
         return view;
     }
 
