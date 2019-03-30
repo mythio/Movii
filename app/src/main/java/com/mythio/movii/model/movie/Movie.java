@@ -8,7 +8,7 @@ public class Movie {
 
     private String posterPath;
     private String overview;
-    private Integer id;
+    private String id;
     private String title;
     private String backdropPath;
     private String votes;
@@ -35,11 +35,11 @@ public class Movie {
         this.overview = overview;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

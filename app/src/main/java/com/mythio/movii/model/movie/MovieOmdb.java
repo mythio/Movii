@@ -10,9 +10,6 @@ public class MovieOmdb {
     @SerializedName("Runtime")
     private String runtime;
 
-    @SerializedName("Genre")
-    private String genre;
-
     @SerializedName("Plot")
     private String plot;
 
@@ -36,14 +33,6 @@ public class MovieOmdb {
 
     public void setRuntime(String runtime) {
         this.runtime = runtime;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public String getPlot() {
