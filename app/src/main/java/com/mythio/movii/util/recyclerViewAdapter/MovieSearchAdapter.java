@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter;
+package com.mythio.movii.util.recyclerViewAdapter;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -10,35 +10,38 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
 
-public class TvShowSearchAdapter extends RecyclerView.Adapter<TvShowSearchAdapter.TvShowSearchHolder> {
+public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.MovieSearchHolder> {
     private Context mContext;
-    private ArrayList<TvShowTmdb> mTvShows;
+    private ArrayList<MovieTmdb> mMovies;
 
-    public TvShowSearchAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows) {
+    public MovieSearchAdapter(Context mContext, ArrayList<MovieTmdb> mMovies) {
         this.mContext = mContext;
-        this.mTvShows = tvShows;
+        this.mMovies = mMovies;
     }
 
     @NonNull
     @Override
-    public TvShowSearchHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new TvShowSearchHolder(LayoutInflater.from(mContext).inflate(R.layout.item_search_result, viewGroup, false));
+    public MovieSearchHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new MovieSearchHolder(LayoutInflater.from(mContext).inflate(R.layout.item_search_result, viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TvShowSearchHolder movieSearchHolder, int i) {
-        TvShowTmdb tvShow = mTvShows.get(i);
+    public void onBindViewHolder(@NonNull MovieSearchHolder movieSearchHolder, int i) {
+        MovieTmdb movie = mMovies.get(i);
 
-        movieSearchHolder.textViewTitle.setText(tvShow.getName());
+        String[] date = movie.getReleaseDate().split("-");
+
+        movieSearchHolder.textViewTitle.setText(movie.getTitle());
+        movieSearchHolder.textViewYear.setText(date[0]);
     }
 
     @Override
     public int getItemCount() {
-        return mTvShows.size();
+        return mMovies.size();
     }
 
     public static class ItemDecorator extends RecyclerView.ItemDecoration {
@@ -59,14 +62,16 @@ public class TvShowSearchAdapter extends RecyclerView.Adapter<TvShowSearchAdapte
         }
     }
 
-    public class TvShowSearchHolder extends RecyclerView.ViewHolder {
+    public class MovieSearchHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewTitle;
+        private TextView textViewYear;
 
-        public TvShowSearchHolder(@NonNull View itemView) {
+        public MovieSearchHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.text_view_title);
+            textViewYear = itemView.findViewById(R.id.text_view_year);
         }
     }
 }

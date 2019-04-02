@@ -12,16 +12,23 @@ import com.mythio.movii.R;
 import com.mythio.movii.contract.activity.movieDetailsActivity.MovieDetailsContract;
 import com.mythio.movii.contract.activity.movieDetailsActivity.MovieDetailsPresenter;
 import com.mythio.movii.model.movie.Movie;
+import com.mythio.movii.util.viewPagerAdapter.MovieDetailsAdapter;
+import com.mythio.movii.util.viewPagerAdapter.MovieSliderAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDetailsActivity extends AppCompatActivity implements MovieDetailsContract.View {
 
+    ViewPager viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
+
+        viewPager = findViewById(R.id.view_pager_details);
+        viewPager.setOffscreenPageLimit(1);
 
         MovieDetailsContract.Presenter presenter = new MovieDetailsPresenter(this);
 
@@ -29,10 +36,14 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
     }
 
     @Override
-    public void showDetails(ArrayList<Movie> movies) {
+    public void showPages(ArrayList<Movie> movies) {
 
         for (Movie movie : movies) {
-            Log.d("TAG_TAG", movie.getTitle());
+            Log.d("TAG_TAG", "123 " + movie.getTitle());
         }
+
+        MovieDetailsAdapter adapter = new MovieDetailsAdapter(this, movies);
+//        adapter.setOnClickListener(this);
+        viewPager.setAdapter(adapter);
     }
 }

@@ -24,7 +24,7 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter, Mo
     @Override
     public void onFinished(ArrayList<Movie> movies) {
 
-        view.showDetails(movies);
+        view.showPages(movies);
     }
 
     @Override

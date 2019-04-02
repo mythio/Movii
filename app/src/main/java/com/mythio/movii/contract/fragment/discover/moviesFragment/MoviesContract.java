@@ -17,8 +17,6 @@ public interface MoviesContract {
 
         void initViews();
 
-        void getModel();
-
         void setDataToViewPager(ArrayList<MovieTmdb> movies);
     }
 

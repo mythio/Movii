@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.mythio.movii.R;
-import com.mythio.movii.adapter.MovieSearchAdapter;
+import com.mythio.movii.util.recyclerViewAdapter.MovieSearchAdapter;
 import com.mythio.movii.contract.activity.searchMovieActivity.SearchMovieContract;
 import com.mythio.movii.contract.activity.searchMovieActivity.SearchMoviePresenter;
 import com.mythio.movii.model.movie.MovieTmdb;

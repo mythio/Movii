@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.mythio.movii.R;
-import com.mythio.movii.adapter.MovieSearchAdapter;
-import com.mythio.movii.adapter.TvShowSearchAdapter;
+import com.mythio.movii.util.recyclerViewAdapter.MovieSearchAdapter;
+import com.mythio.movii.util.recyclerViewAdapter.TvShowSearchAdapter;
 import com.mythio.movii.contract.activity.searchTvShowActivity.SearchTvShowContract;
 import com.mythio.movii.contract.activity.searchTvShowActivity.SearchTvShowPresenter;
 import com.mythio.movii.model.tvShow.TvShowTmdb;

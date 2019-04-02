@@ -8,7 +8,7 @@ public interface MovieDetailsContract {
 
     interface View {
 
-        void showDetails(ArrayList<Movie> movies);
+        void showPages(ArrayList<Movie> movies);
     }
 
     interface Presenter {

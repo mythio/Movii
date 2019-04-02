@@ -10,7 +10,7 @@ import android.view.View;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.MovieDetailsActivity;
 import com.mythio.movii.activity.SearchMovieActivity;
-import com.mythio.movii.adapter.MovieSliderAdapter;
+import com.mythio.movii.util.viewPagerAdapter.MovieSliderAdapter;
 import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.OnItemClickListener;
 import com.mythio.movii.contract.fragment.discover.moviesFragment.MoviesContract;
 import com.mythio.movii.contract.fragment.discover.moviesFragment.MoviesPresenter;

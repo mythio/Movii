@@ -18,11 +18,6 @@ public class MoviesPresenter implements MoviesContract.Presenter {
     }
 
     @Override
-    public void getModel() {
-
-    }
-
-    @Override
     public void setDataToViewPager(ArrayList<MovieTmdb> movies) {
         view.showSlideShow(movies);
     }
