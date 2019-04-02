@@ -9,6 +9,10 @@ public class Movie {
     private String posterPath;
     private String overview;
     private String id;
+    private String collectionId;
+    private String collectionName;
+    private String collectionPosterPath;
+    private String collectionBackdrop;
     private String title;
     private String backdropPath;
     private String votes;
@@ -41,6 +45,38 @@ public class Movie {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(String collectionId) {
+        this.collectionId = collectionId;
+    }
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
+    }
+
+    public String getCollectionPosterPath() {
+        return collectionPosterPath;
+    }
+
+    public void setCollectionPosterPath(String collectionPosterPath) {
+        this.collectionPosterPath = collectionPosterPath;
+    }
+
+    public String getCollectionBackdrop() {
+        return collectionBackdrop;
+    }
+
+    public void setCollectionBackdrop(String collectionBackdrop) {
+        this.collectionBackdrop = collectionBackdrop;
     }
 
     public String getTitle() {

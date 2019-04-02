@@ -1,6 +1,6 @@
 package com.mythio.movii.contract.activity.discoverActivity;
 
-import com.mythio.movii.fragment.BaseFragment;
+import com.mythio.movii.fragment.discover.BaseDiscoverFragment;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
@@ -10,7 +10,7 @@ public interface DiscoverContract {
 
     interface View {
 
-        void showFragment(BaseFragment fragment);
+        void showFragment(BaseDiscoverFragment fragment);
 
         void sendToFragmentMovies(ArrayList<MovieTmdb> movies);
 

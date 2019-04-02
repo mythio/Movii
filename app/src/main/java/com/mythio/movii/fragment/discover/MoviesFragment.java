@@ -1,4 +1,4 @@
-package com.mythio.movii.fragment;
+package com.mythio.movii.fragment.discover;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,11 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.mythio.movii.R;
+import com.mythio.movii.activity.MovieDetailsActivity;
 import com.mythio.movii.activity.SearchMovieActivity;
 import com.mythio.movii.adapter.MovieSliderAdapter;
-import com.mythio.movii.contract.fragment.baseFragment.OnItemClickListener;
-import com.mythio.movii.contract.fragment.moviesFragment.MoviesContract;
-import com.mythio.movii.contract.fragment.moviesFragment.MoviesPresenter;
+import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.OnItemClickListener;
+import com.mythio.movii.contract.fragment.discover.moviesFragment.MoviesContract;
+import com.mythio.movii.contract.fragment.discover.moviesFragment.MoviesPresenter;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MoviesFragment extends BaseFragment implements MoviesContract.View,
+public class MoviesFragment extends BaseDiscoverFragment implements MoviesContract.View,
         MoviesContract.Callback, OnItemClickListener {
 
     @BindView(R.id.view_pager_popular)
@@ -77,6 +78,7 @@ public class MoviesFragment extends BaseFragment implements MoviesContract.View,
                 view.findViewById(R.id.text_view_title2).setAlpha(0.6F * (1.0F - Math.abs(v) * 2));
             }
         });
+        viewPager.setOffscreenPageLimit(1);
     }
 
     @Override
@@ -88,7 +90,10 @@ public class MoviesFragment extends BaseFragment implements MoviesContract.View,
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int id) {
 
+        Intent intent = new Intent(getContext(), MovieDetailsActivity.class);
+        intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", String.valueOf(id));
+        startActivity(intent);
     }
 }

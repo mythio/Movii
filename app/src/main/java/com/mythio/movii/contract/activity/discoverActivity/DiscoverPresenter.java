@@ -1,13 +1,13 @@
 package com.mythio.movii.contract.activity.discoverActivity;
 
-import com.mythio.movii.contract.fragment.baseFragment.FragmentNavigation;
-import com.mythio.movii.fragment.BaseFragment;
+import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.DiscoverFragmentNavigation;
+import com.mythio.movii.fragment.discover.BaseDiscoverFragment;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
 
-public class DiscoverPresenter implements DiscoverContract.Presenter, FragmentNavigation.Presenter, DiscoverContract.Model.MoviesModel.MoviesListener, DiscoverContract.Model.TvShowsModel.TvShowsListener {
+public class DiscoverPresenter implements DiscoverContract.Presenter, DiscoverFragmentNavigation.Presenter, DiscoverContract.Model.MoviesModel.MoviesListener, DiscoverContract.Model.TvShowsModel.TvShowsListener {
 
     private DiscoverContract.View view;
     private DiscoverContract.Model.MoviesModel moviesModel;
@@ -20,7 +20,7 @@ public class DiscoverPresenter implements DiscoverContract.Presenter, FragmentNa
     }
 
     @Override
-    public void setFragment(BaseFragment fragment) {
+    public void setFragment(BaseDiscoverFragment fragment) {
         view.showFragment(fragment);
     }
 

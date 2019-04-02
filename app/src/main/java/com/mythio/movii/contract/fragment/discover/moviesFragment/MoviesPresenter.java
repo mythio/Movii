@@ -1,4 +1,4 @@
-package com.mythio.movii.contract.fragment.moviesFragment;
+package com.mythio.movii.contract.fragment.discover.moviesFragment;
 
 import com.mythio.movii.model.movie.MovieTmdb;
 
@@ -15,6 +15,11 @@ public class MoviesPresenter implements MoviesContract.Presenter {
     @Override
     public void initViews() {
         view.initViewPager();
+    }
+
+    @Override
+    public void getModel() {
+
     }
 
     @Override

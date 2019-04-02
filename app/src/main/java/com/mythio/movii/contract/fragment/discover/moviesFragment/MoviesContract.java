@@ -1,4 +1,4 @@
-package com.mythio.movii.contract.fragment.moviesFragment;
+package com.mythio.movii.contract.fragment.discover.moviesFragment;
 
 import com.mythio.movii.model.movie.MovieTmdb;
 
@@ -16,6 +16,8 @@ public interface MoviesContract {
     interface Presenter {
 
         void initViews();
+
+        void getModel();
 
         void setDataToViewPager(ArrayList<MovieTmdb> movies);
     }

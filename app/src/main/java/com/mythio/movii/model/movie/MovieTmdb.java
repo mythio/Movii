@@ -1,12 +1,16 @@
 package com.mythio.movii.model.movie;
 
 import com.google.gson.annotations.SerializedName;
+import com.mythio.movii.model.Collection.Collection;
 import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.video.VideoResponse;
 
 import java.util.ArrayList;
 
 public class MovieTmdb {
+
+    @SerializedName("belongs_to_collection")
+    public Collection collection;
 
     @SerializedName("poster_path")
     private String posterPath;
@@ -43,6 +47,14 @@ public class MovieTmdb {
 
     @SerializedName("genres")
     private ArrayList<Genre> genres = new ArrayList<>();
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
 
     public String getPosterPath() {
         return posterPath;

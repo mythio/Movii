@@ -9,12 +9,12 @@ import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.mythio.movii.R;
 import com.mythio.movii.contract.activity.discoverActivity.DiscoverContract;
 import com.mythio.movii.contract.activity.discoverActivity.DiscoverPresenter;
-import com.mythio.movii.contract.fragment.moviesFragment.MoviesContract;
-import com.mythio.movii.contract.fragment.tvShowsFragment.TvShowsContract;
-import com.mythio.movii.fragment.BaseFragment;
-import com.mythio.movii.fragment.MoviesFragment;
-import com.mythio.movii.fragment.ProfileFragment;
-import com.mythio.movii.fragment.TvShowsFragment;
+import com.mythio.movii.contract.fragment.discover.moviesFragment.MoviesContract;
+import com.mythio.movii.contract.fragment.discover.tvShowsFragment.TvShowsContract;
+import com.mythio.movii.fragment.discover.BaseDiscoverFragment;
+import com.mythio.movii.fragment.discover.MoviesFragment;
+import com.mythio.movii.fragment.discover.ProfileFragment;
+import com.mythio.movii.fragment.discover.TvShowsFragment;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
@@ -69,7 +69,7 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
     }
 
     @Override
-    public void showFragment(BaseFragment fragment) {
+    public void showFragment(BaseDiscoverFragment fragment) {
         fragment.attachPresenter(presenter);
 
         getSupportFragmentManager()

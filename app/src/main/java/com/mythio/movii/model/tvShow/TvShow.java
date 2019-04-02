@@ -9,12 +9,8 @@ import java.util.ArrayList;
 public class TvShow {
 
     private String backdropPath;
-    private ArrayList<Integer> episodeRunTime;
-    private String firstAirDate;
     private String genres;
     private String id;
-    private String lastAirDate;
-    private Episode lastEpisodeToAir;
     private String name;
     private Episode nextEpisodeToAir;
     private Integer numberOfEpisodes;
@@ -23,7 +19,6 @@ public class TvShow {
     private String posterPath;
     private ArrayList<Season> seasons;
     private String status;
-    private String type;
     private ArrayList<Video> videos;
     private String imdb;
     private String year;
@@ -37,22 +32,6 @@ public class TvShow {
 
     public void setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
-    }
-
-    public ArrayList<Integer> getEpisodeRunTime() {
-        return episodeRunTime;
-    }
-
-    public void setEpisodeRunTime(ArrayList<Integer> episodeRunTime) {
-        this.episodeRunTime = episodeRunTime;
-    }
-
-    public String getFirstAirDate() {
-        return firstAirDate;
-    }
-
-    public void setFirstAirDate(String firstAirDate) {
-        this.firstAirDate = firstAirDate;
     }
 
     public String getGenres() {
@@ -69,22 +48,6 @@ public class TvShow {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getLastAirDate() {
-        return lastAirDate;
-    }
-
-    public void setLastAirDate(String lastAirDate) {
-        this.lastAirDate = lastAirDate;
-    }
-
-    public Episode getLastEpisodeToAir() {
-        return lastEpisodeToAir;
-    }
-
-    public void setLastEpisodeToAir(Episode lastEpisodeToAir) {
-        this.lastEpisodeToAir = lastEpisodeToAir;
     }
 
     public String getName() {
@@ -149,14 +112,6 @@ public class TvShow {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public ArrayList<Video> getVideos() {

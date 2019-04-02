@@ -1,4 +1,4 @@
-package com.mythio.movii.fragment;
+package com.mythio.movii.fragment.discover;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,9 @@ import android.view.View;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.SearchTvShowActivity;
 import com.mythio.movii.adapter.TvShowSliderAdapter;
-import com.mythio.movii.contract.fragment.baseFragment.OnItemClickListener;
-import com.mythio.movii.contract.fragment.tvShowsFragment.TvShowsContract;
-import com.mythio.movii.contract.fragment.tvShowsFragment.TvShowsPresenter;
+import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.OnItemClickListener;
+import com.mythio.movii.contract.fragment.discover.tvShowsFragment.TvShowsContract;
+import com.mythio.movii.contract.fragment.discover.tvShowsFragment.TvShowsPresenter;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TvShowsFragment extends BaseFragment implements TvShowsContract.View,
+public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsContract.View,
         TvShowsContract.Callback, OnItemClickListener {
 
     @BindView(R.id.view_pager_popular)

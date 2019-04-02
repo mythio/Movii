@@ -1,4 +1,4 @@
-package com.mythio.movii.contract.fragment.tvShowsFragment;
+package com.mythio.movii.contract.fragment.discover.tvShowsFragment;
 
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
