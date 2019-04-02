@@ -1,23 +1,31 @@
 package com.mythio.movii.util.viewPagerAdapter;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v7.graphics.Palette;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.model.movie.Movie;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+
+import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class MovieDetailsAdapter extends PagerAdapter {
 
@@ -47,16 +55,52 @@ public class MovieDetailsAdapter extends PagerAdapter {
         final LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.item_movie_detail, null);
+        final View view = inflater.inflate(R.layout.item_movie_detail, null);
 
         TextView tv = view.findViewById(R.id.text_view_title_1);
+        final ImageView iv = view.findViewById(R.id.image_view_poster);
+        final ConstraintLayout cs = view.findViewById(R.id.container);
+
         tv.setText(movie.getTitle());
         tv.setVisibility(View.VISIBLE);
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);
 
-        Log.d("TAG_TAG_TAG", "Inflating " + movie.getTitle());
+        final ImageView im2 = view.findViewById(R.id.bggg);
+
+        Target target = new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+
+                Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
+                    @Override
+                    public void onGenerated(@Nullable Palette palette) {
+                        if (palette.getDarkMutedSwatch() != null) {
+                            cs.setBackgroundColor(palette.getDarkMutedSwatch().getRgb());
+                            im2.setImageTintList(ColorStateList.valueOf(palette.getDarkMutedSwatch().getRgb()));
+                        } else {
+                            cs.setBackgroundColor(palette.getDarkVibrantSwatch().getRgb());
+                            im2.setImageTintList(ColorStateList.valueOf(palette.getDarkVibrantSwatch().getRgb()));
+                        }
+                    }
+                });
+
+                iv.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+
+        Picasso.get().load(IMAGE_BASE_URL + "original" + movie.getPosterPath()).into(target);
 
         return view;
     }

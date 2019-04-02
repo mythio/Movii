@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.github.christophesmet:android_maskable_layout:v1.3.1'
     implementation 'com.jakewharton:butterknife:8.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:palette-v7:28.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.0.0'
 
     testImplementation 'junit:junit:4.12'
