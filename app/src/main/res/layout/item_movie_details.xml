@@ -2,13 +2,12 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/layout_bg"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorTmdbMovieDark">
+    android:layout_height="match_parent">
 
     <ImageButton
-        android:id="@+id/close"
+        android:id="@+id/img_btn_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -22,34 +21,34 @@
         tools:ignore="ContentDescription" />
 
     <ImageView
-        android:id="@+id/image_view_poster"
+        android:id="@+id/img_view_poster"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:src="@drawable/bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/bggg"
+        android:id="@+id/img_view_grad_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/bg_gradient"
-        app:layout_constraintBottom_toBottomOf="@+id/image_view_poster"
-        app:layout_constraintEnd_toEndOf="@+id/image_view_poster"
-        app:layout_constraintStart_toStartOf="@+id/image_view_poster"
-        app:layout_constraintTop_toTopOf="@+id/image_view_poster" />
+        app:layout_constraintBottom_toBottomOf="@+id/img_view_poster"
+        app:layout_constraintEnd_toEndOf="@+id/img_view_poster"
+        app:layout_constraintStart_toStartOf="@+id/img_view_poster"
+        app:layout_constraintTop_toTopOf="@+id/img_view_poster" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image_view_play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:alpha="1"
+        <ImageButton
+            android:id="@+id/img_view_play"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:alpha="0.7"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_play"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,32 +70,32 @@
             android:gravity="bottom"
             android:orientation="vertical"
             android:padding="26dp"
-            app:layout_constraintBottom_toBottomOf="@+id/image_view_poster"
+            app:layout_constraintBottom_toBottomOf="@+id/img_view_poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/text_view_release"
+                android:id="@+id/txt_view_release"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/text_view_genre"
+                android:id="@+id/txt_view_genre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false" />
 
             <TextView
-                android:id="@+id/text_view_title_1"
+                android:id="@+id/txt_view_title_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:textSize="36sp" />
 
             <TextView
-                android:id="@+id/text_view_title_2"
+                android:id="@+id/txt_view_title_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
@@ -110,7 +109,7 @@
                 android:layout_height="12dp" />
 
             <TextView
-                android:id="@+id/text_view_length"
+                android:id="@+id/txt_view_runtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
@@ -121,7 +120,7 @@
                 android:layout_height="12dp" />
 
             <TextView
-                android:id="@+id/text_view_overview"
+                android:id="@+id/txt_view_overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
@@ -153,7 +152,7 @@
                     android:layout_height="0dp" />
 
                 <TextView
-                    android:id="@+id/text_view_vote_count"
+                    android:id="@+id/txt_view_vote_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -167,7 +166,7 @@
                 android:layout_height="18dp" />
 
             <TextView
-                android:id="@+id/text_view_cast"
+                android:id="@+id/txt_view_cast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
@@ -188,7 +187,7 @@
                 android:layout_height="8dp" />
 
             <TextView
-                android:id="@+id/text_view_similar_movies"
+                android:id="@+id/txt_view_similar_movies"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
