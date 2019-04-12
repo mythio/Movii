@@ -1,8 +1,6 @@
 package com.mythio.movii.activity;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
 import com.mythio.movii.R;
 import com.mythio.movii.contract.activity.movieDetailsActivity.MovieDetailsContract;
@@ -11,6 +9,9 @@ import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.viewPagerAdapter.MovieDetailsAdapter;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 public class MovieDetailsActivity extends AppCompatActivity implements MovieDetailsContract.View {
 

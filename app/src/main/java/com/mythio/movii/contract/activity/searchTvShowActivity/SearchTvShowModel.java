@@ -1,11 +1,10 @@
 package com.mythio.movii.contract.activity.searchTvShowActivity;
 
-import android.support.annotation.NonNull;
-
 import com.mythio.movii.model.tvShow.TvShowResponse;
 import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 
+import androidx.annotation.NonNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

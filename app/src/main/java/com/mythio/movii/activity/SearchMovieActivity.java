@@ -1,9 +1,6 @@
 package com.mythio.movii.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -12,13 +9,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.mythio.movii.R;
-import com.mythio.movii.util.recyclerViewAdapter.MovieSearchAdapter;
 import com.mythio.movii.contract.activity.searchMovieActivity.SearchMovieContract;
 import com.mythio.movii.contract.activity.searchMovieActivity.SearchMoviePresenter;
 import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.util.recyclerViewAdapter.MovieSearchAdapter;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

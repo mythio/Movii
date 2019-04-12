@@ -11,7 +11,7 @@
         app:mask="@drawable/bg_rounded_rectangle"
         app:porterduffxfermode="DST_IN">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -68,7 +68,7 @@
 
             </LinearLayout>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.christophesmet.android.views.maskableframelayout.MaskableFrameLayout>
 

@@ -1,7 +1,6 @@
 package com.mythio.movii.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
@@ -19,6 +18,8 @@ import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class DiscoverActivity extends AppCompatActivity implements DiscoverContract.View {
 

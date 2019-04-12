@@ -1,12 +1,13 @@
 package com.mythio.movii.fragment.discover;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.DiscoverFragmentNavigation;
+
+import androidx.fragment.app.Fragment;
 
 public abstract class BaseDiscoverFragment extends Fragment implements DiscoverFragmentNavigation.View {
 

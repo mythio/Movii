@@ -2,21 +2,21 @@ package com.mythio.movii.fragment.discover;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.mythio.movii.R;
 import com.mythio.movii.activity.SearchTvShowActivity;
-import com.mythio.movii.util.viewPagerAdapter.TvShowSliderAdapter;
 import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.OnItemClickListener;
 import com.mythio.movii.contract.fragment.discover.tvShowsFragment.TvShowsContract;
 import com.mythio.movii.contract.fragment.discover.tvShowsFragment.TvShowsPresenter;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.util.viewPagerAdapter.TvShowSliderAdapter;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
