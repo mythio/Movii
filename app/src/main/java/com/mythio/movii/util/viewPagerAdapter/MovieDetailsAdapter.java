@@ -18,6 +18,7 @@ import com.mythio.movii.R;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.ItemDecorator;
 import com.mythio.movii.util.recyclerViewAdapter.CastAdapter;
+import com.mythio.movii.util.recyclerViewAdapter.RecommendedMoviesAdapter;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -119,8 +120,11 @@ public class MovieDetailsAdapter extends PagerAdapter {
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewCast.addItemDecoration(new ItemDecorator(12));
         recyclerViewCast.setAdapter(new CastAdapter(movie.getCasts(), view.getContext()));
+        recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewRecommended.addItemDecoration(new ItemDecorator(36));
+        recyclerViewRecommended.setAdapter(new RecommendedMoviesAdapter(view.getContext(), movie.getMoviesTmdb()));
 
-        Picasso.get().load(IMAGE_BASE_URL + "original" + movie.getPosterPath()).into(imgViewPoster);
+        Picasso.get().load(IMAGE_BASE_URL + "w780" + movie.getPosterPath()).into(imgViewPoster);
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);

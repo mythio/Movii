@@ -79,7 +79,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
     private void getMovieDetailsTmdb(String id) {
 
-        Call<MovieTmdb> call = apiServiceTmdb.getMovieDetail(Integer.valueOf(id), API_KEY_TMDB, "videos,credits,recommended");
+        Call<MovieTmdb> call = apiServiceTmdb.getMovieDetail(Integer.valueOf(id), API_KEY_TMDB, "videos,credits,recommendations");
         call.enqueue(new Callback<MovieTmdb>() {
             @Override
             public void onResponse(Call<MovieTmdb> call, Response<MovieTmdb> response) {
@@ -138,7 +138,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
         movie.setVotes(String.valueOf(NumberFormat.getInstance(Locale.US).format(movieTmdb.getVoteCount())));
         movie.setRuntime(runtime / 60 + " h " + runtime % 60 + " m");
         movie.setVideos(movieTmdb.getVideoResponse().getVideos());
-
+        movie.setMoviesTmdb(movieTmdb.getRecommendations().getResults());
         movies.add(movie);
 
         if (collectionSize == movies.size()) {
@@ -180,6 +180,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
                             : movieOmdb.getImdbRating());
                     movie.setImdb(movieTmdb.getImdb());
                     movie.setCasts(movieTmdb.getCredits().getCast());
+                    movie.setMoviesTmdb(movieTmdb.getRecommendations().getResults());
 
                     if (movieTmdb.getCollection() != null) {
                         movie.setCollectionId(String.valueOf(movieTmdb.getCollection().getId()));
