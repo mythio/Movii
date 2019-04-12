@@ -1,20 +1,29 @@
-package com.mythio.movii.model.Collection;
+package com.mythio.movii.model.collection;
 
 import com.google.gson.annotations.SerializedName;
+import com.mythio.movii.model.movie.MovieTmdb;
 
-public class Collection {
+import java.util.ArrayList;
+
+public class CollectionResponse {
 
     @SerializedName("id")
-    public Integer id;
+    private Integer id;
 
     @SerializedName("name")
-    public String name;
+    private String name;
+
+    @SerializedName("overview")
+    private String overview;
 
     @SerializedName("poster_path")
-    public String posterPath;
+    private String posterPath;
 
     @SerializedName("backdrop_path")
-    public String backdropPath;
+    private String backdropPath;
+
+    @SerializedName("parts")
+    private ArrayList<MovieTmdb> movies;
 
     public Integer getId() {
         return id;
@@ -32,6 +41,14 @@ public class Collection {
         this.name = name;
     }
 
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
     public String getPosterPath() {
         return posterPath;
     }
@@ -46,5 +63,13 @@ public class Collection {
 
     public void setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
+    }
+
+    public ArrayList<MovieTmdb> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(ArrayList<MovieTmdb> movies) {
+        this.movies = movies;
     }
 }

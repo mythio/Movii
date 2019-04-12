@@ -1,6 +1,6 @@
 package com.mythio.movii.network;
 
-import com.mythio.movii.model.Collection.CollectionResponse;
+import com.mythio.movii.model.collection.CollectionResponse;
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tvShow.TvShowResponse;

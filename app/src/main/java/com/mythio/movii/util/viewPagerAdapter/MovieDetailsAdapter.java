@@ -1,29 +1,26 @@
 package com.mythio.movii.util.viewPagerAdapter;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.graphics.Palette;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.model.movie.Movie;
+import com.mythio.movii.util.ItemDecorator;
+import com.mythio.movii.util.recyclerViewAdapter.CastAdapter;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -34,23 +31,44 @@ import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class MovieDetailsAdapter extends PagerAdapter {
 
-    @BindView(R.id.img_btn_close)
-    ImageButton imgBtnClose;
-
-    @BindView(R.id.img_view_play)
-    ImageButton imgBtnPlay;
-
-    @BindView(R.id.img_view_grad_bg)
-    ImageView imgViewGradientBg;
-
     @BindView(R.id.img_view_poster)
     ImageView imgViewPoster;
+
+    @BindView(R.id.img_view_play)
+    ImageButton imgViewPlay;
+
+    @BindView(R.id.txt_view_year)
+    TextView txtViewYear;
+
+    @BindView(R.id.txt_view_genre)
+    TextView txtViewGenre;
 
     @BindView(R.id.txt_view_title_1)
     TextView txtViewTitle1;
 
     @BindView(R.id.txt_view_title_2)
     TextView txtViewTitle2;
+
+    @BindView(R.id.txt_view_runtime)
+    TextView txtViewRuntime;
+
+    @BindView(R.id.txt_view_overview)
+    TextView txtViewOverview;
+
+    @BindView(R.id.rating_bar)
+    RatingBar ratingBar;
+
+    @BindView(R.id.txt_view_rating)
+    TextView rating;
+
+    @BindView(R.id.txt_view_vote_count)
+    TextView txtViewVoteCount;
+
+    @BindView(R.id.recycler_view_cast)
+    RecyclerView recyclerViewCast;
+
+    @BindView(R.id.recycler_view_recommended)
+    RecyclerView recyclerViewRecommended;
 
     private final Context mContext;
     private final ArrayList<Movie> mMovies;
@@ -73,59 +91,39 @@ public class MovieDetailsAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-
         final Movie movie = mMovies.get(position);
-        final LayoutInflater inflater = (LayoutInflater) mContext
+        LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        final View view = inflater.inflate(R.layout.item_movie_details, null);
-
+        View view = inflater.inflate(R.layout.item_movie_details, null);
         ButterKnife.bind(this, view);
 
-//        TextView tv = view.findViewById(R.id.text_view_title_1);
-//        final ImageView iv = view.findViewById(R.id.image_view_poster);
-//        final ConstraintLayout cs = view.findViewById(R.id.container);
+        String[] title = movie.getTitle().split(": ");
 
-//        tv.setText(movie.getTitle());
-//        tv.setVisibility(View.VISIBLE);
+        txtViewYear.setText(movie.getYear());
+
+        if (title.length == 2) {
+            txtViewTitle1.setText(title[0].trim());
+            txtViewTitle2.setText(title[1].trim());
+        } else {
+            txtViewTitle1.setText(title[0].trim());
+            txtViewTitle2.setVisibility(View.GONE);
+        }
+
+        rating.setText(movie.getRating());
+
+        txtViewGenre.setText(movie.getGenres());
+        txtViewRuntime.setText(movie.getRuntime());
+        txtViewOverview.setText(movie.getOverview());
+        ratingBar.setRating(Float.valueOf(movie.getRating()) / 2);
+        txtViewVoteCount.setText(movie.getVotes());
+        recyclerViewCast.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCast.addItemDecoration(new ItemDecorator(12));
+        recyclerViewCast.setAdapter(new CastAdapter(movie.getCasts(), view.getContext()));
+
+        Picasso.get().load(IMAGE_BASE_URL + "original" + movie.getPosterPath()).into(imgViewPoster);
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);
-
-//        final ImageView im2 = view.findViewById(R.id.bggg);
-
-        Target target = new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-
-                Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-                    @Override
-                    public void onGenerated(@Nullable Palette palette) {
-//                        if (palette.getDarkMutedSwatch() != null) {
-//                            cs.setBackgroundColor(palette.getDarkMutedSwatch().getRgb());
-//                            im2.setImageTintList(ColorStateList.valueOf(palette.getDarkMutedSwatch().getRgb()));
-//                        } else {
-//                            cs.setBackgroundColor(palette.getDarkVibrantSwatch().getRgb());
-//                            im2.setImageTintList(ColorStateList.valueOf(palette.getDarkVibrantSwatch().getRgb()));
-//                        }
-                    }
-                });
-
-//                iv.setImageBitmap(bitmap);
-            }
-
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        };
-
-        Picasso.get().load(IMAGE_BASE_URL + "original" + movie.getPosterPath()).into(target);
 
         return view;
     }

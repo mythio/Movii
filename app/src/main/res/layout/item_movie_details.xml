@@ -2,23 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ImageButton
-        android:id="@+id/img_btn_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:alpha="0.7"
-        android:background="@android:color/transparent"
-        android:elevation="100dp"
-        android:src="@drawable/ic_close"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/img_view_poster"
@@ -30,7 +15,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/img_view_grad_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/bg_gradient"
@@ -75,11 +59,11 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/txt_view_release"
+                android:id="@+id/txt_view_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txt_view_genre"
@@ -98,107 +82,98 @@
                 android:id="@+id/txt_view_title_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:alpha="0.4"
                 android:includeFontPadding="false"
                 android:textAllCaps="true"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="12dp" />
-
             <TextView
                 android:id="@+id/txt_view_runtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:includeFontPadding="false"
-                android:textSize="12sp" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="12dp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txt_view_overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:includeFontPadding="false"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="16dp" />
-
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginBottom="12dp">
 
                 <android.support.v7.widget.AppCompatRatingBar
                     android:id="@+id/rating_bar"
                     style="@style/Base.Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="14dp"
                     android:isIndicator="true"
                     android:numStars="5"
                     android:outlineProvider="paddedBounds"
                     android:progressBackgroundTint="#FFFFFF"
                     android:progressTint="#FECE00"
-                    android:stepSize="0.5" />
+                    android:stepSize="0.5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <Space
-                    android:layout_width="12dp"
-                    android:layout_height="0dp" />
+                <TextView
+                    android:id="@+id/txt_view_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:includeFontPadding="false"
+                    android:text="8.9"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rating_bar"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/txt_view_vote_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_marginStart="8dp"
                     android:includeFontPadding="false"
-                    android:textSize="12sp" />
+                    android:text="8,134,123"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/txt_view_rating"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="18dp" />
+            </android.support.constraint.ConstraintLayout>
 
             <TextView
-                android:id="@+id/txt_view_cast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:includeFontPadding="false"
                 android:text="CAST"
                 android:textSize="16sp" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="4dp" />
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_cast"
                 android:layout_width="match_parent"
-                android:layout_height="64dp" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="8dp" />
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp" />
 
             <TextView
-                android:id="@+id/txt_view_similar_movies"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:includeFontPadding="false"
                 android:text="SIMILAR MOVIES" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="8dp" />
-
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/recycler_view_recommended"
                 android:layout_width="match_parent"
                 android:layout_height="204dp"
                 android:background="@drawable/bg_rounded_rectangle"

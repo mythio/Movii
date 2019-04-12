@@ -1,7 +1,8 @@
 package com.mythio.movii.model.movie;
 
 import com.google.gson.annotations.SerializedName;
-import com.mythio.movii.model.Collection.Collection;
+import com.mythio.movii.model.cast.Credits;
+import com.mythio.movii.model.collection.Collection;
 import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.video.VideoResponse;
 
@@ -47,6 +48,12 @@ public class MovieTmdb {
 
     @SerializedName("genres")
     private ArrayList<Genre> genres = new ArrayList<>();
+
+    @SerializedName("recommendations")
+    private MovieResponse recommendations;
+
+    @SerializedName("credits")
+    private Credits credits;
 
     public Collection getCollection() {
         return collection;
@@ -150,5 +157,21 @@ public class MovieTmdb {
 
     public void setGenres(ArrayList<Genre> genres) {
         this.genres = genres;
+    }
+
+    public MovieResponse getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(MovieResponse recommendations) {
+        this.recommendations = recommendations;
+    }
+
+    public Credits getCredits() {
+        return credits;
+    }
+
+    public void setCredits(Credits credits) {
+        this.credits = credits;
     }
 }

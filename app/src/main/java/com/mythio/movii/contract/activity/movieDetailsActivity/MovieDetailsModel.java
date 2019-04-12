@@ -1,6 +1,6 @@
 package com.mythio.movii.contract.activity.movieDetailsActivity;
 
-import com.mythio.movii.model.Collection.CollectionResponse;
+import com.mythio.movii.model.collection.CollectionResponse;
 import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieOmdb;
@@ -10,7 +10,11 @@ import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 import com.mythio.movii.network.EndPointsOmdb;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,10 +39,14 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
         call.enqueue(new Callback<MovieTmdb>() {
             @Override
             public void onResponse(Call<MovieTmdb> call, Response<MovieTmdb> response) {
-                if (response.body().getCollection() != null) {
-                    getCollection(String.valueOf(response.body().getCollection().getId()));
+                if (response.isSuccessful()) {
+                    if (response.body().getCollection() != null) {
+                        getCollection(String.valueOf(response.body().getCollection().getId()));
+                    } else {
+                        getMovieDetailsTmdb(String.valueOf(id));
+                    }
                 } else {
-                    getMovieDetailsTmdb(String.valueOf(id));
+
                 }
             }
 
@@ -64,7 +72,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
             @Override
             public void onFailure(Call<CollectionResponse> call, Throwable t) {
-
+                listener.onFailure(t);
             }
         });
     }
@@ -75,16 +83,18 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
         call.enqueue(new Callback<MovieTmdb>() {
             @Override
             public void onResponse(Call<MovieTmdb> call, Response<MovieTmdb> response) {
-                if (response.body().getImdb() == null) {
-                    setTmdb(response.body());
-                } else {
-                    getMovieDetailsOmdb(response.body());
+                if (response.isSuccessful()) {
+                    if (response.body().getImdb() == null) {
+                        setTmdb(response.body());
+                    } else {
+                        getMovieDetailsOmdb(response.body());
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<MovieTmdb> call, Throwable t) {
-
+                listener.onFailure(t);
             }
         });
     }
@@ -97,9 +107,9 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
         movie.setId(String.valueOf(movieTmdb.getId()));
         movie.setTitle(movieTmdb.getTitle());
         movie.setBackdropPath(movieTmdb.getBackdropPath());
-        movie.setVotes(String.valueOf(movieTmdb.getVoteAverage()));
-        movie.setRating(String.valueOf(movieTmdb.getVoteCount()));
+        movie.setRating(String.valueOf(movieTmdb.getVoteAverage()));
         movie.setImdb(movieTmdb.getImdb());
+        movie.setCasts(movieTmdb.getCredits().getCast());
 
         if (movieTmdb.getCollection() != null) {
             movie.setCollectionId(String.valueOf(movieTmdb.getCollection().getId()));
@@ -118,13 +128,26 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
             }
         }
 
+        String[] date = movieTmdb.getReleaseDate().split("-");
+        movie.setYear(date[0]);
+
         movie.setGenres(genreString.toString());
-        movie.setRuntime(String.valueOf(movieTmdb.getVideoResponse()));
+
+        int runtime = movieTmdb.getRuntime();
+
+        movie.setVotes(String.valueOf(NumberFormat.getInstance(Locale.US).format(movieTmdb.getVoteCount())));
+        movie.setRuntime(runtime / 60 + " h " + runtime % 60 + " m");
         movie.setVideos(movieTmdb.getVideoResponse().getVideos());
 
         movies.add(movie);
 
         if (collectionSize == movies.size()) {
+            Collections.sort(movies, new Comparator<Movie>() {
+                @Override
+                public int compare(Movie o1, Movie o2) {
+                    return o1.getYear().compareTo(o2.getYear());
+                }
+            });
             listener.onFinished(movies);
         }
     }
@@ -138,63 +161,64 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
         call.enqueue(new Callback<MovieOmdb>() {
             @Override
             public void onResponse(Call<MovieOmdb> call, Response<MovieOmdb> response) {
+                if (response.isSuccessful()) {
+                    MovieOmdb movieOmdb = response.body();
 
-                MovieOmdb movieOmdb = response.body();
+                    movie.setPosterPath(movieTmdb.getPosterPath());
+                    movie.setOverview(movieOmdb.getPlot() == null || movieOmdb.getPlot().equals("N/A")
+                            ? movieTmdb.getOverview()
+                            : movieOmdb.getPlot());
+                    movie.setId(String.valueOf(movieTmdb.getId()));
+                    movie.setTitle(movieTmdb.getTitle());
+                    movie.setBackdropPath(movieTmdb.getBackdropPath());
 
-                movie.setPosterPath(movieTmdb.getPosterPath());
-                movie.setOverview(movieOmdb.getPlot() == null || movieOmdb.getPlot().equals("N/A")
-                        ? movieTmdb.getOverview()
-                        : movieOmdb.getPlot());
-                movie.setId(String.valueOf(movieTmdb.getId()));
-                movie.setTitle(movieTmdb.getTitle());
-                movie.setBackdropPath(movieTmdb.getBackdropPath());
+                    movie.setVotes(movieOmdb.getImdbVotes() == null || movieOmdb.getImdbVotes().equals("N/A")
+                            ? String.valueOf(NumberFormat.getInstance(Locale.US).format(movieTmdb.getVoteCount()))
+                            : movieOmdb.getImdbVotes());
+                    movie.setRating(movieOmdb.getImdbRating() == null || movieOmdb.getImdbRating().equals("N/A")
+                            ? String.valueOf(movieTmdb.getVoteAverage())
+                            : movieOmdb.getImdbRating());
+                    movie.setImdb(movieTmdb.getImdb());
+                    movie.setCasts(movieTmdb.getCredits().getCast());
 
-                // TODO: 3/30/19 votes need to be seperated by commas
-
-                movie.setVotes(movieOmdb.getImdbVotes() == null || movieOmdb.getImdbVotes().equals("N/A")
-                        ? String.valueOf(movieTmdb.getVoteCount())
-                        : movieOmdb.getImdbVotes());
-                movie.setRating(movieOmdb.getImdbRating() == null || movieOmdb.getImdbRating().equals("N/A")
-                        ? String.valueOf(movieTmdb.getVoteAverage())
-                        : movieOmdb.getImdbRating());
-                movie.setImdb(movieTmdb.getImdb());
-
-                if (movieTmdb.getCollection() != null) {
-                    movie.setCollectionId(String.valueOf(movieTmdb.getCollection().getId()));
-                    movie.setCollectionName(movieTmdb.getCollection().getName());
-                    movie.setCollectionPosterPath(movieTmdb.getCollection().getPosterPath());
-                    movie.setCollectionBackdrop(movieTmdb.getCollection().getBackdropPath());
-                }
-
-                StringBuilder genreString = new StringBuilder();
-                int s = movieTmdb.getGenres().size();
-                for (Genre genre : movieTmdb.getGenres()) {
-                    genreString.append(genre.getName());
-                    s--;
-                    if (s > 0) {
-                        genreString.append(" | ");
+                    if (movieTmdb.getCollection() != null) {
+                        movie.setCollectionId(String.valueOf(movieTmdb.getCollection().getId()));
+                        movie.setCollectionName(movieTmdb.getCollection().getName());
+                        movie.setCollectionPosterPath(movieTmdb.getCollection().getPosterPath());
+                        movie.setCollectionBackdrop(movieTmdb.getCollection().getBackdropPath());
                     }
-                }
 
-                movie.setGenres(genreString.toString());
+                    StringBuilder genreString = new StringBuilder();
+                    int s = movieTmdb.getGenres().size();
+                    for (Genre genre : movieTmdb.getGenres()) {
+                        genreString.append(genre.getName());
+                        s--;
+                        if (s > 0) {
+                            genreString.append(" | ");
+                        }
+                    }
 
-                // TODO: 3/30/19 runtime should be modular
+                    String[] date = movieTmdb.getReleaseDate().split("-");
+                    movie.setYear(date[0]);
 
-                movie.setRuntime(String.valueOf(movieTmdb.getVideoResponse()));
-                movie.setVideos(movieTmdb.getVideoResponse().getVideos());
+                    movie.setGenres(genreString.toString());
 
-                movies.add(movie);
+                    int runtime = movieTmdb.getRuntime();
 
-                // TODO: 4/2/19 sort the movies in the chronological order
+                    movie.setRuntime(runtime / 60 + " h " + runtime % 60 + " m");
+                    movie.setVideos(movieTmdb.getVideoResponse().getVideos());
 
-                if (collectionSize == movies.size()) {
-                    listener.onFinished(movies);
-//                    Collections.sort(movies, new Comparator<Movie>() {
-//                        @Override
-//                        public int compare(Movie o1, Movie o2) {
-//                            return 0;
-//                        }
-//                    });
+                    movies.add(movie);
+
+                    if (collectionSize == movies.size()) {
+                        Collections.sort(movies, new Comparator<Movie>() {
+                            @Override
+                            public int compare(Movie o1, Movie o2) {
+                                return o1.getYear().compareTo(o2.getYear());
+                            }
+                        });
+                        listener.onFinished(movies);
+                    }
                 }
             }
 

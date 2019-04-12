@@ -1,5 +1,6 @@
 package com.mythio.movii.model.movie;
 
+import com.mythio.movii.model.cast.Cast;
 import com.mythio.movii.model.video.Video;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class Movie {
     private String year;
     private String runtime;
     private ArrayList<Video> videos;
+    private ArrayList<MovieTmdb> moviesTmdb;
+    private ArrayList<Cast> casts;
 
     public String getPosterPath() {
         return posterPath;
@@ -149,5 +152,21 @@ public class Movie {
 
     public void setVideos(ArrayList<Video> videos) {
         this.videos = videos;
+    }
+
+    public ArrayList<MovieTmdb> getMoviesTmdb() {
+        return moviesTmdb;
+    }
+
+    public void setMoviesTmdb(ArrayList<MovieTmdb> moviesTmdb) {
+        this.moviesTmdb = moviesTmdb;
+    }
+
+    public ArrayList<Cast> getCasts() {
+        return casts;
+    }
+
+    public void setCasts(ArrayList<Cast> casts) {
+        this.casts = casts;
     }
 }
