@@ -1,7 +1,6 @@
 package com.mythio.movii.model.tvShow;
 
-import com.mythio.movii.model.episode.Episode;
-import com.mythio.movii.model.season.Season;
+import com.mythio.movii.model.season.SeasonDetails;
 import com.mythio.movii.model.video.Video;
 
 import java.util.ArrayList;
@@ -12,17 +11,11 @@ public class TvShow {
     private String genres;
     private String id;
     private String name;
-    private Episode nextEpisodeToAir;
-    private Integer numberOfEpisodes;
-    private String numberOfSeasons;
     private String overview;
     private String posterPath;
-    private ArrayList<Season> seasons;
-    private String status;
+    private ArrayList<SeasonDetails> seasons;
     private ArrayList<Video> videos;
     private String imdb;
-    private String year;
-    private String runtime;
     private String rating;
     private String votes;
 
@@ -58,30 +51,6 @@ public class TvShow {
         this.name = name;
     }
 
-    public Episode getNextEpisodeToAir() {
-        return nextEpisodeToAir;
-    }
-
-    public void setNextEpisodeToAir(Episode nextEpisodeToAir) {
-        this.nextEpisodeToAir = nextEpisodeToAir;
-    }
-
-    public Integer getNumberOfEpisodes() {
-        return numberOfEpisodes;
-    }
-
-    public void setNumberOfEpisodes(Integer numberOfEpisodes) {
-        this.numberOfEpisodes = numberOfEpisodes;
-    }
-
-    public String getNumberOfSeasons() {
-        return numberOfSeasons;
-    }
-
-    public void setNumberOfSeasons(String numberOfSeasons) {
-        this.numberOfSeasons = numberOfSeasons;
-    }
-
     public String getOverview() {
         return overview;
     }
@@ -98,20 +67,12 @@ public class TvShow {
         this.posterPath = posterPath;
     }
 
-    public ArrayList<Season> getSeasons() {
+    public ArrayList<SeasonDetails> getSeasons() {
         return seasons;
     }
 
-    public void setSeasons(ArrayList<Season> seasons) {
+    public void setSeasons(ArrayList<SeasonDetails> seasons) {
         this.seasons = seasons;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public ArrayList<Video> getVideos() {
@@ -128,22 +89,6 @@ public class TvShow {
 
     public void setImdb(String imdb) {
         this.imdb = imdb;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getRuntime() {
-        return runtime;
-    }
-
-    public void setRuntime(String runtime) {
-        this.runtime = runtime;
     }
 
     public String getRating() {

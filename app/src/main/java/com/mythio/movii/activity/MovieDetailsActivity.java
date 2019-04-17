@@ -24,9 +24,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
         setContentView(R.layout.activity_movie_details);
 
         currentId = getIntent().getStringExtra("BUNDLED_EXTRA_MOVIE_ID");
-
         viewPager = findViewById(R.id.view_pager_details);
-
         MovieDetailsContract.Presenter presenter = new MovieDetailsPresenter(this);
 
         presenter.onRequestCollection(currentId);

@@ -1,5 +1,6 @@
 package com.mythio.movii.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -39,6 +40,9 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        startActivity(new Intent(this, TvShowDetailsActivity.class));
+        finish();
 //        ButterKnife.bind(this);
 
         presenter = new DiscoverPresenter(this);

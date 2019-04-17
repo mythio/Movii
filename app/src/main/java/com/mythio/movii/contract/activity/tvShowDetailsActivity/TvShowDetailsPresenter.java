@@ -2,7 +2,6 @@ package com.mythio.movii.contract.activity.tvShowDetailsActivity;
 
 import android.util.Log;
 
-import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.tvShow.TvShow;
 
 public class TvShowDetailsPresenter implements TvShowDetailsContract.Presenter, TvShowDetailsContract.Model.OnTvShowDetailsListener {

@@ -118,10 +118,10 @@ public class MovieDetailsAdapter extends PagerAdapter {
         ratingBar.setRating(Float.valueOf(movie.getRating()) / 2);
         txtViewVoteCount.setText(movie.getVotes());
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewCast.addItemDecoration(new ItemDecorator(12));
+        recyclerViewCast.addItemDecoration(new ItemDecorator(12, 1));
         recyclerViewCast.setAdapter(new CastAdapter(movie.getCasts(), view.getContext()));
         recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewRecommended.addItemDecoration(new ItemDecorator(36));
+        recyclerViewRecommended.addItemDecoration(new ItemDecorator(36, 0));
         recyclerViewRecommended.setAdapter(new RecommendedMoviesAdapter(view.getContext(), movie.getMoviesTmdb()));
 
         Picasso.get().load(IMAGE_BASE_URL + "w780" + movie.getPosterPath()).into(imgViewPoster);
