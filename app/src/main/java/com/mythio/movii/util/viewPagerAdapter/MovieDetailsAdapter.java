@@ -123,6 +123,9 @@ public class MovieDetailsAdapter extends PagerAdapter {
         recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewRecommended.addItemDecoration(new ItemDecorator(36, 0));
         recyclerViewRecommended.setAdapter(new RecommendedMoviesAdapter(view.getContext(), movie.getMoviesTmdb()));
+        recyclerViewRecommended.setDrawingCacheEnabled(true);
+        recyclerViewRecommended.setItemViewCacheSize(6);
+        recyclerViewRecommended.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
         Picasso.get().load(IMAGE_BASE_URL + "w780" + movie.getPosterPath()).into(imgViewPoster);
 

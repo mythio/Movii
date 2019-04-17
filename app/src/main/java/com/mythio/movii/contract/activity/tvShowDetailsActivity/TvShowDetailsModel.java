@@ -1,7 +1,5 @@
 package com.mythio.movii.contract.activity.tvShowDetailsActivity;
 
-import android.util.Log;
-
 import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.season.SeasonDetails;
 import com.mythio.movii.model.tvShow.TvShow;
@@ -113,16 +111,8 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
                 seasons.add(tvShowTmdb.getSeason1());
         }
 
-        Log.d("TAG_TAG", tvShowTmdb.getSeason1().getName());
-
         tvShow.setSeasons(seasons);
-
-        for (SeasonDetails details : tvShow.getSeasons()) {
-            Log.d("TAG_TAG", details.getName() + " " + details.getSeasonNumber());
-        }
-
         tvShow.setGenres(genreString.toString());
-
         listener.onFinished(tvShow);
     }
 

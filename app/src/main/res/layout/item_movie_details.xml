@@ -24,8 +24,13 @@
         app:layout_constraintTop_toTopOf="@+id/img_view_poster" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/img_view_play"
@@ -38,44 +43,42 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.20"
             tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom">
+        android:layout_height="0dp"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom"
+            android:layout_height="0dp"
             android:orientation="vertical"
-            android:padding="26dp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_view_poster"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:padding="26dp">
 
             <TextView
                 android:id="@+id/txt_view_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="false"
+                android:includeFontPadding="true"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txt_view_genre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="false" />
+                android:includeFontPadding="true" />
 
             <TextView
                 android:id="@+id/txt_view_title_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="false"
+                android:includeFontPadding="true"
                 android:textSize="36sp" />
 
             <TextView
@@ -84,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:alpha="0.4"
-                android:includeFontPadding="false"
+                android:includeFontPadding="true"
                 android:textAllCaps="true"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -94,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:includeFontPadding="false"
+                android:includeFontPadding="true"
                 android:textSize="16sp" />
 
             <TextView
@@ -102,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:includeFontPadding="false"
+                android:includeFontPadding="true"
                 android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:includeFontPadding="false"
+                    android:includeFontPadding="true"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/rating_bar"
@@ -141,7 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:includeFontPadding="false"
+                    android:includeFontPadding="true"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/txt_view_rating"
@@ -153,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:includeFontPadding="false"
+                android:includeFontPadding="true"
                 android:text="CAST"
                 android:textSize="16sp" />
 
@@ -167,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:includeFontPadding="false"
+                android:includeFontPadding="true"
                 android:text="SIMILAR MOVIES" />
 
 
@@ -185,6 +188,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
