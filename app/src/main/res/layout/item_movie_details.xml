@@ -47,11 +47,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="bottom"
+        android:fadingEdgeLength="64dp"
+        android:requiresFadingEdge="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
@@ -72,6 +72,7 @@
                 android:id="@+id/txt_view_genre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:includeFontPadding="true" />
 
             <TextView
@@ -88,6 +89,7 @@
                 android:layout_marginBottom="12dp"
                 android:alpha="0.4"
                 android:includeFontPadding="true"
+                android:paddingBottom="4dp"
                 android:textAllCaps="true"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -96,7 +98,7 @@
                 android:id="@+id/txt_view_runtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="24dp"
                 android:includeFontPadding="true"
                 android:textSize="16sp" />
 
@@ -104,14 +106,14 @@
                 android:id="@+id/txt_view_overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="24dp"
                 android:includeFontPadding="true"
                 android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="24dp">
 
                 <androidx.appcompat.widget.AppCompatRatingBar
                     android:id="@+id/rating_bar"
@@ -155,7 +157,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="12dp"
                 android:includeFontPadding="true"
                 android:text="CAST"
                 android:textSize="16sp" />
@@ -164,12 +166,12 @@
                 android:id="@+id/recycler_view_cast"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:includeFontPadding="true"
                 android:text="SIMILAR MOVIES" />
 
