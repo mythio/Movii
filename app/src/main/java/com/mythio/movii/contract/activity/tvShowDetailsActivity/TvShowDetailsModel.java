@@ -3,9 +3,12 @@ package com.mythio.movii.contract.activity.tvShowDetailsActivity;
 import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.season.SeasonDetails;
 import com.mythio.movii.model.tvShow.TvShow;
+import com.mythio.movii.model.tvShow.TvShowOmdb;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.network.ApiClientBuilderOmdb;
 import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
+import com.mythio.movii.network.EndPointsOmdb;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.mythio.movii.util.Constant.API_KEY_OMDB;
 import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
 public class TvShowDetailsModel implements TvShowDetailsContract.Model {
@@ -22,7 +26,7 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
     private OnTvShowDetailsListener listener;
     private TvShow tvShow;
     private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
-//    private EndPointsOmdb apiServiceOmdb = ApiClientBuilderOmdb.getClient().create(EndPointsOmdb.class);
+    private EndPointsOmdb apiServiceOmdb = ApiClientBuilderOmdb.getClient().create(EndPointsOmdb.class);
 
     @Override
     public void getTvShowDetails(final OnTvShowDetailsListener listener, Integer id) {
@@ -34,12 +38,7 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
             @Override
             public void onResponse(Call<TvShowTmdb> call, Response<TvShowTmdb> response) {
                 if (response.isSuccessful()) {
-//                    if (response.body().getExternalIds().getImdbId() != null) {
-//                        getTvShowDetailsOmdb(response.body().getExternalIds().getImdbId());
-//                    } else {
                     setTmdb(response.body());
-//                    }
-//                    Log.v("TAG_TAG", response.body().getName());
                 }
             }
 
@@ -113,10 +112,35 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
 
         tvShow.setSeasons(seasons);
         tvShow.setGenres(genreString.toString());
-        listener.onFinished(tvShow);
+
+        if (tvShowTmdb.getExternalIds().getImdbId() != null) {
+            getTvShowDetailsOmdb(tvShowTmdb.getExternalIds().getImdbId());
+        } else {
+            listener.onFinished(tvShow);
+        }
     }
 
     private void getTvShowDetailsOmdb(String imdb) {
 
+        Call<TvShowOmdb> call = apiServiceOmdb.getTvShowDetailOmdb(API_KEY_OMDB, imdb);
+        call.enqueue(new Callback<TvShowOmdb>() {
+            @Override
+            public void onResponse(Call<TvShowOmdb> call, Response<TvShowOmdb> response) {
+
+                if (response.isSuccessful()) {
+                    tvShow.setGenres(response.body().getGenre());
+                    tvShow.setRating(response.body().getImdbRating());
+                    tvShow.setVotes(response.body().getImdbVotes());
+                    tvShow.setOverview(response.body().getPlot());
+
+                    listener.onFinished(tvShow);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TvShowOmdb> call, Throwable t) {
+
+            }
+        });
     }
 }

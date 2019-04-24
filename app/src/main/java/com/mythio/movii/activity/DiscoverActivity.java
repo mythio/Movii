@@ -1,7 +1,10 @@
 package com.mythio.movii.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
@@ -18,8 +21,6 @@ import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class DiscoverActivity extends AppCompatActivity implements DiscoverContract.View {
 
@@ -40,8 +41,8 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-//        startActivity(new Intent(this, TvShowDetailsActivity.class));
-//        finish();
+        startActivity(new Intent(this, TvShowDetailsActivity.class));
+        finish();
 //        ButterKnife.bind(this);
 
         presenter = new DiscoverPresenter(this);
