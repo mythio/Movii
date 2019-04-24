@@ -132,7 +132,6 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
                     tvShow.setRating(response.body().getImdbRating());
                     tvShow.setVotes(response.body().getImdbVotes());
                     tvShow.setOverview(response.body().getPlot());
-
                     listener.onFinished(tvShow);
                 }
             }

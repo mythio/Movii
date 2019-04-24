@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".activity.TvShowDetailsActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Breaking Bad" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
