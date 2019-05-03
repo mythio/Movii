@@ -1,7 +1,5 @@
 package com.mythio.movii.contract.activity.discoverActivity;
 
-import android.util.Log;
-
 import com.mythio.movii.contract.activity.discoverActivity.DiscoverContract.Model;
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.network.ApiClientBuilderTmdb;
@@ -28,13 +26,16 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                moviesListener.onFinishedMovies(response.body().getResults());
+                if (response.isSuccessful()) {
+                    moviesListener.onFinishedMovies(response.body().getResults());
+                } else {
+                    moviesListener.onFailureMovies(response.message());
+                }
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                moviesListener.onFailureMovies(t);
-                Log.v("TAG_TAG", t.getLocalizedMessage());
+                moviesListener.onFailureMovies(t.getMessage());
             }
         });
     }

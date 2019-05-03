@@ -33,7 +33,7 @@ public class SearchMoviePresenter implements SearchMovieContract.Presenter, Sear
     }
 
     @Override
-    public void onFailure(Throwable throwable) {
-        Log.v("TAG_TAG", throwable.getLocalizedMessage());
+    public void onFailure(String message) {
+        Log.v("TAG_TAG", message);
     }
 }

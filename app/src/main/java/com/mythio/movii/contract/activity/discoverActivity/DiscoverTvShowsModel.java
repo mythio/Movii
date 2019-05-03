@@ -1,7 +1,5 @@
 package com.mythio.movii.contract.activity.discoverActivity;
 
-import android.util.Log;
-
 import com.mythio.movii.contract.activity.discoverActivity.DiscoverContract.Model;
 import com.mythio.movii.model.tvShow.TvShowResponse;
 import com.mythio.movii.network.ApiClientBuilderTmdb;
@@ -28,13 +26,16 @@ public class DiscoverTvShowsModel implements Model.TvShowsModel {
         call.enqueue(new Callback<TvShowResponse>() {
             @Override
             public void onResponse(Call<TvShowResponse> call, Response<TvShowResponse> response) {
-                tvShowsListener.onFinishedTvShows(response.body().getResults());
+                if (response.isSuccessful()) {
+                    tvShowsListener.onFinishedTvShows(response.body().getResults());
+                } else {
+                    tvShowsListener.onFailureTvShows(response.message());
+                }
             }
 
             @Override
             public void onFailure(Call<TvShowResponse> call, Throwable t) {
-                tvShowsListener.onFailureTvShows(t);
-                Log.v("TAG_TAG", t.getLocalizedMessage());
+                tvShowsListener.onFailureTvShows(t.getMessage());
             }
         });
     }

@@ -1,10 +1,11 @@
 package com.mythio.movii.contract.activity.searchTvShowActivity;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.model.tvShow.TvShowResponse;
 import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 
-import androidx.annotation.NonNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,12 +25,14 @@ public class SearchTvShowModel implements SearchTvShowContract.Model {
             public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
                 if (response.body() != null) {
                     listener.onFinished(response.body().getResults());
+                } else {
+                    listener.onFailure(response.message());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
-                listener.onFailure(t);
+                listener.onFailure(t.getMessage());
             }
         });
     }

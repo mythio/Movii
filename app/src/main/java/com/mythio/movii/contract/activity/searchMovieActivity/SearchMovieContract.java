@@ -30,7 +30,7 @@ public interface SearchMovieContract {
 
             void onFinished(ArrayList<MovieTmdb> movies);
 
-            void onFailure(Throwable throwable);
+            void onFailure(String message);
         }
     }
 }

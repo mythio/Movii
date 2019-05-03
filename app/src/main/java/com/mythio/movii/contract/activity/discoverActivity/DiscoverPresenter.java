@@ -36,7 +36,7 @@ public class DiscoverPresenter implements DiscoverContract.Presenter, DiscoverFr
     }
 
     @Override
-    public void onFailureMovies(Throwable throwable) {
+    public void onFailureMovies(String message) {
 
     }
 
@@ -46,7 +46,7 @@ public class DiscoverPresenter implements DiscoverContract.Presenter, DiscoverFr
     }
 
     @Override
-    public void onFailureTvShows(Throwable throwable) {
+    public void onFailureTvShows(String message) {
 
     }
 }

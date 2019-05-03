@@ -1,12 +1,11 @@
 package com.mythio.movii.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
-import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.mythio.movii.R;
 import com.mythio.movii.contract.activity.discoverActivity.DiscoverContract;
 import com.mythio.movii.contract.activity.discoverActivity.DiscoverPresenter;
@@ -21,10 +20,13 @@ import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DiscoverActivity extends AppCompatActivity implements DiscoverContract.View {
 
-//    @BindView(R.id.bottom_navigation)
-//    BubbleNavigationConstraintView navBar;
+    @BindView(R.id.bottom_navigation)
+    BubbleNavigationConstraintView navBar;
 
     private MoviesFragment moviesFragment = new MoviesFragment();
     private TvShowsFragment tvShowsFragment = new TvShowsFragment();
@@ -40,34 +42,30 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-//        startActivity(new Intent(this, TvShowDetailsActivity.class));
-//        finish();
-//        ButterKnife.bind(this);
+        ButterKnife.bind(this);
+
+        startActivity(new Intent(this, TvShowDetailsActivity.class));
+        finish();
 
         presenter = new DiscoverPresenter(this);
         presenter.setFragment(moviesFragment);
 
         presenter.onDataRequest();
 
-        BubbleNavigationConstraintView navBar = findViewById(R.id.bottom_navigation);
-
         moviesCallback = moviesFragment;
         tvShowsCallback = tvShowsFragment;
 
-        navBar.setNavigationChangeListener(new BubbleNavigationChangeListener() {
-            @Override
-            public void onNavigationChanged(View view, int position) {
-                switch (position) {
-                    case 0:
-                        presenter.setFragment(moviesFragment);
-                        break;
-                    case 1:
-                        presenter.setFragment(tvShowsFragment);
-                        break;
-                    case 2:
-                        presenter.setFragment(profileFragment);
-                        break;
-                }
+        navBar.setNavigationChangeListener((view, position) -> {
+            switch (position) {
+                case 0:
+                    presenter.setFragment(moviesFragment);
+                    break;
+                case 1:
+                    presenter.setFragment(tvShowsFragment);
+                    break;
+                case 2:
+                    presenter.setFragment(profileFragment);
+                    break;
             }
         });
     }

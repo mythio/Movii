@@ -1,5 +1,7 @@
 package com.mythio.movii.contract.activity.movieDetailsActivity;
 
+import android.util.Log;
+
 import com.mythio.movii.model.collection.CollectionResponse;
 import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.movie.Movie;
@@ -13,7 +15,6 @@ import com.mythio.movii.network.EndPointsOmdb;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -33,6 +34,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
     @Override
     public void getDetails(final OnCollectionListener listener, final Integer id) {
+        Log.d("TAG_TAG_TAG", "**** getDetails S");
         this.listener = listener;
 
         Call<MovieTmdb> call = apiServiceTmdb.getMovieDetail(Integer.valueOf(id), API_KEY_TMDB, "");
@@ -46,13 +48,13 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
                         getMovieDetailsTmdb(String.valueOf(id));
                     }
                 } else {
-
+                    listener.onFailure(response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<MovieTmdb> call, Throwable t) {
-
+                listener.onFailure(t.getMessage());
             }
         });
     }
@@ -60,7 +62,6 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
     private void getCollection(String id) {
 
         Call<CollectionResponse> call = apiServiceTmdb.getCollectionResults(id, API_KEY_TMDB);
-
         call.enqueue(new Callback<CollectionResponse>() {
             @Override
             public void onResponse(Call<CollectionResponse> call, Response<CollectionResponse> response) {
@@ -72,7 +73,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
             @Override
             public void onFailure(Call<CollectionResponse> call, Throwable t) {
-                listener.onFailure(t);
+                listener.onFailure(t.getMessage());
             }
         });
     }
@@ -89,12 +90,14 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
                     } else {
                         getMovieDetailsOmdb(response.body());
                     }
+                } else {
+                    listener.onFailure(response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<MovieTmdb> call, Throwable t) {
-                listener.onFailure(t);
+                listener.onFailure(t.getMessage());
             }
         });
     }
@@ -142,12 +145,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
         movies.add(movie);
 
         if (collectionSize == movies.size()) {
-            Collections.sort(movies, new Comparator<Movie>() {
-                @Override
-                public int compare(Movie o1, Movie o2) {
-                    return o1.getYear().compareTo(o2.getYear());
-                }
-            });
+            Collections.sort(movies, (o1, o2) -> o1.getYear().compareTo(o2.getYear()));
             listener.onFinished(movies);
         }
     }
@@ -155,9 +153,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
     private void getMovieDetailsOmdb(final MovieTmdb movieTmdb) {
 
         final Movie movie = new Movie();
-
         Call<MovieOmdb> call = apiServiceOmdb.getMovieDetailOmdb(API_KEY_OMDB, movieTmdb.getImdb());
-
         call.enqueue(new Callback<MovieOmdb>() {
             @Override
             public void onResponse(Call<MovieOmdb> call, Response<MovieOmdb> response) {
@@ -212,12 +208,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
                     movies.add(movie);
 
                     if (collectionSize == movies.size()) {
-                        Collections.sort(movies, new Comparator<Movie>() {
-                            @Override
-                            public int compare(Movie o1, Movie o2) {
-                                return o1.getYear().compareTo(o2.getYear());
-                            }
-                        });
+                        Collections.sort(movies, (o1, o2) -> o1.getYear().compareTo(o2.getYear()));
                         listener.onFinished(movies);
                     }
                 }
@@ -225,7 +216,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
             @Override
             public void onFailure(Call<MovieOmdb> call, Throwable t) {
-                listener.onFailure(t);
+                listener.onFailure(t.getMessage());
             }
         });
     }

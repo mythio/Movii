@@ -25,7 +25,7 @@ public class TvShowDetailsPresenter implements TvShowDetailsContract.Presenter, 
     }
 
     @Override
-    public void onFailure(Throwable throwable) {
-        Log.v("TAG_TAG", throwable.getLocalizedMessage());
+    public void onFailure(String message) {
+        Log.v("TAG_TAG", message);
     }
 }

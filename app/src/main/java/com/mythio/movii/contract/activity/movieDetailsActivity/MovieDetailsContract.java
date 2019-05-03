@@ -24,7 +24,7 @@ public interface MovieDetailsContract {
 
             void onFinished(ArrayList<Movie> movies);
 
-            void onFailure(Throwable throwable);
+            void onFailure(String message);
         }
     }
 }

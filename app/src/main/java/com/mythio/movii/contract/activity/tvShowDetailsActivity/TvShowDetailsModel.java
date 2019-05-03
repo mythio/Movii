@@ -39,12 +39,14 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
             public void onResponse(Call<TvShowTmdb> call, Response<TvShowTmdb> response) {
                 if (response.isSuccessful()) {
                     setTmdb(response.body());
+                } else {
+                    listener.onFailure(response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<TvShowTmdb> call, Throwable t) {
-                listener.onFailure(t);
+                listener.onFailure(t.getMessage());
             }
         });
     }
@@ -138,7 +140,7 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
 
             @Override
             public void onFailure(Call<TvShowOmdb> call, Throwable t) {
-
+                listener.onFailure(t.getMessage());
             }
         });
     }

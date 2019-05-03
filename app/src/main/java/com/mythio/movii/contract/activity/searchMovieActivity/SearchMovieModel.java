@@ -21,14 +21,16 @@ public class SearchMovieModel implements SearchMovieContract.Model {
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                if (response != null) {
+                if (response.isSuccessful()) {
                     listener.onFinished(response.body().getResults());
+                } else {
+                    listener.onFailure(response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                listener.onFailure(t);
+                listener.onFailure(t.getMessage());
             }
         });
     }

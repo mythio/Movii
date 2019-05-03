@@ -30,7 +30,7 @@ public interface SearchTvShowContract {
 
             void onFinished(ArrayList<TvShowTmdb> tvShows);
 
-            void onFailure(Throwable throwable);
+            void onFailure(String message);
         }
     }
 }

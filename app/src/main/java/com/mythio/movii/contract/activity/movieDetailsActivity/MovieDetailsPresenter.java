@@ -23,12 +23,11 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter, Mo
 
     @Override
     public void onFinished(ArrayList<Movie> movies) {
-
         view.showPages(movies);
     }
 
     @Override
-    public void onFailure(Throwable throwable) {
-        Log.v("TAG_TAG", throwable.getLocalizedMessage());
+    public void onFailure(String message) {
+        Log.v("TAG_TAG", message);
     }
 }

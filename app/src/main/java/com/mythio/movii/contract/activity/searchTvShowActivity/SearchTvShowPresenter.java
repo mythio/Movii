@@ -33,7 +33,7 @@ public class SearchTvShowPresenter implements SearchTvShowContract.Presenter, Se
     }
 
     @Override
-    public void onFailure(Throwable throwable) {
-        Log.v("TAG_TAG", throwable.getLocalizedMessage());
+    public void onFailure(String message) {
+        Log.v("TAG_TAG", message);
     }
 }

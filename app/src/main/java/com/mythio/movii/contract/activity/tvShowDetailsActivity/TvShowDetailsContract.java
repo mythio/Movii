@@ -22,7 +22,7 @@ public interface TvShowDetailsContract {
 
             void onFinished(TvShow tvShow);
 
-            void onFailure(Throwable throwable);
+            void onFailure(String message);
         }
     }
 }

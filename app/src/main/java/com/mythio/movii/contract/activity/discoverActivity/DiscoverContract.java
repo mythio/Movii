@@ -32,7 +32,7 @@ public interface DiscoverContract {
 
                 void onFinishedMovies(ArrayList<MovieTmdb> movies);
 
-                void onFailureMovies(Throwable throwable);
+                void onFailureMovies(String message);
             }
         }
 
@@ -44,7 +44,7 @@ public interface DiscoverContract {
 
                 void onFinishedTvShows(ArrayList<TvShowTmdb> tvShows);
 
-                void onFailureTvShows(Throwable throwable);
+                void onFailureTvShows(String message);
 
             }
         }
