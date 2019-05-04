@@ -1,4 +1,4 @@
-package com.mythio.movii.util.viewPagerAdapter;
+package com.mythio.movii.adapter.viewPagerAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

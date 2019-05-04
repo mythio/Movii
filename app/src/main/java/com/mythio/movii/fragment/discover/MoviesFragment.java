@@ -4,20 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
+
 import com.mythio.movii.R;
 import com.mythio.movii.activity.MovieDetailsActivity;
 import com.mythio.movii.activity.SearchMovieActivity;
+import com.mythio.movii.adapter.viewPagerAdapter.MovieSliderAdapter;
 import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.OnItemClickListener;
 import com.mythio.movii.contract.fragment.discover.moviesFragment.MoviesContract;
 import com.mythio.movii.contract.fragment.discover.moviesFragment.MoviesPresenter;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.mythio.movii.util.viewPagerAdapter.MovieSliderAdapter;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

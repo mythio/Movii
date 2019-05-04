@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mythio.movii.R;
+import com.mythio.movii.adapter.viewPagerAdapter.MovieDetailsAdapter;
 import com.mythio.movii.contract.activity.movieDetailsActivity.MovieDetailsContract;
 import com.mythio.movii.contract.activity.movieDetailsActivity.MovieDetailsPresenter;
 import com.mythio.movii.model.movie.Movie;
-import com.mythio.movii.util.viewPagerAdapter.MovieDetailsAdapter;
 
 import java.util.ArrayList;
 

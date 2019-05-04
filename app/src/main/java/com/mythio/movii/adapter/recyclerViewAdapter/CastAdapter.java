@@ -1,9 +1,12 @@
-package com.mythio.movii.util.recyclerViewAdapter;
+package com.mythio.movii.adapter.recyclerViewAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.model.cast.Cast;
@@ -11,8 +14,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;

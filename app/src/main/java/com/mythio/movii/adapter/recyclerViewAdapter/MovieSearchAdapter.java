@@ -1,4 +1,4 @@
-package com.mythio.movii.util.recyclerViewAdapter;
+package com.mythio.movii.adapter.recyclerViewAdapter;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -7,13 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.mythio.movii.R;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.MovieSearchHolder> {
     private Context mContext;

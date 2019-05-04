@@ -1,4 +1,4 @@
-package com.mythio.movii.util.viewPagerAdapter;
+package com.mythio.movii.adapter.viewPagerAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,10 +16,10 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mythio.movii.R;
+import com.mythio.movii.adapter.recyclerViewAdapter.CastAdapter;
+import com.mythio.movii.adapter.recyclerViewAdapter.RecommendedMoviesAdapter;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.ItemDecorator;
-import com.mythio.movii.util.recyclerViewAdapter.CastAdapter;
-import com.mythio.movii.util.recyclerViewAdapter.RecommendedMoviesAdapter;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;

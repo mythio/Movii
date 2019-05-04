@@ -1,36 +1,37 @@
-package com.mythio.movii.util.viewPagerAdapter;
+package com.mythio.movii.adapter.viewPagerAdapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.mythio.movii.R;
 import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.OnItemClickListener;
-import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.model.movie.MovieTmdb;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
-public class TvShowSliderAdapter extends PagerAdapter {
+public class MovieSliderAdapter extends PagerAdapter {
 
     private final Context mContext;
-    private final ArrayList<TvShowTmdb> tvShows;
+    private final ArrayList<MovieTmdb> mMovies;
     private OnItemClickListener listener;
 
-    public TvShowSliderAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows) {
+    public MovieSliderAdapter(Context mContext, ArrayList<MovieTmdb> mMovies) {
         this.mContext = mContext;
-        this.tvShows = tvShows;
+        this.mMovies = mMovies;
     }
 
     public void setOnClickListener(OnItemClickListener listener) {
@@ -39,19 +40,18 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return tvShows.size();
+        return mMovies.size();
     }
 
     @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == object;
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
+        return view == o;
     }
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, final int i) {
-        final TvShowTmdb tvShow = tvShows.get(i);
-
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        final MovieTmdb movie = mMovies.get(position);
         final LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -63,10 +63,18 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
         im.setImageDrawable(mContext.getDrawable(R.drawable.bg_gradient_movie));
 
-        textViewTitle1.setText(tvShow.getName());
-        textViewTitle2.setVisibility(View.GONE);
+        String[] title_arr = movie.getTitle().split(": ");
 
-        String url = IMAGE_BASE_URL + "w780" + tvShow.getBackdropPath();
+        if (title_arr.length == 2) {
+            textViewTitle1.setText(title_arr[0].trim());
+            textViewTitle2.setVisibility(View.VISIBLE);
+            textViewTitle2.setText(title_arr[1].trim());
+        } else {
+            textViewTitle1.setText(title_arr[0].trim());
+            textViewTitle2.setVisibility(View.GONE);
+        }
+
+        String url = IMAGE_BASE_URL + "w780" + movie.getBackdropPath();
 
         Picasso.get()
                 .load(url)
@@ -78,9 +86,11 @@ public class TvShowSliderAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(i);
+                listener.onItemClick(movie.getId());
             }
         });
+
+        Log.v("TAG_TAG_TAG", movie.getTitle() + "");
 
         return view;
     }

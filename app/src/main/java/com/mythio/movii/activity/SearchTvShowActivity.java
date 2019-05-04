@@ -8,18 +8,19 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.mythio.movii.R;
-import com.mythio.movii.contract.activity.searchTvShowActivity.SearchTvShowContract;
-import com.mythio.movii.contract.activity.searchTvShowActivity.SearchTvShowPresenter;
-import com.mythio.movii.model.tvShow.TvShowTmdb;
-import com.mythio.movii.util.recyclerViewAdapter.MovieSearchAdapter;
-import com.mythio.movii.util.recyclerViewAdapter.TvShowSearchAdapter;
-
-import java.util.ArrayList;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.mythio.movii.R;
+import com.mythio.movii.adapter.recyclerViewAdapter.MovieSearchAdapter;
+import com.mythio.movii.adapter.recyclerViewAdapter.TvShowSearchAdapter;
+import com.mythio.movii.contract.activity.searchTvShowActivity.SearchTvShowContract;
+import com.mythio.movii.contract.activity.searchTvShowActivity.SearchTvShowPresenter;
+import com.mythio.movii.model.tvShow.TvShowTmdb;
+
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
