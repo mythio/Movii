@@ -33,7 +33,9 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
     @Override
     public void showPages(ArrayList<Movie> movies) {
 
-        MovieDetailsAdapter adapter = new MovieDetailsAdapter(this, movies);
-        viewPager.setAdapter(adapter);
+        new Thread(() -> runOnUiThread(() -> {
+            MovieDetailsAdapter adapter = new MovieDetailsAdapter(this, movies);
+            viewPager.setAdapter(adapter);
+        })).start();
     }
 }

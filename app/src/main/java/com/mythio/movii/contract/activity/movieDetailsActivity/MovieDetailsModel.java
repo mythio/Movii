@@ -1,7 +1,5 @@
 package com.mythio.movii.contract.activity.movieDetailsActivity;
 
-import android.util.Log;
-
 import com.mythio.movii.model.collection.CollectionResponse;
 import com.mythio.movii.model.genre.Genre;
 import com.mythio.movii.model.movie.Movie;
@@ -34,7 +32,6 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
     @Override
     public void getDetails(final OnCollectionListener listener, final Integer id) {
-        Log.d("TAG_TAG_TAG", "**** getDetails S");
         this.listener = listener;
 
         Call<MovieTmdb> call = apiServiceTmdb.getMovieDetail(Integer.valueOf(id), API_KEY_TMDB, "");

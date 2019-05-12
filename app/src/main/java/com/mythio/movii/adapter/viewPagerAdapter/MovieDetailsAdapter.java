@@ -1,5 +1,6 @@
 package com.mythio.movii.adapter.viewPagerAdapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,39 +100,45 @@ public class MovieDetailsAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.item_movie_details, null);
         ButterKnife.bind(this, view);
 
-        String[] title = movie.getTitle().split(": ");
+        Thread th = new Thread(() -> {
+            String[] title = movie.getTitle().split(": ");
 
-        txtViewYear.setText(movie.getYear());
+            txtViewYear.setText(movie.getYear());
 
-        if (title.length == 2) {
-            txtViewTitle1.setText(title[0].trim());
-            txtViewTitle2.setText(title[1].trim());
-        } else {
-            txtViewTitle1.setText(title[0].trim());
-            txtViewTitle2.setVisibility(View.GONE);
-        }
+            if (title.length == 2) {
+                txtViewTitle1.setText(title[0].trim());
+                txtViewTitle2.setText(title[1].trim());
+            } else {
+                txtViewTitle1.setText(title[0].trim());
+                txtViewTitle2.setVisibility(View.GONE);
+            }
 
-        rating.setText(movie.getRating());
+            rating.setText(movie.getRating());
 
-        txtViewGenre.setText(movie.getGenres());
-        txtViewRuntime.setText(movie.getRuntime());
-        txtViewOverview.setText(movie.getOverview());
-        ratingBar.setRating(Float.valueOf(movie.getRating()) / 2);
-        txtViewVoteCount.setText(movie.getVotes());
-        recyclerViewCast.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewCast.addItemDecoration(new ItemDecorator(12, 1));
-        recyclerViewCast.setAdapter(new CastAdapter(movie.getCasts(), view.getContext()));
-        recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewRecommended.addItemDecoration(new ItemDecorator(36, 0));
-        recyclerViewRecommended.setAdapter(new RecommendedMoviesAdapter(view.getContext(), movie.getMoviesTmdb()));
-        recyclerViewRecommended.setDrawingCacheEnabled(true);
-        recyclerViewRecommended.setItemViewCacheSize(6);
-        recyclerViewRecommended.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+            txtViewGenre.setText(movie.getGenres());
+            txtViewRuntime.setText(movie.getRuntime());
+            txtViewOverview.setText(movie.getOverview());
+            ratingBar.setRating(Float.valueOf(movie.getRating()) / 2);
+            txtViewVoteCount.setText(movie.getVotes());
+            recyclerViewCast.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
+            recyclerViewCast.addItemDecoration(new ItemDecorator(12, 1));
+            recyclerViewCast.setAdapter(new CastAdapter(movie.getCasts(), view.getContext()));
+            recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
+            recyclerViewRecommended.addItemDecoration(new ItemDecorator(36, 0));
+            recyclerViewRecommended.setAdapter(new RecommendedMoviesAdapter(view.getContext(), movie.getMoviesTmdb()));
+            recyclerViewRecommended.setDrawingCacheEnabled(true);
+            recyclerViewRecommended.setItemViewCacheSize(6);
+            recyclerViewRecommended.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        });
+        th.start();
 
         Picasso.get().load(IMAGE_BASE_URL + "w780" + movie.getPosterPath()).into(imgViewPoster);
 
-        ViewPager viewPager = (ViewPager) container;
-        viewPager.addView(view, 0);
+        Thread tht = new Thread(() -> ((Activity) mContext).runOnUiThread(() -> {
+            ViewPager viewPager = (ViewPager) container;
+            viewPager.addView(view, 0);
+        }));
+        tht.start();
 
         return view;
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,19 +13,21 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.mythio.movii.R;
 import com.mythio.movii.model.season.SeasonDetails;
+import com.mythio.movii.model.tvShow.TvShow;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
+
 public class TvShowDetailsAdapter extends PagerAdapter {
 
     private final Context mContext;
-    private final ArrayList<SeasonDetails> mSeasons;
-    //
+    private final TvShow tvShow;
+
 //    @BindView(R.id.txt_view_runtime)
 //    TextView txtViewRuntime;
 //
@@ -45,8 +48,9 @@ public class TvShowDetailsAdapter extends PagerAdapter {
 //
 //    @BindView(R.id.recycler_view_recommended)
 //    RecyclerView recyclerViewRecommended;
-//    @BindView(R.id.img_view_poster)
-//    ImageView imgViewPoster;
+
+    @BindView(R.id.img_view_poster)
+    ImageView imgViewPoster;
 //
 //    @BindView(R.id.img_view_play)
 //    ImageButton imgViewPlay;
@@ -56,20 +60,20 @@ public class TvShowDetailsAdapter extends PagerAdapter {
 //
 //    @BindView(R.id.txt_view_genre)
 //    TextView txtViewGenre;
-//
+
     @BindView(R.id.txt_view_title_1)
     TextView txtViewTitle1;
     @BindView(R.id.txt_view_title_2)
     TextView txtViewTitle2;
 
-    public TvShowDetailsAdapter(Context mContext, ArrayList<SeasonDetails> mSeasons) {
+    public TvShowDetailsAdapter(Context mContext, TvShow tvShow) {
         this.mContext = mContext;
-        this.mSeasons = mSeasons;
+        this.tvShow = tvShow;
     }
 
     @Override
     public int getCount() {
-        return mSeasons.size();
+        return tvShow.getSeasons().size();
     }
 
     @Override
@@ -80,13 +84,15 @@ public class TvShowDetailsAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        final SeasonDetails season = mSeasons.get(position);
+        final SeasonDetails season = tvShow.getSeasons().get(position);
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_movie_details, null);
         ButterKnife.bind(this, view);
 
-        txtViewTitle1.setText("TITLE FOR THE TV SHOW");
+        txtViewTitle1.setText(tvShow.getName());
+        txtViewTitle2.setText(season.getName());
+        Picasso.get().load(IMAGE_BASE_URL + "w780" + season.getPosterPath()).into(imgViewPoster);
 
 //        String[] title = movie.getTitle().split(": ");
 //
@@ -116,8 +122,6 @@ public class TvShowDetailsAdapter extends PagerAdapter {
 //        recyclerViewRecommended.setDrawingCacheEnabled(true);
 //        recyclerViewRecommended.setItemViewCacheSize(6);
 //        recyclerViewRecommended.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-
-
 //        Picasso.get().load(IMAGE_BASE_URL + "w780" + movie.getPosterPath()).into(imgViewPoster);
 
         ViewPager viewPager = (ViewPager) container;
