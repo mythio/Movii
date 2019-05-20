@@ -63,92 +63,18 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_view_runtime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:textSize="16sp" />
-
-            <TextView
                 android:id="@+id/txt_view_overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:textSize="16sp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp">
-
-                <androidx.appcompat.widget.AppCompatRatingBar
-                    android:id="@+id/rating_bar"
-                    style="@style/Base.Widget.AppCompat.RatingBar.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="14dp"
-                    android:isIndicator="true"
-                    android:numStars="5"
-                    android:outlineProvider="paddedBounds"
-                    android:progressBackgroundTint="#FFFFFF"
-                    android:progressTint="#FECE00"
-                    android:stepSize="0.5"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txt_view_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/rating_bar"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txt_view_vote_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/txt_view_rating"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:text="CAST"
+                android:text="Episodes"
                 android:textSize="16sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_cast"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginBottom="24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="SIMILAR MOVIES" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_recommended"
-                android:layout_width="match_parent"
-                android:layout_height="204dp"
-                android:background="@drawable/bg_rounded_rectangle"
-                android:backgroundTint="#111111"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:requiresFadingEdge="vertical">
-
-            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 

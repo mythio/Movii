@@ -28,41 +28,15 @@ public class TvShowDetailsAdapter extends PagerAdapter {
     private final Context mContext;
     private final TvShow tvShow;
 
-//    @BindView(R.id.txt_view_runtime)
-//    TextView txtViewRuntime;
-//
-//    @BindView(R.id.txt_view_overview)
-//    TextView txtViewOverview;
-//
-//    @BindView(R.id.rating_bar)
-//    RatingBar ratingBar;
-//
-//    @BindView(R.id.txt_view_rating)
-//    TextView rating;
-//
-//    @BindView(R.id.txt_view_vote_count)
-//    TextView txtViewVoteCount;
-//
-//    @BindView(R.id.recycler_view_cast)
-//    RecyclerView recyclerViewCast;
-//
-//    @BindView(R.id.recycler_view_recommended)
-//    RecyclerView recyclerViewRecommended;
+    @BindView(R.id.txt_view_overview)
+    TextView txtViewOverview;
 
     @BindView(R.id.img_view_poster)
     ImageView imgViewPoster;
-//
-//    @BindView(R.id.img_view_play)
-//    ImageButton imgViewPlay;
-//
-//    @BindView(R.id.txt_view_year)
-//    TextView txtViewYear;
-//
-//    @BindView(R.id.txt_view_genre)
-//    TextView txtViewGenre;
 
     @BindView(R.id.txt_view_title_1)
     TextView txtViewTitle1;
+
     @BindView(R.id.txt_view_title_2)
     TextView txtViewTitle2;
 
@@ -87,42 +61,14 @@ public class TvShowDetailsAdapter extends PagerAdapter {
         final SeasonDetails season = tvShow.getSeasons().get(position);
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.item_movie_details, null);
+        View view = inflater.inflate(R.layout.item_tvshow_details, null);
         ButterKnife.bind(this, view);
 
         txtViewTitle1.setText(tvShow.getName());
         txtViewTitle2.setText(season.getName());
         Picasso.get().load(IMAGE_BASE_URL + "w780" + season.getPosterPath()).into(imgViewPoster);
 
-//        String[] title = movie.getTitle().split(": ");
-//
-//        txtViewYear.setText(movie.getYear());
-//
-//        if (title.length == 2) {
-//            txtViewTitle1.setText(title[0].trim());
-//            txtViewTitle2.setText(title[1].trim());
-//        } else {
-//            txtViewTitle1.setText(title[0].trim());
-//            txtViewTitle2.setVisibility(View.GONE);
-//        }
-//
-//        rating.setText(movie.getRating());
-//
-//        txtViewGenre.setText(movie.getGenres());
-//        txtViewRuntime.setText(movie.getRuntime());
-//        txtViewOverview.setText(movie.getOverview());
-//        ratingBar.setRating(Float.valueOf(movie.getRating()) / 2);
-//        txtViewVoteCount.setText(movie.getVotes());
-//        recyclerViewCast.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        recyclerViewCast.addItemDecoration(new ItemDecorator(12, 1));
-//        recyclerViewCast.setAdapter(new CastAdapter(movie.getCasts(), view.getContext()));
-//        recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        recyclerViewRecommended.addItemDecoration(new ItemDecorator(36, 0));
-//        recyclerViewRecommended.setAdapter(new RecommendedMoviesAdapter(view.getContext(), movie.getMoviesTmdb()));
-//        recyclerViewRecommended.setDrawingCacheEnabled(true);
-//        recyclerViewRecommended.setItemViewCacheSize(6);
-//        recyclerViewRecommended.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-//        Picasso.get().load(IMAGE_BASE_URL + "w780" + movie.getPosterPath()).into(imgViewPoster);
+        txtViewOverview.setText(season.getOverview());
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);

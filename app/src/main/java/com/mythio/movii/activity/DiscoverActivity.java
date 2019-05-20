@@ -1,6 +1,5 @@
 package com.mythio.movii.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,8 +43,8 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
 
         ButterKnife.bind(this);
 
-        startActivity(new Intent(this, TvShowDetailsActivity.class));
-        finish();
+//        startActivity(new Intent(this, TvShowDetailsActivity.class));
+//        finish();
 
         presenter = new DiscoverPresenter(this);
         presenter.setFragment(moviesFragment);

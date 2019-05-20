@@ -1,5 +1,6 @@
 package com.mythio.movii.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -49,7 +50,6 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchMovi
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.addItemDecoration(decorator);
 
-
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -75,9 +75,7 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchMovi
 
     @Override
     public void showPlate() {
-
         if (searchPlate.getVisibility() == View.INVISIBLE) {
-
             searchPlate.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_in));
             recyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_out));
             searchPlate.setVisibility(View.VISIBLE);
@@ -87,9 +85,7 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchMovi
 
     @Override
     public void hidePlate() {
-
         if (searchPlate.getVisibility() == View.VISIBLE) {
-
             searchPlate.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_out));
             recyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_in));
             searchPlate.setVisibility(View.INVISIBLE);
@@ -99,7 +95,11 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchMovi
 
     @Override
     public void showRes(ArrayList<MovieTmdb> movies) {
-        MovieSearchAdapter adapter = new MovieSearchAdapter(this, movies);
+        MovieSearchAdapter adapter = new MovieSearchAdapter(this, movies, id -> {
+            Intent intent = new Intent(SearchMovieActivity.this, MovieDetailsActivity.class);
+            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", String.valueOf(id));
+            startActivity(intent);
+        });
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.setAdapter(adapter);
     }

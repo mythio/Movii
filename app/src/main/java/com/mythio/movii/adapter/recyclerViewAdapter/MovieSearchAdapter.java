@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
+import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.OnItemClickListener;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
@@ -18,10 +19,12 @@ import java.util.ArrayList;
 public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.MovieSearchHolder> {
     private Context mContext;
     private ArrayList<MovieTmdb> mMovies;
+    private OnItemClickListener listener;
 
-    public MovieSearchAdapter(Context mContext, ArrayList<MovieTmdb> mMovies) {
+    public MovieSearchAdapter(Context mContext, ArrayList<MovieTmdb> mMovies, OnItemClickListener listener) {
         this.mContext = mContext;
         this.mMovies = mMovies;
+        this.listener = listener;
     }
 
     @NonNull
@@ -73,6 +76,8 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
 
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewYear = itemView.findViewById(R.id.text_view_year);
+
+            itemView.setOnClickListener(v -> listener.onItemClick(mMovies.get(getAdapterPosition()).getId()));
         }
     }
 }

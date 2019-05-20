@@ -197,7 +197,12 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
                     movie.setGenres(genreString.toString());
 
-                    int runtime = movieTmdb.getRuntime();
+                    int runtime;
+                    if (movieTmdb.getRuntime() != null) {
+                        runtime = movieTmdb.getRuntime();
+                    } else {
+                        runtime = 0;
+                    }
 
                     movie.setRuntime(runtime / 60 + " h " + runtime % 60 + " m");
                     movie.setVideos(movieTmdb.getVideoResponse().getVideos());

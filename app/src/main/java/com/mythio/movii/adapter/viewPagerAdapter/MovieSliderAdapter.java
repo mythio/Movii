@@ -29,12 +29,9 @@ public class MovieSliderAdapter extends PagerAdapter {
     private final ArrayList<MovieTmdb> mMovies;
     private OnItemClickListener listener;
 
-    public MovieSliderAdapter(Context mContext, ArrayList<MovieTmdb> mMovies) {
+    public MovieSliderAdapter(Context mContext, ArrayList<MovieTmdb> mMovies, OnItemClickListener listener) {
         this.mContext = mContext;
         this.mMovies = mMovies;
-    }
-
-    public void setOnClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -83,12 +80,7 @@ public class MovieSliderAdapter extends PagerAdapter {
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onItemClick(movie.getId());
-            }
-        });
+        view.setOnClickListener(v -> listener.onItemClick(movie.getId()));
 
         Log.v("TAG_TAG_TAG", movie.getTitle() + "");
 
