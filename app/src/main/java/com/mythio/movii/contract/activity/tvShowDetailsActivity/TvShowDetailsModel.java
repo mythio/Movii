@@ -32,7 +32,7 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
     public void getTvShowDetails(final OnTvShowDetailsListener listener, Integer id) {
         this.listener = listener;
 
-        Call<TvShowTmdb> call = apiServiceTmdb.getTvShowDetail(id, API_KEY_TMDB, "external_ids,season/1,season/2,season/3,season/4,season/5,season/6,season/7,season/8,season/9,season/10,season/11,,season/12,season/13,season/14");
+        Call<TvShowTmdb> call = apiServiceTmdb.getTvShowDetail(id, API_KEY_TMDB, "external_ids,season/1,season/2,season/3,season/4,season/5,season/6,season/7,season/8,season/9,season/10,season/11,season/12,season/13,season/14");
 
         call.enqueue(new Callback<TvShowTmdb>() {
             @Override
