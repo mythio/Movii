@@ -23,13 +23,13 @@ import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
 public class TvShowDetailsModel implements TvShowDetailsContract.Model {
 
-    private OnTvShowDetailsListener listener;
+    private OnSeasonListener listener;
     private TvShow tvShow;
     private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
     private EndPointsOmdb apiServiceOmdb = ApiClientBuilderOmdb.getClient().create(EndPointsOmdb.class);
 
     @Override
-    public void getTvShowDetails(final OnTvShowDetailsListener listener, Integer id) {
+    public void getDetails(final OnSeasonListener listener, Integer id) {
         this.listener = listener;
 
         Call<TvShowTmdb> call = apiServiceTmdb.getTvShowDetail(id, API_KEY_TMDB, "external_ids,season/1,season/2,season/3,season/4,season/5,season/6,season/7,season/8,season/9,season/10,season/11,season/12,season/13,season/14");
@@ -52,7 +52,6 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
     }
 
     private void setTmdb(TvShowTmdb tvShowTmdb) {
-
         ArrayList<SeasonDetails> seasons = new ArrayList<>();
 
         tvShow = new TvShow();
@@ -123,7 +122,6 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
     }
 
     private void getTvShowDetailsOmdb(String imdb) {
-
         Call<TvShowOmdb> call = apiServiceOmdb.getTvShowDetailOmdb(API_KEY_OMDB, imdb);
         call.enqueue(new Callback<TvShowOmdb>() {
             @Override

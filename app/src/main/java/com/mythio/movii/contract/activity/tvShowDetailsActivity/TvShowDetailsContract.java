@@ -11,14 +11,14 @@ public interface TvShowDetailsContract {
 
     interface Presenter {
 
-        void onGetDetails(Integer id);
+        void onRequestSeasons(String id);
     }
 
     interface Model {
 
-        void getTvShowDetails(OnTvShowDetailsListener listener, Integer id);
+        void getDetails(OnSeasonListener listener, Integer id);
 
-        interface OnTvShowDetailsListener {
+        interface OnSeasonListener {
 
             void onFinished(TvShow tvShow);
 

@@ -28,12 +28,9 @@ public class TvShowSliderAdapter extends PagerAdapter {
     private final ArrayList<TvShowTmdb> tvShows;
     private OnItemClickListener listener;
 
-    public TvShowSliderAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows) {
+    public TvShowSliderAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows, OnItemClickListener listener) {
         this.mContext = mContext;
         this.tvShows = tvShows;
-    }
-
-    public void setOnClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -75,12 +72,7 @@ public class TvShowSliderAdapter extends PagerAdapter {
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onItemClick(i);
-            }
-        });
+        view.setOnClickListener(v -> listener.onItemClick(tvShow.getId()));
 
         return view;
     }

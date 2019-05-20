@@ -21,7 +21,9 @@ public class TvShowDetailsActivity extends AppCompatActivity implements TvShowDe
         setContentView(R.layout.activity_tv_show_details);
 
         TvShowDetailsContract.Presenter presenter = new TvShowDetailsPresenter(this);
-        presenter.onGetDetails(1418);
+
+        String currentId = getIntent().getStringExtra("BUNDLED_EXTRA_TV_ID");
+        presenter.onRequestSeasons(currentId);
 
         viewPager = findViewById(R.id.view_pager_details);
     }

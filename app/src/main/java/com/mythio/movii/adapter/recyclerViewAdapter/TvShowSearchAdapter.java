@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
+import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.OnItemClickListener;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
@@ -18,10 +19,12 @@ import java.util.ArrayList;
 public class TvShowSearchAdapter extends RecyclerView.Adapter<TvShowSearchAdapter.TvShowSearchHolder> {
     private Context mContext;
     private ArrayList<TvShowTmdb> mTvShows;
+    private OnItemClickListener listener;
 
-    public TvShowSearchAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows) {
+    public TvShowSearchAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows, OnItemClickListener listener) {
         this.mContext = mContext;
         this.mTvShows = tvShows;
+        this.listener = listener;
     }
 
     @NonNull
@@ -68,6 +71,8 @@ public class TvShowSearchAdapter extends RecyclerView.Adapter<TvShowSearchAdapte
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.text_view_title);
+
+            itemView.setOnClickListener(v -> listener.onItemClick(mTvShows.get(getAdapterPosition()).getId()));
         }
     }
 }

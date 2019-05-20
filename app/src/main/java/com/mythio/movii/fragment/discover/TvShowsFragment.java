@@ -10,8 +10,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.mythio.movii.R;
 import com.mythio.movii.activity.SearchTvShowActivity;
+import com.mythio.movii.activity.TvShowDetailsActivity;
 import com.mythio.movii.adapter.viewPagerAdapter.TvShowSliderAdapter;
-import com.mythio.movii.contract.fragment.discover.baseFragmentDiscover.OnItemClickListener;
 import com.mythio.movii.contract.fragment.discover.tvShowsFragment.TvShowsContract;
 import com.mythio.movii.contract.fragment.discover.tvShowsFragment.TvShowsPresenter;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsContract.View,
-        TvShowsContract.Callback, OnItemClickListener {
+        TvShowsContract.Callback {
 
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
@@ -68,27 +68,21 @@ public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsCont
 
     @Override
     public void initViewPager() {
-
-        viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View view, float v) {
-                view.findViewById(R.id.image_view_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
-                view.findViewById(R.id.text_view_title1).setAlpha(1.0F - Math.abs(v) * 2);
-                view.findViewById(R.id.text_view_title2).setAlpha(0.6F * (1.0F - Math.abs(v) * 2));
-            }
+        viewPager.setPageTransformer(false, (view, v) -> {
+            view.findViewById(R.id.image_view_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
+            view.findViewById(R.id.text_view_title1).setAlpha(1.0F - Math.abs(v) * 2);
+            view.findViewById(R.id.text_view_title2).setAlpha(0.6F * (1.0F - Math.abs(v) * 2));
         });
     }
 
     @Override
     public void showSlideShow(ArrayList<TvShowTmdb> tvShows) {
 
-        TvShowSliderAdapter adapter = new TvShowSliderAdapter(getContext(), tvShows);
-        adapter.setOnClickListener(this);
+        TvShowSliderAdapter adapter = new TvShowSliderAdapter(getContext(), tvShows, id -> {
+            Intent intent = new Intent(getContext(), TvShowDetailsActivity.class);
+            intent.putExtra("BUNDLED_EXTRA_TV_ID", String.valueOf(id));
+            startActivity(intent);
+        });
         viewPager.setAdapter(adapter);
-    }
-
-    @Override
-    public void onItemClick(int position) {
-
     }
 }

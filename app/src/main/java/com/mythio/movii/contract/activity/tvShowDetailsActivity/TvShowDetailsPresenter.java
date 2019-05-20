@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.mythio.movii.model.tvShow.TvShow;
 
-public class TvShowDetailsPresenter implements TvShowDetailsContract.Presenter, TvShowDetailsContract.Model.OnTvShowDetailsListener {
+public class TvShowDetailsPresenter implements TvShowDetailsContract.Presenter, TvShowDetailsContract.Model.OnSeasonListener {
 
     private TvShowDetailsContract.View view;
     private TvShowDetailsModel model;
@@ -15,8 +15,8 @@ public class TvShowDetailsPresenter implements TvShowDetailsContract.Presenter, 
     }
 
     @Override
-    public void onGetDetails(Integer id) {
-        model.getTvShowDetails(this, id);
+    public void onRequestSeasons(String id) {
+        model.getDetails(this, Integer.valueOf(id));
     }
 
     @Override

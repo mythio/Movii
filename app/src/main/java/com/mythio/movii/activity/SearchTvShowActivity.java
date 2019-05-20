@@ -1,5 +1,6 @@
 package com.mythio.movii.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.adapter.recyclerViewAdapter.MovieSearchAdapter;
 import com.mythio.movii.adapter.recyclerViewAdapter.TvShowSearchAdapter;
 import com.mythio.movii.contract.activity.searchTvShowActivity.SearchTvShowContract;
 import com.mythio.movii.contract.activity.searchTvShowActivity.SearchTvShowPresenter;
@@ -45,7 +45,7 @@ public class SearchTvShowActivity extends AppCompatActivity implements SearchTvS
         ButterKnife.bind(this);
         presenter = new SearchTvShowPresenter(this);
 
-        MovieSearchAdapter.ItemDecorator decorator = new MovieSearchAdapter.ItemDecorator(12);
+        TvShowSearchAdapter.ItemDecorator decorator = new TvShowSearchAdapter.ItemDecorator(12);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.addItemDecoration(decorator);
@@ -59,7 +59,6 @@ public class SearchTvShowActivity extends AppCompatActivity implements SearchTvS
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 if (s.toString().isEmpty()) {
                     presenter.onNoSearchParam();
                 } else {
@@ -76,9 +75,7 @@ public class SearchTvShowActivity extends AppCompatActivity implements SearchTvS
 
     @Override
     public void showPlate() {
-
         if (searchPlate.getVisibility() == View.INVISIBLE) {
-
             searchPlate.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_in));
             recyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_out));
             searchPlate.setVisibility(View.VISIBLE);
@@ -88,9 +85,7 @@ public class SearchTvShowActivity extends AppCompatActivity implements SearchTvS
 
     @Override
     public void hidePlate() {
-
         if (searchPlate.getVisibility() == View.VISIBLE) {
-
             searchPlate.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_out));
             recyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_in));
             searchPlate.setVisibility(View.INVISIBLE);
@@ -100,8 +95,11 @@ public class SearchTvShowActivity extends AppCompatActivity implements SearchTvS
 
     @Override
     public void showRes(ArrayList<TvShowTmdb> tvShows) {
-
-        TvShowSearchAdapter adapter = new TvShowSearchAdapter(this, tvShows);
+        TvShowSearchAdapter adapter = new TvShowSearchAdapter(this, tvShows, id -> {
+            Intent intent = new Intent(SearchTvShowActivity.this, TvShowDetailsActivity.class);
+            intent.putExtra("BUNDLED_EXTRA_TV_ID", String.valueOf(id));
+            startActivity(intent);
+        });
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.setAdapter(adapter);
     }
