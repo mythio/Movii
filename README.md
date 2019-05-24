@@ -5,10 +5,9 @@ A handcrafted Android application to show everything you want to know about your
 
 <img src="https://github.com/mythio/Movii/blob/MVP/res/home_movie.png" width="200">    <img src="https://github.com/mythio/Movii/blob/MVP/res/home_tv.png" width="200">    <img src="https://github.com/mythio/Movii/blob/MVP/res/movie_activity.png" width="200"> <img src="https://github.com/mythio/Movii/blob/MVP/res/search_activity.png" width="200"> <img src="https://github.com/mythio/Movii/blob/MVP/res/search_results.png" width="200">
 
-* Upcoming:
-Search activity to search what's on their minds.
-Genre section which will allow the user to view the top movies from their favourite genre.
-People fragment with top actors.
-Favourite buttons on the movies and shows.
-Profile section to keep track of the user's likings.
-and much more.
+### Upcoming:
+- Genre section which will allow the user to view the top movies from their favourite genre.
+- People fragment with top actors.
+- Favourite buttons on the movies and shows.
+- Profile section to keep track of the user's likings.
+- and much more.
