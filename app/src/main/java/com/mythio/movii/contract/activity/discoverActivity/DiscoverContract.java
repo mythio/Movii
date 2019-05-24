@@ -12,14 +12,14 @@ public interface DiscoverContract {
 
         void showFragment(BaseDiscoverFragment fragment);
 
-        void sendToFragmentMovies(ArrayList<MovieTmdb> movies);
+        void sendToMoviesFragment(ArrayList<MovieTmdb> movies);
 
-        void sendToFragmentTvShows(ArrayList<TvShowTmdb> tvShows);
+        void sendToTvShowsFragment(ArrayList<TvShowTmdb> tvShows);
     }
 
     interface Presenter {
 
-        void onDataRequest();
+        void getData();
     }
 
     interface Model {
@@ -31,8 +31,6 @@ public interface DiscoverContract {
             interface MoviesListener {
 
                 void onFinishedMovies(ArrayList<MovieTmdb> movies);
-
-                void onFailureMovies(String message);
             }
         }
 
@@ -43,9 +41,6 @@ public interface DiscoverContract {
             interface TvShowsListener {
 
                 void onFinishedTvShows(ArrayList<TvShowTmdb> tvShows);
-
-                void onFailureTvShows(String message);
-
             }
         }
     }

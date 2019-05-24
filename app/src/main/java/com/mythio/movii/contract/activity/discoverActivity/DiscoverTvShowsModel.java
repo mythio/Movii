@@ -1,42 +1,48 @@
 package com.mythio.movii.contract.activity.discoverActivity;
 
+import android.util.Log;
+
 import com.mythio.movii.contract.activity.discoverActivity.DiscoverContract.Model;
 import com.mythio.movii.model.tvShow.TvShowResponse;
 import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
 public class DiscoverTvShowsModel implements Model.TvShowsModel {
 
-    private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
-
-    /*
-    TV SHOW FRAGMENT DATA
-     */
+    private static final String TAG = "DiscoverTvShowsModel";
 
     @Override
-    public void getTvShows(final TvShowsListener tvShowsListener) {
+    public void getTvShows(final TvShowsListener listener) {
 
-        Call<TvShowResponse> call = apiServiceTmdb.getPopularTvShows(API_KEY_TMDB);
-        call.enqueue(new Callback<TvShowResponse>() {
+        getSingle().subscribe(getObserver(listener));
+
+    }
+
+    private Single<TvShowResponse> getSingle() {
+        return ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class)
+                .getPopularTvShows(API_KEY_TMDB)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private DisposableSingleObserver<TvShowResponse> getObserver(TvShowsListener listener) {
+        return new DisposableSingleObserver<TvShowResponse>() {
             @Override
-            public void onResponse(Call<TvShowResponse> call, Response<TvShowResponse> response) {
-                if (response.isSuccessful()) {
-                    tvShowsListener.onFinishedTvShows(response.body().getResults());
-                } else {
-                    tvShowsListener.onFailureTvShows(response.message());
-                }
+            public void onSuccess(TvShowResponse response) {
+                listener.onFinishedTvShows(response.getResults());
             }
 
             @Override
-            public void onFailure(Call<TvShowResponse> call, Throwable t) {
-                tvShowsListener.onFailureTvShows(t.getMessage());
+            public void onError(Throwable e) {
+                Log.d(TAG, e.getLocalizedMessage());
             }
-        });
+        };
     }
 }

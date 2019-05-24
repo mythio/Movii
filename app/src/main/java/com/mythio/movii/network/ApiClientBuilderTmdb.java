@@ -1,6 +1,7 @@
 package com.mythio.movii.network;
 
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.mythio.movii.util.Constant.BASE_URL_TMDB;
@@ -14,6 +15,7 @@ public class ApiClientBuilderTmdb {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL_TMDB)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
         }
         return retrofit;

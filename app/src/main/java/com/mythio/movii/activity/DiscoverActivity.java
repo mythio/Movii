@@ -49,7 +49,7 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
         presenter = new DiscoverPresenter(this);
         presenter.setFragment(moviesFragment);
 
-        presenter.onDataRequest();
+        presenter.getData();
 
         moviesCallback = moviesFragment;
         tvShowsCallback = tvShowsFragment;
@@ -81,12 +81,12 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
     }
 
     @Override
-    public void sendToFragmentMovies(ArrayList<MovieTmdb> movies) {
+    public void sendToMoviesFragment(ArrayList<MovieTmdb> movies) {
         moviesCallback.onDataReceived(movies);
     }
 
     @Override
-    public void sendToFragmentTvShows(ArrayList<TvShowTmdb> tvShows) {
+    public void sendToTvShowsFragment(ArrayList<TvShowTmdb> tvShows) {
         tvShowsCallback.onDataReceived(tvShows);
     }
 }

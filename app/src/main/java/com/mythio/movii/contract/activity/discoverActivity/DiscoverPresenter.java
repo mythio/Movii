@@ -7,7 +7,8 @@ import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
 
-public class DiscoverPresenter implements DiscoverContract.Presenter, DiscoverFragmentNavigation.Presenter, DiscoverContract.Model.MoviesModel.MoviesListener, DiscoverContract.Model.TvShowsModel.TvShowsListener {
+public class DiscoverPresenter implements DiscoverContract.Presenter, DiscoverFragmentNavigation.Presenter,
+        DiscoverContract.Model.MoviesModel.MoviesListener, DiscoverContract.Model.TvShowsModel.TvShowsListener {
 
     private DiscoverContract.View view;
     private DiscoverContract.Model.MoviesModel moviesModel;
@@ -25,28 +26,18 @@ public class DiscoverPresenter implements DiscoverContract.Presenter, DiscoverFr
     }
 
     @Override
-    public void onDataRequest() {
+    public void getData() {
         moviesModel.getMovies(this);
         tvShowsModel.getTvShows(this);
     }
 
     @Override
     public void onFinishedMovies(ArrayList<MovieTmdb> movies) {
-        view.sendToFragmentMovies(movies);
-    }
-
-    @Override
-    public void onFailureMovies(String message) {
-
+        view.sendToMoviesFragment(movies);
     }
 
     @Override
     public void onFinishedTvShows(ArrayList<TvShowTmdb> tvShows) {
-        view.sendToFragmentTvShows(tvShows);
-    }
-
-    @Override
-    public void onFailureTvShows(String message) {
-
+        view.sendToTvShowsFragment(tvShows);
     }
 }
