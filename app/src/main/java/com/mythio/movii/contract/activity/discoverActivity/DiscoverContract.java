@@ -26,7 +26,7 @@ public interface DiscoverContract {
 
         interface MoviesModel {
 
-            void getMovies(MoviesListener moviesListener);
+            void getMovies(MoviesListener listener);
 
             interface MoviesListener {
 
@@ -36,7 +36,7 @@ public interface DiscoverContract {
 
         interface TvShowsModel {
 
-            void getTvShows(TvShowsListener tvShowsListener);
+            void getTvShows(TvShowsListener listener);
 
             interface TvShowsListener {
 

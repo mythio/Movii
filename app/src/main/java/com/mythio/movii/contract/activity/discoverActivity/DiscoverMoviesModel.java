@@ -16,12 +16,14 @@ import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
 public class DiscoverMoviesModel implements Model.MoviesModel {
 
-    private static final String TAG = "DiscoverMoviesModel";
+    private static final String TAG = "movii.debug: DiscoverMoviesModel";
 
     @Override
     public void getMovies(final MoviesListener listener) {
 
-        getSingle().subscribe(getSubscriber(listener));
+        Single<MovieResponse> single = getSingle();
+
+        single.subscribe(getSubscriber(listener));
     }
 
     private Single<MovieResponse> getSingle() {
