@@ -4,9 +4,8 @@ import android.util.Log;
 
 import com.mythio.movii.model.movie.Movie;
 
-import java.util.ArrayList;
-
-public class MovieDetailsPresenter implements MovieDetailsContract.Presenter, MovieDetailsContract.Model.OnCollectionListener {
+public class MovieDetailsPresenter implements MovieDetailsContract.Presenter,
+        MovieDetailsContract.Model.MovieDetailsListener {
 
     private MovieDetailsContract.View view;
     private MovieDetailsModel model;
@@ -17,13 +16,13 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter, Mo
     }
 
     @Override
-    public void onRequestCollection(String id) {
+    public void getDetails(String id) {
         model.getDetails(this, Integer.valueOf(id));
     }
 
     @Override
-    public void onFinished(ArrayList<Movie> movies) {
-        view.showPages(movies);
+    public void onFinished(Movie movie) {
+        view.showDetails(movie);
     }
 
     @Override

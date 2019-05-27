@@ -27,7 +27,9 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
     private static final String TAG = "movii.debug: MovieDetailsModel";
 
     @Override
-    public void getDetails(OnCollectionListener listener, Integer id) {
+    public void getDetails(MovieDetailsListener listener, Integer id) {
+
+        Log.d(TAG, "starts");
 
         getMovieTmdbObservable(id)
                 .toObservable()
@@ -35,12 +37,12 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
                 .subscribe(new DisposableObserver<Movie>() {
                     @Override
                     public void onNext(Movie movie) {
-                        Log.d(TAG, "onNext()");
+                        listener.onFinished(movie);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.d(TAG, e.getLocalizedMessage());
                     }
 
                     @Override
@@ -52,7 +54,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
     private Single<MovieTmdb> getMovieTmdbObservable(int id) {
         return ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class)
-                .getMovieDetail(id, API_KEY_TMDB, "")
+                .getMovieDetail(id, API_KEY_TMDB, "recommendations,videos,credits")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

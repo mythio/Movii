@@ -2,27 +2,25 @@ package com.mythio.movii.contract.activity.movieDetailsActivity;
 
 import com.mythio.movii.model.movie.Movie;
 
-import java.util.ArrayList;
-
 public interface MovieDetailsContract {
 
     interface View {
 
-        void showPages(ArrayList<Movie> movies);
+        void showDetails(Movie movie);
     }
 
     interface Presenter {
 
-        void onRequestCollection(String id);
+        void getDetails(String id);
     }
 
     interface Model {
 
-        void getDetails(OnCollectionListener listener, Integer id);
+        void getDetails(MovieDetailsListener listener, Integer id);
 
-        interface OnCollectionListener {
+        interface MovieDetailsListener {
 
-            void onFinished(ArrayList<Movie> movies);
+            void onFinished(Movie movie);
 
             void onFailure(String message);
         }
