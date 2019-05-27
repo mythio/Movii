@@ -22,7 +22,6 @@ public class Parse {
         movie.setVideos(movieTmdb.getVideoResponse().getVideos());
         movie.setImdb(movieTmdb.getImdb());
         movie.setRecommendations(movieTmdb.getRecommendations().getResults());
-
         movie.setRating(movieOmdb.getImdbRating());
         movie.setVotes(movieOmdb.getImdbVotes());
 
