@@ -33,7 +33,8 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
         getMovieTmdbObservable(id)
                 .toObservable()
-                .flatMap((Function<MovieTmdb, ObservableSource<MovieOmdb>>) movieTmdb -> getMovieOmdbObservable(movieTmdb.getImdb()), Parse::getMovie)
+                .flatMap((Function<MovieTmdb, ObservableSource<MovieOmdb>>)
+                        movieTmdb -> getMovieOmdbObservable(movieTmdb.getImdb()), Parse::getMovie)
                 .subscribe(new DisposableObserver<Movie>() {
                     @Override
                     public void onNext(Movie movie) {

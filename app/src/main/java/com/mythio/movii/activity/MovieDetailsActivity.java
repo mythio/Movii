@@ -24,7 +24,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
         viewPager = findViewById(R.id.view_pager_details);
         Presenter presenter = new MovieDetailsPresenter(this);
 
-        presenter.ge(currentId);
+        presenter.getDetails(currentId);
     }
 
     @Override

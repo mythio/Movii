@@ -4,8 +4,9 @@ import android.util.Log;
 
 import com.mythio.movii.model.movie.Movie;
 
-public class MovieDetailsPresenter implements MovieDetailsContract.Presenter,
-        MovieDetailsContract.Model.MovieDetailsListener {
+public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
+
+    private static final String TAG = "movii.debug: MovieDetailsPresenter";
 
     private MovieDetailsContract.View view;
     private MovieDetailsModel model;
@@ -17,16 +18,16 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter,
 
     @Override
     public void getDetails(String id) {
-        model.getDetails(this, Integer.valueOf(id));
-    }
+        model.getDetails(new MovieDetailsContract.Model.MovieDetailsListener() {
+            @Override
+            public void onFinished(Movie movie) {
+                view.showDetails(movie);
+            }
 
-    @Override
-    public void onFinished(Movie movie) {
-        view.showDetails(movie);
-    }
-
-    @Override
-    public void onFailure(String message) {
-        Log.v("TAG_TAG", message);
+            @Override
+            public void onFailure(String message) {
+                Log.d(TAG, message);
+            }
+        }, Integer.valueOf(id));
     }
 }
