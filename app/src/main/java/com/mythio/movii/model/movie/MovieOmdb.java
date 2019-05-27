@@ -4,14 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class MovieOmdb {
 
-    @SerializedName("Year")
-    private String year;
-
     @SerializedName("Runtime")
     private String runtime;
-
-    @SerializedName("Plot")
-    private String plot;
 
     @SerializedName("imdbRating")
     private String imdbRating;
@@ -19,28 +13,12 @@ public class MovieOmdb {
     @SerializedName("imdbVotes")
     private String imdbVotes;
 
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
     public String getRuntime() {
         return runtime;
     }
 
     public void setRuntime(String runtime) {
         this.runtime = runtime;
-    }
-
-    public String getPlot() {
-        return plot;
-    }
-
-    public void setPlot(String plot) {
-        this.plot = plot;
     }
 
     public String getImdbRating() {

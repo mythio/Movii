@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mythio.movii.R;
-import com.mythio.movii.adapter.viewPagerAdapter.MovieDetailsAdapter;
 import com.mythio.movii.contract.activity.movieDetailsActivity.MovieDetailsContract;
 import com.mythio.movii.contract.activity.movieDetailsActivity.MovieDetailsPresenter;
 import com.mythio.movii.model.movie.Movie;
@@ -32,9 +31,9 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
     @Override
     public void showPages(ArrayList<Movie> movies) {
 
-        new Thread(() -> runOnUiThread(() -> {
-            MovieDetailsAdapter adapter = new MovieDetailsAdapter(this, movies);
-            viewPager.setAdapter(adapter);
-        })).start();
+//        new Thread(() -> runOnUiThread(() -> {
+//            MovieDetailsAdapter adapter = new MovieDetailsAdapter(this, movies);
+//            viewPager.setAdapter(adapter);
+//        })).start();
     }
 }

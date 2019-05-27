@@ -1,6 +1,5 @@
 package com.mythio.movii.network;
 
-import com.mythio.movii.model.collection.CollectionResponse;
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tvShow.TvShowResponse;
@@ -18,13 +17,13 @@ public interface EndPointTmdb {
     Single<MovieResponse> getPopularMovies(@Query("api_key") String apiKey);
 
     @GET("movie/{movie_id}")
-    Call<MovieTmdb> getMovieDetail(@Path("movie_id") Integer movieId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
+    Single<MovieTmdb> getMovieDetail(@Path("movie_id") Integer movieId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
 
     @GET("search/movie")
     Call<MovieResponse> getMovieSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
 
-    @GET("collection/{collection_id}")
-    Call<CollectionResponse> getCollectionResults(@Path("collection_id") String collectionId, @Query("api_key") String apiKey);
+//    @GET("collection/{collection_id}")
+//    Call<CollectionResponse> getCollectionResults(@Path("collection_id") String collectionId, @Query("api_key") String apiKey);
 
     @GET("tv/popular")
     Single<TvShowResponse> getPopularTvShows(@Query("api_key") String apiKey);

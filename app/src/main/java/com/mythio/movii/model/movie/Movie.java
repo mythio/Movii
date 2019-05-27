@@ -23,7 +23,7 @@ public class Movie {
     private String year;
     private String runtime;
     private ArrayList<Video> videos;
-    private ArrayList<MovieTmdb> moviesTmdb;
+    private ArrayList<MovieTmdb> recommendations;
     private ArrayList<Cast> casts;
 
     public String getPosterPath() {
@@ -154,12 +154,12 @@ public class Movie {
         this.videos = videos;
     }
 
-    public ArrayList<MovieTmdb> getMoviesTmdb() {
-        return moviesTmdb;
+    public ArrayList<MovieTmdb> getRecommendations() {
+        return recommendations;
     }
 
-    public void setMoviesTmdb(ArrayList<MovieTmdb> moviesTmdb) {
-        this.moviesTmdb = moviesTmdb;
+    public void setRecommendations(ArrayList<MovieTmdb> recommendations) {
+        this.recommendations = recommendations;
     }
 
     public ArrayList<Cast> getCasts() {
