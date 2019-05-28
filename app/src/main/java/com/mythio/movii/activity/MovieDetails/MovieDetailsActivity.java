@@ -125,6 +125,8 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
                 .load(IMAGE_BASE_URL + "original" + movie.getPosterPath())
                 .into(target);
 
+        imgViewPoster.setTag(target);
+
         if (movie.getTitle2().equals("")) {
             txtViewTitle1.setText(movie.getTitle1());
             txtViewTitle2.setVisibility(View.GONE);
