@@ -1,5 +1,7 @@
 package com.mythio.movii.activity.SearchTvShow.contract;
 
+import android.util.Log;
+
 import com.mythio.movii.model.tvShow.TvShowResponse;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 import com.mythio.movii.network.EndPointTmdb;
@@ -31,7 +33,7 @@ public class SearchTvShowModel implements SearchTvShowContract.Model {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.d(TAG, "onError: " + e.getMessage());
                     }
                 });
     }
