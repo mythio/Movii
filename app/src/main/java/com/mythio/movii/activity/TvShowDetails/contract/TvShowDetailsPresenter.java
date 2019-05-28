@@ -12,6 +12,6 @@ public class TvShowDetailsPresenter implements TvShowDetailsContract.Presenter {
 
     @Override
     public void onRequestSeasons(String id) {
-        model.getDetails(tvShow -> view.showDetails(tvShow), Integer.valueOf(id));
+        model.getDetails(view::showDetails, Integer.valueOf(id));
     }
 }

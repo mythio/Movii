@@ -12,6 +12,6 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
 
     @Override
     public void getDetails(String id) {
-        model.getDetails(movie -> view.showDetails(movie), Integer.valueOf(id));
+        model.getDetails(view::showDetails, Integer.valueOf(id));
     }
 }

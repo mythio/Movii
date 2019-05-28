@@ -17,7 +17,7 @@ public class SearchTvShowPresenter implements SearchTvShowContract.Presenter {
 
     @Override
     public void onSearchParam(String string) {
-        model.getSearchResults(tvShows -> view.showRes(tvShows), string);
+        model.getSearchResults(view::showRes, string);
         view.hidePlate();
     }
 }

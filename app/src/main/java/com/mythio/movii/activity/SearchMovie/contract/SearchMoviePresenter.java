@@ -17,7 +17,7 @@ public class SearchMoviePresenter implements SearchMovieContract.Presenter {
 
     @Override
     public void onSearchParam(String string) {
-        model.getSearchResults(movies -> view.showRes(movies), string);
+        model.getSearchResults(view::showRes, string);
         view.hidePlate();
     }
 }
