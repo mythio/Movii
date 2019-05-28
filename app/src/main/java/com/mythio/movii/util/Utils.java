@@ -4,6 +4,9 @@ import com.mythio.movii.model.cast.Cast;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieOmdb;
 import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.tvShow.TvShow;
+import com.mythio.movii.model.tvShow.TvShowOmdb;
+import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -66,5 +69,14 @@ public class Utils {
         movie.setRecommendations(movieTmdb.getRecommendations().getResults());
 
         return movie;
+    }
+
+    public static TvShow getTvShow(TvShowTmdb tvShowTmdb, TvShowOmdb tvShowOmdb) {
+
+        TvShow tvShow = new TvShow();
+
+        // TODO: 29/5/19 parse tmdb + omdb to give tvShow
+
+        return tvShow;
     }
 }
