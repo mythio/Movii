@@ -72,7 +72,6 @@ public class MoviesFragment extends BaseDiscoverFragment implements MoviesContra
             view.findViewById(R.id.text_view_title1).setAlpha(1.0F - Math.abs(v) * 2);
             view.findViewById(R.id.text_view_title2).setAlpha(0.6F * (1.0F - Math.abs(v) * 2));
         });
-        viewPager.setOffscreenPageLimit(1);
     }
 
     @Override

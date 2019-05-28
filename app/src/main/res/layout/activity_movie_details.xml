@@ -79,6 +79,7 @@
                 android:id="@+id/txt_view_title_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:textSize="36sp" />
 
             <TextView
@@ -87,29 +88,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:alpha="0.4"
-                android:paddingBottom="4dp"
                 android:textAllCaps="true"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/txt_view_runtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="12dp"
                 android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Overview"
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/txt_view_overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="12dp"
                 android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="12dp">
 
                 <androidx.appcompat.widget.AppCompatRatingBar
                     android:id="@+id/rating_bar"
@@ -152,21 +160,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:text="CAST"
-                android:textSize="16sp" />
+                android:text="Cast"
+                android:textSize="22sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_cast"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginBottom="24dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fadingEdgeLength="64dp"
+                android:requiresFadingEdge="horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:text="SIMILAR MOVIES" />
-
+                android:text="Recommendations"
+                android:textSize="22sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_recommended"
@@ -176,9 +186,7 @@
                 android:backgroundTint="#111111"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:requiresFadingEdge="vertical">
-
-            </androidx.recyclerview.widget.RecyclerView>
+                android:requiresFadingEdge="vertical" />
 
         </LinearLayout>
 

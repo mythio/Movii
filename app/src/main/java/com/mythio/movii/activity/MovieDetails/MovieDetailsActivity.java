@@ -4,6 +4,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,13 +13,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.palette.graphics.Palette;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.activity.MovieDetails.contract.MovieDetailsContract;
 import com.mythio.movii.activity.MovieDetails.contract.MovieDetailsContract.Presenter;
 import com.mythio.movii.activity.MovieDetails.contract.MovieDetailsPresenter;
+import com.mythio.movii.adapter.recyclerViewAdapter.CastAdapter;
 import com.mythio.movii.model.movie.Movie;
+import com.mythio.movii.util.ItemDecorator;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -87,9 +91,11 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
     @Override
     public void showDetails(Movie movie) {
 
-        Picasso.get().load(IMAGE_BASE_URL + "original" + movie.getPosterPath()).into(new Target() {
+        Target target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                imgViewPoster.setImageBitmap(bitmap);
+                Log.d("TAG_TAG_TAG_PICASSO", "onBitmapLoaded()");
                 Palette.from(bitmap).generate(palette -> {
                     if (palette.getDarkMutedSwatch() != null) {
                         imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkMutedSwatch().getRgb()));
@@ -101,28 +107,31 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
                         imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getMutedSwatch().getRgb()));
                         getWindow().getDecorView().setBackgroundColor(palette.getMutedSwatch().getRgb());
                     }
-                    imgViewPoster.setImageBitmap(bitmap);
                 });
             }
 
             @Override
             public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
+                Log.d("TAG_TAG_TAG_PICASSO", "onBitmapFailed(): " + e.getLocalizedMessage());
             }
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
-
+                Log.d("TAG_TAG_TAG_PICASSO", "onPrepareLoad()");
             }
-        });
+        };
+
+        Picasso.get()
+                .load(IMAGE_BASE_URL + "original" + movie.getPosterPath())
+                .into(target);
 
         if (movie.getTitle2().equals("")) {
             txtViewTitle1.setText(movie.getTitle1());
-            txtViewTitle2.setVisibility(View.VISIBLE);
-            txtViewTitle2.setText(movie.getTitle2());
+            txtViewTitle2.setVisibility(View.GONE);
         } else {
             txtViewTitle1.setText(movie.getTitle1());
-            txtViewTitle2.setVisibility(View.GONE);
+            txtViewTitle2.setVisibility(View.VISIBLE);
+            txtViewTitle2.setText(movie.getTitle2());
         }
 
         txtViewYear.setText(movie.getYear());
@@ -132,5 +141,15 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
         ratingBar.setRating(Float.valueOf(movie.getRating()) / 2);
         txtViewRating.setText(movie.getRating());
         txtViewVoteCount.setText(movie.getVotes());
+
+        recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        recyclerViewCast.addItemDecoration(new ItemDecorator(16, 1));
+        CastAdapter castAdapter = new CastAdapter(movie.getCasts(), this);
+        recyclerViewCast.setAdapter(castAdapter);
+
+        recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        recyclerViewRecommended.addItemDecoration(new ItemDecorator(36, 1));
+//        RecommendedMoviesAdapter adapter = new RecommendedMoviesAdapter(this, movie.getRecommendations());
+//        recyclerViewRecommended.setAdapter(adapter);
     }
 }
