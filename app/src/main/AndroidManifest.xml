@@ -13,15 +13,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.TvShowDetails.TvShowDetailsActivity"></activity>
-        <activity android:name=".activity.MovieDetails.MovieDetailsActivity" />
         <activity android:name=".activity.Discover.activity.DiscoverActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MovieDetails.MovieDetailsActivity" />
+        <activity android:name=".activity.TvShowDetails.TvShowDetailsActivity" />
         <activity
             android:name=".activity.SearchMovie.SearchMovieActivity"
             android:windowSoftInputMode="adjustPan" />
