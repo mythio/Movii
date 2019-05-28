@@ -5,10 +5,9 @@ import com.mythio.movii.model.season.SeasonDetails;
 import com.mythio.movii.model.tvShow.TvShow;
 import com.mythio.movii.model.tvShow.TvShowOmdb;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
-import com.mythio.movii.network.ApiClientBuilderOmdb;
-import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 import com.mythio.movii.network.EndPointsOmdb;
+import com.mythio.movii.network.RetrofitBuilder;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -25,8 +24,8 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
 
     private OnSeasonListener listener;
     private TvShow tvShow;
-    private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
-    private EndPointsOmdb apiServiceOmdb = ApiClientBuilderOmdb.getClient().create(EndPointsOmdb.class);
+    private EndPointTmdb apiServiceTmdb = RetrofitBuilder.getClientTmdb().create(EndPointTmdb.class);
+    private EndPointsOmdb apiServiceOmdb = RetrofitBuilder.getClientOmdb().create(EndPointsOmdb.class);
 
     @Override
     public void getDetails(final OnSeasonListener listener, Integer id) {
@@ -122,7 +121,7 @@ public class TvShowDetailsModel implements TvShowDetailsContract.Model {
     }
 
     private void getTvShowDetailsOmdb(String imdb) {
-        Call<TvShowOmdb> call = apiServiceOmdb.getTvShowDetailOmdb(API_KEY_OMDB, imdb);
+        Call<TvShowOmdb> call = apiServiceOmdb.getTvShowDetail(API_KEY_OMDB, imdb);
         call.enqueue(new Callback<TvShowOmdb>() {
             @Override
             public void onResponse(Call<TvShowOmdb> call, Response<TvShowOmdb> response) {

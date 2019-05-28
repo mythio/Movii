@@ -1,11 +1,9 @@
 package com.mythio.movii.activity.Discover.activity.contract;
 
-import android.util.Log;
-
 import com.mythio.movii.activity.Discover.activity.contract.DiscoverContract.Model;
 import com.mythio.movii.model.movie.MovieResponse;
-import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
+import com.mythio.movii.network.RetrofitBuilder;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,29 +19,26 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
     @Override
     public void getMovies(final MoviesListener listener) {
 
-        Single<MovieResponse> single = getSingle();
+        getSinglePopularMovies()
+                .subscribe(new DisposableSingleObserver<MovieResponse>() {
+                    @Override
+                    public void onSuccess(MovieResponse response) {
+                        listener.onFinishedMovies(response.getResults());
+                    }
 
-        single.subscribe(getSubscriber(listener));
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
     }
 
-    private Single<MovieResponse> getSingle() {
-        return ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class)
+    private Single<MovieResponse> getSinglePopularMovies() {
+        return RetrofitBuilder
+                .getClientTmdb()
+                .create(EndPointTmdb.class)
                 .getPopularMovies(API_KEY_TMDB)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private DisposableSingleObserver<MovieResponse> getSubscriber(MoviesListener listener) {
-        return new DisposableSingleObserver<MovieResponse>() {
-            @Override
-            public void onSuccess(MovieResponse response) {
-                listener.onFinishedMovies(response.getResults());
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.d(TAG, e.getLocalizedMessage());
-            }
-        };
     }
 }

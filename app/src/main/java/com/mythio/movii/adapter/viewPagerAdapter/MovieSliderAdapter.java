@@ -1,7 +1,6 @@
 package com.mythio.movii.adapter.viewPagerAdapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,11 +53,11 @@ public class MovieSliderAdapter extends PagerAdapter {
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
-        final ImageView im = view.findViewById(R.id.image_view_overlay);
+//        final ImageView im = view.findViewById(R.id.image_view_overlay);
         TextView textViewTitle1 = view.findViewById(R.id.text_view_title1);
         TextView textViewTitle2 = view.findViewById(R.id.text_view_title2);
 
-        im.setImageDrawable(mContext.getDrawable(R.drawable.bg_gradient_movie));
+//        im.setImageDrawable(mContext.getDrawable(R.drawable.bg_gradient_movie));
 
         String[] title_arr = movie.getTitle().split(": ");
 
@@ -81,8 +80,6 @@ public class MovieSliderAdapter extends PagerAdapter {
         viewPager.addView(view, 0);
 
         view.setOnClickListener(v -> listener.onItemClick(movie.getId()));
-
-        Log.v("TAG_TAG_TAG", movie.getTitle() + "");
 
         return view;
     }

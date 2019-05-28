@@ -5,15 +5,13 @@ import android.util.Log;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieOmdb;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.mythio.movii.network.ApiClientBuilderOmdb;
-import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 import com.mythio.movii.network.EndPointsOmdb;
+import com.mythio.movii.network.RetrofitBuilder;
 import com.mythio.movii.util.Parse;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
@@ -29,10 +27,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
     @Override
     public void getDetails(MovieDetailsListener listener, Integer id) {
 
-        Log.d(TAG, "starts");
-
         getMovieTmdbObservable(id)
-                .toObservable()
                 .flatMap((Function<MovieTmdb, ObservableSource<MovieOmdb>>)
                         movieTmdb -> getMovieOmdbObservable(movieTmdb.getImdb()), Parse::getMovie)
                 .subscribe(new DisposableObserver<Movie>() {
@@ -53,16 +48,20 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
                 });
     }
 
-    private Single<MovieTmdb> getMovieTmdbObservable(int id) {
-        return ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class)
+    private Observable<MovieTmdb> getMovieTmdbObservable(int id) {
+        return RetrofitBuilder
+                .getClientTmdb()
+                .create(EndPointTmdb.class)
                 .getMovieDetail(id, API_KEY_TMDB, "recommendations,videos,credits")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     private Observable<MovieOmdb> getMovieOmdbObservable(String id) {
-        return ApiClientBuilderOmdb.getClient().create(EndPointsOmdb.class)
-                .getMovieDetailOmdb(API_KEY_OMDB, id)
+        return RetrofitBuilder
+                .getClientOmdb()
+                .create(EndPointsOmdb.class)
+                .getMovieDetail(API_KEY_OMDB, id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

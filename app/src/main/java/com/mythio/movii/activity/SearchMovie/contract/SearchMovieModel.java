@@ -1,8 +1,8 @@
 package com.mythio.movii.activity.SearchMovie.contract;
 
 import com.mythio.movii.model.movie.MovieResponse;
-import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
+import com.mythio.movii.network.RetrofitBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -12,7 +12,7 @@ import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
 public class SearchMovieModel implements SearchMovieContract.Model {
 
-    private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
+    private EndPointTmdb apiServiceTmdb = RetrofitBuilder.getClientTmdb().create(EndPointTmdb.class);
 
     @Override
     public void getSearchResults(final OnMoviesSearchListener listener, String query) {

@@ -1,11 +1,9 @@
 package com.mythio.movii.activity.Discover.activity.contract;
 
-import android.util.Log;
-
 import com.mythio.movii.activity.Discover.activity.contract.DiscoverContract.Model;
 import com.mythio.movii.model.tvShow.TvShowResponse;
-import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
+import com.mythio.movii.network.RetrofitBuilder;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,28 +19,26 @@ public class DiscoverTvShowsModel implements Model.TvShowsModel {
     @Override
     public void getTvShows(final TvShowsListener listener) {
 
-        getSingle().subscribe(getObserver(listener));
+        getSinglePopularTvShows()
+                .subscribe(new DisposableSingleObserver<TvShowResponse>() {
+                    @Override
+                    public void onSuccess(TvShowResponse response) {
+                        listener.onFinishedTvShows(response.getResults());
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
     }
 
-    private Single<TvShowResponse> getSingle() {
-        return ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class)
+    private Single<TvShowResponse> getSinglePopularTvShows() {
+        return RetrofitBuilder
+                .getClientTmdb()
+                .create(EndPointTmdb.class)
                 .getPopularTvShows(API_KEY_TMDB)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private DisposableSingleObserver<TvShowResponse> getObserver(TvShowsListener listener) {
-        return new DisposableSingleObserver<TvShowResponse>() {
-            @Override
-            public void onSuccess(TvShowResponse response) {
-                listener.onFinishedTvShows(response.getResults());
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.d(TAG, e.getLocalizedMessage());
-            }
-        };
     }
 }

@@ -3,8 +3,8 @@ package com.mythio.movii.activity.SearchTvShow.contract;
 import androidx.annotation.NonNull;
 
 import com.mythio.movii.model.tvShow.TvShowResponse;
-import com.mythio.movii.network.ApiClientBuilderTmdb;
 import com.mythio.movii.network.EndPointTmdb;
+import com.mythio.movii.network.RetrofitBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,7 +14,7 @@ import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
 public class SearchTvShowModel implements SearchTvShowContract.Model {
 
-    private EndPointTmdb apiServiceTmdb = ApiClientBuilderTmdb.getClient().create(EndPointTmdb.class);
+    private EndPointTmdb apiServiceTmdb = RetrofitBuilder.getClientTmdb().create(EndPointTmdb.class);
 
     @Override
     public void getSearchResults(final OnTvShowSearchListener listener, String query) {

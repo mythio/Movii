@@ -5,6 +5,7 @@ import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tvShow.TvShowResponse;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -17,7 +18,7 @@ public interface EndPointTmdb {
     Single<MovieResponse> getPopularMovies(@Query("api_key") String apiKey);
 
     @GET("movie/{movie_id}")
-    Single<MovieTmdb> getMovieDetail(@Path("movie_id") Integer movieId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
+    Observable<MovieTmdb> getMovieDetail(@Path("movie_id") Integer movieId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
 
     @GET("search/movie")
     Call<MovieResponse> getMovieSearchResults(@Query("api_key") String apiKey, @Query("query") String query);

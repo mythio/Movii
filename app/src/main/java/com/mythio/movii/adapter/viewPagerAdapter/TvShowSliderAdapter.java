@@ -54,11 +54,11 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
-        final ImageView im = view.findViewById(R.id.image_view_overlay);
+//        final ImageView im = view.findViewById(R.id.image_view_overlay);
         TextView textViewTitle1 = view.findViewById(R.id.text_view_title1);
         TextView textViewTitle2 = view.findViewById(R.id.text_view_title2);
 
-        im.setImageDrawable(mContext.getDrawable(R.drawable.bg_gradient_movie));
+//        im.setImageDrawable(mContext.getDrawable(R.drawable.bg_gradient_movie));
 
         textViewTitle1.setText(tvShow.getName());
         textViewTitle2.setVisibility(View.GONE);

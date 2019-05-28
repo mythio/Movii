@@ -11,8 +11,8 @@ import retrofit2.http.Query;
 public interface EndPointsOmdb {
 
     @GET("/")
-    Observable<MovieOmdb> getMovieDetailOmdb(@Query("apikey") String apiKey, @Query("i") String imdbId);
+    Observable<MovieOmdb> getMovieDetail(@Query("apikey") String apiKey, @Query("i") String imdbId);
 
     @GET("/")
-    Call<TvShowOmdb> getTvShowDetailOmdb(@Query("apikey") String apiKey, @Query("i") String imdbId);
+    Call<TvShowOmdb> getTvShowDetail(@Query("apikey") String apiKey, @Query("i") String imdbId);
 }
