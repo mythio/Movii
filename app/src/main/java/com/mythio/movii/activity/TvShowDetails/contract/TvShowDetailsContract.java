@@ -21,8 +21,6 @@ public interface TvShowDetailsContract {
         interface OnSeasonListener {
 
             void onFinished(TvShow tvShow);
-
-            void onFailure(String message);
         }
     }
 }

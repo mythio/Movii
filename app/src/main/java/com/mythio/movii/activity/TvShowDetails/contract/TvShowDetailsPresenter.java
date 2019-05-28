@@ -1,10 +1,6 @@
 package com.mythio.movii.activity.TvShowDetails.contract;
 
-import android.util.Log;
-
-import com.mythio.movii.model.tvShow.TvShow;
-
-public class TvShowDetailsPresenter implements TvShowDetailsContract.Presenter, TvShowDetailsContract.Model.OnSeasonListener {
+public class TvShowDetailsPresenter implements TvShowDetailsContract.Presenter {
 
     private TvShowDetailsContract.View view;
     private TvShowDetailsModel model;
@@ -16,16 +12,6 @@ public class TvShowDetailsPresenter implements TvShowDetailsContract.Presenter, 
 
     @Override
     public void onRequestSeasons(String id) {
-        model.getDetails(this, Integer.valueOf(id));
-    }
-
-    @Override
-    public void onFinished(TvShow tvShow) {
-        view.showDetails(tvShow);
-    }
-
-    @Override
-    public void onFailure(String message) {
-        Log.v("TAG_TAG", message);
+        model.getDetails(tvShow -> view.showDetails(tvShow), Integer.valueOf(id));
     }
 }
