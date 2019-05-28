@@ -21,8 +21,6 @@ public interface MovieDetailsContract {
         interface MovieDetailsListener {
 
             void onFinished(Movie movie);
-
-            void onFailure(String message);
         }
     }
 }
