@@ -22,7 +22,7 @@ public class DiscoverPresenter implements DiscoverContract.Presenter, DiscoverFr
 
     @Override
     public void getData() {
-        moviesModel.getMovies(movies -> view.sendToMoviesFragment(movies));
-        tvShowsModel.getTvShows(tvShows -> view.sendToTvShowsFragment(tvShows));
+        moviesModel.getMovies(view::sendToMoviesFragment);
+        tvShowsModel.getTvShows(view::sendToTvShowsFragment);
     }
 }
