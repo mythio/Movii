@@ -8,7 +8,7 @@ import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 import com.mythio.movii.network.EndPointsOmdb;
 import com.mythio.movii.network.RetrofitBuilder;
-import com.mythio.movii.util.Parse;
+import com.mythio.movii.util.Utils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -29,7 +29,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
         getMovieTmdbObservable(id)
                 .flatMap((Function<MovieTmdb, ObservableSource<MovieOmdb>>)
-                        movieTmdb -> getMovieOmdbObservable(movieTmdb.getImdb()), Parse::getMovie)
+                        movieTmdb -> getMovieOmdbObservable(movieTmdb.getImdb()), Utils::getMovie)
                 .subscribe(new DisposableObserver<Movie>() {
                     @Override
                     public void onNext(Movie movie) {

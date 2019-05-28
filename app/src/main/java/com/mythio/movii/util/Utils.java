@@ -10,11 +10,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-/*
- *  Helper class to parse data
- */
-
-public class Parse {
+public class Utils {
 
     public static Movie getMovie(MovieTmdb movieTmdb, MovieOmdb movieOmdb) {
 
