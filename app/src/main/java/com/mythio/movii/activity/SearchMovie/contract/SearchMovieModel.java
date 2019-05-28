@@ -1,5 +1,7 @@
 package com.mythio.movii.activity.SearchMovie.contract;
 
+import android.util.Log;
+
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.network.EndPointTmdb;
@@ -16,6 +18,8 @@ import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
 public class SearchMovieModel implements SearchMovieContract.Model {
 
+    private static final String TAG = "movii.debug: SearchMovieModel";
+
     @Override
     public void getSearchResults(final OnMoviesSearchListener listener, String query) {
 
@@ -29,7 +33,7 @@ public class SearchMovieModel implements SearchMovieContract.Model {
 
                     @Override
                     public void onError(Throwable e) {
-                        listener.onFailure(e.getLocalizedMessage());
+                        Log.d(TAG, "onError: " + e.getMessage());
                     }
                 });
     }

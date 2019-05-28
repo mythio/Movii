@@ -1,5 +1,7 @@
 package com.mythio.movii.activity.Discover.activity.contract;
 
+import android.util.Log;
+
 import com.mythio.movii.activity.Discover.activity.contract.DiscoverContract.Model;
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.network.EndPointTmdb;
@@ -14,6 +16,8 @@ import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
 public class DiscoverMoviesModel implements Model.MoviesModel {
 
+    private static final String TAG = "movii.debug: DiscoverMoviesModel";
+
     @Override
     public void getMovies(final MoviesListener listener) {
 
@@ -26,7 +30,7 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.d(TAG, "onError: " + e.getMessage());
                     }
                 });
     }

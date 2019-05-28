@@ -38,7 +38,7 @@ public class MovieDetailsModel implements MovieDetailsContract.Model {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, e.getLocalizedMessage());
+                        Log.d(TAG, "onError: " + e.getMessage());
                     }
 
                     @Override
