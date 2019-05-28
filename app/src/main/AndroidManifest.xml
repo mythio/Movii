@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
         <activity android:name=".activity.Discover.activity.DiscoverActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
