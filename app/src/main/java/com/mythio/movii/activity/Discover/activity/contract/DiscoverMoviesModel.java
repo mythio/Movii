@@ -14,8 +14,6 @@ import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
 public class DiscoverMoviesModel implements Model.MoviesModel {
 
-    private static final String TAG = "movii.debug: DiscoverMoviesModel";
-
     @Override
     public void getMovies(final MoviesListener listener) {
 
