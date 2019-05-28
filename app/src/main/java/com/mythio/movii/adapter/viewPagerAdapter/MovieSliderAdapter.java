@@ -1,5 +1,6 @@
 package com.mythio.movii.adapter.viewPagerAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ public class MovieSliderAdapter extends PagerAdapter {
         return view == o;
     }
 
+    @SuppressLint("InflateParams")
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {

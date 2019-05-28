@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:includeFontPadding="false"
-                    android:textSize="24dp" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/text_view_title2"
@@ -63,7 +63,7 @@
                     android:alpha="0.6"
                     android:includeFontPadding="false"
                     android:textAllCaps="true"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:visibility="gone" />
 
