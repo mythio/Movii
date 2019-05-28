@@ -29,8 +29,6 @@ public interface SearchMovieContract {
         interface OnMoviesSearchListener {
 
             void onFinished(ArrayList<MovieTmdb> movies);
-
-            void onFailure(String message);
         }
     }
 }

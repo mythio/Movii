@@ -1,12 +1,6 @@
 package com.mythio.movii.activity.SearchMovie.contract;
 
-import android.util.Log;
-
-import com.mythio.movii.model.movie.MovieTmdb;
-
-import java.util.ArrayList;
-
-public class SearchMoviePresenter implements SearchMovieContract.Presenter, SearchMovieContract.Model.OnMoviesSearchListener {
+public class SearchMoviePresenter implements SearchMovieContract.Presenter {
 
     private SearchMovieContract.View view;
     private SearchMovieContract.Model model;
@@ -23,17 +17,7 @@ public class SearchMoviePresenter implements SearchMovieContract.Presenter, Sear
 
     @Override
     public void onSearchParam(String string) {
-        model.getSearchResults(this, string);
+        model.getSearchResults(movies -> view.showRes(movies), string);
         view.hidePlate();
-    }
-
-    @Override
-    public void onFinished(ArrayList<MovieTmdb> movies) {
-        view.showRes(movies);
-    }
-
-    @Override
-    public void onFailure(String message) {
-        Log.v("TAG_TAG", message);
     }
 }
