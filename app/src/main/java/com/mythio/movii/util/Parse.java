@@ -56,7 +56,9 @@ public class Parse {
         movie.setGenres(genreString.toString());
         movie.setCasts(casts);
         movie.setYear(new StringTokenizer(movieTmdb.getReleaseDate(), "-").nextToken());
-        movie.setRuntime(movieTmdb.getRuntime() / 60 + ":" + movieTmdb.getRuntime() % 60);
+        movie.setRuntime(
+                String.format(Locale.US, "%02d", movieTmdb.getRuntime() / 60) +
+                        ":" + String.format(Locale.US, "%02d", movieTmdb.getRuntime() % 60));
         movie.setRating(movieOmdb.getImdbRating() == null || movieOmdb.getImdbRating().equals("N/A")
                 ? String.valueOf(movieTmdb.getVoteAverage())
                 : movieOmdb.getImdbRating());
