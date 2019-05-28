@@ -21,6 +21,7 @@ import com.mythio.movii.activity.MovieDetails.contract.MovieDetailsContract;
 import com.mythio.movii.activity.MovieDetails.contract.MovieDetailsContract.Presenter;
 import com.mythio.movii.activity.MovieDetails.contract.MovieDetailsPresenter;
 import com.mythio.movii.adapter.recyclerViewAdapter.CastAdapter;
+import com.mythio.movii.adapter.recyclerViewAdapter.RecommendedMoviesAdapter;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.ItemDecorator;
 import com.squareup.picasso.Picasso;
@@ -151,7 +152,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
 
         recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerViewRecommended.addItemDecoration(new ItemDecorator(36, 1));
-//        RecommendedMoviesAdapter adapter = new RecommendedMoviesAdapter(this, movie.getRecommendations());
-//        recyclerViewRecommended.setAdapter(adapter);
+        RecommendedMoviesAdapter adapter = new RecommendedMoviesAdapter(this, movie.getRecommendations());
+        recyclerViewRecommended.setAdapter(adapter);
     }
 }
