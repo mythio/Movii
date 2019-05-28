@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeHolder> {
 
-    private Context mContext;
-    private ArrayList<Episode> mEpisodes;
+    private final Context mContext;
+    private final ArrayList<Episode> mEpisodes;
 
     public EpisodeAdapter(Context mContext, ArrayList<Episode> mEpisodes) {
         this.mContext = mContext;
@@ -47,9 +47,9 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeH
 
     class EpisodeHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewEpisodeName;
-        private TextView textViewOverview;
-        private ImageView imageViewStill;
+        private final TextView textViewEpisodeName;
+        private final TextView textViewOverview;
+        private final ImageView imageViewStill;
 
         public EpisodeHolder(@NonNull View itemView) {
             super(itemView);

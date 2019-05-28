@@ -27,7 +27,7 @@ public class MovieSliderAdapter extends PagerAdapter {
 
     private final Context mContext;
     private final ArrayList<MovieTmdb> mMovies;
-    private OnItemClickListener listener;
+    private final OnItemClickListener listener;
 
     public MovieSliderAdapter(Context mContext, ArrayList<MovieTmdb> mMovies, OnItemClickListener listener) {
         this.mContext = mContext;

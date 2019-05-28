@@ -17,9 +17,9 @@ import com.mythio.movii.model.tvShow.TvShowTmdb;
 import java.util.ArrayList;
 
 public class TvShowSearchAdapter extends RecyclerView.Adapter<TvShowSearchAdapter.TvShowSearchHolder> {
-    private Context mContext;
-    private ArrayList<TvShowTmdb> mTvShows;
-    private OnItemClickListener listener;
+    private final Context mContext;
+    private final ArrayList<TvShowTmdb> mTvShows;
+    private final OnItemClickListener listener;
 
     public TvShowSearchAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows, OnItemClickListener listener) {
         this.mContext = mContext;
@@ -63,11 +63,11 @@ public class TvShowSearchAdapter extends RecyclerView.Adapter<TvShowSearchAdapte
         }
     }
 
-    public class TvShowSearchHolder extends RecyclerView.ViewHolder {
+    class TvShowSearchHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewTitle;
+        private final TextView textViewTitle;
 
-        public TvShowSearchHolder(@NonNull View itemView) {
+        TvShowSearchHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.text_view_title);

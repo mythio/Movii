@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseDiscoverFragment extends Fragment implements DiscoverFragmentNavigation.View {
 
-    protected DiscoverFragmentNavigation.Presenter presenter;
+    private DiscoverFragmentNavigation.Presenter presenter;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,

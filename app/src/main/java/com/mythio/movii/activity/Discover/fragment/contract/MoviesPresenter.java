@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class MoviesPresenter implements MoviesContract.Presenter {
 
-    private MoviesContract.View view;
+    private final MoviesContract.View view;
 
     public MoviesPresenter(MoviesContract.View view) {
         this.view = view;

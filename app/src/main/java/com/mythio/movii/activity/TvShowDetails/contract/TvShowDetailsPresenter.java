@@ -2,8 +2,8 @@ package com.mythio.movii.activity.TvShowDetails.contract;
 
 public class TvShowDetailsPresenter implements TvShowDetailsContract.Presenter {
 
-    private TvShowDetailsContract.View view;
-    private TvShowDetailsModel model;
+    private final TvShowDetailsContract.View view;
+    private final TvShowDetailsModel model;
 
     public TvShowDetailsPresenter(TvShowDetailsContract.View view) {
         this.view = view;

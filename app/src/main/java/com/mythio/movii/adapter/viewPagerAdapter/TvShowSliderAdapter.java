@@ -27,7 +27,7 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
     private final Context mContext;
     private final ArrayList<TvShowTmdb> tvShows;
-    private OnItemClickListener listener;
+    private final OnItemClickListener listener;
 
     public TvShowSliderAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows, OnItemClickListener listener) {
         this.mContext = mContext;

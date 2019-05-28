@@ -11,13 +11,13 @@ import java.util.ArrayList;
 public class MovieTmdb {
 
     @SerializedName("belongs_to_collection")
-    public Collection collection;
+    private Collection collection;
 
     @SerializedName("poster_path")
     private String posterPath;
 
     @SerializedName("videos")
-    public VideoResponse videoResponse;
+    private VideoResponse videoResponse;
 
     @SerializedName("release_date")
     private String releaseDate;

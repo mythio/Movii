@@ -13,7 +13,7 @@ import com.mythio.movii.model.tvShow.TvShow;
 
 public class TvShowDetailsActivity extends AppCompatActivity implements TvShowDetailsContract.View {
 
-    ViewPager viewPager;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,8 +2,8 @@ package com.mythio.movii.activity.SearchTvShow.contract;
 
 public class SearchTvShowPresenter implements SearchTvShowContract.Presenter {
 
-    private SearchTvShowContract.View view;
-    private SearchTvShowContract.Model model;
+    private final SearchTvShowContract.View view;
+    private final SearchTvShowContract.Model model;
 
     public SearchTvShowPresenter(SearchTvShowContract.View view) {
         this.view = view;

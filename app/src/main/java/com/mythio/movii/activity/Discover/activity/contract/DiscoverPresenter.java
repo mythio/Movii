@@ -5,9 +5,9 @@ import com.mythio.movii.activity.Discover.fragment.contract.DiscoverFragmentNavi
 
 public class DiscoverPresenter implements DiscoverContract.Presenter, DiscoverFragmentNavigation.Presenter {
 
-    private DiscoverContract.View view;
-    private DiscoverContract.Model.MoviesModel moviesModel;
-    private DiscoverContract.Model.TvShowsModel tvShowsModel;
+    private final DiscoverContract.View view;
+    private final DiscoverContract.Model.MoviesModel moviesModel;
+    private final DiscoverContract.Model.TvShowsModel tvShowsModel;
 
     public DiscoverPresenter(DiscoverContract.View view) {
         this.view = view;

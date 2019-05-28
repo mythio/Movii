@@ -2,8 +2,8 @@ package com.mythio.movii.activity.SearchMovie.contract;
 
 public class SearchMoviePresenter implements SearchMovieContract.Presenter {
 
-    private SearchMovieContract.View view;
-    private SearchMovieContract.Model model;
+    private final SearchMovieContract.View view;
+    private final SearchMovieContract.Model model;
 
     public SearchMoviePresenter(SearchMovieContract.View view) {
         this.view = view;

@@ -27,9 +27,9 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
     @BindView(R.id.bottom_navigation)
     BubbleNavigationConstraintView navBar;
 
-    private MoviesFragment moviesFragment = new MoviesFragment();
-    private TvShowsFragment tvShowsFragment = new TvShowsFragment();
-    private ProfileFragment profileFragment = new ProfileFragment();
+    private final MoviesFragment moviesFragment = new MoviesFragment();
+    private final TvShowsFragment tvShowsFragment = new TvShowsFragment();
+    private final ProfileFragment profileFragment = new ProfileFragment();
 
     private static MoviesContract.Callback moviesCallback;
     private static TvShowsContract.Callback tvShowsCallback;

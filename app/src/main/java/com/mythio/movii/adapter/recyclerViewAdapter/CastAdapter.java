@@ -19,8 +19,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
-    private ArrayList<Cast> mCasts;
-    private Context mContext;
+    private final ArrayList<Cast> mCasts;
+    private final Context mContext;
 //    private final ListItemClickListener mOnClickListener;
 
 //    public interface ListItemClickListener {
@@ -59,7 +59,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
 
     class CastHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private CircleImageView imageView;
+        private final CircleImageView imageView;
 
         CastHolder(@NonNull View itemView/*, ListItemClickListener mOnClickListener*/) {
             super(itemView);

@@ -20,8 +20,8 @@ import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMoviesAdapter.MovieHolder> {
 
-    private Context mContext;
-    private ArrayList<MovieTmdb> mMovieList;
+    private final Context mContext;
+    private final ArrayList<MovieTmdb> mMovieList;
 
     public RecommendedMoviesAdapter(Context mContext, ArrayList<MovieTmdb> mMovieList) {
         this.mContext = mContext;
@@ -54,8 +54,8 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
 
     class MovieHolder extends RecyclerView.ViewHolder {
 
-        private ImageView mImageViewPoster;
-        private TextView mTextViewTitle;
+        private final ImageView mImageViewPoster;
+        private final TextView mTextViewTitle;
 
         MovieHolder(@NonNull View itemView) {
             super(itemView);

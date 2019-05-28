@@ -17,9 +17,9 @@ import com.mythio.movii.model.movie.MovieTmdb;
 import java.util.ArrayList;
 
 public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.MovieSearchHolder> {
-    private Context mContext;
-    private ArrayList<MovieTmdb> mMovies;
-    private OnItemClickListener listener;
+    private final Context mContext;
+    private final ArrayList<MovieTmdb> mMovies;
+    private final OnItemClickListener listener;
 
     public MovieSearchAdapter(Context mContext, ArrayList<MovieTmdb> mMovies, OnItemClickListener listener) {
         this.mContext = mContext;
@@ -68,8 +68,8 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
 
     public class MovieSearchHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewTitle;
-        private TextView textViewYear;
+        private final TextView textViewTitle;
+        private final TextView textViewYear;
 
         public MovieSearchHolder(@NonNull View itemView) {
             super(itemView);

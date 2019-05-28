@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName;
 public class Collection {
 
     @SerializedName("id")
-    public Integer id;
+    private Integer id;
 
     @SerializedName("name")
-    public String name;
+    private String name;
 
     @SerializedName("poster_path")
-    public String posterPath;
+    private String posterPath;
 
     @SerializedName("backdrop_path")
-    public String backdropPath;
+    private String backdropPath;
 
     public Integer getId() {
         return id;

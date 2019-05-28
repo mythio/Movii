@@ -25,7 +25,7 @@ public class Video implements Parcelable {
         }
     };
 
-    protected Video(Parcel in) {
+    private Video(Parcel in) {
         key = in.readString();
         type = in.readString();
     }
