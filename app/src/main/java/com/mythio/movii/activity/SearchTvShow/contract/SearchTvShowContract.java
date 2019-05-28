@@ -29,8 +29,6 @@ public interface SearchTvShowContract {
         interface OnTvShowSearchListener {
 
             void onFinished(ArrayList<TvShowTmdb> tvShows);
-
-            void onFailure(String message);
         }
     }
 }
