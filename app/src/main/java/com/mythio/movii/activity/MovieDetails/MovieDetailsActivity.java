@@ -151,7 +151,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
         recyclerViewCast.setAdapter(castAdapter);
 
         recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        recyclerViewRecommended.addItemDecoration(new ItemDecorator(36, 1));
+        recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, 1));
         RecommendedMoviesAdapter adapter = new RecommendedMoviesAdapter(this, movie.getRecommendations());
         recyclerViewRecommended.setAdapter(adapter);
     }
