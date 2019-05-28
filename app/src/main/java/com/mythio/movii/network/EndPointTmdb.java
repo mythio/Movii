@@ -21,7 +21,7 @@ public interface EndPointTmdb {
     Observable<MovieTmdb> getMovieDetail(@Path("movie_id") Integer movieId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
 
     @GET("search/movie")
-    Call<MovieResponse> getMovieSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
+    Single<MovieResponse> getMovieSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
 
 //    @GET("collection/{collection_id}")
 //    Call<CollectionResponse> getCollectionResults(@Path("collection_id") String collectionId, @Query("api_key") String apiKey);
