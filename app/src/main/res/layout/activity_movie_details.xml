@@ -185,7 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="204dp"
                 android:background="@drawable/bg_rounded_rectangle"
-                android:backgroundTint="#111111"
+                android:backgroundTint="#66111111"
                 android:padding="12dp"
                 android:requiresFadingEdge="vertical" />
 
