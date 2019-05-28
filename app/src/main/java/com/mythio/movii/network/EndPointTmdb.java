@@ -33,5 +33,5 @@ public interface EndPointTmdb {
     Call<TvShowTmdb> getTvShowDetail(@Path("tv_show_id") int tvShowId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
 
     @GET("search/tv")
-    Call<TvShowResponse> getTvShowSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
+    Single<TvShowResponse> getTvShowSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
 }
