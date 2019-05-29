@@ -20,7 +20,7 @@ public interface EndPointTmdb {
     Observable<MovieTmdb> getMovieDetail(@Path("movie_id") Integer movieId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
 
     @GET("search/movie")
-    Single<MovieResponse> getMovieSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
+    Observable<MovieResponse> getMovieSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
 
     @GET("tv/popular")
     Single<TvShowResponse> getPopularTvShows(@Query("api_key") String apiKey);
@@ -29,5 +29,5 @@ public interface EndPointTmdb {
     Observable<TvShowTmdb> getTvShowDetail(@Path("tv_show_id") int tvShowId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
 
     @GET("search/tv")
-    Single<TvShowResponse> getTvShowSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
+    Observable<TvShowResponse> getTvShowSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
 }

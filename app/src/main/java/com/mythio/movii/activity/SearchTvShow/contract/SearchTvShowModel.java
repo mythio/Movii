@@ -8,10 +8,13 @@ import com.mythio.movii.network.EndPointTmdb;
 import com.mythio.movii.network.RetrofitBuilder;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Single;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.functions.Function;
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.mythio.movii.util.Constant.API_KEY_TMDB;
@@ -24,10 +27,14 @@ public class SearchTvShowModel implements SearchTvShowContract.Model {
     public void getSearchResults(final OnTvShowSearchListener listener, String query) {
 
         getSingleSearch(query)
+                .debounce(150, TimeUnit.MILLISECONDS)
+                .distinctUntilChanged()
                 .map(TvShowResponse::getResults)
-                .subscribe(new DisposableSingleObserver<ArrayList<TvShowTmdb>>() {
+                .switchMap((Function<ArrayList<TvShowTmdb>, ObservableSource<ArrayList<TvShowTmdb>>>)
+                        Observable::just)
+                .subscribe(new DisposableObserver<ArrayList<TvShowTmdb>>() {
                     @Override
-                    public void onSuccess(ArrayList<TvShowTmdb> tvShowTmdbs) {
+                    public void onNext(ArrayList<TvShowTmdb> tvShowTmdbs) {
                         listener.onFinished(tvShowTmdbs);
                     }
 
@@ -35,10 +42,15 @@ public class SearchTvShowModel implements SearchTvShowContract.Model {
                     public void onError(Throwable e) {
                         Log.d(TAG, "onError: " + e.getMessage());
                     }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
                 });
     }
 
-    private Single<TvShowResponse> getSingleSearch(String query) {
+    private Observable<TvShowResponse> getSingleSearch(String query) {
         return RetrofitBuilder
                 .getClientTmdb()
                 .create(EndPointTmdb.class)
