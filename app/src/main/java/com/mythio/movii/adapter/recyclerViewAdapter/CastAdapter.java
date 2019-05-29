@@ -48,7 +48,6 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
         String url = IMAGE_BASE_URL + "w185" + cast.getProfilePath();
         Picasso.get()
                 .load(url)
-                .placeholder(R.drawable.bg)
                 .into(castHolder.imageView);
     }
 
