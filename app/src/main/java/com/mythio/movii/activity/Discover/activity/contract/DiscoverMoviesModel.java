@@ -4,8 +4,11 @@ import android.util.Log;
 
 import com.mythio.movii.activity.Discover.activity.contract.DiscoverContract.Model;
 import com.mythio.movii.model.movie.MovieResponse;
+import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 import com.mythio.movii.network.RetrofitBuilder;
+
+import java.util.ArrayList;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -22,10 +25,11 @@ public class DiscoverMoviesModel implements Model.MoviesModel {
     public void getMovies(final MoviesListener listener) {
 
         getSinglePopularMovies()
-                .subscribe(new DisposableSingleObserver<MovieResponse>() {
+                .map(MovieResponse::getResults)
+                .subscribe(new DisposableSingleObserver<ArrayList<MovieTmdb>>() {
                     @Override
-                    public void onSuccess(MovieResponse response) {
-                        listener.onFinishedMovies(response.getResults());
+                    public void onSuccess(ArrayList<MovieTmdb> movieTmdbs) {
+                        listener.onFinishedMovies(movieTmdbs);
                     }
 
                     @Override
