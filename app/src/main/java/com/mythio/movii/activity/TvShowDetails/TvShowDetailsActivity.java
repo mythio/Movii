@@ -6,12 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mythio.movii.R;
-import com.mythio.movii.activity.TvShowDetails.contract.TvShowDetailsContract;
-import com.mythio.movii.activity.TvShowDetails.contract.TvShowDetailsPresenter;
+import com.mythio.movii.activity.TvShowDetails.contract.Contract;
+import com.mythio.movii.activity.TvShowDetails.contract.Presenter;
 import com.mythio.movii.adapter.viewPagerAdapter.TvShowDetailsAdapter;
 import com.mythio.movii.model.tvShow.TvShow;
 
-public class TvShowDetailsActivity extends AppCompatActivity implements TvShowDetailsContract.View {
+public class TvShowDetailsActivity extends AppCompatActivity implements Contract.View {
 
     private ViewPager viewPager;
 
@@ -20,7 +20,7 @@ public class TvShowDetailsActivity extends AppCompatActivity implements TvShowDe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_show_details);
 
-        TvShowDetailsContract.Presenter presenter = new TvShowDetailsPresenter(this);
+        Contract.Presenter presenter = new Presenter(this);
 
         String currentId = getIntent().getStringExtra("BUNDLED_EXTRA_TV_ID");
         presenter.onRequestSeasons(currentId);

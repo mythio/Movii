@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.activity.MovieDetails.MovieDetailsActivity;
-import com.mythio.movii.activity.SearchMovie.contract.SearchMovieContract;
-import com.mythio.movii.activity.SearchMovie.contract.SearchMoviePresenter;
+import com.mythio.movii.activity.SearchMovie.contract.Contract;
+import com.mythio.movii.activity.SearchMovie.contract.Presenter;
 import com.mythio.movii.adapter.recyclerViewAdapter.MovieSearchAdapter;
 import com.mythio.movii.model.movie.MovieTmdb;
 
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchMovieActivity extends AppCompatActivity implements SearchMovieContract.View {
+public class SearchMovieActivity extends AppCompatActivity implements Contract.View {
 
     @BindView(R.id.search_bar)
     EditText searchBar;
@@ -36,7 +36,7 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchMovi
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    private SearchMovieContract.Presenter presenter;
+    private Contract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchMovi
         setContentView(R.layout.activity_search_movie);
 
         ButterKnife.bind(this);
-        presenter = new SearchMoviePresenter(this);
+        presenter = new Presenter(this);
 
         MovieSearchAdapter.ItemDecorator decorator = new MovieSearchAdapter.ItemDecorator(12);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

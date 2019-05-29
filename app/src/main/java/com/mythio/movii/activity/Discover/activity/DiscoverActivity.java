@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.mythio.movii.R;
-import com.mythio.movii.activity.Discover.activity.contract.DiscoverContract;
-import com.mythio.movii.activity.Discover.activity.contract.DiscoverPresenter;
+import com.mythio.movii.activity.Discover.activity.contract.Contract;
+import com.mythio.movii.activity.Discover.activity.contract.Presenter;
 import com.mythio.movii.activity.Discover.fragment.BaseDiscoverFragment;
 import com.mythio.movii.activity.Discover.fragment.MoviesFragment;
 import com.mythio.movii.activity.Discover.fragment.ProfileFragment;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DiscoverActivity extends AppCompatActivity implements DiscoverContract.View {
+public class DiscoverActivity extends AppCompatActivity implements Contract.View {
 
     @BindView(R.id.bottom_navigation)
     BubbleNavigationConstraintView navBar;
@@ -34,7 +34,7 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
     private static MoviesContract.Callback moviesCallback;
     private static TvShowsContract.Callback tvShowsCallback;
 
-    private DiscoverPresenter presenter;
+    private Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class DiscoverActivity extends AppCompatActivity implements DiscoverContr
 //        startActivity(new Intent(this, TvShowDetailsActivity.class));
 //        finish();
 
-        presenter = new DiscoverPresenter(this);
+        presenter = new Presenter(this);
         presenter.setFragment(moviesFragment);
 
         presenter.getData();

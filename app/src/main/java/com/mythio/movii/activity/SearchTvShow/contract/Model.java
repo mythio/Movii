@@ -19,9 +19,9 @@ import io.reactivex.schedulers.Schedulers;
 
 import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
-public class SearchTvShowModel implements SearchTvShowContract.Model {
+public class Model implements Contract.Model {
 
-    private static final String TAG = "movii.debug: SearchTvShowModel";
+    private static final String TAG = "movii.debug: Model";
 
     @Override
     public void getSearchResults(final OnTvShowSearchListener listener, String query) {

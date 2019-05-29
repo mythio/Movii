@@ -2,7 +2,7 @@ package com.mythio.movii.activity.Discover.fragment.contract;
 
 import com.mythio.movii.activity.Discover.fragment.BaseDiscoverFragment;
 
-public interface DiscoverFragmentNavigation {
+public interface FragmentNavigation {
 
     interface View {
         void attachPresenter(Presenter presenter);

@@ -6,7 +6,7 @@ import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
 
-public interface DiscoverContract {
+public interface Contract {
 
     interface View {
 

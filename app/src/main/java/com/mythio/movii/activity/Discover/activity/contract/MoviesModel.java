@@ -2,9 +2,9 @@ package com.mythio.movii.activity.Discover.activity.contract;
 
 import android.util.Log;
 
-import com.mythio.movii.activity.Discover.activity.contract.DiscoverContract.Model;
-import com.mythio.movii.model.tvShow.TvShowResponse;
-import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.activity.Discover.activity.contract.Contract.Model;
+import com.mythio.movii.model.movie.MovieResponse;
+import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 import com.mythio.movii.network.RetrofitBuilder;
 
@@ -17,19 +17,19 @@ import io.reactivex.schedulers.Schedulers;
 
 import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
-public class DiscoverTvShowsModel implements Model.TvShowsModel {
+public class MoviesModel implements Model.MoviesModel {
 
-    private static final String TAG = "movii.debug: DiscoverTvShowsModel";
+    private static final String TAG = "movii.debug: MoviesModel";
 
     @Override
-    public void getTvShows(final TvShowsListener listener) {
+    public void getMovies(final MoviesListener listener) {
 
-        getSinglePopularTvShows()
-                .map(TvShowResponse::getResults)
-                .subscribe(new DisposableSingleObserver<ArrayList<TvShowTmdb>>() {
+        getSinglePopularMovies()
+                .map(MovieResponse::getResults)
+                .subscribe(new DisposableSingleObserver<ArrayList<MovieTmdb>>() {
                     @Override
-                    public void onSuccess(ArrayList<TvShowTmdb> tvShowTmdbs) {
-                        listener.onFinishedTvShows(tvShowTmdbs);
+                    public void onSuccess(ArrayList<MovieTmdb> movieTmdbs) {
+                        listener.onFinishedMovies(movieTmdbs);
                     }
 
                     @Override
@@ -39,11 +39,11 @@ public class DiscoverTvShowsModel implements Model.TvShowsModel {
                 });
     }
 
-    private Single<TvShowResponse> getSinglePopularTvShows() {
+    private Single<MovieResponse> getSinglePopularMovies() {
         return RetrofitBuilder
                 .getClientTmdb()
                 .create(EndPointTmdb.class)
-                .getPopularTvShows(API_KEY_TMDB)
+                .getPopularMovies(API_KEY_TMDB)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

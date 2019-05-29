@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.activity.SearchTvShow.contract.SearchTvShowContract;
-import com.mythio.movii.activity.SearchTvShow.contract.SearchTvShowPresenter;
+import com.mythio.movii.activity.SearchTvShow.contract.Contract;
+import com.mythio.movii.activity.SearchTvShow.contract.Presenter;
 import com.mythio.movii.activity.TvShowDetails.TvShowDetailsActivity;
 import com.mythio.movii.adapter.recyclerViewAdapter.TvShowSearchAdapter;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchTvShowActivity extends AppCompatActivity implements SearchTvShowContract.View {
+public class SearchTvShowActivity extends AppCompatActivity implements Contract.View {
 
     @BindView(R.id.search_bar)
     EditText searchBar;
@@ -36,7 +36,7 @@ public class SearchTvShowActivity extends AppCompatActivity implements SearchTvS
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    private SearchTvShowContract.Presenter presenter;
+    private Contract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class SearchTvShowActivity extends AppCompatActivity implements SearchTvS
         setContentView(R.layout.activity_search_movie);
 
         ButterKnife.bind(this);
-        presenter = new SearchTvShowPresenter(this);
+        presenter = new Presenter(this);
 
         TvShowSearchAdapter.ItemDecorator decorator = new TvShowSearchAdapter.ItemDecorator(12);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

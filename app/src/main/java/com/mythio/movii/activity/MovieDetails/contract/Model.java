@@ -20,9 +20,9 @@ import io.reactivex.schedulers.Schedulers;
 import static com.mythio.movii.util.Constant.API_KEY_OMDB;
 import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 
-public class MovieDetailsModel implements MovieDetailsContract.Model {
+public class Model implements Contract.Model {
 
-    private static final String TAG = "movii.debug: MovieDetailsModel";
+    private static final String TAG = "movii.debug: Model";
 
     @Override
     public void getDetails(MovieDetailsListener listener, Integer id) {

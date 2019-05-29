@@ -2,7 +2,7 @@ package com.mythio.movii.activity.MovieDetails.contract;
 
 import com.mythio.movii.model.movie.Movie;
 
-public interface MovieDetailsContract {
+public interface Contract {
 
     interface View {
 

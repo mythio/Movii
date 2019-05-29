@@ -4,7 +4,7 @@ import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
 
-public interface SearchMovieContract {
+public interface Contract {
 
     interface View {
 

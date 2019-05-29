@@ -17,9 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.activity.MovieDetails.contract.MovieDetailsContract;
-import com.mythio.movii.activity.MovieDetails.contract.MovieDetailsContract.Presenter;
-import com.mythio.movii.activity.MovieDetails.contract.MovieDetailsPresenter;
+import com.mythio.movii.activity.MovieDetails.contract.Contract;
+import com.mythio.movii.activity.MovieDetails.contract.Presenter;
 import com.mythio.movii.adapter.recyclerViewAdapter.CastAdapter;
 import com.mythio.movii.adapter.recyclerViewAdapter.RecommendedMoviesAdapter;
 import com.mythio.movii.model.movie.Movie;
@@ -32,7 +31,7 @@ import butterknife.ButterKnife;
 
 import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
-public class MovieDetailsActivity extends AppCompatActivity implements MovieDetailsContract.View {
+public class MovieDetailsActivity extends AppCompatActivity implements Contract.View {
 
     @BindView(R.id.img_view_poster)
     ImageView imgViewPoster;
@@ -84,7 +83,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
         ButterKnife.bind(this);
 
         String currentId = getIntent().getStringExtra("BUNDLED_EXTRA_MOVIE_ID");
-        Presenter presenter = new MovieDetailsPresenter(this);
+        Contract.Presenter presenter = new Presenter(this);
 
         presenter.getDetails(currentId);
     }

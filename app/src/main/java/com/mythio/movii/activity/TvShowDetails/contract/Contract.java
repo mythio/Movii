@@ -2,7 +2,7 @@ package com.mythio.movii.activity.TvShowDetails.contract;
 
 import com.mythio.movii.model.tvShow.TvShow;
 
-public interface TvShowDetailsContract {
+public interface Contract {
 
     interface View {
 
