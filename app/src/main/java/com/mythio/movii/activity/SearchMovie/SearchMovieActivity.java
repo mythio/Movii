@@ -91,6 +91,7 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
             recyclerView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_in));
             searchPlate.setVisibility(View.INVISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
+            recyclerView.setAdapter(null);
         }
     }
 
