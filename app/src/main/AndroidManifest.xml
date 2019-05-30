@@ -13,12 +13,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
-        <activity android:name=".activity.Discover.activity.DiscoverActivity">
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.Discover.activity.DiscoverActivity" />
         <activity android:name=".activity.MovieDetails.MovieDetailsActivity" />
         <activity android:name=".activity.TvShowDetails.TvShowDetailsActivity" />
         <activity
