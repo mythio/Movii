@@ -4,7 +4,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -95,20 +94,16 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 imgViewPoster.setImageBitmap(bitmap);
-                Log.d("TAG_TAG_TAG_PICASSO", "onBitmapLoaded()");
                 Palette.from(bitmap).generate(palette -> {
                     assert palette != null;
                     if (palette.getDarkMutedSwatch() != null) {
                         imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkMutedSwatch().getRgb()));
-//                        imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getDarkMutedSwatch().getRgb()));
                         getWindow().getDecorView().setBackgroundColor(palette.getDarkMutedSwatch().getRgb());
                     } else if (palette.getDarkVibrantSwatch() != null) {
                         imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkVibrantSwatch().getRgb()));
-//                        imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getDarkVibrantSwatch().getRgb()));
                         getWindow().getDecorView().setBackgroundColor(palette.getDarkVibrantSwatch().getRgb());
                     } else if (palette.getMutedSwatch() != null) {
                         imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getMutedSwatch().getRgb()));
-//                        imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getMutedSwatch().getRgb()));
                         getWindow().getDecorView().setBackgroundColor(palette.getMutedSwatch().getRgb());
                     }
 
@@ -122,12 +117,10 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
             @Override
             public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-                Log.d("TAG_TAG_TAG_PICASSO", "onBitmapFailed(): " + e.getLocalizedMessage());
             }
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
-                Log.d("TAG_TAG_TAG_PICASSO", "onPrepareLoad()");
             }
         };
 
