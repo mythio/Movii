@@ -97,15 +97,25 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
                 imgViewPoster.setImageBitmap(bitmap);
                 Log.d("TAG_TAG_TAG_PICASSO", "onBitmapLoaded()");
                 Palette.from(bitmap).generate(palette -> {
+                    assert palette != null;
                     if (palette.getDarkMutedSwatch() != null) {
                         imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkMutedSwatch().getRgb()));
+//                        imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getDarkMutedSwatch().getRgb()));
                         getWindow().getDecorView().setBackgroundColor(palette.getDarkMutedSwatch().getRgb());
                     } else if (palette.getDarkVibrantSwatch() != null) {
                         imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkVibrantSwatch().getRgb()));
+//                        imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getDarkVibrantSwatch().getRgb()));
                         getWindow().getDecorView().setBackgroundColor(palette.getDarkVibrantSwatch().getRgb());
                     } else if (palette.getMutedSwatch() != null) {
                         imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getMutedSwatch().getRgb()));
+//                        imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getMutedSwatch().getRgb()));
                         getWindow().getDecorView().setBackgroundColor(palette.getMutedSwatch().getRgb());
+                    }
+
+                    if (palette.getLightMutedSwatch() != null) {
+                        imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getLightMutedSwatch().getRgb()));
+                    } else if (palette.getLightVibrantSwatch() != null) {
+                        imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getLightVibrantSwatch().getRgb()));
                     }
                 });
             }
