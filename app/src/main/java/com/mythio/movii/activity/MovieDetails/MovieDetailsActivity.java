@@ -148,7 +148,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         txtViewVoteCount.setText(movie.getVotes());
 
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        recyclerViewCast.addItemDecoration(new ItemDecorator(16, 1));
+        recyclerViewCast.addItemDecoration(new ItemDecorator(32, 1));
         CastAdapter castAdapter = new CastAdapter(movie.getCasts(), this);
         recyclerViewCast.setAdapter(castAdapter);
 
