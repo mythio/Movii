@@ -29,6 +29,7 @@ A handcrafted Android application to show everything you want to know about your
 │   │       ├── MoviesFragment.java
 │   │       ├── ProfileFragment.java
 │   │       └── TvShowsFragment.java
+│   ├── MainActivity.java
 │   ├── MovieDetails
 │   │   ├── contract
 │   │   │   ├── Contract.java
@@ -55,11 +56,19 @@ A handcrafted Android application to show everything you want to know about your
 │       └── TvShowDetailsActivity.java
 ├── adapter
 │   ├── recyclerViewAdapter
-│   │   ├── CastAdapter.java
-│   │   ├── EpisodeAdapter.java
-│   │   ├── MovieSearchAdapter.java
-│   │   ├── RecommendedMoviesAdapter.java
-│   │   └── TvShowSearchAdapter.java
+│   │   ├── Cast
+│   │   │   ├── CastAdapter.java
+│   │   │   └── CastPresenter.java
+│   │   ├── Contract.java
+│   │   ├── RecommendedMovies
+│   │   │   ├── RecommendedMoviesAdapter.java
+│   │   │   └── RecommendedMoviesPresenter.java
+│   │   ├── SearchMovie
+│   │   │   ├── SearchMovieAdapter.java
+│   │   │   └── SearchMoviePresenter.java
+│   │   └── SearchTvShow
+│   │       ├── SearchTvShowAdapter.java
+│   │       └── SearchTvShowPresenter.java
 │   └── viewPagerAdapter
 │       ├── MovieSliderAdapter.java
 │       ├── TvShowDetailsAdapter.java
@@ -102,7 +111,7 @@ A handcrafted Android application to show everything you want to know about your
     ├── ItemDecorator.java
     └── Utils.java
 
-29 directories, 64 files
+33 directories, 69 files
 ```
 
 ### Upcoming:
