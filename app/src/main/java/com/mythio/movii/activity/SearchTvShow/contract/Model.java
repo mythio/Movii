@@ -27,7 +27,7 @@ public class Model implements Contract.Model {
     public void getSearchResults(final OnTvShowSearchListener listener, String query) {
 
         getSingleSearch(query)
-                .debounce(150, TimeUnit.MILLISECONDS)
+                .debounce(200, TimeUnit.MILLISECONDS)
                 .distinctUntilChanged()
                 .map(TvShowResponse::getResults)
                 .switchMap((Function<ArrayList<TvShowTmdb>, ObservableSource<ArrayList<TvShowTmdb>>>)
