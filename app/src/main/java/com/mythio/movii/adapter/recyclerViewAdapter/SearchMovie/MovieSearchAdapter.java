@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.contract.Contract;
-import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.contract.Presenter;
+import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.contract.SearchMoviePresenter;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.MovieSearchViewHolder> {
-    private final Presenter presenter;
+    private final SearchMoviePresenter presenter;
     private final OnItemClickListener listener;
 
-    public MovieSearchAdapter(Presenter presenter, OnItemClickListener listener) {
+    public MovieSearchAdapter(SearchMoviePresenter presenter, OnItemClickListener listener) {
         this.presenter = presenter;
         this.listener = listener;
     }
