@@ -15,27 +15,27 @@ import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.contract.Contrac
 import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.contract.SearchMoviePresenter;
 import com.mythio.movii.model.movie.MovieTmdb;
 
-public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.MovieSearchViewHolder> {
+public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.SearchMovieViewHolder> {
     private final SearchMoviePresenter presenter;
     private final OnItemClickListener listener;
 
-    public MovieSearchAdapter(SearchMoviePresenter presenter, OnItemClickListener listener) {
+    public SearchMovieAdapter(SearchMoviePresenter presenter, OnItemClickListener listener) {
         this.presenter = presenter;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public MovieSearchViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new MovieSearchViewHolder(
+    public SearchMovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new SearchMovieViewHolder(
                 LayoutInflater
                         .from(viewGroup.getContext())
                         .inflate(R.layout.item_search_result, viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieSearchViewHolder movieSearchViewHolder, int i) {
-        presenter.onBindViewAtPosition(movieSearchViewHolder, i);
+    public void onBindViewHolder(@NonNull SearchMovieViewHolder viewHolder, int i) {
+        presenter.onBindViewAtPosition(viewHolder, i);
     }
 
     @Override
@@ -43,12 +43,12 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
         return presenter.getCount();
     }
 
-    public class MovieSearchViewHolder extends RecyclerView.ViewHolder implements Contract.View {
+    public class SearchMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View {
 
         private final TextView textViewTitle;
         private final TextView textViewYear;
 
-        MovieSearchViewHolder(@NonNull View itemView) {
+        SearchMovieViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.text_view_title);

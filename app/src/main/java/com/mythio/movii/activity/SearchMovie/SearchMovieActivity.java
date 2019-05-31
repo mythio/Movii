@@ -17,7 +17,7 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.MovieDetails.MovieDetailsActivity;
 import com.mythio.movii.activity.SearchMovie.contract.Contract;
 import com.mythio.movii.activity.SearchMovie.contract.Presenter;
-import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.MovieSearchAdapter;
+import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.SearchMovieAdapter;
 import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.contract.SearchMoviePresenter;
 import com.mythio.movii.model.movie.MovieTmdb;
 
@@ -47,7 +47,7 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
         ButterKnife.bind(this);
         presenter = new Presenter(this);
 
-        MovieSearchAdapter.ItemDecorator decorator = new MovieSearchAdapter.ItemDecorator(12);
+        SearchMovieAdapter.ItemDecorator decorator = new SearchMovieAdapter.ItemDecorator(12);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.addItemDecoration(decorator);
@@ -99,7 +99,7 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
     @Override
     public void showRes(ArrayList<MovieTmdb> movies) {
         SearchMoviePresenter presenter = new SearchMoviePresenter(movies);
-        MovieSearchAdapter adapter = new MovieSearchAdapter(presenter, id -> {
+        SearchMovieAdapter adapter = new SearchMovieAdapter(presenter, id -> {
             Intent intent = new Intent(SearchMovieActivity.this, MovieDetailsActivity.class);
             intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", String.valueOf(id));
             startActivity(intent);

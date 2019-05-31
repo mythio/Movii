@@ -17,7 +17,8 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.SearchTvShow.contract.Contract;
 import com.mythio.movii.activity.SearchTvShow.contract.Presenter;
 import com.mythio.movii.activity.TvShowDetails.TvShowDetailsActivity;
-import com.mythio.movii.adapter.recyclerViewAdapter.TvShowSearchAdapter;
+import com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow.SearchTvShowAdapter;
+import com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow.contract.SearchTvShowPresenter;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
         ButterKnife.bind(this);
         presenter = new Presenter(this);
 
-        TvShowSearchAdapter.ItemDecorator decorator = new TvShowSearchAdapter.ItemDecorator(12);
+        SearchTvShowAdapter.ItemDecorator decorator = new SearchTvShowAdapter.ItemDecorator(12);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.addItemDecoration(decorator);
@@ -97,7 +98,8 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
 
     @Override
     public void showRes(ArrayList<TvShowTmdb> tvShows) {
-        TvShowSearchAdapter adapter = new TvShowSearchAdapter(this, tvShows, id -> {
+        SearchTvShowPresenter presenter = new SearchTvShowPresenter(tvShows);
+        SearchTvShowAdapter adapter = new SearchTvShowAdapter(presenter, id -> {
             Intent intent = new Intent(SearchTvShowActivity.this, TvShowDetailsActivity.class);
             intent.putExtra("BUNDLED_EXTRA_TV_ID", String.valueOf(id));
             startActivity(intent);
