@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
-import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.contract.Contract;
-import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.contract.SearchMoviePresenter;
+import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.SearchMovieViewHolder> {
@@ -43,8 +42,7 @@ public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.
         return presenter.getCount();
     }
 
-    public class SearchMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View {
-
+    public class SearchMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<MovieTmdb> {
         private final TextView textViewTitle;
         private final TextView textViewYear;
 

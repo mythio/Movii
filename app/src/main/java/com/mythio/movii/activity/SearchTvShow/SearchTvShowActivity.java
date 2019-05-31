@@ -18,7 +18,7 @@ import com.mythio.movii.activity.SearchTvShow.contract.Contract;
 import com.mythio.movii.activity.SearchTvShow.contract.Presenter;
 import com.mythio.movii.activity.TvShowDetails.TvShowDetailsActivity;
 import com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow.SearchTvShowAdapter;
-import com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow.contract.SearchTvShowPresenter;
+import com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow.SearchTvShowPresenter;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;

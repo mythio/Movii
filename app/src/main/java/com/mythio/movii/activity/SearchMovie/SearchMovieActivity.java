@@ -18,7 +18,7 @@ import com.mythio.movii.activity.MovieDetails.MovieDetailsActivity;
 import com.mythio.movii.activity.SearchMovie.contract.Contract;
 import com.mythio.movii.activity.SearchMovie.contract.Presenter;
 import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.SearchMovieAdapter;
-import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.contract.SearchMoviePresenter;
+import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.SearchMoviePresenter;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;

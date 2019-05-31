@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
-import com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow.contract.Contract;
-import com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow.contract.SearchTvShowPresenter;
+import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapter.SearchTvShowViewHolder> {
@@ -43,8 +42,7 @@ public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapte
         return presenter.getCount();
     }
 
-    public class SearchTvShowViewHolder extends RecyclerView.ViewHolder implements Contract.View {
-
+    public class SearchTvShowViewHolder extends RecyclerView.ViewHolder implements Contract.View<TvShowTmdb> {
         private final TextView textViewTitle;
 
         SearchTvShowViewHolder(@NonNull View itemView) {
@@ -54,7 +52,6 @@ public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapte
 
             itemView.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
         }
-
 
         @Override
         public void show(TvShowTmdb tvShowTmdb) {

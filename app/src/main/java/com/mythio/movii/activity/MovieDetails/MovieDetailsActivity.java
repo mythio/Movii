@@ -18,8 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.MovieDetails.contract.Contract;
 import com.mythio.movii.activity.MovieDetails.contract.Presenter;
-import com.mythio.movii.adapter.recyclerViewAdapter.CastAdapter;
-import com.mythio.movii.adapter.recyclerViewAdapter.RecommendedMoviesAdapter;
+import com.mythio.movii.adapter.recyclerViewAdapter.Cast.CastAdapter;
+import com.mythio.movii.adapter.recyclerViewAdapter.Cast.CastPresenter;
+import com.mythio.movii.adapter.recyclerViewAdapter.RecommendedMovies.RecommendedMoviesAdapter;
+import com.mythio.movii.adapter.recyclerViewAdapter.RecommendedMovies.RecommendedMoviesPresenter;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.ItemDecorator;
 import com.squareup.picasso.Picasso;
@@ -149,12 +151,16 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerViewCast.addItemDecoration(new ItemDecorator(32, 1));
-        CastAdapter castAdapter = new CastAdapter(movie.getCasts(), this);
+
+        CastPresenter castPresenter = new CastPresenter(movie.getCasts());
+        CastAdapter castAdapter = new CastAdapter(castPresenter, null);
         recyclerViewCast.setAdapter(castAdapter);
 
         recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, 1));
-        RecommendedMoviesAdapter adapter = new RecommendedMoviesAdapter(this, movie.getRecommendations());
-        recyclerViewRecommended.setAdapter(adapter);
+
+        RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movie.getRecommendations());
+        RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, null);
+        recyclerViewRecommended.setAdapter(recommendedMoviesAdapter);
     }
 }

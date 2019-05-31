@@ -1,10 +1,11 @@
-package com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow.contract;
+package com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow;
 
+import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
 import java.util.ArrayList;
 
-public class SearchTvShowPresenter implements Contract.Presenter {
+public class SearchTvShowPresenter implements Contract.Presenter<TvShowTmdb> {
     private final ArrayList<TvShowTmdb> tvShows;
 
     public SearchTvShowPresenter(ArrayList<TvShowTmdb> tvShows) {
@@ -12,7 +13,7 @@ public class SearchTvShowPresenter implements Contract.Presenter {
     }
 
     @Override
-    public void onBindViewAtPosition(Contract.View view, int position) {
+    public void onBindViewAtPosition(Contract.View<TvShowTmdb> view, int position) {
         view.show(tvShows.get(position));
     }
 
