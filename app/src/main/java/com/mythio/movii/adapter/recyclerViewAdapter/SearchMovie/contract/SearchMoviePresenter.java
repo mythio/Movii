@@ -4,11 +4,11 @@ import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
 
-public class Presenter implements Contract.Presenter {
+public class SearchMoviePresenter implements Contract.Presenter {
 
     public final ArrayList<MovieTmdb> movies;
 
-    public Presenter(ArrayList<MovieTmdb> movies) {
+    public SearchMoviePresenter(ArrayList<MovieTmdb> movies) {
         this.movies = movies;
     }
 
