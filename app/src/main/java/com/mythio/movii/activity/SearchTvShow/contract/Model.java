@@ -2,6 +2,8 @@ package com.mythio.movii.activity.SearchTvShow.contract;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.model.tvShow.TvShowResponse;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 import com.mythio.movii.network.EndPointTmdb;
@@ -24,7 +26,7 @@ public class Model implements Contract.Model {
     private static final String TAG = "movii.debug: Model";
 
     @Override
-    public void getSearchResults(final OnTvShowSearchListener listener, String query) {
+    public void getSearchResults(@NonNull final OnTvShowSearchListener listener, String query) {
 
         getSingleSearch(query)
                 .debounce(200, TimeUnit.MILLISECONDS)
@@ -39,7 +41,7 @@ public class Model implements Contract.Model {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NonNull Throwable e) {
                         Log.d(TAG, "onError: " + e.getMessage());
                     }
 

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,45 +36,59 @@ import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class MovieDetailsActivity extends AppCompatActivity implements Contract.View {
 
+    @Nullable
     @BindView(R.id.img_view_poster)
     ImageView imgViewPoster;
 
+    @Nullable
     @BindView(R.id.img_view_bg_grad)
     ImageView imgViewBgGrad;
 
+    @Nullable
     @BindView(R.id.img_view_play)
     ImageButton imgViewPlay;
 
+    @Nullable
     @BindView(R.id.txt_view_year)
     TextView txtViewYear;
 
+    @Nullable
     @BindView(R.id.txt_view_genre)
     TextView txtViewGenre;
 
+    @Nullable
     @BindView(R.id.txt_view_title_1)
     TextView txtViewTitle1;
 
+    @Nullable
     @BindView(R.id.txt_view_title_2)
     TextView txtViewTitle2;
 
+    @Nullable
     @BindView(R.id.txt_view_runtime)
     TextView txtViewRuntime;
 
+    @Nullable
     @BindView(R.id.txt_view_overview)
     TextView txtViewOverview;
 
+    @Nullable
     @BindView(R.id.rating_bar)
     RatingBar ratingBar;
 
+    @Nullable
     @BindView(R.id.txt_view_rating)
     TextView txtViewRating;
 
+    @Nullable
     @BindView(R.id.txt_view_vote_count)
     TextView txtViewVoteCount;
 
+    @Nullable
     @BindView(R.id.recycler_view_cast)
     RecyclerView recyclerViewCast;
 
+    @Nullable
     @BindView(R.id.recycler_view_recommended)
     RecyclerView recyclerViewRecommended;
 
@@ -90,11 +106,11 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     }
 
     @Override
-    public void showDetails(Movie movie) {
+    public void showDetails(@NonNull Movie movie) {
 
         Target target = new Target() {
             @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            public void onBitmapLoaded(@NonNull Bitmap bitmap, Picasso.LoadedFrom from) {
                 imgViewPoster.setImageBitmap(bitmap);
                 Palette.from(bitmap).generate(palette -> {
                     assert palette != null;

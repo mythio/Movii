@@ -57,7 +57,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         }
 
         @Override
-        public void show(Cast cast) {
+        public void show(@NonNull Cast cast) {
             Picasso.get()
                     .load(IMAGE_BASE_URL + "w185" + cast.getProfilePath())
                     .into(imageView);

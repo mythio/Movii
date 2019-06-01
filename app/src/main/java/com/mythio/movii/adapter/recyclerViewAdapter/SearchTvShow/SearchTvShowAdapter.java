@@ -54,7 +54,7 @@ public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapte
         }
 
         @Override
-        public void show(TvShowTmdb tvShowTmdb) {
+        public void show(@NonNull TvShowTmdb tvShowTmdb) {
             textViewTitle.setText(tvShowTmdb.getName());
         }
     }

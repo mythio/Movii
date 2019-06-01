@@ -25,11 +25,13 @@ import butterknife.OnClick;
 public class MoviesFragment extends BaseDiscoverFragment implements MoviesContract.View,
         MoviesContract.Callback {
 
+    @Nullable
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
 
     private MoviesContract.Presenter mPresenter;
     private ArrayList<MovieTmdb> movies;
+    @NonNull
     private Boolean hasReceived = false;
 
     @Override

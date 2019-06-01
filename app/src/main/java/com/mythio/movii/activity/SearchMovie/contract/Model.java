@@ -2,6 +2,8 @@ package com.mythio.movii.activity.SearchMovie.contract;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.network.EndPointTmdb;
@@ -25,7 +27,7 @@ public class Model implements Contract.Model {
     private int s = -1;
 
     @Override
-    public void getSearchResults(final OnMoviesSearchListener listener, String query) {
+    public void getSearchResults(@NonNull final OnMoviesSearchListener listener, String query) {
 
         getSingleSearch(query)
                 .debounce(200, TimeUnit.MILLISECONDS)
@@ -43,13 +45,13 @@ public class Model implements Contract.Model {
                 .distinctUntilChanged()
                 .subscribe(new DisposableObserver<ArrayList<MovieTmdb>>() {
                     @Override
-                    public void onNext(ArrayList<MovieTmdb> movieTmdbs) {
+                    public void onNext(@NonNull ArrayList<MovieTmdb> movieTmdbs) {
                         Log.d(TAG, "onNext: " + movieTmdbs.size());
                         listener.onFinished(movieTmdbs);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NonNull Throwable e) {
                         Log.d(TAG, "onError: " + e.getMessage());
                     }
 

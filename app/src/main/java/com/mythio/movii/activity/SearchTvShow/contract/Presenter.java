@@ -1,8 +1,11 @@
 package com.mythio.movii.activity.SearchTvShow.contract;
 
+import androidx.annotation.NonNull;
+
 public class Presenter implements Contract.Presenter {
 
     private final Contract.View view;
+    @NonNull
     private final Contract.Model model;
 
     public Presenter(Contract.View view) {

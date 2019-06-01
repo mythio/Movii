@@ -59,7 +59,7 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
         }
 
         @Override
-        public void show(MovieTmdb movieTmdb) {
+        public void show(@NonNull MovieTmdb movieTmdb) {
             Picasso.get()
                     .load(IMAGE_BASE_URL + "w154" + movieTmdb.getPosterPath())
                     .into(mImageViewPoster);

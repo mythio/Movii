@@ -10,6 +10,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,12 +31,15 @@ import butterknife.ButterKnife;
 
 public class SearchMovieActivity extends AppCompatActivity implements Contract.View {
 
+    @Nullable
     @BindView(R.id.search_bar)
     EditText searchBar;
 
+    @Nullable
     @BindView(R.id.search_plate)
     LinearLayout searchPlate;
 
+    @Nullable
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -60,7 +65,7 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(@NonNull CharSequence s, int start, int before, int count) {
                 if (s.toString().isEmpty()) {
                     presenter.onNoSearchParam();
                 } else {
@@ -97,7 +102,7 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
     }
 
     @Override
-    public void showRes(ArrayList<MovieTmdb> movies) {
+    public void showRes(@NonNull ArrayList<MovieTmdb> movies) {
         Log.d("movii.debug: shit", "showRes: " + movies.size());
         SearchMoviePresenter presenter = new SearchMoviePresenter(movies);
         SearchMovieAdapter adapter = new SearchMovieAdapter(presenter, id -> {

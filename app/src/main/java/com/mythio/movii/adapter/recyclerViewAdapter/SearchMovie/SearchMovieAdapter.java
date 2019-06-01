@@ -56,7 +56,7 @@ public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.
         }
 
         @Override
-        public void show(MovieTmdb movie) {
+        public void show(@NonNull MovieTmdb movie) {
             String[] date = movie.getReleaseDate().split("-");
             textViewTitle.setText(movie.getTitle());
             textViewYear.setText(date[0]);

@@ -2,6 +2,8 @@ package com.mythio.movii.activity.Discover.activity.contract;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.activity.Discover.activity.contract.Contract.Model;
 import com.mythio.movii.model.tvShow.TvShowResponse;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
@@ -22,7 +24,7 @@ public class TvShowsModel implements Model.TvShowsModel {
     private static final String TAG = "movii.debug: TvShowsModel";
 
     @Override
-    public void getTvShows(final TvShowsListener listener) {
+    public void getTvShows(@NonNull final TvShowsListener listener) {
 
         getSinglePopularTvShows()
                 .map(TvShowResponse::getResults)
@@ -33,7 +35,7 @@ public class TvShowsModel implements Model.TvShowsModel {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NonNull Throwable e) {
                         Log.d(TAG, "onError: " + e.getMessage());
                     }
                 });

@@ -1,5 +1,7 @@
 package com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
@@ -13,7 +15,7 @@ public class SearchTvShowPresenter implements Contract.Presenter<TvShowTmdb> {
     }
 
     @Override
-    public void onBindViewAtPosition(Contract.View<TvShowTmdb> view, int position) {
+    public void onBindViewAtPosition(@NonNull Contract.View<TvShowTmdb> view, int position) {
         view.show(tvShows.get(position));
     }
 

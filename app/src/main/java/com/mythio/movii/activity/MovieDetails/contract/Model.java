@@ -2,6 +2,8 @@ package com.mythio.movii.activity.MovieDetails.contract;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieOmdb;
 import com.mythio.movii.model.movie.MovieTmdb;
@@ -25,7 +27,7 @@ public class Model implements Contract.Model {
     private static final String TAG = "movii.debug: Model";
 
     @Override
-    public void getDetails(MovieDetailsListener listener, Integer id) {
+    public void getDetails(@NonNull MovieDetailsListener listener, Integer id) {
 
         getMovieTmdbObservable(id)
                 .flatMap((Function<MovieTmdb, ObservableSource<MovieOmdb>>)
@@ -37,7 +39,7 @@ public class Model implements Contract.Model {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NonNull Throwable e) {
                         Log.d(TAG, "onError: " + e.getMessage());
                     }
 

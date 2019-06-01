@@ -2,6 +2,8 @@ package com.mythio.movii.activity.TvShowDetails.contract;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.model.tvShow.TvShow;
 import com.mythio.movii.model.tvShow.TvShowOmdb;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
@@ -25,7 +27,7 @@ public class Model implements Contract.Model {
     private static final String TAG = "movii.debug: Model";
 
     @Override
-    public void getDetails(final OnSeasonListener listener, Integer id) {
+    public void getDetails(@NonNull final OnSeasonListener listener, Integer id) {
 
         getTvShowTmdbObservable(id)
                 .flatMap((Function<TvShowTmdb, ObservableSource<TvShowOmdb>>)
@@ -37,7 +39,7 @@ public class Model implements Contract.Model {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NonNull Throwable e) {
                         Log.d(TAG, "onError: " + e.getMessage());
                     }
 

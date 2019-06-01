@@ -1,5 +1,7 @@
 package com.mythio.movii.util;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.model.cast.Cast;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieOmdb;
@@ -15,7 +17,8 @@ import java.util.StringTokenizer;
 
 public class Utils {
 
-    public static Movie getMovie(MovieTmdb movieTmdb, MovieOmdb movieOmdb) {
+    @NonNull
+    public static Movie getMovie(MovieTmdb movieTmdb, @NonNull MovieOmdb movieOmdb) {
 
         Movie movie = new Movie();
 
@@ -71,6 +74,7 @@ public class Utils {
         return movie;
     }
 
+    @NonNull
     public static TvShow getTvShow(TvShowTmdb tvShowTmdb, TvShowOmdb tvShowOmdb) {
 
         TvShow tvShow = new TvShow();

@@ -1,5 +1,7 @@
 package com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.movie.MovieTmdb;
 
@@ -13,7 +15,7 @@ public class SearchMoviePresenter implements Contract.Presenter<MovieTmdb> {
     }
 
     @Override
-    public void onBindViewAtPosition(Contract.View<MovieTmdb> view, int position) {
+    public void onBindViewAtPosition(@NonNull Contract.View<MovieTmdb> view, int position) {
         view.show(movies.get(position));
     }
 

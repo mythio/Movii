@@ -1,12 +1,16 @@
 package com.mythio.movii.activity.Discover.activity.contract;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.activity.Discover.fragment.BaseDiscoverFragment;
 import com.mythio.movii.activity.Discover.fragment.contract.FragmentNavigation;
 
 public class Presenter implements Contract.Presenter, FragmentNavigation.Presenter {
 
     private final Contract.View view;
+    @NonNull
     private final Contract.Model.MoviesModel moviesModel;
+    @NonNull
     private final Contract.Model.TvShowsModel tvShowsModel;
 
     public Presenter(Contract.View view) {

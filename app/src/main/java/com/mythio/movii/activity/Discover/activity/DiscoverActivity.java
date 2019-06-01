@@ -2,6 +2,8 @@ package com.mythio.movii.activity.Discover.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
@@ -24,6 +26,7 @@ import butterknife.ButterKnife;
 
 public class DiscoverActivity extends AppCompatActivity implements Contract.View {
 
+    @Nullable
     @BindView(R.id.bottom_navigation)
     BubbleNavigationConstraintView navBar;
 
@@ -67,7 +70,7 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
     }
 
     @Override
-    public void showFragment(BaseDiscoverFragment fragment) {
+    public void showFragment(@NonNull BaseDiscoverFragment fragment) {
 
         getSupportFragmentManager()
                 .beginTransaction()

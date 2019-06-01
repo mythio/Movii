@@ -2,6 +2,8 @@ package com.mythio.movii.activity.Discover.activity.contract;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.activity.Discover.activity.contract.Contract.Model;
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.movie.MovieTmdb;
@@ -22,7 +24,7 @@ public class MoviesModel implements Model.MoviesModel {
     private static final String TAG = "movii.debug: MoviesModel";
 
     @Override
-    public void getMovies(final MoviesListener listener) {
+    public void getMovies(@NonNull final MoviesListener listener) {
 
         getSinglePopularMovies()
                 .map(MovieResponse::getResults)
@@ -33,7 +35,7 @@ public class MoviesModel implements Model.MoviesModel {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@NonNull Throwable e) {
                         Log.d(TAG, "onError: " + e.getMessage());
                     }
                 });

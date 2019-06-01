@@ -1,5 +1,7 @@
 package com.mythio.movii.adapter.recyclerViewAdapter.Cast;
 
+import androidx.annotation.NonNull;
+
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.cast.Cast;
 
@@ -13,7 +15,7 @@ public class CastPresenter implements Contract.Presenter<Cast> {
     }
 
     @Override
-    public void onBindViewAtPosition(Contract.View<Cast> view, int position) {
+    public void onBindViewAtPosition(@NonNull Contract.View<Cast> view, int position) {
         view.show(casts.get(position));
     }
 

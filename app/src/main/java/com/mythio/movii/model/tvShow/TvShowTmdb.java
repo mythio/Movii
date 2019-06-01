@@ -1,5 +1,7 @@
 package com.mythio.movii.model.tvShow;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 import com.mythio.movii.model.externalIds.ExternalIds;
 import com.mythio.movii.model.genre.Genre;
@@ -14,6 +16,7 @@ public class TvShowTmdb {
     @SerializedName("backdrop_path")
     private String backdropPath;
 
+    @Nullable
     @SerializedName("genres")
     private ArrayList<Genre> genres = null;
 
@@ -32,6 +35,7 @@ public class TvShowTmdb {
     @SerializedName("poster_path")
     private String posterPath;
 
+    @Nullable
     @SerializedName("seasons")
     private ArrayList<Season> seasons = null;
 
@@ -109,6 +113,7 @@ public class TvShowTmdb {
         this.backdropPath = backdropPath;
     }
 
+    @Nullable
     public ArrayList<Genre> getGenres() {
         return genres;
     }
@@ -157,6 +162,7 @@ public class TvShowTmdb {
         this.posterPath = posterPath;
     }
 
+    @Nullable
     public ArrayList<Season> getSeasons() {
         return seasons;
     }

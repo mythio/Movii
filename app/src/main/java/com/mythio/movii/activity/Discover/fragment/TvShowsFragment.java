@@ -25,11 +25,13 @@ import butterknife.OnClick;
 public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsContract.View,
         TvShowsContract.Callback {
 
+    @Nullable
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
 
     private TvShowsContract.Presenter mPresenter;
     private ArrayList<TvShowTmdb> tvShows;
+    @NonNull
     private Boolean hasReceived = false;
 
     @Override
