@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -30,19 +29,15 @@ public class TvShowDetailsAdapter extends PagerAdapter {
     private final Context mContext;
     private final TvShow tvShow;
 
-    @Nullable
     @BindView(R.id.txt_view_overview)
     TextView txtViewOverview;
 
-    @Nullable
     @BindView(R.id.img_view_poster)
     ImageView imgViewPoster;
 
-    @Nullable
     @BindView(R.id.txt_view_title_1)
     TextView txtViewTitle1;
 
-    @Nullable
     @BindView(R.id.txt_view_title_2)
     TextView txtViewTitle2;
 

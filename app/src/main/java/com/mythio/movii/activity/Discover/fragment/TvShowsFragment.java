@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mythio.movii.R;
@@ -25,7 +24,6 @@ import butterknife.OnClick;
 public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsContract.View,
         TvShowsContract.Callback {
 
-    @Nullable
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
 
@@ -35,7 +33,7 @@ public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsCont
     private Boolean hasReceived = false;
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 

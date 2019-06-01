@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -21,10 +20,10 @@ public class Video implements Parcelable {
             return new Video[size];
         }
     };
-    @Nullable
+
     @SerializedName("key")
     private String key;
-    @Nullable
+
     @SerializedName("type")
     private String type;
 
@@ -33,7 +32,6 @@ public class Video implements Parcelable {
         type = in.readString();
     }
 
-    @Nullable
     public String getKey() {
         return key;
     }
@@ -42,7 +40,6 @@ public class Video implements Parcelable {
         this.key = key;
     }
 
-    @Nullable
     public String getType() {
         return type;
     }
