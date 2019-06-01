@@ -12,10 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
 import com.mythio.movii.model.season.SeasonDetails;
 import com.mythio.movii.model.tvShow.TvShow;
-import com.squareup.picasso.Picasso;
+import com.mythio.movii.util.App;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -68,7 +69,10 @@ public class TvShowDetailsAdapter extends PagerAdapter {
 
         txtViewTitle1.setText(tvShow.getName());
         txtViewTitle2.setText(season.getName());
-        Picasso.get().load(IMAGE_BASE_URL + "w780" + season.getPosterPath()).into(imgViewPoster);
+
+        Glide.with(App.getContext())
+                .load(IMAGE_BASE_URL + "w780" + season.getPosterPath())
+                .into(imgViewPoster);
 
         txtViewOverview.setText(season.getOverview());
 

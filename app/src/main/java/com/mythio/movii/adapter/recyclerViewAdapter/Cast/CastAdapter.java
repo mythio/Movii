@@ -7,11 +7,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.cast.Cast;
-import com.squareup.picasso.Picasso;
+import com.mythio.movii.util.App;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,7 +61,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
 
         @Override
         public void show(@NonNull Cast cast) {
-            Picasso.get()
+            Glide.with(App.getContext())
                     .load(IMAGE_BASE_URL + "w185" + cast.getProfilePath())
                     .into(imageView);
         }

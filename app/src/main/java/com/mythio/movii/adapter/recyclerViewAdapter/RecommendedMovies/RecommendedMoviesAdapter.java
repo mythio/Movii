@@ -9,11 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.squareup.picasso.Picasso;
+import com.mythio.movii.util.App;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +65,7 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
 
         @Override
         public void show(@NonNull MovieTmdb movieTmdb) {
-            Picasso.get()
+            Glide.with(App.getContext())
                     .load(IMAGE_BASE_URL + "w154" + movieTmdb.getPosterPath())
                     .into(mImageViewPoster);
             mTextViewTitle.setText(movieTmdb.getTitle());
