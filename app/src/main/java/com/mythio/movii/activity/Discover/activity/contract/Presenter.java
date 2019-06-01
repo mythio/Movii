@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import com.mythio.movii.activity.Discover.fragment.BaseDiscoverFragment;
 import com.mythio.movii.activity.Discover.fragment.contract.FragmentNavigation;
 
-public class Presenter implements Contract.Presenter, FragmentNavigation.Presenter {
+public class Presenter implements Contract.Presenter, FragmentNavigation {
 
     private final Contract.View view;
     @NonNull
