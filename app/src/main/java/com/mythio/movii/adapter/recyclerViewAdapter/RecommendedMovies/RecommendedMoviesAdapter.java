@@ -15,6 +15,9 @@ import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMoviesAdapter.RecommendedMovieViewHolder> {
@@ -46,14 +49,15 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
     }
 
     class RecommendedMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<MovieTmdb> {
-        private final ImageView mImageViewPoster;
-        private final TextView mTextViewTitle;
+        @BindView(R.id.img_view_poster)
+        ImageView mImageViewPoster;
+
+        @BindView(R.id.txt_view_title)
+        TextView mTextViewTitle;
 
         RecommendedMovieViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            mImageViewPoster = itemView.findViewById(R.id.img_view_poster);
-            mTextViewTitle = itemView.findViewById(R.id.txt_view_title);
+            ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
         }

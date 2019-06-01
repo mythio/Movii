@@ -13,6 +13,9 @@ import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapter.SearchTvShowViewHolder> {
     private final SearchTvShowPresenter presenter;
     private final OnItemClickListener listener;
@@ -42,12 +45,12 @@ public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapte
     }
 
     public class SearchTvShowViewHolder extends RecyclerView.ViewHolder implements Contract.View<TvShowTmdb> {
-        private final TextView textViewTitle;
+        @BindView(R.id.text_view_title)
+        TextView textViewTitle;
 
         SearchTvShowViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            textViewTitle = itemView.findViewById(R.id.text_view_title);
+            ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
         }

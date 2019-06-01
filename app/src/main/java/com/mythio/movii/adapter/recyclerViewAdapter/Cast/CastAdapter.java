@@ -13,6 +13,8 @@ import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.cast.Cast;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
@@ -46,12 +48,12 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
     }
 
     class CastViewHolder extends RecyclerView.ViewHolder implements Contract.View<Cast> {
-        private final CircleImageView imageView;
+        @BindView(R.id.cast)
+        CircleImageView imageView;
 
         CastViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            imageView = itemView.findViewById(R.id.cast);
+            ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
         }

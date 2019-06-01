@@ -13,6 +13,9 @@ import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.movie.MovieTmdb;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.SearchMovieViewHolder> {
     private final SearchMoviePresenter presenter;
     private final OnItemClickListener listener;
@@ -42,14 +45,15 @@ public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.
     }
 
     public class SearchMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<MovieTmdb> {
-        private final TextView textViewTitle;
-        private final TextView textViewYear;
+        @BindView(R.id.text_view_title)
+        TextView textViewTitle;
+
+        @BindView(R.id.text_view_year)
+        TextView textViewYear;
 
         SearchMovieViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            textViewTitle = itemView.findViewById(R.id.text_view_title);
-            textViewYear = itemView.findViewById(R.id.text_view_year);
+            ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
         }
