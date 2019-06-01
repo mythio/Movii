@@ -1,6 +1,6 @@
 package com.mythio.movii.network;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -11,12 +11,10 @@ import static com.mythio.movii.util.Constant.BASE_URL_TMDB;
 
 public class RetrofitBuilder {
 
-    @Nullable
     private static Retrofit retrofitOmdb = null;
-    @Nullable
     private static Retrofit retrofitTmdb = null;
 
-    @Nullable
+    @NonNull
     public static Retrofit getClientTmdb() {
         if (retrofitTmdb == null) {
             retrofitTmdb = new Retrofit.Builder()
@@ -28,7 +26,7 @@ public class RetrofitBuilder {
         return retrofitTmdb;
     }
 
-    @Nullable
+    @NonNull
     public static Retrofit getClientOmdb() {
         if (retrofitOmdb == null) {
             retrofitOmdb = new Retrofit.Builder()
