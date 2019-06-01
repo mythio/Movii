@@ -95,7 +95,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginVertical="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:background="#33ffffff" />
 
             <TextView
@@ -165,7 +166,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginVertical="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:background="#33ffffff" />
 
             <TextView
@@ -178,8 +180,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_cast"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="12dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:fadingEdgeLength="64dp" />
 
             <TextView
