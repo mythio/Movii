@@ -7,13 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.mythio.movii.activity.Discover.fragment.contract.FragmentNavigation;
-
 import org.jetbrains.annotations.NotNull;
 
-public abstract class BaseDiscoverFragment extends Fragment implements FragmentNavigation.View {
-
-    private FragmentNavigation.Presenter presenter;
+public abstract class BaseDiscoverFragment extends Fragment {
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -23,9 +19,4 @@ public abstract class BaseDiscoverFragment extends Fragment implements FragmentN
     }
 
     protected abstract int getLayout();
-
-    @Override
-    public void attachPresenter(FragmentNavigation.Presenter presenter) {
-        this.presenter = presenter;
-    }
 }

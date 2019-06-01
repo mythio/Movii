@@ -43,9 +43,6 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
 
         ButterKnife.bind(this);
 
-//        startActivity(new Intent(this, TvShowDetailsActivity.class));
-//        finish();
-
         presenter = new Presenter(this);
         presenter.setFragment(moviesFragment);
 
@@ -71,7 +68,6 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
 
     @Override
     public void showFragment(BaseDiscoverFragment fragment) {
-        fragment.attachPresenter(presenter);
 
         getSupportFragmentManager()
                 .beginTransaction()
