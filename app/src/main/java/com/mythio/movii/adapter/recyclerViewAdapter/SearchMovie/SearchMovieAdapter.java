@@ -1,6 +1,5 @@
 package com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie;
 
-import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,24 +59,6 @@ public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.
             String[] date = movie.getReleaseDate().split("-");
             textViewTitle.setText(movie.getTitle());
             textViewYear.setText(date[0]);
-        }
-    }
-
-    public static class ItemDecorator extends RecyclerView.ItemDecoration {
-
-        private final int space;
-
-        public ItemDecorator(int space) {
-            this.space = space;
-        }
-
-        @Override
-        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
-                                   @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-            outRect.bottom = space;
-            if (parent.getChildAdapterPosition(view) == 0) {
-                outRect.top = space;
-            }
         }
     }
 }

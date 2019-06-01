@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +21,7 @@ import com.mythio.movii.activity.TvShowDetails.TvShowDetailsActivity;
 import com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow.SearchTvShowAdapter;
 import com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow.SearchTvShowPresenter;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.util.ItemDecorator;
 
 import java.util.ArrayList;
 
@@ -30,15 +30,12 @@ import butterknife.ButterKnife;
 
 public class SearchTvShowActivity extends AppCompatActivity implements Contract.View {
 
-    @Nullable
     @BindView(R.id.search_bar)
     EditText searchBar;
 
-    @Nullable
     @BindView(R.id.search_plate)
     LinearLayout searchPlate;
 
-    @Nullable
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -52,7 +49,7 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
         ButterKnife.bind(this);
         presenter = new Presenter(this);
 
-        SearchTvShowAdapter.ItemDecorator decorator = new SearchTvShowAdapter.ItemDecorator(12);
+        ItemDecorator decorator = new ItemDecorator(12, ItemDecorator.VERTICAL);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.addItemDecoration(decorator);

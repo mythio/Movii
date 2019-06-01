@@ -11,7 +11,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,59 +35,45 @@ import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class MovieDetailsActivity extends AppCompatActivity implements Contract.View {
 
-    @Nullable
     @BindView(R.id.img_view_poster)
     ImageView imgViewPoster;
 
-    @Nullable
     @BindView(R.id.img_view_bg_grad)
     ImageView imgViewBgGrad;
 
-    @Nullable
     @BindView(R.id.img_view_play)
     ImageButton imgViewPlay;
 
-    @Nullable
     @BindView(R.id.txt_view_year)
     TextView txtViewYear;
 
-    @Nullable
     @BindView(R.id.txt_view_genre)
     TextView txtViewGenre;
 
-    @Nullable
     @BindView(R.id.txt_view_title_1)
     TextView txtViewTitle1;
 
-    @Nullable
     @BindView(R.id.txt_view_title_2)
     TextView txtViewTitle2;
 
-    @Nullable
     @BindView(R.id.txt_view_runtime)
     TextView txtViewRuntime;
 
-    @Nullable
     @BindView(R.id.txt_view_overview)
     TextView txtViewOverview;
 
-    @Nullable
     @BindView(R.id.rating_bar)
     RatingBar ratingBar;
 
-    @Nullable
     @BindView(R.id.txt_view_rating)
     TextView txtViewRating;
 
-    @Nullable
     @BindView(R.id.txt_view_vote_count)
     TextView txtViewVoteCount;
 
-    @Nullable
     @BindView(R.id.recycler_view_cast)
     RecyclerView recyclerViewCast;
 
-    @Nullable
     @BindView(R.id.recycler_view_recommended)
     RecyclerView recyclerViewRecommended;
 
@@ -166,14 +151,14 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         txtViewVoteCount.setText(movie.getVotes());
 
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        recyclerViewCast.addItemDecoration(new ItemDecorator(32, 1));
+        recyclerViewCast.addItemDecoration(new ItemDecorator(32, ItemDecorator.HORIZONTAL));
 
         CastPresenter castPresenter = new CastPresenter(movie.getCasts());
         CastAdapter castAdapter = new CastAdapter(castPresenter, null);
         recyclerViewCast.setAdapter(castAdapter);
 
         recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, 1));
+        recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));
 
         RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movie.getRecommendations());
         RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, null);

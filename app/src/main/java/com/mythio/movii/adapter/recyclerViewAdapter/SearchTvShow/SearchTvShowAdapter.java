@@ -1,6 +1,5 @@
 package com.mythio.movii.adapter.recyclerViewAdapter.SearchTvShow;
 
-import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,24 +55,6 @@ public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapte
         @Override
         public void show(@NonNull TvShowTmdb tvShowTmdb) {
             textViewTitle.setText(tvShowTmdb.getName());
-        }
-    }
-
-    public static class ItemDecorator extends RecyclerView.ItemDecoration {
-
-        private final int space;
-
-        public ItemDecorator(int space) {
-            this.space = space;
-        }
-
-        @Override
-        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
-                                   @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-            outRect.bottom = space;
-            if (parent.getChildAdapterPosition(view) == 0) {
-                outRect.top = space;
-            }
         }
     }
 }

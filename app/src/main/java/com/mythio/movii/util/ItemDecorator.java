@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemDecorator extends RecyclerView.ItemDecoration {
 
+    public static final int HORIZONTAL = 0;
+    public static final int VERTICAL = 1;
+
     private final int space;
     private final int style;
 
@@ -21,15 +24,15 @@ public class ItemDecorator extends RecyclerView.ItemDecoration {
                                @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
 
         switch (style) {
-            case 0:
-                outRect.right = space;
-                if (parent.getChildAdapterPosition(view) == 0) {
+            case HORIZONTAL:
+                if (parent.getChildAdapterPosition(view) != 0) {
                     outRect.left = space;
                 }
                 break;
-            case 1:
-                if (parent.getChildAdapterPosition(view) != 0) {
-                    outRect.left = space;
+            case VERTICAL:
+                outRect.bottom = space;
+                if (parent.getChildAdapterPosition(view) == 0) {
+                    outRect.top = space;
                 }
                 break;
         }

@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +22,7 @@ import com.mythio.movii.activity.SearchMovie.contract.Presenter;
 import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.SearchMovieAdapter;
 import com.mythio.movii.adapter.recyclerViewAdapter.SearchMovie.SearchMoviePresenter;
 import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.util.ItemDecorator;
 
 import java.util.ArrayList;
 
@@ -31,15 +31,12 @@ import butterknife.ButterKnife;
 
 public class SearchMovieActivity extends AppCompatActivity implements Contract.View {
 
-    @Nullable
     @BindView(R.id.search_bar)
     EditText searchBar;
 
-    @Nullable
     @BindView(R.id.search_plate)
     LinearLayout searchPlate;
 
-    @Nullable
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -53,7 +50,7 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
         ButterKnife.bind(this);
         presenter = new Presenter(this);
 
-        SearchMovieAdapter.ItemDecorator decorator = new SearchMovieAdapter.ItemDecorator(12);
+        ItemDecorator decorator = new ItemDecorator(12, ItemDecorator.VERTICAL);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.addItemDecoration(decorator);
