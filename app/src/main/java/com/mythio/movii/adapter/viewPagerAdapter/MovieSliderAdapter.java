@@ -12,10 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.squareup.picasso.Picasso;
+import com.mythio.movii.util.App;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,11 +56,8 @@ public class MovieSliderAdapter extends PagerAdapter {
 
         View view = inflater.inflate(R.layout.item_slideshow, null);
         final ImageView imageViewBackdrop = view.findViewById(R.id.image_view_backdrop);
-//        final ImageView im = view.findViewById(R.id.image_view_overlay);
         TextView textViewTitle1 = view.findViewById(R.id.text_view_title1);
         TextView textViewTitle2 = view.findViewById(R.id.text_view_title2);
-
-//        im.setImageDrawable(mContext.getDrawable(R.drawable.bg_gradient_movie));
 
         String[] title_arr = movie.getTitle().split(": ");
 
@@ -74,7 +72,7 @@ public class MovieSliderAdapter extends PagerAdapter {
 
         String url = IMAGE_BASE_URL + "w780" + movie.getBackdropPath();
 
-        Picasso.get()
+        Glide.with(App.getContext())
                 .load(url)
                 .into(imageViewBackdrop);
 

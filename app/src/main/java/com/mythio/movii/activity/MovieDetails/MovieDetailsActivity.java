@@ -1,8 +1,8 @@
 package com.mythio.movii.activity.MovieDetails;
 
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -11,11 +11,17 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.MovieDetails.contract.Contract;
 import com.mythio.movii.activity.MovieDetails.contract.Presenter;
@@ -24,9 +30,8 @@ import com.mythio.movii.adapter.recyclerViewAdapter.Cast.CastPresenter;
 import com.mythio.movii.adapter.recyclerViewAdapter.RecommendedMovies.RecommendedMoviesAdapter;
 import com.mythio.movii.adapter.recyclerViewAdapter.RecommendedMovies.RecommendedMoviesPresenter;
 import com.mythio.movii.model.movie.Movie;
+import com.mythio.movii.util.App;
 import com.mythio.movii.util.ItemDecorator;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,48 +95,45 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         presenter.getDetails(currentId);
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void showDetails(@NonNull Movie movie) {
 
-        Target target = new Target() {
-            @Override
-            public void onBitmapLoaded(@NonNull Bitmap bitmap, Picasso.LoadedFrom from) {
-                imgViewPoster.setImageBitmap(bitmap);
-                Palette.from(bitmap).generate(palette -> {
-                    assert palette != null;
-                    if (palette.getDarkMutedSwatch() != null) {
-                        imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkMutedSwatch().getRgb()));
-                        getWindow().getDecorView().setBackgroundColor(palette.getDarkMutedSwatch().getRgb());
-                    } else if (palette.getDarkVibrantSwatch() != null) {
-                        imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkVibrantSwatch().getRgb()));
-                        getWindow().getDecorView().setBackgroundColor(palette.getDarkVibrantSwatch().getRgb());
-                    } else if (palette.getMutedSwatch() != null) {
-                        imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getMutedSwatch().getRgb()));
-                        getWindow().getDecorView().setBackgroundColor(palette.getMutedSwatch().getRgb());
+        Glide.with(App.getContext())
+                .asBitmap()
+                .load(IMAGE_BASE_URL + "w780" + movie.getPosterPath())
+                .listener(new RequestListener<Bitmap>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                        return false;
                     }
 
-                    if (palette.getLightMutedSwatch() != null) {
-                        imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getLightMutedSwatch().getRgb()));
-                    } else if (palette.getLightVibrantSwatch() != null) {
-                        imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getLightVibrantSwatch().getRgb()));
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                        imgViewPoster.setImageBitmap(resource);
+                        Palette.from(resource).generate(palette -> {
+                            assert palette != null;
+                            if (palette.getDarkMutedSwatch() != null) {
+                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkMutedSwatch().getRgb()));
+                                getWindow().getDecorView().setBackgroundColor(palette.getDarkMutedSwatch().getRgb());
+                            } else if (palette.getDarkVibrantSwatch() != null) {
+                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkVibrantSwatch().getRgb()));
+                                getWindow().getDecorView().setBackgroundColor(palette.getDarkVibrantSwatch().getRgb());
+                            } else if (palette.getMutedSwatch() != null) {
+                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getMutedSwatch().getRgb()));
+                                getWindow().getDecorView().setBackgroundColor(palette.getMutedSwatch().getRgb());
+                            }
+
+                            if (palette.getLightMutedSwatch() != null) {
+                                imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getLightMutedSwatch().getRgb()));
+                            } else if (palette.getLightVibrantSwatch() != null) {
+                                imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getLightVibrantSwatch().getRgb()));
+                            }
+                        });
+                        return false;
                     }
-                });
-            }
-
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-            }
-        };
-
-        Picasso.get()
-                .load(IMAGE_BASE_URL + "original" + movie.getPosterPath())
-                .into(target);
-
-        imgViewPoster.setTag(target);
+                })
+                .into(imgViewPoster);
 
         if (movie.getTitle2().equals("")) {
             txtViewTitle1.setText(movie.getTitle1());
