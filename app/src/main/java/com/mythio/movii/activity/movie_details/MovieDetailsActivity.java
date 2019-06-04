@@ -15,7 +15,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +26,6 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.mythio.movii.R;
-import com.mythio.movii.activity.about_cast.AboutCastActivity;
 import com.mythio.movii.activity.movie_details.contract.Contract;
 import com.mythio.movii.activity.movie_details.contract.Presenter;
 import com.mythio.movii.adapter.recycler_view_adapter.cast.CastAdapter;
@@ -166,10 +164,14 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
         CastPresenter castPresenter = new CastPresenter(movie.getCasts());
         CastAdapter castAdapter = new CastAdapter(castPresenter, (id, imageView) -> {
-            Intent intent = new Intent(getContext(), AboutCastActivity.class);
-            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", movie.getCasts().get(id).getProfilePath());
-            ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, imageView, imageView.getTransitionName());
-            startActivity(intent, compat.toBundle());
+            CastBottomDialog b = new CastBottomDialog();
+            Bundle bundle = new Bundle();
+            bundle.putString("123", movie.getCasts().get(id).getProfilePath());
+            bundle.putString("234", movie.getCasts().get(id).getName());
+            bundle.putString("345", movie.getCasts().get(id).getCharacter());
+            bundle.putString("456", movie.getCasts().get(id).getCreditId());
+            b.setArguments(bundle);
+            b.show(getSupportFragmentManager(), b.getTag());
         });
         recyclerViewCast.setAdapter(castAdapter);
 
@@ -177,7 +179,12 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));
 
         RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movie.getRecommendations());
-        RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, null);
+        RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, id -> {
+            Intent intent = new Intent(MovieDetailsActivity.this, MovieDetailsActivity.class);
+            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", String.valueOf(movie.getRecommendations().get(id).getId()));
+            startActivity(intent);
+            finish();
+        });
         recyclerViewRecommended.setAdapter(recommendedMoviesAdapter);
 
         animationView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_out));
