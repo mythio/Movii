@@ -16,7 +16,7 @@ import com.mythio.movii.activity.discover.fragment.TvShowsFragment;
 import com.mythio.movii.activity.discover.fragment.contract.MoviesContract;
 import com.mythio.movii.activity.discover.fragment.contract.TvShowsContract;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.model.tv_show.TvShowTmdb;
 
 import java.util.ArrayList;
 

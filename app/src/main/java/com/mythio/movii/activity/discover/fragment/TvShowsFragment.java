@@ -10,10 +10,10 @@ import androidx.viewpager.widget.ViewPager;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.discover.fragment.contract.TvShowsContract;
 import com.mythio.movii.activity.discover.fragment.contract.TvShowsPresenter;
-import com.mythio.movii.activity.searchTvShow.SearchTvShowActivity;
-import com.mythio.movii.activity.tvShowDetails.TvShowDetailsActivity;
-import com.mythio.movii.adapter.viewPagerAdapter.TvShowSliderAdapter;
-import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.activity.search_tv_show.SearchTvShowActivity;
+import com.mythio.movii.activity.tv_show_details.TvShowDetailsActivity;
+import com.mythio.movii.adapter.view_pager_adapter.TvShowSliderAdapter;
+import com.mythio.movii.model.tv_show.TvShowTmdb;
 
 import java.util.ArrayList;
 

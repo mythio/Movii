@@ -1,6 +1,6 @@
 package com.mythio.movii.activity.discover.fragment.contract;
 
-import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.model.tv_show.TvShowTmdb;
 
 import java.util.ArrayList;
 

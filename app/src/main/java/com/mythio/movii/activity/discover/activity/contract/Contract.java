@@ -2,7 +2,7 @@ package com.mythio.movii.activity.discover.activity.contract;
 
 import com.mythio.movii.activity.discover.fragment.BaseDiscoverFragment;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.model.tv_show.TvShowTmdb;
 
 import java.util.ArrayList;
 

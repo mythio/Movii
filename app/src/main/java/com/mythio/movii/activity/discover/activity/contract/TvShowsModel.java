@@ -5,8 +5,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.mythio.movii.activity.discover.activity.contract.Contract.Model;
-import com.mythio.movii.model.tvShow.TvShowResponse;
-import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.model.tv_show.TvShowResponse;
+import com.mythio.movii.model.tv_show.TvShowTmdb;
 import com.mythio.movii.network.EndPointTmdb;
 import com.mythio.movii.network.RetrofitBuilder;
 

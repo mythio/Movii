@@ -6,9 +6,9 @@ import com.mythio.movii.model.cast.Cast;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieOmdb;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.mythio.movii.model.tvShow.TvShow;
-import com.mythio.movii.model.tvShow.TvShowOmdb;
-import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.model.tv_show.TvShow;
+import com.mythio.movii.model.tv_show.TvShowOmdb;
+import com.mythio.movii.model.tv_show.TvShowTmdb;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;

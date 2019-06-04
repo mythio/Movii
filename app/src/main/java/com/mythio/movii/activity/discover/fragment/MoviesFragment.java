@@ -10,9 +10,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.discover.fragment.contract.MoviesContract;
 import com.mythio.movii.activity.discover.fragment.contract.MoviesPresenter;
-import com.mythio.movii.activity.movieDetails.MovieDetailsActivity;
-import com.mythio.movii.activity.searchMovie.SearchMovieActivity;
-import com.mythio.movii.adapter.viewPagerAdapter.MovieSliderAdapter;
+import com.mythio.movii.activity.movie_details.MovieDetailsActivity;
+import com.mythio.movii.activity.search_movie.SearchMovieActivity;
+import com.mythio.movii.adapter.view_pager_adapter.MovieSliderAdapter;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
