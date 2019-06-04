@@ -14,9 +14,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
-import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.util.App;
+import com.mythio.movii.util.ItemClickListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,9 +28,9 @@ public class MovieSliderAdapter extends PagerAdapter {
 
     private final Context mContext;
     private final ArrayList<MovieTmdb> mMovies;
-    private final OnItemClickListener listener;
+    private final ItemClickListener.OnItemClick listener;
 
-    public MovieSliderAdapter(Context mContext, ArrayList<MovieTmdb> mMovies, OnItemClickListener listener) {
+    public MovieSliderAdapter(Context mContext, ArrayList<MovieTmdb> mMovies, ItemClickListener.OnItemClick listener) {
         this.mContext = mContext;
         this.mMovies = mMovies;
         this.listener = listener;

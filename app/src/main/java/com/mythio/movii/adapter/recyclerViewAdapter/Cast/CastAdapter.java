@@ -3,16 +3,17 @@ package com.mythio.movii.adapter.recyclerViewAdapter.Cast;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
-import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.cast.Cast;
 import com.mythio.movii.util.App;
+import com.mythio.movii.util.ItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,9 +23,9 @@ import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder> {
     private final CastPresenter presenter;
-    private final OnItemClickListener listener;
+    private final ItemClickListener.OnItemClickData<ImageView> listener;
 
-    public CastAdapter(CastPresenter presenter, OnItemClickListener listener) {
+    public CastAdapter(CastPresenter presenter, ItemClickListener.OnItemClickData<ImageView> listener) {
         this.presenter = presenter;
         this.listener = listener;
     }
@@ -56,7 +57,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-            itemView.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
+            itemView.setOnClickListener(v -> listener.onItemClick(getAdapterPosition(), imageView));
         }
 
         @Override

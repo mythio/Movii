@@ -9,18 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.util.ItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.SearchMovieViewHolder> {
     private final SearchMoviePresenter presenter;
-    private final OnItemClickListener listener;
+    private final ItemClickListener.OnItemClick listener;
 
-    public SearchMovieAdapter(SearchMoviePresenter presenter, OnItemClickListener listener) {
+    public SearchMovieAdapter(SearchMoviePresenter presenter, ItemClickListener.OnItemClick listener) {
         this.presenter = presenter;
         this.listener = listener;
     }

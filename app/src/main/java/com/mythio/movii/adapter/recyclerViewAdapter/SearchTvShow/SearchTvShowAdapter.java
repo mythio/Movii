@@ -9,18 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
-import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.util.ItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapter.SearchTvShowViewHolder> {
     private final SearchTvShowPresenter presenter;
-    private final OnItemClickListener listener;
+    private final ItemClickListener.OnItemClick listener;
 
-    public SearchTvShowAdapter(SearchTvShowPresenter presenter, OnItemClickListener listener) {
+    public SearchTvShowAdapter(SearchTvShowPresenter presenter, ItemClickListener.OnItemClick listener) {
         this.presenter = presenter;
         this.listener = listener;
     }

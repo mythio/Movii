@@ -14,9 +14,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
-import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.model.tvShow.TvShowTmdb;
 import com.mythio.movii.util.App;
+import com.mythio.movii.util.ItemClickListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,9 +28,9 @@ public class TvShowSliderAdapter extends PagerAdapter {
 
     private final Context mContext;
     private final ArrayList<TvShowTmdb> tvShows;
-    private final OnItemClickListener listener;
+    private final ItemClickListener.OnItemClick listener;
 
-    public TvShowSliderAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows, OnItemClickListener listener) {
+    public TvShowSliderAdapter(Context mContext, ArrayList<TvShowTmdb> tvShows, ItemClickListener.OnItemClick listener) {
         this.mContext = mContext;
         this.tvShows = tvShows;
         this.listener = listener;

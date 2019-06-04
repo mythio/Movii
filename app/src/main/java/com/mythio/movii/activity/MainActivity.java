@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mythio.movii.activity.Discover.activity.DiscoverActivity;
+import com.mythio.movii.activity.discover.activity.DiscoverActivity;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
-import com.mythio.movii.activity.Discover.fragment.contract.OnItemClickListener;
 import com.mythio.movii.adapter.recyclerViewAdapter.Contract;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.util.App;
+import com.mythio.movii.util.ItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,9 +23,9 @@ import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMoviesAdapter.RecommendedMovieViewHolder> {
     private final RecommendedMoviesPresenter presenter;
-    private final OnItemClickListener listener;
+    private final ItemClickListener.OnItemClick listener;
 
-    public RecommendedMoviesAdapter(RecommendedMoviesPresenter presenter, OnItemClickListener listener) {
+    public RecommendedMoviesAdapter(RecommendedMoviesPresenter presenter, ItemClickListener.OnItemClick listener) {
         this.presenter = presenter;
         this.listener = listener;
     }
