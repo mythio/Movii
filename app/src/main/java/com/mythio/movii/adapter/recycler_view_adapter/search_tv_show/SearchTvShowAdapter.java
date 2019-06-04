@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.recycler_view_adapter.SearchMovie;
+package com.mythio.movii.adapter.recycler_view_adapter.search_tv_show;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,32 +10,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.recycler_view_adapter.Contract;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.tv_show.TvShowTmdb;
 import com.mythio.movii.util.ItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.SearchMovieViewHolder> {
-    private final SearchMoviePresenter presenter;
+public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapter.SearchTvShowViewHolder> {
+    private final SearchTvShowPresenter presenter;
     private final ItemClickListener.OnItemClick listener;
 
-    public SearchMovieAdapter(SearchMoviePresenter presenter, ItemClickListener.OnItemClick listener) {
+    public SearchTvShowAdapter(SearchTvShowPresenter presenter, ItemClickListener.OnItemClick listener) {
         this.presenter = presenter;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public SearchMovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SearchMovieViewHolder(
+    public SearchTvShowViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new SearchTvShowViewHolder(
                 LayoutInflater
                         .from(viewGroup.getContext())
                         .inflate(R.layout.item_search_result, viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchMovieViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull SearchTvShowViewHolder viewHolder, int i) {
         presenter.onBindViewAtPosition(viewHolder, i);
     }
 
@@ -44,14 +44,11 @@ public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.
         return presenter.getCount();
     }
 
-    public class SearchMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<MovieTmdb> {
+    public class SearchTvShowViewHolder extends RecyclerView.ViewHolder implements Contract.View<TvShowTmdb> {
         @BindView(R.id.text_view_title)
         TextView textViewTitle;
 
-        @BindView(R.id.text_view_year)
-        TextView textViewYear;
-
-        SearchMovieViewHolder(@NonNull View itemView) {
+        SearchTvShowViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
@@ -59,10 +56,8 @@ public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.
         }
 
         @Override
-        public void show(@NonNull MovieTmdb movie) {
-            String[] date = movie.getReleaseDate().split("-");
-            textViewTitle.setText(movie.getTitle());
-            textViewYear.setText(date[0]);
+        public void show(@NonNull TvShowTmdb tvShowTmdb) {
+            textViewTitle.setText(tvShowTmdb.getName());
         }
     }
 }

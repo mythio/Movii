@@ -30,10 +30,10 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.about_cast.AboutCastActivity;
 import com.mythio.movii.activity.movie_details.contract.Contract;
 import com.mythio.movii.activity.movie_details.contract.Presenter;
-import com.mythio.movii.adapter.recycler_view_adapter.Cast.CastAdapter;
-import com.mythio.movii.adapter.recycler_view_adapter.Cast.CastPresenter;
-import com.mythio.movii.adapter.recycler_view_adapter.RecommendedMovies.RecommendedMoviesAdapter;
-import com.mythio.movii.adapter.recycler_view_adapter.RecommendedMovies.RecommendedMoviesPresenter;
+import com.mythio.movii.adapter.recycler_view_adapter.cast.CastAdapter;
+import com.mythio.movii.adapter.recycler_view_adapter.cast.CastPresenter;
+import com.mythio.movii.adapter.recycler_view_adapter.recommended_movies.RecommendedMoviesAdapter;
+import com.mythio.movii.adapter.recycler_view_adapter.recommended_movies.RecommendedMoviesPresenter;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.ItemDecorator;
 

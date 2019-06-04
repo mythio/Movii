@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.recycler_view_adapter.RecommendedMovies;
+package com.mythio.movii.adapter.recycler_view_adapter.recommended_movies;
 
 import androidx.annotation.NonNull;
 

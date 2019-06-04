@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.recycler_view_adapter.Cast;
+package com.mythio.movii.adapter.recycler_view_adapter.cast;
 
 import android.view.LayoutInflater;
 import android.view.View;

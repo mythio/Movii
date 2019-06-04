@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.recycler_view_adapter.SearchTvShow;
+package com.mythio.movii.adapter.recycler_view_adapter.search_tv_show;
 
 import androidx.annotation.NonNull;
 

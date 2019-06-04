@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.recycler_view_adapter.SearchMovie;
+package com.mythio.movii.adapter.recycler_view_adapter.search_movie;
 
 import androidx.annotation.NonNull;
 

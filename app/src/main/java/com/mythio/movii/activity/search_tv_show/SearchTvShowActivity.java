@@ -18,8 +18,8 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.search_tv_show.contract.Contract;
 import com.mythio.movii.activity.search_tv_show.contract.Presenter;
 import com.mythio.movii.activity.tv_show_details.TvShowDetailsActivity;
-import com.mythio.movii.adapter.recycler_view_adapter.SearchTvShow.SearchTvShowAdapter;
-import com.mythio.movii.adapter.recycler_view_adapter.SearchTvShow.SearchTvShowPresenter;
+import com.mythio.movii.adapter.recycler_view_adapter.search_tv_show.SearchTvShowAdapter;
+import com.mythio.movii.adapter.recycler_view_adapter.search_tv_show.SearchTvShowPresenter;
 import com.mythio.movii.model.tv_show.TvShowTmdb;
 import com.mythio.movii.util.ItemDecorator;
 
