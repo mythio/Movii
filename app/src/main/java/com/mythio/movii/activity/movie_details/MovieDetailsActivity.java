@@ -105,7 +105,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     @Override
     public void showDetails(@NonNull Movie movie) {
 
-
         Glide.with(getContext())
                 .asBitmap()
                 .load(IMAGE_BASE_URL + "w780" + movie.getPosterPath())

@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mythio.movii.R;
-import com.mythio.movii.activity.discover.fragment.contract.TvShowsContract;
-import com.mythio.movii.activity.discover.fragment.contract.TvShowsPresenter;
+import com.mythio.movii.activity.discover.fragment.contract.Contract;
+import com.mythio.movii.activity.discover.fragment.contract.Presenter;
 import com.mythio.movii.activity.search_tv_show.SearchTvShowActivity;
 import com.mythio.movii.activity.tv_show_details.TvShowDetailsActivity;
 import com.mythio.movii.adapter.view_pager_adapter.TvShowSliderAdapter;
@@ -21,13 +21,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsContract.View,
-        TvShowsContract.Callback {
+public class TvShowsFragment extends BaseDiscoverFragment implements Contract.View<TvShowTmdb>,
+        Contract.Callback<TvShowTmdb> {
 
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
 
-    private TvShowsContract.Presenter mPresenter;
+    private Contract.Presenter<TvShowTmdb> mPresenter;
     private ArrayList<TvShowTmdb> tvShows;
     @NonNull
     private Boolean hasReceived = false;
@@ -37,7 +37,7 @@ public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsCont
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        mPresenter = new TvShowsPresenter(this);
+        mPresenter = new Presenter<>(this);
         mPresenter.initViews();
 
         if (hasReceived) {
@@ -47,7 +47,6 @@ public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsCont
 
     @OnClick(R.id.search_btn_go)
     public void send() {
-
         startActivity(new Intent(getContext(), SearchTvShowActivity.class));
     }
 
@@ -60,7 +59,6 @@ public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsCont
     public void onDataReceived(ArrayList<TvShowTmdb> tvShows) {
         hasReceived = true;
         this.tvShows = tvShows;
-
         if (mPresenter != null) {
             mPresenter.setDataToViewPager(tvShows);
         }
@@ -77,7 +75,6 @@ public class TvShowsFragment extends BaseDiscoverFragment implements TvShowsCont
 
     @Override
     public void showSlideShow(ArrayList<TvShowTmdb> tvShows) {
-
         TvShowSliderAdapter adapter = new TvShowSliderAdapter(getContext(), tvShows, id -> {
             Intent intent = new Intent(getContext(), TvShowDetailsActivity.class);
             intent.putExtra("BUNDLED_EXTRA_TV_ID", String.valueOf(id));

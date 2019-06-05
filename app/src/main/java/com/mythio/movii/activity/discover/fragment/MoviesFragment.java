@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
 import com.mythio.movii.R;
-import com.mythio.movii.activity.discover.fragment.contract.MoviesContract;
-import com.mythio.movii.activity.discover.fragment.contract.MoviesPresenter;
+import com.mythio.movii.activity.discover.fragment.contract.Contract;
+import com.mythio.movii.activity.discover.fragment.contract.Presenter;
 import com.mythio.movii.activity.movie_details.MovieDetailsActivity;
 import com.mythio.movii.activity.search_movie.SearchMovieActivity;
 import com.mythio.movii.adapter.view_pager_adapter.MovieSliderAdapter;
@@ -21,13 +21,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MoviesFragment extends BaseDiscoverFragment implements MoviesContract.View,
-        MoviesContract.Callback {
+public class MoviesFragment extends BaseDiscoverFragment implements Contract.View<MovieTmdb>,
+        Contract.Callback<MovieTmdb> {
 
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
 
-    private MoviesContract.Presenter mPresenter;
+    private Contract.Presenter<MovieTmdb> mPresenter;
     private ArrayList<MovieTmdb> movies;
     private Boolean hasReceived = false;
 
@@ -36,7 +36,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements MoviesContra
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        mPresenter = new MoviesPresenter(this);
+        mPresenter = new Presenter<>(this);
         mPresenter.initViews();
 
         if (hasReceived) {
@@ -58,7 +58,6 @@ public class MoviesFragment extends BaseDiscoverFragment implements MoviesContra
     public void onDataReceived(ArrayList<MovieTmdb> movies) {
         hasReceived = true;
         this.movies = movies;
-
         if (mPresenter != null) {
             mPresenter.setDataToViewPager(movies);
         }

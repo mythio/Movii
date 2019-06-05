@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -100,7 +99,6 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
 
     @Override
     public void showRes(@NonNull ArrayList<MovieTmdb> movies) {
-        Log.d("movii.debug: shit", "showRes: " + movies.size());
         SearchMoviePresenter presenter = new SearchMoviePresenter(movies);
         SearchMovieAdapter adapter = new SearchMovieAdapter(presenter, id -> {
             Intent intent = new Intent(SearchMovieActivity.this, MovieDetailsActivity.class);

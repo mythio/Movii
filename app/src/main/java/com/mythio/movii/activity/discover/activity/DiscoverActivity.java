@@ -7,14 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.mythio.movii.R;
-import com.mythio.movii.activity.discover.activity.contract.Contract;
 import com.mythio.movii.activity.discover.activity.contract.Presenter;
 import com.mythio.movii.activity.discover.fragment.BaseDiscoverFragment;
 import com.mythio.movii.activity.discover.fragment.MoviesFragment;
 import com.mythio.movii.activity.discover.fragment.ProfileFragment;
 import com.mythio.movii.activity.discover.fragment.TvShowsFragment;
-import com.mythio.movii.activity.discover.fragment.contract.MoviesContract;
-import com.mythio.movii.activity.discover.fragment.contract.TvShowsContract;
+import com.mythio.movii.activity.discover.fragment.contract.Contract;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tv_show.TvShowTmdb;
 
@@ -23,7 +21,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DiscoverActivity extends AppCompatActivity implements Contract.View {
+public class DiscoverActivity extends AppCompatActivity implements com.mythio.movii.activity.discover.activity.contract.Contract.View {
 
     @BindView(R.id.bottom_navigation)
     BubbleNavigationConstraintView navBar;
@@ -32,8 +30,8 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
     private final TvShowsFragment tvShowsFragment = new TvShowsFragment();
     private final ProfileFragment profileFragment = new ProfileFragment();
 
-    private static MoviesContract.Callback moviesCallback;
-    private static TvShowsContract.Callback tvShowsCallback;
+    private static Contract.Callback<MovieTmdb> moviesCallback;
+    private static Contract.Callback<TvShowTmdb> tvShowsCallback;
 
     private Presenter presenter;
 
