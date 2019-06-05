@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.mythio.movii.model.tvShow.TvShowResponse;
-import com.mythio.movii.model.tvShow.TvShowTmdb;
+import com.mythio.movii.model.tv_show.TvShowResponse;
+import com.mythio.movii.model.tv_show.TvShowTmdb;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;

@@ -10,6 +10,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:fontFamily">@font/gsans_medium</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="MovieLayout" parent="android:Theme">

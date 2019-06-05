@@ -14,22 +14,24 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
+        <activity android:name=".activity.about_cast.AboutCastActivity"></activity>
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.Discover.activity.DiscoverActivity" />
-        <activity android:name=".activity.MovieDetails.MovieDetailsActivity" />
-        <activity android:name=".activity.TvShowDetails.TvShowDetailsActivity" />
+        <activity android:name=".activity.discover.activity.DiscoverActivity" />
+        <activity android:name=".activity.movie_details.MovieDetailsActivity" />
+        <activity android:name=".activity.tv_show_details.TvShowDetailsActivity" />
         <activity
-            android:name=".activity.SearchMovie.SearchMovieActivity"
+            android:name=".activity.search_movie.SearchMovieActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.SearchTvShow.SearchTvShowActivity"
+            android:name=".activity.search_tv_show.SearchTvShowActivity"
             android:windowSoftInputMode="adjustPan" />
     </application>
 
