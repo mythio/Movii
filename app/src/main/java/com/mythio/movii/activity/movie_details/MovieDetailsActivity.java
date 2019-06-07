@@ -169,6 +169,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
             bundle.putString("234", movie.getCasts().get(id).getName());
             bundle.putString("345", movie.getCasts().get(id).getCharacter());
             bundle.putString("456", movie.getCasts().get(id).getCreditId());
+            bundle.putInt("int", movie.getCasts().get(id).getId());
             b.setArguments(bundle);
             b.show(getSupportFragmentManager(), b.getTag());
         });

@@ -2,6 +2,7 @@ package com.mythio.movii.network;
 
 import androidx.annotation.NonNull;
 
+import com.mythio.movii.model.cast.CastMovies;
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tv_show.TvShowResponse;
@@ -38,4 +39,7 @@ public interface EndPointTmdb {
     @NonNull
     @GET("search/tv")
     Observable<TvShowResponse> getTvShowSearchResults(@Query("api_key") String apiKey, @Query("query") String query);
+
+    @GET("person/{cast_id}/movie_credits")
+    Single<CastMovies> getCastMovies(@Path("cast_id") int id, @Query("api_key") String apiKey);
 }
