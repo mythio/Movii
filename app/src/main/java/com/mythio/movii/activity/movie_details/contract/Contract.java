@@ -6,19 +6,19 @@ public interface Contract {
 
     interface View {
 
-        void showDetails(Movie movie);
+        void showMovieDetails(Movie movie);
     }
 
     interface Presenter {
 
-        void getDetails(String id);
+        void getDetails(int id);
     }
 
     interface Model {
 
-        void getDetails(MovieDetailsListener listener, int id);
+        void getDetails(OnMovieDetailReceivedListener listener, int id);
 
-        interface MovieDetailsListener {
+        interface OnMovieDetailReceivedListener {
 
             void onFinished(Movie movie);
         }

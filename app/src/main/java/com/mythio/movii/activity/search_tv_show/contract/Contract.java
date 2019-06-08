@@ -12,7 +12,7 @@ public interface Contract {
 
         void hidePlate();
 
-        void showRes(ArrayList<TvShowTmdb> tvShows);
+        void showSearchResult(ArrayList<TvShowTmdb> tvShows);
     }
 
     interface Presenter {
@@ -24,9 +24,9 @@ public interface Contract {
 
     interface Model {
 
-        void getSearchResults(OnTvShowSearchListener listener, String query);
+        void getSearchResults(OnSearchResultsListener listener, String query);
 
-        interface OnTvShowSearchListener {
+        interface OnSearchResultsListener {
 
             void onFinished(ArrayList<TvShowTmdb> tvShows);
         }

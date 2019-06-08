@@ -11,7 +11,12 @@ public class Presenter implements Contract.Presenter {
     }
 
     @Override
-    public void onLaunch(int id) {
-        model.getMovies(id, view::initSheet);
+    public void onViewInitialized() {
+        view.showInitView();
+    }
+
+    @Override
+    public void getData(int id) {
+        model.getMovies(id, view::showRecommendedMovies);
     }
 }

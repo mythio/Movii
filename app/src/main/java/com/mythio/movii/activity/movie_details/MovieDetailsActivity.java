@@ -95,15 +95,15 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
         ButterKnife.bind(this);
 
-        String currentId = getIntent().getStringExtra("BUNDLED_EXTRA_MOVIE_ID");
-        Contract.Presenter presenter = new Presenter(this);
+        int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
+        Presenter presenter = new Presenter(this);
 
-        presenter.getDetails(currentId);
+        presenter.getDetails(id);
     }
 
     @SuppressLint("CheckResult")
     @Override
-    public void showDetails(@NonNull Movie movie) {
+    public void showMovieDetails(@NonNull Movie movie) {
 
         Glide.with(getContext())
                 .asBitmap()
@@ -162,14 +162,14 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         recyclerViewCast.addItemDecoration(new ItemDecorator(32, ItemDecorator.HORIZONTAL));
 
         CastPresenter castPresenter = new CastPresenter(movie.getCasts());
-        CastAdapter castAdapter = new CastAdapter(castPresenter, (id, imageView) -> {
+        CastAdapter castAdapter = new CastAdapter(castPresenter, (position, imageView) -> {
             CastBottomDialog b = new CastBottomDialog();
             Bundle bundle = new Bundle();
-            bundle.putString("123", movie.getCasts().get(id).getProfilePath());
-            bundle.putString("234", movie.getCasts().get(id).getName());
-            bundle.putString("345", movie.getCasts().get(id).getCharacter());
-            bundle.putString("456", movie.getCasts().get(id).getCreditId());
-            bundle.putInt("int", movie.getCasts().get(id).getId());
+            bundle.putString("123", movie.getCasts().get(position).getProfilePath());
+            bundle.putString("234", movie.getCasts().get(position).getName());
+            bundle.putString("345", movie.getCasts().get(position).getCharacter());
+            bundle.putString("456", movie.getCasts().get(position).getCreditId());
+            bundle.putInt("int", movie.getCasts().get(position).getId());
             b.setArguments(bundle);
             b.show(getSupportFragmentManager(), b.getTag());
         });
@@ -179,9 +179,9 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));
 
         RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movie.getRecommendations());
-        RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, id -> {
+        RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, position -> {
             Intent intent = new Intent(MovieDetailsActivity.this, MovieDetailsActivity.class);
-            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", String.valueOf(movie.getRecommendations().get(id).getId()));
+            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", movie.getRecommendations().get(position).getId());
             startActivity(intent);
             finish();
         });

@@ -20,7 +20,7 @@ public class Presenter implements Contract.Presenter {
 
     @Override
     public void onSearchParam(String string) {
-        model.getSearchResults(view::showRes, string);
+        model.getSearchResults(view::showSearchResult, string);
         view.hidePlate();
     }
 }

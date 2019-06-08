@@ -2,6 +2,7 @@ package com.mythio.movii.activity.discover.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     @BindView(R.id.view_pager_popular)
     ViewPager viewPager;
 
-    private Contract.Presenter<MovieTmdb> mPresenter;
+    private /*Contract.*/ Presenter<MovieTmdb> mPresenter;
     private ArrayList<MovieTmdb> movies;
     private Boolean hasReceived = false;
 
@@ -45,7 +46,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     }
 
     @OnClick(R.id.search_btn_go)
-    public void send() {
+    void send() {
         startActivity(new Intent(getContext(), SearchMovieActivity.class));
     }
 
@@ -73,10 +74,11 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     }
 
     @Override
-    public void showSlideShow(ArrayList<MovieTmdb> mMovies) {
-        MovieSliderAdapter adapter = new MovieSliderAdapter(getContext(), mMovies, id -> {
+    public void showSlideShow(ArrayList<MovieTmdb> movies) {
+        MovieSliderAdapter adapter = new MovieSliderAdapter(getContext(), movies, position -> {
+            Log.d("TAG_TAG_TAG", position + " returned");
             Intent intent = new Intent(getContext(), MovieDetailsActivity.class);
-            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", String.valueOf(id));
+            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", movies.get(position).getId());
             startActivity(intent);
         });
         viewPager.setAdapter(adapter);

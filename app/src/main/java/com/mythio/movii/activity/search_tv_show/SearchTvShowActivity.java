@@ -44,7 +44,7 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_movie);
+        setContentView(R.layout.activity_search_tv_show);
 
         ButterKnife.bind(this);
         presenter = new Presenter(this);
@@ -99,11 +99,11 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
     }
 
     @Override
-    public void showRes(ArrayList<TvShowTmdb> tvShows) {
+    public void showSearchResult(ArrayList<TvShowTmdb> tvShows) {
         SearchTvShowPresenter presenter = new SearchTvShowPresenter(tvShows);
-        SearchTvShowAdapter adapter = new SearchTvShowAdapter(presenter, id -> {
+        SearchTvShowAdapter adapter = new SearchTvShowAdapter(presenter, position -> {
             Intent intent = new Intent(SearchTvShowActivity.this, TvShowDetailsActivity.class);
-            intent.putExtra("BUNDLED_EXTRA_TV_ID", String.valueOf(id));
+            intent.putExtra("BUNDLED_EXTRA_TV_ID", tvShows.get(position).getId());
             startActivity(intent);
         });
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));

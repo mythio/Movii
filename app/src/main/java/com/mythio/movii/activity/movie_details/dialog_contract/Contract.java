@@ -8,12 +8,16 @@ public interface Contract {
 
     interface View {
 
-        void initSheet(ArrayList<MovieTmdb> movies);
+        void showInitView();
+
+        void showRecommendedMovies(ArrayList<MovieTmdb> movies);
     }
 
     interface Presenter {
 
-        void onLaunch(int id);
+        void onViewInitialized();
+
+        void getData(int id);
     }
 
     interface Model {

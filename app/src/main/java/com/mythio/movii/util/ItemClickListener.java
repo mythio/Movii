@@ -3,10 +3,10 @@ package com.mythio.movii.util;
 public interface ItemClickListener {
 
     interface OnItemClick {
-        void onItemClick(int id);
+        void onItemClick(int position);
     }
 
     interface OnItemClickData<T> {
-        void onItemClick(int id, T t);
+        void onItemClick(int position, T t);
     }
 }

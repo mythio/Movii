@@ -26,7 +26,7 @@ public class Model implements Contract.Model {
     private static final String TAG = "movii.debug: Model";
 
     @Override
-    public void getSearchResults(@NonNull final OnTvShowSearchListener listener, String query) {
+    public void getSearchResults(@NonNull final OnSearchResultsListener listener, String query) {
 
         getSingleSearch(query)
                 .debounce(200, TimeUnit.MILLISECONDS)

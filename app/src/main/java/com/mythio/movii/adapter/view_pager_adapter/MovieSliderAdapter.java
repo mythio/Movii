@@ -51,6 +51,7 @@ public class MovieSliderAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         final MovieTmdb movie = mMovies.get(position);
+
         final LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -79,7 +80,7 @@ public class MovieSliderAdapter extends PagerAdapter {
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);
 
-        view.setOnClickListener(v -> listener.onItemClick(movie.getId()));
+        view.setOnClickListener(v -> listener.onItemClick(position));
 
         return view;
     }

@@ -27,7 +27,7 @@ public class Model implements Contract.Model {
     private static final String TAG = "movii.debug: Model";
 
     @Override
-    public void getDetails(@NonNull MovieDetailsListener listener, int id) {
+    public void getDetails(@NonNull OnMovieDetailReceivedListener listener, int id) {
 
         getMovieTmdbObservable(id)
                 .flatMap((Function<MovieTmdb, ObservableSource<MovieOmdb>>)

@@ -24,22 +24,13 @@ import static com.mythio.movii.util.Constant.API_KEY_TMDB;
 public class Model implements Contract.Model {
 
     private static final String TAG = "movii.debug: Model";
-    private int s = -1;
 
     @Override
-    public void getSearchResults(@NonNull final OnMoviesSearchListener listener, String query) {
+    public void getSearchResults(@NonNull final OnSearchResultsListener listener, String query) {
 
         getSingleSearch(query)
                 .debounce(200, TimeUnit.MILLISECONDS)
                 .map(MovieResponse::getResults)
-//                .filter(movieTmdbs -> {
-//                    if (s == movieTmdbs.size()) {
-//                        return false;
-//                    } else {
-//                        s = movieTmdbs.size();
-//                        return true;
-//                    }
-//                })
                 .switchMap((Function<ArrayList<MovieTmdb>, ObservableSource<ArrayList<MovieTmdb>>>)
                         Observable::just)
                 .distinctUntilChanged()

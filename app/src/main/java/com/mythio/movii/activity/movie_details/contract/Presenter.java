@@ -14,7 +14,7 @@ public class Presenter implements Contract.Presenter {
     }
 
     @Override
-    public void getDetails(@NonNull String id) {
-        model.getDetails(view::showDetails, Integer.valueOf(id));
+    public void getDetails(int id) {
+        model.getDetails(view::showMovieDetails, id);
     }
 }

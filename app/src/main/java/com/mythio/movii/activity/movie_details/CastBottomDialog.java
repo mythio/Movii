@@ -1,11 +1,9 @@
 package com.mythio.movii.activity.movie_details;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +23,7 @@ import com.mythio.movii.util.App;
 import com.mythio.movii.util.ItemDecorator;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +50,6 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.dialog_cast, container, false);
@@ -65,25 +63,28 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
 
         Presenter presenter = new Presenter(this);
 
+        presenter.onViewInitialized();
+        presenter.getData(Objects.requireNonNull(getArguments()).getInt("int"));
+    }
+
+    @Override
+    public void showInitView() {
         Bundle bundle = getArguments();
-        String url = bundle.getString("123");
 
-        ImageView imageView = view.findViewById(R.id.cast);
+        String profilePath = Objects.requireNonNull(bundle).getString("123");
+        String castName = Objects.requireNonNull(bundle).getString("234");
+        String characterName = Objects.requireNonNull(bundle).getString("345");
 
-        int id = bundle.getInt("int");
-
-        presenter.onLaunch(id);
-
-        textViewCast.setText(bundle.getString("234"));
-        textViewCharacter.setText("as " + bundle.getString("345"));
+        textViewCast.setText(castName);
+        textViewCharacter.setText(characterName);
 
         Glide.with(App.getContext())
-                .load(IMAGE_BASE_URL + "w185" + url)
+                .load(IMAGE_BASE_URL + "w185" + profilePath)
                 .into(imageView);
     }
 
     @Override
-    public void initSheet(ArrayList<MovieTmdb> movies) {
+    public void showRecommendedMovies(ArrayList<MovieTmdb> movies) {
         recyclerView.setLayoutManager(new LinearLayoutManager(App.getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));
 
@@ -91,6 +92,5 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
 
         RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, null);
         recyclerView.setAdapter(recommendedMoviesAdapter);
-        Log.d("TAG_TAG_TAG", movies.size() + " ");
     }
 }

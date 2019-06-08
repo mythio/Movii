@@ -98,11 +98,11 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
     }
 
     @Override
-    public void showRes(@NonNull ArrayList<MovieTmdb> movies) {
+    public void showSearchResult(@NonNull ArrayList<MovieTmdb> movies) {
         SearchMoviePresenter presenter = new SearchMoviePresenter(movies);
-        SearchMovieAdapter adapter = new SearchMovieAdapter(presenter, id -> {
+        SearchMovieAdapter adapter = new SearchMovieAdapter(presenter, position -> {
             Intent intent = new Intent(SearchMovieActivity.this, MovieDetailsActivity.class);
-            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", String.valueOf(id));
+            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", movies.get(position).getId());
             startActivity(intent);
         });
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));

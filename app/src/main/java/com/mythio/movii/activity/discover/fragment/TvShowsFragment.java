@@ -46,7 +46,7 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
     }
 
     @OnClick(R.id.search_btn_go)
-    public void send() {
+    void send() {
         startActivity(new Intent(getContext(), SearchTvShowActivity.class));
     }
 
@@ -75,9 +75,9 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
 
     @Override
     public void showSlideShow(ArrayList<TvShowTmdb> tvShows) {
-        TvShowSliderAdapter adapter = new TvShowSliderAdapter(getContext(), tvShows, id -> {
+        TvShowSliderAdapter adapter = new TvShowSliderAdapter(getContext(), tvShows, position -> {
             Intent intent = new Intent(getContext(), TvShowDetailsActivity.class);
-            intent.putExtra("BUNDLED_EXTRA_TV_ID", String.valueOf(id));
+            intent.putExtra("BUNDLED_EXTRA_TV_ID", tvShows.get(position).getId());
             startActivity(intent);
         });
         viewPager.setAdapter(adapter);
