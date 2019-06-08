@@ -12,7 +12,7 @@ A handcrafted Android application to show everything you want to know about your
 ```
 .
 ├── activity
-│   ├── Discover
+│   ├── discover
 │   │   ├── activity
 │   │   │   ├── contract
 │   │   │   │   ├── Contract.java
@@ -23,69 +23,72 @@ A handcrafted Android application to show everything you want to know about your
 │   │   └── fragment
 │   │       ├── BaseDiscoverFragment.java
 │   │       ├── contract
+│   │       │   ├── Contract.java
 │   │       │   ├── FragmentNavigation.java
-│   │       │   ├── MoviesContract.java
-│   │       │   ├── MoviesPresenter.java
-│   │       │   ├── OnItemClickListener.java
-│   │       │   ├── TvShowsContract.java
-│   │       │   └── TvShowsPresenter.java
+│   │       │   └── Presenter.java
 │   │       ├── MoviesFragment.java
 │   │       ├── ProfileFragment.java
 │   │       └── TvShowsFragment.java
 │   ├── MainActivity.java
-│   ├── MovieDetails
+│   ├── movie_details
+│   │   ├── CastBottomDialog.java
 │   │   ├── contract
 │   │   │   ├── Contract.java
 │   │   │   ├── Model.java
 │   │   │   └── Presenter.java
+│   │   ├── dialog_contract
+│   │   │   ├── Contract.java
+│   │   │   ├── Model.java
+│   │   │   └── Presenter.java
 │   │   └── MovieDetailsActivity.java
-│   ├── SearchMovie
+│   ├── search_movie
 │   │   ├── contract
 │   │   │   ├── Contract.java
 │   │   │   ├── Model.java
 │   │   │   └── Presenter.java
 │   │   └── SearchMovieActivity.java
-│   ├── SearchTvShow
+│   ├── search_tv_show
 │   │   ├── contract
 │   │   │   ├── Contract.java
 │   │   │   ├── Model.java
 │   │   │   └── Presenter.java
 │   │   └── SearchTvShowActivity.java
-│   └── TvShowDetails
+│   └── tv_show_details
 │       ├── contract
 │       │   ├── Contract.java
 │       │   ├── Model.java
 │       │   └── Presenter.java
 │       └── TvShowDetailsActivity.java
 ├── adapter
-│   ├── recyclerViewAdapter
-│   │   ├── Cast
+│   ├── recycler_view_adapter
+│   │   ├── cast
 │   │   │   ├── CastAdapter.java
 │   │   │   └── CastPresenter.java
 │   │   ├── Contract.java
-│   │   ├── RecommendedMovies
+│   │   ├── recommended_movies
 │   │   │   ├── RecommendedMoviesAdapter.java
 │   │   │   └── RecommendedMoviesPresenter.java
-│   │   ├── SearchMovie
+│   │   ├── search_movie
 │   │   │   ├── SearchMovieAdapter.java
 │   │   │   └── SearchMoviePresenter.java
-│   │   └── SearchTvShow
+│   │   └── search_tv_show
 │   │       ├── SearchTvShowAdapter.java
 │   │       └── SearchTvShowPresenter.java
-│   └── viewPagerAdapter
+│   └── view_pager_adapter
 │       ├── MovieSliderAdapter.java
 │       ├── TvShowDetailsAdapter.java
 │       └── TvShowSliderAdapter.java
 ├── model
 │   ├── cast
 │   │   ├── Cast.java
+│   │   ├── CastMovies.java
 │   │   └── Credits.java
 │   ├── collection
 │   │   ├── Collection.java
 │   │   └── CollectionResponse.java
 │   ├── episode
 │   │   └── Episode.java
-│   ├── externalIds
+│   ├── external_ids
 │   │   └── ExternalIds.java
 │   ├── genre
 │   │   └── Genre.java
@@ -97,7 +100,7 @@ A handcrafted Android application to show everything you want to know about your
 │   ├── season
 │   │   ├── SeasonDetails.java
 │   │   └── Season.java
-│   ├── tvShow
+│   ├── tv_show
 │   │   ├── TvShow.java
 │   │   ├── TvShowOmdb.java
 │   │   ├── TvShowResponse.java
@@ -110,11 +113,13 @@ A handcrafted Android application to show everything you want to know about your
 │   ├── EndPointTmdb.java
 │   └── RetrofitBuilder.java
 └── util
+    ├── App.java
     ├── Constant.java
+    ├── ItemClickListener.java
     ├── ItemDecorator.java
     └── Utils.java
 
-33 directories, 69 files
+34 directories, 73 files
 ```
 
 ### Upcoming:
