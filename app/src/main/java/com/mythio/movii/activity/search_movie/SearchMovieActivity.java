@@ -36,7 +36,7 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
     @BindView(R.id.search_plate)
     LinearLayout searchPlate;
 
-    @BindView(R.id.recycler_view)
+    @BindView(R.id.rv_search_result)
     RecyclerView recyclerView;
 
     private Contract.Presenter presenter;

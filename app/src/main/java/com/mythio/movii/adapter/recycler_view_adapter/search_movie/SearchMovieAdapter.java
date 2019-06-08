@@ -45,10 +45,10 @@ public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.
     }
 
     public class SearchMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<MovieTmdb> {
-        @BindView(R.id.text_view_title)
+        @BindView(R.id.tv_title)
         TextView textViewTitle;
 
-        @BindView(R.id.text_view_year)
+        @BindView(R.id.tv_year)
         TextView textViewYear;
 
         SearchMovieViewHolder(@NonNull View itemView) {

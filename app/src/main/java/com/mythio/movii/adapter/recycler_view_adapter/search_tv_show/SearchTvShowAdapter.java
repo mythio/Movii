@@ -45,7 +45,7 @@ public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapte
     }
 
     public class SearchTvShowViewHolder extends RecyclerView.ViewHolder implements Contract.View<TvShowTmdb> {
-        @BindView(R.id.text_view_title)
+        @BindView(R.id.tv_title)
         TextView textViewTitle;
 
         SearchTvShowViewHolder(@NonNull View itemView) {

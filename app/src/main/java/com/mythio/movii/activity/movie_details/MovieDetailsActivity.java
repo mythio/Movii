@@ -51,46 +51,46 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     @BindView(R.id.anim)
     LottieAnimationView animationView;
 
-    @BindView(R.id.img_view_poster)
+    @BindView(R.id.iv_poster)
     ImageView imgViewPoster;
 
-    @BindView(R.id.img_view_bg_grad)
+    @BindView(R.id.v_bg_grad)
     View imgViewBgGrad;
 
-    @BindView(R.id.img_view_play)
+    @BindView(R.id.ib_play)
     ImageButton imgViewPlay;
 
-    @BindView(R.id.txt_view_year)
+    @BindView(R.id.tv_year)
     TextView txtViewYear;
 
-    @BindView(R.id.txt_view_genre)
+    @BindView(R.id.tv_genre)
     TextView txtViewGenre;
 
-    @BindView(R.id.txt_view_title_1)
+    @BindView(R.id.tv_title_1)
     TextView txtViewTitle1;
 
-    @BindView(R.id.txt_view_title_2)
+    @BindView(R.id.tv_title_2)
     TextView txtViewTitle2;
 
-    @BindView(R.id.txt_view_runtime)
+    @BindView(R.id.tv_runtime)
     TextView txtViewRuntime;
 
-    @BindView(R.id.txt_view_overview)
+    @BindView(R.id.tv_overview)
     TextView txtViewOverview;
 
-    @BindView(R.id.rating_bar)
+    @BindView(R.id.ratingbar)
     RatingBar ratingBar;
 
-    @BindView(R.id.txt_view_rating)
+    @BindView(R.id.tv_rating)
     TextView txtViewRating;
 
-    @BindView(R.id.txt_view_vote_count)
+    @BindView(R.id.tv_vote_count)
     TextView txtViewVoteCount;
 
-    @BindView(R.id.recycler_view_cast)
+    @BindView(R.id.rv_cast)
     RecyclerView recyclerViewCast;
 
-    @BindView(R.id.recycler_view_recommended)
+    @BindView(R.id.rv_recommended)
     RecyclerView recyclerViewRecommended;
 
     @Override

@@ -25,10 +25,10 @@ import butterknife.OnClick;
 public class MoviesFragment extends BaseDiscoverFragment implements Contract.View<MovieTmdb>,
         Contract.Callback<MovieTmdb> {
 
-    @BindView(R.id.view_pager_popular)
+    @BindView(R.id.vp_popular)
     ViewPager viewPager;
 
-    private /*Contract.*/ Presenter<MovieTmdb> mPresenter;
+    private Presenter<MovieTmdb> mPresenter;
     private ArrayList<MovieTmdb> movies;
     private Boolean hasReceived = false;
 
@@ -67,9 +67,9 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     @Override
     public void initViewPager() {
         viewPager.setPageTransformer(false, (view, v) -> {
-            view.findViewById(R.id.image_view_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
-            view.findViewById(R.id.text_view_title1).setAlpha(1.0F - Math.abs(v) * 2);
-            view.findViewById(R.id.text_view_title2).setAlpha(0.6F * (1.0F - Math.abs(v) * 2));
+            view.findViewById(R.id.iv_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
+            view.findViewById(R.id.tv_title1).setAlpha(1.0F - Math.abs(v) * 2);
+            view.findViewById(R.id.tv_title2).setAlpha(0.6F * (1.0F - Math.abs(v) * 2));
         });
     }
 

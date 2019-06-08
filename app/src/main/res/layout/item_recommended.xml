@@ -16,7 +16,7 @@
             android:layout_height="180dp">
 
             <ImageView
-                android:id="@+id/img_view_poster"
+                android:id="@+id/iv_poster"
                 android:layout_width="120dp"
                 android:layout_height="180dp" />
 
@@ -27,7 +27,7 @@
                 android:background="@drawable/bg_gradient_soft" />
 
             <TextView
-                android:id="@+id/txt_view_title"
+                android:id="@+id/tv_title"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

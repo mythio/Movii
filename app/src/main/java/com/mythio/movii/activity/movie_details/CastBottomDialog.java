@@ -33,16 +33,19 @@ import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class CastBottomDialog extends BottomSheetDialogFragment implements Contract.View {
 
-    @BindView(R.id.cast)
+    @BindView(R.id.v_bg)
+    View bg;
+
+    @BindView(R.id.iv_cast_profile)
     CircleImageView imageView;
 
-    @BindView(R.id.txt_view_cast)
+    @BindView(R.id.tv_name)
     TextView textViewCast;
 
-    @BindView(R.id.txt_view_character)
+    @BindView(R.id.tv_character)
     TextView textViewCharacter;
 
-    @BindView(R.id.recycler_view_related)
+    @BindView(R.id.rv_recommended)
     RecyclerView recyclerView;
 
     @Override
@@ -78,7 +81,6 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
         textViewCast.setText(castName);
         textViewCharacter.setText(characterName);
 
-        View bg = getView().findViewById(R.id.bg_view);
         bg.setBackgroundColor(bundle.getInt("color"));
 
         Glide.with(App.getContext())

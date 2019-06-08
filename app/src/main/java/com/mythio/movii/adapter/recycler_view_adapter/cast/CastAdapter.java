@@ -50,7 +50,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
     }
 
     class CastViewHolder extends RecyclerView.ViewHolder implements Contract.View<Cast> {
-        @BindView(R.id.cast)
+        @BindView(R.id.iv_cast_profile)
         CircleImageView imageView;
 
         CastViewHolder(@NonNull View itemView) {

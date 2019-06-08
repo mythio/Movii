@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/text_view_label_movie"
+        android:id="@+id/tv_label_series"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -26,26 +26,26 @@
         android:padding="12dp"
         android:src="@drawable/ic_search"
         android:tint="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/scroll_view"
+        app:layout_constraintBottom_toTopOf="@+id/sv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/scroll_view"
+        android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_label_movie">
+        app:layout_constraintTop_toBottomOf="@+id/tv_label_series">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/text_view_popular"
+                android:id="@+id/tv_popular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
@@ -56,14 +56,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.viewpager.widget.ViewPager
-                android:id="@+id/view_pager_popular"
+                android:id="@+id/vp_popular"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="12dp"
                 app:layout_constraintDimensionRatio="H,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_popular" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_popular" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

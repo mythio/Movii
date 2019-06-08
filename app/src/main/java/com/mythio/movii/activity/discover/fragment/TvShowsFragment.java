@@ -24,7 +24,7 @@ import butterknife.OnClick;
 public class TvShowsFragment extends BaseDiscoverFragment implements Contract.View<TvShowTmdb>,
         Contract.Callback<TvShowTmdb> {
 
-    @BindView(R.id.view_pager_popular)
+    @BindView(R.id.vp_popular)
     ViewPager viewPager;
 
     private Contract.Presenter<TvShowTmdb> mPresenter;
@@ -67,9 +67,9 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
     @Override
     public void initViewPager() {
         viewPager.setPageTransformer(false, (view, v) -> {
-            view.findViewById(R.id.image_view_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
-            view.findViewById(R.id.text_view_title1).setAlpha(1.0F - Math.abs(v) * 2);
-            view.findViewById(R.id.text_view_title2).setAlpha(0.6F * (1.0F - Math.abs(v) * 2));
+            view.findViewById(R.id.iv_backdrop).setTranslationX(-v * viewPager.getWidth() / 4);
+            view.findViewById(R.id.tv_title1).setAlpha(1.0F - Math.abs(v) * 2);
+            view.findViewById(R.id.tv_title2).setAlpha(0.6F * (1.0F - Math.abs(v) * 2));
         });
     }
 

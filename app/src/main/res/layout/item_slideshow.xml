@@ -16,7 +16,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/image_view_backdrop"
+                android:id="@+id/iv_backdrop"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleX="1.1"
@@ -27,16 +27,16 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--<ImageView-->
-            <!--android:id="@+id/image_view_overlay"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:alpha="0.5"-->
-            <!--android:background="@color/colorPrimaryDark"-->
-            <!--app:layout_constraintBottom_toBottomOf="@+id/image_view_backdrop"-->
-            <!--app:layout_constraintEnd_toEndOf="@+id/image_view_backdrop"-->
-            <!--app:layout_constraintStart_toStartOf="@+id/image_view_backdrop"-->
-            <!--app:layout_constraintTop_toTopOf="@+id/image_view_backdrop" />-->
+            <View
+                android:id="@+id/v_overlay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.3"
+                android:background="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_backdrop"
+                app:layout_constraintEnd_toEndOf="@+id/iv_backdrop"
+                app:layout_constraintStart_toStartOf="@+id/iv_backdrop"
+                app:layout_constraintTop_toTopOf="@+id/iv_backdrop" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -45,11 +45,11 @@
                 android:layout_marginBottom="38dp"
                 android:gravity="bottom|end"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/image_view_backdrop"
-                app:layout_constraintEnd_toEndOf="@+id/image_view_backdrop">
+                app:layout_constraintBottom_toBottomOf="@+id/iv_backdrop"
+                app:layout_constraintEnd_toEndOf="@+id/iv_backdrop">
 
                 <TextView
-                    android:id="@+id/text_view_title1"
+                    android:id="@+id/tv_title1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -57,7 +57,7 @@
                     android:textSize="24sp" />
 
                 <TextView
-                    android:id="@+id/text_view_title2"
+                    android:id="@+id/tv_title2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha="0.6"

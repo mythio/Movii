@@ -50,10 +50,10 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
     }
 
     class RecommendedMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<MovieTmdb> {
-        @BindView(R.id.img_view_poster)
+        @BindView(R.id.iv_poster)
         ImageView mImageViewPoster;
 
-        @BindView(R.id.txt_view_title)
+        @BindView(R.id.tv_title)
         TextView mTextViewTitle;
 
         RecommendedMovieViewHolder(@NonNull View itemView) {

@@ -6,7 +6,7 @@
     tools:context=".activity.tv_show_details.TvShowDetailsActivity">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_details"
+        android:id="@+id/vp_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
