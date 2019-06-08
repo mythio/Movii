@@ -32,8 +32,12 @@ import com.mythio.movii.adapter.recycler_view_adapter.cast.CastAdapter;
 import com.mythio.movii.adapter.recycler_view_adapter.cast.CastPresenter;
 import com.mythio.movii.adapter.recycler_view_adapter.recommended_movies.RecommendedMoviesAdapter;
 import com.mythio.movii.adapter.recycler_view_adapter.recommended_movies.RecommendedMoviesPresenter;
+import com.mythio.movii.model.cast.Cast;
 import com.mythio.movii.model.movie.Movie;
+import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.util.ItemDecorator;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -104,7 +108,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     @SuppressLint("CheckResult")
     @Override
     public void showMovieDetails(@NonNull Movie movie) {
-
         Glide.with(getContext())
                 .asBitmap()
                 .load(IMAGE_BASE_URL + "w780" + movie.getPosterPath())
@@ -115,25 +118,34 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
                     }
 
                     @Override
-                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target,
+                                                   DataSource dataSource, boolean isFirstResource) {
                         imgViewPoster.setImageBitmap(resource);
                         Palette.from(resource).generate(palette -> {
                             assert palette != null;
                             if (palette.getDarkMutedSwatch() != null) {
-                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkMutedSwatch().getRgb()));
-                                getWindow().getDecorView().setBackgroundColor(palette.getDarkMutedSwatch().getRgb());
+                                int rgb = palette.getDominantSwatch().getRgb();
+
+                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(rgb));
+                                getWindow().getDecorView().setBackgroundColor(rgb);
                             } else if (palette.getDarkVibrantSwatch() != null) {
-                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getDarkVibrantSwatch().getRgb()));
-                                getWindow().getDecorView().setBackgroundColor(palette.getDarkVibrantSwatch().getRgb());
+                                int rgb = palette.getDarkVibrantSwatch().getRgb();
+
+                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(rgb));
+                                getWindow().getDecorView().setBackgroundColor(rgb);
                             } else if (palette.getMutedSwatch() != null) {
-                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(palette.getMutedSwatch().getRgb()));
-                                getWindow().getDecorView().setBackgroundColor(palette.getMutedSwatch().getRgb());
+                                int rgb = palette.getMutedSwatch().getRgb();
+
+                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(rgb));
+                                getWindow().getDecorView().setBackgroundColor(rgb);
                             }
 
                             if (palette.getLightMutedSwatch() != null) {
-                                imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getLightMutedSwatch().getRgb()));
+                                int rgb = palette.getLightMutedSwatch().getRgb();
+                                imgViewPlay.setImageTintList(ColorStateList.valueOf(rgb));
                             } else if (palette.getLightVibrantSwatch() != null) {
-                                imgViewPlay.setImageTintList(ColorStateList.valueOf(palette.getLightVibrantSwatch().getRgb()));
+                                int rgb = palette.getLightVibrantSwatch().getRgb();
+                                imgViewPlay.setImageTintList(ColorStateList.valueOf(rgb));
                             }
                         });
                         return false;
@@ -158,37 +170,45 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         txtViewRating.setText(movie.getRating());
         txtViewVoteCount.setText(movie.getVotes());
 
-        recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        animationView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_out));
+        animationView.setVisibility(View.GONE);
+        animationView.cancelAnimation();
+    }
+
+    @Override
+    public void showCastRecyclerView(ArrayList<Cast> casts) {
+        recyclerViewCast.setLayoutManager(
+                new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerViewCast.addItemDecoration(new ItemDecorator(32, ItemDecorator.HORIZONTAL));
 
-        CastPresenter castPresenter = new CastPresenter(movie.getCasts());
+        CastPresenter castPresenter = new CastPresenter(casts);
         CastAdapter castAdapter = new CastAdapter(castPresenter, (position, imageView) -> {
             CastBottomDialog b = new CastBottomDialog();
             Bundle bundle = new Bundle();
-            bundle.putString("123", movie.getCasts().get(position).getProfilePath());
-            bundle.putString("234", movie.getCasts().get(position).getName());
-            bundle.putString("345", movie.getCasts().get(position).getCharacter());
-            bundle.putString("456", movie.getCasts().get(position).getCreditId());
-            bundle.putInt("int", movie.getCasts().get(position).getId());
+            bundle.putString("123", casts.get(position).getProfilePath());
+            bundle.putString("234", casts.get(position).getName());
+            bundle.putString("345", casts.get(position).getCharacter());
+            bundle.putString("456", casts.get(position).getCreditId());
+            bundle.putInt("int", casts.get(position).getId());
             b.setArguments(bundle);
             b.show(getSupportFragmentManager(), b.getTag());
         });
         recyclerViewCast.setAdapter(castAdapter);
+    }
 
-        recyclerViewRecommended.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+    @Override
+    public void showRecommendationsRecyclerView(ArrayList<MovieTmdb> movies) {
+        recyclerViewRecommended.setLayoutManager(
+                new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));
 
-        RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movie.getRecommendations());
+        RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movies);
         RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, position -> {
             Intent intent = new Intent(MovieDetailsActivity.this, MovieDetailsActivity.class);
-            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", movie.getRecommendations().get(position).getId());
+            intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", movies.get(position).getId());
             startActivity(intent);
             finish();
         });
         recyclerViewRecommended.setAdapter(recommendedMoviesAdapter);
-
-        animationView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_out));
-        animationView.setVisibility(View.GONE);
-        animationView.cancelAnimation();
     }
 }

@@ -15,6 +15,10 @@ public class Presenter implements Contract.Presenter {
 
     @Override
     public void getDetails(int id) {
-        model.getDetails(view::showMovieDetails, id);
+        model.getDetails(movie -> {
+            view.showMovieDetails(movie);
+            view.showCastRecyclerView(movie.getCasts());
+            view.showRecommendationsRecyclerView(movie.getRecommendations());
+        }, id);
     }
 }
