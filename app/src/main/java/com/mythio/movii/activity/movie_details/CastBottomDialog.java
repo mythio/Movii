@@ -78,6 +78,9 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
         textViewCast.setText(castName);
         textViewCharacter.setText(characterName);
 
+        View bg = getView().findViewById(R.id.bg_view);
+        bg.setBackgroundColor(bundle.getInt("color"));
+
         Glide.with(App.getContext())
                 .load(IMAGE_BASE_URL + "w185" + profilePath)
                 .into(imageView);
@@ -85,7 +88,8 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
 
     @Override
     public void showRecommendedMovies(ArrayList<MovieTmdb> movies) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(App.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(
+                new LinearLayoutManager(App.getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));
 
         RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movies);

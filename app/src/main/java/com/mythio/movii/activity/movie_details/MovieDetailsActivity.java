@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.ImageViewCompat;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -190,6 +191,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
             bundle.putString("345", casts.get(position).getCharacter());
             bundle.putString("456", casts.get(position).getCreditId());
             bundle.putInt("int", casts.get(position).getId());
+            bundle.putInt("color", ImageViewCompat.getImageTintList(imgViewBgGrad).getDefaultColor());
             b.setArguments(bundle);
             b.show(getSupportFragmentManager(), b.getTag());
         });
@@ -203,6 +205,8 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));
 
         RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movies);
+
+
         RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, position -> {
             Intent intent = new Intent(MovieDetailsActivity.this, MovieDetailsActivity.class);
             intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", movies.get(position).getId());
