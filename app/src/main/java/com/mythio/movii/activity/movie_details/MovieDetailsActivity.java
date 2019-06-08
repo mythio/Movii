@@ -15,7 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.ImageViewCompat;
+import androidx.core.view.ViewCompat;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +55,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     ImageView imgViewPoster;
 
     @BindView(R.id.img_view_bg_grad)
-    ImageView imgViewBgGrad;
+    View imgViewBgGrad;
 
     @BindView(R.id.img_view_play)
     ImageButton imgViewPlay;
@@ -127,17 +127,17 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
                             if (palette.getDarkMutedSwatch() != null) {
                                 int rgb = palette.getDominantSwatch().getRgb();
 
-                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(rgb));
+                                imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
                                 getWindow().getDecorView().setBackgroundColor(rgb);
                             } else if (palette.getDarkVibrantSwatch() != null) {
                                 int rgb = palette.getDarkVibrantSwatch().getRgb();
 
-                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(rgb));
+                                imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
                                 getWindow().getDecorView().setBackgroundColor(rgb);
                             } else if (palette.getMutedSwatch() != null) {
                                 int rgb = palette.getMutedSwatch().getRgb();
 
-                                imgViewBgGrad.setImageTintList(ColorStateList.valueOf(rgb));
+                                imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
                                 getWindow().getDecorView().setBackgroundColor(rgb);
                             }
 
@@ -191,7 +191,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
             bundle.putString("345", casts.get(position).getCharacter());
             bundle.putString("456", casts.get(position).getCreditId());
             bundle.putInt("int", casts.get(position).getId());
-            bundle.putInt("color", ImageViewCompat.getImageTintList(imgViewBgGrad).getDefaultColor());
+            bundle.putInt("color", ViewCompat.getBackgroundTintList(imgViewBgGrad).getDefaultColor());
             b.setArguments(bundle);
             b.show(getSupportFragmentManager(), b.getTag());
         });

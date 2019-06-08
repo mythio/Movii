@@ -28,11 +28,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <View
         android:id="@+id/img_view_bg_grad"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/bg_gradient"
+        android:background="@drawable/bg_gradient"
         app:layout_constraintBottom_toBottomOf="@+id/img_view_poster"
         app:layout_constraintEnd_toEndOf="@+id/img_view_poster"
         app:layout_constraintStart_toStartOf="@+id/img_view_poster"
