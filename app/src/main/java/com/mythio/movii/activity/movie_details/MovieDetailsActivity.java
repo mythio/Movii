@@ -201,11 +201,12 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     @Override
     public void showRecommendationsRecyclerView(ArrayList<MovieTmdb> movies) {
         recyclerViewRecommended.setLayoutManager(
-                new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));
 
-        RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movies);
+//        recyclerViewCast.
 
+        RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movies);
 
         RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, position -> {
             Intent intent = new Intent(MovieDetailsActivity.this, MovieDetailsActivity.class);

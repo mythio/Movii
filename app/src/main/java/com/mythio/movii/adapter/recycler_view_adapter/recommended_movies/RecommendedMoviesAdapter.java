@@ -36,7 +36,7 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
         return new RecommendedMovieViewHolder(
                 LayoutInflater
                         .from(viewGroup.getContext())
-                        .inflate(R.layout.item_recommended, viewGroup, false));
+                        .inflate(R.layout.item_recommendation, viewGroup, false));
     }
 
     @Override
