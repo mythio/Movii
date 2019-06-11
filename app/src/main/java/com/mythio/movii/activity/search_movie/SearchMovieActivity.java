@@ -39,15 +39,14 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
     @BindView(R.id.rv_search_result)
     RecyclerView recyclerView;
 
-    private Contract.Presenter presenter;
+    private Contract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_movie);
-
         ButterKnife.bind(this);
-        presenter = new Presenter(this);
+        setPresenter(new Presenter(this));
 
         ItemDecorator decorator = new ItemDecorator(12, ItemDecorator.VERTICAL);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -63,9 +62,9 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
             @Override
             public void onTextChanged(@NonNull CharSequence s, int start, int before, int count) {
                 if (s.toString().isEmpty()) {
-                    presenter.onNoSearchParam();
+                    mPresenter.onNoSearchParam();
                 } else {
-                    presenter.onSearchParam(s.toString());
+                    mPresenter.onSearchParam(s.toString());
                 }
             }
 
@@ -74,6 +73,11 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
 
             }
         });
+    }
+
+    @Override
+    public void setPresenter(Contract.Presenter presenter) {
+        this.mPresenter = presenter;
     }
 
     @Override

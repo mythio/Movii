@@ -13,9 +13,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -31,8 +29,8 @@ public class Model implements Contract.Model {
         getSingleSearch(query)
                 .debounce(200, TimeUnit.MILLISECONDS)
                 .map(MovieResponse::getResults)
-                .switchMap((Function<ArrayList<MovieTmdb>, ObservableSource<ArrayList<MovieTmdb>>>)
-                        Observable::just)
+//                .switchMap((Function<ArrayList<MovieTmdb>, ObservableSource<ArrayList<MovieTmdb>>>)
+//                        Observable::just)
                 .distinctUntilChanged()
                 .subscribe(new DisposableObserver<ArrayList<MovieTmdb>>() {
                     @Override

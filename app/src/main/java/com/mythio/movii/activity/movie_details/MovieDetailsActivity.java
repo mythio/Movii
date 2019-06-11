@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -221,5 +222,13 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
             finish();
         });
         recyclerViewRecommended.setAdapter(recommendedMoviesAdapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
+
+        Log.d("TAG_TAG_TAG", "onDestroy: MovieDetail");
     }
 }

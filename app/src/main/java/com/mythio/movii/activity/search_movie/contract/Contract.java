@@ -1,12 +1,14 @@
 package com.mythio.movii.activity.search_movie.contract;
 
+import com.mythio.movii.BasePresenter;
+import com.mythio.movii.BaseView;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
 
 public interface Contract {
 
-    interface View {
+    interface View extends BaseView<Presenter> {
 
         void showPlate();
 
@@ -15,7 +17,7 @@ public interface Contract {
         void showSearchResult(ArrayList<MovieTmdb> movies);
     }
 
-    interface Presenter {
+    interface Presenter extends BasePresenter {
 
         void onNoSearchParam();
 

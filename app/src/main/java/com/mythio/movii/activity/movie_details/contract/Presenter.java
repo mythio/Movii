@@ -16,7 +16,6 @@ import static com.mythio.movii.util.Constant.API_KEY;
 public class Presenter implements Contract.Presenter {
 
     private static final String TAG = "TAG_TAG_TAG: Presenter";
-    public int a;
     private Contract.View view;
 
     public Presenter(Contract.View view) {
