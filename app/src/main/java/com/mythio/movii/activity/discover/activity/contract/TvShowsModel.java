@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import com.mythio.movii.activity.discover.activity.contract.Contract.Model;
 import com.mythio.movii.model.tv_show.TvShowResponse;
 import com.mythio.movii.model.tv_show.TvShowTmdb;
-import com.mythio.movii.network.EndPointTmdb;
+import com.mythio.movii.network.EndPoint;
 import com.mythio.movii.network.RetrofitBuilder;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.mythio.movii.util.Constant.API_KEY_TMDB;
+import static com.mythio.movii.util.Constant.API_KEY;
 
 public class TvShowsModel implements Model.TvShowsModel {
 
@@ -43,9 +43,9 @@ public class TvShowsModel implements Model.TvShowsModel {
 
     private Single<TvShowResponse> getSinglePopularTvShows() {
         return RetrofitBuilder
-                .getClientTmdb()
-                .create(EndPointTmdb.class)
-                .getPopularTvShows(API_KEY_TMDB)
+                .getClient()
+                .create(EndPoint.class)
+                .getPopularTvShows(API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

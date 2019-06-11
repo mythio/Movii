@@ -14,7 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface EndPointTmdb {
+public interface EndPoint {
 
     @NonNull
     @GET("movie/popular")
@@ -22,7 +22,7 @@ public interface EndPointTmdb {
 
     @NonNull
     @GET("movie/{movie_id}")
-    Observable<MovieTmdb> getMovieDetail(@Path("movie_id") Integer movieId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
+    Single<MovieTmdb> getMovieDetail(@Path("movie_id") Integer movieId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
 
     @NonNull
     @GET("search/movie")

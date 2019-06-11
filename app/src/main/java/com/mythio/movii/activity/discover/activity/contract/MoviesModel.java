@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import com.mythio.movii.activity.discover.activity.contract.Contract.Model;
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.movie.MovieTmdb;
-import com.mythio.movii.network.EndPointTmdb;
+import com.mythio.movii.network.EndPoint;
 import com.mythio.movii.network.RetrofitBuilder;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.mythio.movii.util.Constant.API_KEY_TMDB;
+import static com.mythio.movii.util.Constant.API_KEY;
 
 public class MoviesModel implements Model.MoviesModel {
 
@@ -44,9 +44,9 @@ public class MoviesModel implements Model.MoviesModel {
 
     private Single<MovieResponse> getSinglePopularMovies() {
         return RetrofitBuilder
-                .getClientTmdb()
-                .create(EndPointTmdb.class)
-                .getPopularMovies(API_KEY_TMDB)
+                .getClient()
+                .create(EndPoint.class)
+                .getPopularMovies(API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

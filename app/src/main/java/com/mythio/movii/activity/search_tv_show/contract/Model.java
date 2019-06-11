@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.mythio.movii.model.tv_show.TvShowResponse;
 import com.mythio.movii.model.tv_show.TvShowTmdb;
-import com.mythio.movii.network.EndPointTmdb;
+import com.mythio.movii.network.EndPoint;
 import com.mythio.movii.network.RetrofitBuilder;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.mythio.movii.util.Constant.API_KEY_TMDB;
+import static com.mythio.movii.util.Constant.API_KEY;
 
 public class Model implements Contract.Model {
 
@@ -54,9 +54,9 @@ public class Model implements Contract.Model {
 
     private Observable<TvShowResponse> getSingleSearch(String query) {
         return RetrofitBuilder
-                .getClientTmdb()
-                .create(EndPointTmdb.class)
-                .getTvShowSearchResults(API_KEY_TMDB, query)
+                .getClient()
+                .create(EndPoint.class)
+                .getTvShowSearchResults(API_KEY, query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

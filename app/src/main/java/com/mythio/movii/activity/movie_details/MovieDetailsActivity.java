@@ -92,17 +92,24 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     @BindView(R.id.rv_recommended)
     RecyclerView recyclerViewRecommended;
 
+    private Contract.Presenter mPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
+        setPresenter(new Presenter(this));
+
         ButterKnife.bind(this);
 
         int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
-        Presenter presenter = new Presenter(this);
+        mPresenter.getDetails(id);
+    }
 
-        presenter.getDetails(id);
+    @Override
+    public void setPresenter(Contract.Presenter presenter) {
+        mPresenter = presenter;
     }
 
     @SuppressLint("CheckResult")

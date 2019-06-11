@@ -1,24 +1,57 @@
 package com.mythio.movii.activity.movie_details.contract;
 
-import androidx.annotation.NonNull;
+import android.util.Log;
+
+import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.network.EndPoint;
+import com.mythio.movii.network.RetrofitBuilder;
+
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
+
+import static com.mythio.movii.util.Constant.API_KEY;
 
 public class Presenter implements Contract.Presenter {
 
-    private final Contract.View view;
-    @NonNull
-    private final Model model;
+    private static final String TAG = "TAG_TAG_TAG: Presenter";
+    public int a;
+    private Contract.View view;
 
     public Presenter(Contract.View view) {
         this.view = view;
-        model = new Model();
     }
 
     @Override
     public void getDetails(int id) {
-        model.getDetails(movie -> {
-            view.showMovieDetails(movie);
-            view.showCastRecyclerView(movie.getCredits().getCast());
-            view.showRecommendationsRecyclerView(movie.getRecommendations().getResults());
-        }, id);
+        getMovieTmdbObservable(id)
+                .subscribe(new DisposableSingleObserver<MovieTmdb>() {
+                    @Override
+                    public void onSuccess(MovieTmdb movieTmdb) {
+                        view.showMovieDetails(movieTmdb);
+                        view.showCastRecyclerView(movieTmdb.getCredits().getCast());
+                        view.showRecommendationsRecyclerView(movieTmdb.getRecommendations().getResults());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onError: " + e.getMessage());
+                    }
+                });
+    }
+
+    @Override
+    public void detachView() {
+        this.view = null;
+    }
+
+    private Single<MovieTmdb> getMovieTmdbObservable(int id) {
+        return RetrofitBuilder
+                .getClient()
+                .create(EndPoint.class)
+                .getMovieDetail(id, API_KEY, "recommendations,videos,credits")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }
