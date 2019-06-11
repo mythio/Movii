@@ -11,8 +11,6 @@ import static com.mythio.movii.util.Constant.BASE_URL;
 public class RetrofitBuilder {
 
     private static Retrofit retrofitTmdb = null;
-//    private static File httpCacheDirectory = new File(App.getContext().getCacheDir(), "httpCache");
-//    private static Cache cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
 
     @NonNull
     public static Retrofit getClient() {
@@ -25,13 +23,4 @@ public class RetrofitBuilder {
         }
         return retrofitTmdb;
     }
-
-//    private static OkHttpClient getHttpClient() {
-//        return new OkHttpClient.Builder()
-//                .cache(cache)
-//                .addInterceptor(chain -> chain.proceed(chain.request().newBuilder()
-//                        .header("Cache-Control", "public, only-if-cached," + "max-stale=" + 60 * 60 * 24)
-//                        .build()))
-//                .build();
-//    }
 }
