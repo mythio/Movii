@@ -23,14 +23,4 @@ public interface Contract {
 
         void onSearchParam(String string);
     }
-
-    interface Model {
-
-        void getSearchResults(OnSearchResultsListener listener, String query);
-
-        interface OnSearchResultsListener {
-
-            void onFinished(ArrayList<Movie> movies);
-        }
-    }
 }

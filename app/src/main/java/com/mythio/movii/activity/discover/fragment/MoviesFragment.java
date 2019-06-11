@@ -85,7 +85,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
 
     @Override
     public void setPresenter(Contract.Presenter<Movie> presenter) {
-        this.mPresenter = presenter;
+        mPresenter = presenter;
     }
 
     @Override

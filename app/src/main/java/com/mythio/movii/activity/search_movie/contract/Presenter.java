@@ -36,7 +36,6 @@ public class Presenter implements Contract.Presenter {
 
     @Override
     public void onSearchParam(String query) {
-
         getSingleSearch(query)
                 .debounce(200, TimeUnit.MILLISECONDS)
                 .map(MovieResponse::getResults)
@@ -61,6 +60,11 @@ public class Presenter implements Contract.Presenter {
         view.hidePlate();
     }
 
+    @Override
+    public void detachView() {
+        view = null;
+    }
+
     private Observable<MovieResponse> getSingleSearch(String query) {
         return RetrofitBuilder
                 .getClient()
@@ -68,10 +72,5 @@ public class Presenter implements Contract.Presenter {
                 .getMovieSearchResults(API_KEY, query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    @Override
-    public void detachView() {
-        this.view = null;
     }
 }

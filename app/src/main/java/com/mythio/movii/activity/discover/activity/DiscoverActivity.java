@@ -85,7 +85,7 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
 
     @Override
     public void setPresenter(Contract.Presenter presenter) {
-        this.mPresenter = presenter;
+        mPresenter = presenter;
     }
 
     @Override

@@ -112,4 +112,10 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.setAdapter(adapter);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter = null;
+    }
 }

@@ -19,20 +19,32 @@ public class TvShowDetailsActivity extends AppCompatActivity implements Contract
     @BindView(R.id.vp_details)
     ViewPager viewPager;
 
+    private Contract.Presenter mPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_show_details);
         ButterKnife.bind(this);
-
-        Contract.Presenter presenter = new Presenter(this);
+        setPresenter(new Presenter(this));
 
         String currentId = getIntent().getStringExtra("BUNDLED_EXTRA_TV_ID");
-        presenter.onRequestSeasons(currentId);
+        mPresenter.onRequestSeasons(currentId);
+    }
+
+    @Override
+    public void setPresenter(Contract.Presenter presenter) {
+        mPresenter = presenter;
     }
 
     @Override
     public void showDetails(TvShow tvShow) {
         viewPager.setAdapter(new TvShowDetailsAdapter(this, tvShow));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
     }
 }

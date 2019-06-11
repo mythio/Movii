@@ -4,17 +4,19 @@ import androidx.annotation.NonNull;
 
 public class Presenter implements Contract.Presenter {
 
-    private final Contract.View view;
-    @NonNull
-    private final Model model;
+    private Contract.View view;
 
     public Presenter(Contract.View view) {
         this.view = view;
-        model = new Model();
     }
 
     @Override
     public void onRequestSeasons(@NonNull String id) {
-        model.getDetails(view::showDetails, Integer.valueOf(id));
+//        model.getDetails(view::showDetails, Integer.valueOf(id));
+    }
+
+    @Override
+    public void detachView() {
+        view = null;
     }
 }

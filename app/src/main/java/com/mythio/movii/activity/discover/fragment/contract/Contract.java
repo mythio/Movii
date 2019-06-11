@@ -11,18 +11,18 @@ public interface Contract {
 
         void initViewPager();
 
-        void showSlideShow(ArrayList<T> t);
+        void showSlideShow(ArrayList<T> ts);
     }
 
     interface Presenter<T> extends BasePresenter {
 
         void initViews();
 
-        void setDataToViewPager(ArrayList<T> t);
+        void setDataToViewPager(ArrayList<T> ts);
     }
 
     interface Callback<T> {
 
-        void onDataReceived(ArrayList<T> t);
+        void onDataReceived(ArrayList<T> ts);
     }
 }

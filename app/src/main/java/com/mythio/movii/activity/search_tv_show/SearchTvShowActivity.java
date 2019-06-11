@@ -39,15 +39,14 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
     @BindView(R.id.rv_search_result)
     RecyclerView recyclerView;
 
-    private Contract.Presenter presenter;
+    private Contract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_tv_show);
-
         ButterKnife.bind(this);
-        presenter = new Presenter(this);
+        setPresenter(new Presenter(this));
 
         ItemDecorator decorator = new ItemDecorator(12, ItemDecorator.VERTICAL);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -64,9 +63,9 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
             @Override
             public void onTextChanged(@NonNull CharSequence s, int start, int before, int count) {
                 if (s.toString().isEmpty()) {
-                    presenter.onNoSearchParam();
+                    mPresenter.onNoSearchParam();
                 } else {
-                    presenter.onSearchParam(s.toString());
+                    mPresenter.onSearchParam(s.toString());
                 }
             }
 
@@ -75,6 +74,11 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
 
             }
         });
+    }
+
+    @Override
+    public void setPresenter(Contract.Presenter presenter) {
+        mPresenter = presenter;
     }
 
     @Override
@@ -108,5 +112,11 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
         });
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall));
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
     }
 }

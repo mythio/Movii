@@ -6,8 +6,8 @@ public class Presenter<T> implements Contract.Presenter<T> {
 
     private Contract.View<T> view;
 
-    public Presenter(Contract.View<T> t) {
-        this.view = t;
+    public Presenter(Contract.View<T> view) {
+        this.view = view;
     }
 
     @Override
@@ -22,6 +22,6 @@ public class Presenter<T> implements Contract.Presenter<T> {
 
     @Override
     public void detachView() {
-        this.view = null;
+        view = null;
     }
 }

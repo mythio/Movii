@@ -48,6 +48,8 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
     @BindView(R.id.rv_recommended)
     RecyclerView recyclerView;
 
+    private Contract.Presenter mPresenter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,11 +65,10 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
+        setPresenter(new Presenter(this));
 
-        Presenter presenter = new Presenter(this);
-
-        presenter.onViewInitialized();
-        presenter.getData(Objects.requireNonNull(getArguments()).getInt("int"));
+        mPresenter.onViewInitialized();
+        mPresenter.getData(Objects.requireNonNull(getArguments()).getInt("int"));
     }
 
     @Override
@@ -98,5 +99,16 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
 
         RecommendedMoviesAdapter recommendedMoviesAdapter = new RecommendedMoviesAdapter(recommendedMoviesPresenter, null);
         recyclerView.setAdapter(recommendedMoviesAdapter);
+    }
+
+    @Override
+    public void setPresenter(Contract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
     }
 }

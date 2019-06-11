@@ -1,33 +1,24 @@
 package com.mythio.movii.activity.movie_details.dialog_contract;
 
+import com.mythio.movii.BasePresenter;
+import com.mythio.movii.BaseView;
 import com.mythio.movii.model.movie.Movie;
 
 import java.util.ArrayList;
 
 public interface Contract {
 
-    interface View {
+    interface View extends BaseView<Presenter> {
 
         void showInitView();
 
         void showRecommendedMovies(ArrayList<Movie> movies);
     }
 
-    interface Presenter {
+    interface Presenter extends BasePresenter {
 
         void onViewInitialized();
 
         void getData(int id);
     }
-
-    interface Model {
-
-        void getMovies(int id, OnMoviesReceivedListener listener);
-
-        interface OnMoviesReceivedListener {
-
-            void onFinished(ArrayList<Movie> movies);
-        }
-    }
-
 }
