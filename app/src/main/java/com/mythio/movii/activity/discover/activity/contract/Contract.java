@@ -20,7 +20,7 @@ public interface Contract {
         void sendToTvShowsFragment(ArrayList<TvShow> tvShows);
     }
 
-    interface Presenter extends BasePresenter, FragmentNavigation {
+    interface Presenter extends FragmentNavigation, BasePresenter {
 
         void getData();
     }

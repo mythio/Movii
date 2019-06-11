@@ -32,11 +32,6 @@ public class Presenter implements Contract.Presenter {
     }
 
     @Override
-    public void setFragment(BaseDiscoverFragment fragment) {
-        view.showFragment(fragment);
-    }
-
-    @Override
     public void getData() {
         getSinglePopularMovies()
                 .map(MovieResponse::getResults)
@@ -68,8 +63,13 @@ public class Presenter implements Contract.Presenter {
     }
 
     @Override
+    public void setFragment(BaseDiscoverFragment fragment) {
+        view.showFragment(fragment);
+    }
+
+    @Override
     public void detachView() {
-        this.view = null;
+        view = null;
     }
 
     private Single<MovieResponse> getSinglePopularMovies() {
