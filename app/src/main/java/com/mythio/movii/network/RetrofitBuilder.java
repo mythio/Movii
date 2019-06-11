@@ -29,7 +29,7 @@ public class RetrofitBuilder {
                     .baseUrl(BASE_URL_TMDB)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .client(getHttpClient())
+//                    .client(getHttpClient())
                     .build();
         }
         return retrofitTmdb;

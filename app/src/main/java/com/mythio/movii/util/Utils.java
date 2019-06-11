@@ -52,7 +52,7 @@ public class Utils {
         }
 
         movie.setBackdropPath(movieTmdb.getBackdropPath());
-        movie.setId(movieTmdb.getId().toString());
+//        movie.setId(movieTmdb.getId().toString());
         movie.setPosterPath(movieTmdb.getPosterPath());
         movie.setOverview(movieTmdb.getOverview());
         movie.setGenres(genreString.toString());

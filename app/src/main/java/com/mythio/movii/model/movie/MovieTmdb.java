@@ -23,10 +23,10 @@ public class MovieTmdb {
     private String releaseDate;
 
     @SerializedName("runtime")
-    private Integer runtime;
+    private int runtime;
 
     @SerializedName("id")
-    private Integer id;
+    private int id;
 
     @SerializedName("title")
     private String title;
@@ -38,10 +38,10 @@ public class MovieTmdb {
     private String overview;
 
     @SerializedName("vote_count")
-    private Integer voteCount;
+    private int voteCount;
 
     @SerializedName("vote_average")
-    private Double voteAverage;
+    private float voteAverage;
 
     @SerializedName("imdb_id")
     private String imdb;
@@ -87,19 +87,19 @@ public class MovieTmdb {
         this.releaseDate = releaseDate;
     }
 
-    public Integer getRuntime() {
+    public int getRuntime() {
         return runtime;
     }
 
-    public void setRuntime(Integer runtime) {
+    public void setRuntime(int runtime) {
         this.runtime = runtime;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -127,19 +127,19 @@ public class MovieTmdb {
         this.overview = overview;
     }
 
-    public Integer getVoteCount() {
+    public int getVoteCount() {
         return voteCount;
     }
 
-    public void setVoteCount(Integer voteCount) {
+    public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
     }
 
-    public Double getVoteAverage() {
+    public Float getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(Double voteAverage) {
+    public void setVoteAverage(float voteAverage) {
         this.voteAverage = voteAverage;
     }
 

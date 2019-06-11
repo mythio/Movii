@@ -34,7 +34,6 @@ import com.mythio.movii.adapter.recycler_view_adapter.cast.CastPresenter;
 import com.mythio.movii.adapter.recycler_view_adapter.recommended_movies.RecommendedMoviesAdapter;
 import com.mythio.movii.adapter.recycler_view_adapter.recommended_movies.RecommendedMoviesPresenter;
 import com.mythio.movii.model.cast.Cast;
-import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.util.ItemDecorator;
 
@@ -108,7 +107,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
     @SuppressLint("CheckResult")
     @Override
-    public void showMovieDetails(@NonNull Movie movie) {
+    public void showMovieDetails(@NonNull MovieTmdb movie) {
         Glide.with(getContext())
                 .asBitmap()
                 .load(IMAGE_BASE_URL + "w780" + movie.getPosterPath())
@@ -154,22 +153,24 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
                 })
                 .into(imgViewPoster);
 
-        if (movie.getTitle2().equals("")) {
-            txtViewTitle1.setText(movie.getTitle1());
-            txtViewTitle2.setVisibility(View.GONE);
-        } else {
-            txtViewTitle1.setText(movie.getTitle1());
+        String[] title_arr = movie.getTitle().split(": ");
+
+        if (title_arr.length == 2) {
+            txtViewTitle1.setText(title_arr[0].trim());
             txtViewTitle2.setVisibility(View.VISIBLE);
-            txtViewTitle2.setText(movie.getTitle2());
+            txtViewTitle2.setText(title_arr[1].trim());
+        } else {
+            txtViewTitle1.setText(title_arr[0].trim());
+            txtViewTitle2.setVisibility(View.GONE);
         }
 
-        txtViewYear.setText(movie.getYear());
-        txtViewGenre.setText(movie.getGenres());
-        txtViewRuntime.setText(movie.getRuntime());
+        txtViewYear.setText(movie.getReleaseDate());
+        txtViewGenre.setText(movie.getGenres().get(0).getName());
+        txtViewRuntime.setText(String.valueOf(movie.getRuntime()));
         txtViewOverview.setText(movie.getOverview());
-        ratingBar.setRating(Float.valueOf(movie.getRating()) / 2);
-        txtViewRating.setText(movie.getRating());
-        txtViewVoteCount.setText(movie.getVotes());
+        ratingBar.setRating(movie.getVoteAverage() / 2);
+        txtViewRating.setText(String.valueOf(movie.getVoteAverage()));
+        txtViewVoteCount.setText(String.valueOf(movie.getVoteCount()));
 
         animationView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_out));
         animationView.setVisibility(View.GONE);
@@ -203,8 +204,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         recyclerViewRecommended.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));
-
-//        recyclerViewCast.
 
         RecommendedMoviesPresenter recommendedMoviesPresenter = new RecommendedMoviesPresenter(movies);
 

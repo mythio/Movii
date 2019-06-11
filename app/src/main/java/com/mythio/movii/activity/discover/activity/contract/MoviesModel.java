@@ -31,6 +31,7 @@ public class MoviesModel implements Model.MoviesModel {
                 .subscribe(new DisposableSingleObserver<ArrayList<MovieTmdb>>() {
                     @Override
                     public void onSuccess(ArrayList<MovieTmdb> movieTmdbs) {
+                        Log.d(TAG, "onSuccess: ");
                         listener.onFinishedMovies(movieTmdbs);
                     }
 

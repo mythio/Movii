@@ -17,8 +17,8 @@ public class Presenter implements Contract.Presenter {
     public void getDetails(int id) {
         model.getDetails(movie -> {
             view.showMovieDetails(movie);
-            view.showCastRecyclerView(movie.getCasts());
-            view.showRecommendationsRecyclerView(movie.getRecommendations());
+            view.showCastRecyclerView(movie.getCredits().getCast());
+            view.showRecommendationsRecyclerView(movie.getRecommendations().getResults());
         }, id);
     }
 }

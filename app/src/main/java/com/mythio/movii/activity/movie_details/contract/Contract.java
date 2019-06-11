@@ -1,7 +1,6 @@
 package com.mythio.movii.activity.movie_details.contract;
 
 import com.mythio.movii.model.cast.Cast;
-import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieTmdb;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ public interface Contract {
 
     interface View {
 
-        void showMovieDetails(Movie movie);
+        void showMovieDetails(MovieTmdb movie);
 
         void showCastRecyclerView(ArrayList<Cast> casts);
 
@@ -28,7 +27,7 @@ public interface Contract {
 
         interface OnMovieDetailReceivedListener {
 
-            void onFinished(Movie movie);
+            void onFinished(MovieTmdb movie);
         }
     }
 }
