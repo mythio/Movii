@@ -1,6 +1,9 @@
 package com.mythio.movii.activity.discover.activity.contract;
 
+import com.mythio.movii.BasePresenter;
+import com.mythio.movii.BaseView;
 import com.mythio.movii.activity.discover.fragment.BaseDiscoverFragment;
+import com.mythio.movii.activity.discover.fragment.contract.FragmentNavigation;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tv_show.TvShowTmdb;
 
@@ -8,7 +11,7 @@ import java.util.ArrayList;
 
 public interface Contract {
 
-    interface View {
+    interface View extends BaseView<Presenter> {
 
         void showFragment(BaseDiscoverFragment fragment);
 
@@ -17,31 +20,8 @@ public interface Contract {
         void sendToTvShowsFragment(ArrayList<TvShowTmdb> tvShows);
     }
 
-    interface Presenter {
+    interface Presenter extends BasePresenter, FragmentNavigation {
 
         void getData();
-    }
-
-    interface Model {
-
-        interface MoviesModel {
-
-            void getMovies(MoviesListener listener);
-
-            interface MoviesListener {
-
-                void onFinishedMovies(ArrayList<MovieTmdb> movies);
-            }
-        }
-
-        interface TvShowsModel {
-
-            void getTvShows(TvShowsListener listener);
-
-            interface TvShowsListener {
-
-                void onFinishedTvShows(ArrayList<TvShowTmdb> tvShows);
-            }
-        }
     }
 }

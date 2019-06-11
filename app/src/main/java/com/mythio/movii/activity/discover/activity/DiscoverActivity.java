@@ -7,12 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.mythio.movii.R;
+import com.mythio.movii.activity.discover.activity.contract.Contract;
 import com.mythio.movii.activity.discover.activity.contract.Presenter;
 import com.mythio.movii.activity.discover.fragment.BaseDiscoverFragment;
 import com.mythio.movii.activity.discover.fragment.MoviesFragment;
 import com.mythio.movii.activity.discover.fragment.ProfileFragment;
 import com.mythio.movii.activity.discover.fragment.TvShowsFragment;
-import com.mythio.movii.activity.discover.fragment.contract.Contract;
+import com.mythio.movii.activity.discover.fragment.contract.Contract.Callback;
 import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.model.tv_show.TvShowTmdb;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DiscoverActivity extends AppCompatActivity implements com.mythio.movii.activity.discover.activity.contract.Contract.View {
+public class DiscoverActivity extends AppCompatActivity implements Contract.View {
 
     @BindView(R.id.bottom_navigation)
     BubbleNavigationConstraintView navBar;
@@ -30,10 +31,10 @@ public class DiscoverActivity extends AppCompatActivity implements com.mythio.mo
     private final TvShowsFragment tvShowsFragment = new TvShowsFragment();
     private final ProfileFragment profileFragment = new ProfileFragment();
 
-    private static Contract.Callback<MovieTmdb> moviesCallback;
-    private static Contract.Callback<TvShowTmdb> tvShowsCallback;
+    private static Callback<MovieTmdb> moviesCallback;
+    private static Callback<TvShowTmdb> tvShowsCallback;
 
-    private Presenter presenter;
+    private Contract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,8 @@ public class DiscoverActivity extends AppCompatActivity implements com.mythio.mo
 
         ButterKnife.bind(this);
 
-        presenter = new Presenter(this);
+        setPresenter(new Presenter(this));
+
         presenter.setFragment(moviesFragment);
 
         presenter.getData();
@@ -67,7 +69,6 @@ public class DiscoverActivity extends AppCompatActivity implements com.mythio.mo
 
     @Override
     public void showFragment(@NonNull BaseDiscoverFragment fragment) {
-
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
@@ -83,5 +84,10 @@ public class DiscoverActivity extends AppCompatActivity implements com.mythio.mo
     @Override
     public void sendToTvShowsFragment(ArrayList<TvShowTmdb> tvShows) {
         tvShowsCallback.onDataReceived(tvShows);
+    }
+
+    @Override
+    public void setPresenter(Contract.Presenter presenter) {
+        this.presenter = presenter;
     }
 }
