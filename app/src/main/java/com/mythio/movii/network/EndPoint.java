@@ -3,10 +3,10 @@ package com.mythio.movii.network;
 import androidx.annotation.NonNull;
 
 import com.mythio.movii.model.cast.CastMovies;
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieResponse;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.tv_show.TvShow;
 import com.mythio.movii.model.tv_show.TvShowResponse;
-import com.mythio.movii.model.tv_show.TvShowTmdb;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -22,7 +22,7 @@ public interface EndPoint {
 
     @NonNull
     @GET("movie/{movie_id}")
-    Single<MovieTmdb> getMovieDetail(@Path("movie_id") Integer movieId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
+    Single<Movie> getMovieDetail(@Path("movie_id") Integer movieId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
 
     @NonNull
     @GET("search/movie")
@@ -34,7 +34,7 @@ public interface EndPoint {
 
     @NonNull
     @GET("tv/{tv_show_id}")
-    Observable<TvShowTmdb> getTvShowDetail(@Path("tv_show_id") int tvShowId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
+    Observable<TvShow> getTvShowDetail(@Path("tv_show_id") int tvShowId, @Query("api_key") String apiKey, @Query("append_to_response") String parameter);
 
     @NonNull
     @GET("search/tv")

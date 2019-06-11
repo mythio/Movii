@@ -2,7 +2,7 @@ package com.mythio.movii.activity.movie_details.contract;
 
 import android.util.Log;
 
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.network.EndPoint;
 import com.mythio.movii.network.RetrofitBuilder;
 
@@ -25,12 +25,12 @@ public class Presenter implements Contract.Presenter {
     @Override
     public void getDetails(int id) {
         getMovieTmdbObservable(id)
-                .subscribe(new DisposableSingleObserver<MovieTmdb>() {
+                .subscribe(new DisposableSingleObserver<Movie>() {
                     @Override
-                    public void onSuccess(MovieTmdb movieTmdb) {
-                        view.showMovieDetails(movieTmdb);
-                        view.showCastRecyclerView(movieTmdb.getCredits().getCast());
-                        view.showRecommendationsRecyclerView(movieTmdb.getRecommendations().getResults());
+                    public void onSuccess(Movie movie) {
+                        view.showMovieDetails(movie);
+                        view.showCastRecyclerView(movie.getCredits().getCast());
+                        view.showRecommendationsRecyclerView(movie.getRecommendations().getResults());
                     }
 
                     @Override
@@ -45,7 +45,7 @@ public class Presenter implements Contract.Presenter {
         this.view = null;
     }
 
-    private Single<MovieTmdb> getMovieTmdbObservable(int id) {
+    private Single<Movie> getMovieTmdbObservable(int id) {
         return RetrofitBuilder
                 .getClient()
                 .create(EndPoint.class)

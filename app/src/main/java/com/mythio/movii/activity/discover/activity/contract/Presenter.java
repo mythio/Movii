@@ -5,10 +5,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.mythio.movii.activity.discover.fragment.BaseDiscoverFragment;
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieResponse;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.tv_show.TvShow;
 import com.mythio.movii.model.tv_show.TvShowResponse;
-import com.mythio.movii.model.tv_show.TvShowTmdb;
 import com.mythio.movii.network.EndPoint;
 import com.mythio.movii.network.RetrofitBuilder;
 
@@ -40,10 +40,10 @@ public class Presenter implements Contract.Presenter {
     public void getData() {
         getSinglePopularMovies()
                 .map(MovieResponse::getResults)
-                .subscribe(new DisposableSingleObserver<ArrayList<MovieTmdb>>() {
+                .subscribe(new DisposableSingleObserver<ArrayList<Movie>>() {
                     @Override
-                    public void onSuccess(ArrayList<MovieTmdb> movieTmdbs) {
-                        view.sendToMoviesFragment(movieTmdbs);
+                    public void onSuccess(ArrayList<Movie> movies) {
+                        view.sendToMoviesFragment(movies);
                     }
 
                     @Override
@@ -54,10 +54,10 @@ public class Presenter implements Contract.Presenter {
 
         getSinglePopularTvShows()
                 .map(TvShowResponse::getResults)
-                .subscribe(new DisposableSingleObserver<ArrayList<TvShowTmdb>>() {
+                .subscribe(new DisposableSingleObserver<ArrayList<TvShow>>() {
                     @Override
-                    public void onSuccess(ArrayList<TvShowTmdb> tvShowTmdbs) {
-                        view.sendToTvShowsFragment(tvShowTmdbs);
+                    public void onSuccess(ArrayList<TvShow> tvShows) {
+                        view.sendToTvShowsFragment(tvShows);
                     }
 
                     @Override

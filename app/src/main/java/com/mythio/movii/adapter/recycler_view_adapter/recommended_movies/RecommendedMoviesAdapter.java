@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.recycler_view_adapter.Contract;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.App;
 import com.mythio.movii.util.ItemClickListener;
 
@@ -49,7 +49,7 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
         return presenter.getCount();
     }
 
-    class RecommendedMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<MovieTmdb> {
+    class RecommendedMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<Movie> {
         @BindView(R.id.iv_poster)
         ImageView mImageViewPoster;
 
@@ -64,11 +64,11 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
         }
 
         @Override
-        public void show(@NonNull MovieTmdb movieTmdb) {
+        public void show(@NonNull Movie movie) {
             Glide.with(App.getContext())
-                    .load(IMAGE_BASE_URL + "w154" + movieTmdb.getPosterPath())
+                    .load(IMAGE_BASE_URL + "w154" + movie.getPosterPath())
                     .into(mImageViewPoster);
-            mTextViewTitle.setText(movieTmdb.getTitle());
+            mTextViewTitle.setText(movie.getTitle());
         }
     }
 }

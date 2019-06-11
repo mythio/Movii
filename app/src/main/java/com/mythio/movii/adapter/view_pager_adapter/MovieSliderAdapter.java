@@ -14,7 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.App;
 import com.mythio.movii.util.ItemClickListener;
 
@@ -27,10 +27,10 @@ import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 public class MovieSliderAdapter extends PagerAdapter {
 
     private final Context mContext;
-    private final ArrayList<MovieTmdb> mMovies;
+    private final ArrayList<Movie> mMovies;
     private final ItemClickListener.OnItemClick listener;
 
-    public MovieSliderAdapter(Context mContext, ArrayList<MovieTmdb> mMovies, ItemClickListener.OnItemClick listener) {
+    public MovieSliderAdapter(Context mContext, ArrayList<Movie> mMovies, ItemClickListener.OnItemClick listener) {
         this.mContext = mContext;
         this.mMovies = mMovies;
         this.listener = listener;
@@ -50,7 +50,7 @@ public class MovieSliderAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        final MovieTmdb movie = mMovies.get(position);
+        final Movie movie = mMovies.get(position);
 
         final LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -13,7 +13,7 @@ import com.mythio.movii.activity.discover.fragment.contract.Presenter;
 import com.mythio.movii.activity.search_tv_show.SearchTvShowActivity;
 import com.mythio.movii.activity.tv_show_details.TvShowDetailsActivity;
 import com.mythio.movii.adapter.view_pager_adapter.TvShowSliderAdapter;
-import com.mythio.movii.model.tv_show.TvShowTmdb;
+import com.mythio.movii.model.tv_show.TvShow;
 
 import java.util.ArrayList;
 
@@ -21,14 +21,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TvShowsFragment extends BaseDiscoverFragment implements Contract.View<TvShowTmdb>,
-        Contract.Callback<TvShowTmdb> {
+public class TvShowsFragment extends BaseDiscoverFragment implements Contract.View<TvShow>,
+        Contract.Callback<TvShow> {
 
     @BindView(R.id.vp_popular)
     ViewPager viewPager;
 
-    private Contract.Presenter<TvShowTmdb> mPresenter;
-    private ArrayList<TvShowTmdb> tvShows;
+    private Contract.Presenter<TvShow> mPresenter;
+    private ArrayList<TvShow> tvShows;
     private Boolean hasReceived = false;
 
     @Override
@@ -55,7 +55,7 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
     }
 
     @Override
-    public void onDataReceived(ArrayList<TvShowTmdb> tvShows) {
+    public void onDataReceived(ArrayList<TvShow> tvShows) {
         hasReceived = true;
         this.tvShows = tvShows;
         if (mPresenter != null) {
@@ -73,7 +73,7 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
     }
 
     @Override
-    public void showSlideShow(ArrayList<TvShowTmdb> tvShows) {
+    public void showSlideShow(ArrayList<TvShow> tvShows) {
         TvShowSliderAdapter adapter = new TvShowSliderAdapter(getContext(), tvShows, position -> {
             Intent intent = new Intent(getContext(), TvShowDetailsActivity.class);
             intent.putExtra("BUNDLED_EXTRA_TV_ID", tvShows.get(position).getId());
@@ -83,7 +83,7 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
     }
 
     @Override
-    public void setPresenter(Contract.Presenter<TvShowTmdb> presenter) {
+    public void setPresenter(Contract.Presenter<TvShow> presenter) {
         mPresenter = presenter;
     }
 

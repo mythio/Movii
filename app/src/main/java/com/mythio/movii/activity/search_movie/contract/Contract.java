@@ -2,7 +2,7 @@ package com.mythio.movii.activity.search_movie.contract;
 
 import com.mythio.movii.BasePresenter;
 import com.mythio.movii.BaseView;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public interface Contract {
 
         void hidePlate();
 
-        void showSearchResult(ArrayList<MovieTmdb> movies);
+        void showSearchResult(ArrayList<Movie> movies);
     }
 
     interface Presenter extends BasePresenter {
@@ -30,7 +30,7 @@ public interface Contract {
 
         interface OnSearchResultsListener {
 
-            void onFinished(ArrayList<MovieTmdb> movies);
+            void onFinished(ArrayList<Movie> movies);
         }
     }
 }

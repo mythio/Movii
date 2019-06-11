@@ -20,7 +20,7 @@ import com.mythio.movii.activity.search_tv_show.contract.Presenter;
 import com.mythio.movii.activity.tv_show_details.TvShowDetailsActivity;
 import com.mythio.movii.adapter.recycler_view_adapter.search_tv_show.SearchTvShowAdapter;
 import com.mythio.movii.adapter.recycler_view_adapter.search_tv_show.SearchTvShowPresenter;
-import com.mythio.movii.model.tv_show.TvShowTmdb;
+import com.mythio.movii.model.tv_show.TvShow;
 import com.mythio.movii.util.ItemDecorator;
 
 import java.util.ArrayList;
@@ -99,7 +99,7 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
     }
 
     @Override
-    public void showSearchResult(ArrayList<TvShowTmdb> tvShows) {
+    public void showSearchResult(ArrayList<TvShow> tvShows) {
         SearchTvShowPresenter presenter = new SearchTvShowPresenter(tvShows);
         SearchTvShowAdapter adapter = new SearchTvShowAdapter(presenter, position -> {
             Intent intent = new Intent(SearchTvShowActivity.this, TvShowDetailsActivity.class);

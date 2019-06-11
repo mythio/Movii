@@ -1,31 +1,67 @@
 package com.mythio.movii.model.movie;
 
-import com.mythio.movii.model.cast.Cast;
-import com.mythio.movii.model.video.Video;
+import com.google.gson.annotations.SerializedName;
+import com.mythio.movii.model.cast.Credits;
+import com.mythio.movii.model.collection.Collection;
+import com.mythio.movii.model.genre.Genre;
+import com.mythio.movii.model.video.VideoResponse;
 
 import java.util.ArrayList;
 
 public class Movie {
 
+    @SerializedName("belongs_to_collection")
+    private Collection collection;
+
+    @SerializedName("poster_path")
     private String posterPath;
-    private String overview;
-    private String id;
-    private String collectionId;
-    private String collectionName;
-    private String collectionPosterPath;
-    private String collectionBackdrop;
-    private String title1;
-    private String title2;
+
+    @SerializedName("videos")
+    private VideoResponse videoResponse;
+
+    @SerializedName("release_date")
+    private String releaseDate;
+
+    @SerializedName("runtime")
+    private int runtime;
+
+    @SerializedName("id")
+    private int id;
+
+    @SerializedName("title")
+    private String title;
+
+    @SerializedName("backdrop_path")
     private String backdropPath;
-    private String votes;
-    private String rating;
+
+    @SerializedName("overview")
+    private String overview;
+
+    @SerializedName("vote_count")
+    private int voteCount;
+
+    @SerializedName("vote_average")
+    private float voteAverage;
+
+    @SerializedName("imdb_id")
     private String imdb;
-    private String genres;
-    private String year;
-    private String runtime;
-    private ArrayList<Video> videos;
-    private ArrayList<MovieTmdb> recommendations;
-    private ArrayList<Cast> casts;
+
+    @SerializedName("genres")
+    private ArrayList<Genre> genres = new ArrayList<>();
+
+    @SerializedName("recommendations")
+    private MovieResponse recommendations;
+
+    @SerializedName("credits")
+    private Credits credits;
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
 
     public String getPosterPath() {
         return posterPath;
@@ -35,68 +71,44 @@ public class Movie {
         this.posterPath = posterPath;
     }
 
-    public String getOverview() {
-        return overview;
+    public VideoResponse getVideoResponse() {
+        return videoResponse;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
+    public void setVideoResponse(VideoResponse videoResponse) {
+        this.videoResponse = videoResponse;
     }
 
-    public String getId() {
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getCollectionId() {
-        return collectionId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCollectionId(String collectionId) {
-        this.collectionId = collectionId;
-    }
-
-    public String getCollectionName() {
-        return collectionName;
-    }
-
-    public void setCollectionName(String collectionName) {
-        this.collectionName = collectionName;
-    }
-
-    public String getCollectionPosterPath() {
-        return collectionPosterPath;
-    }
-
-    public void setCollectionPosterPath(String collectionPosterPath) {
-        this.collectionPosterPath = collectionPosterPath;
-    }
-
-    public String getCollectionBackdrop() {
-        return collectionBackdrop;
-    }
-
-    public void setCollectionBackdrop(String collectionBackdrop) {
-        this.collectionBackdrop = collectionBackdrop;
-    }
-
-    public String getTitle1() {
-        return title1;
-    }
-
-    public void setTitle1(String title1) {
-        this.title1 = title1;
-    }
-
-    public String getTitle2() {
-        return title2;
-    }
-
-    public void setTitle2(String title2) {
-        this.title2 = title2;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getBackdropPath() {
@@ -107,20 +119,28 @@ public class Movie {
         this.backdropPath = backdropPath;
     }
 
-    public String getVotes() {
-        return votes;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setVotes(String votes) {
-        this.votes = votes;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
-    public String getRating() {
-        return rating;
+    public int getVoteCount() {
+        return voteCount;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
+    }
+
+    public Float getVoteAverage() {
+        return voteAverage;
+    }
+
+    public void setVoteAverage(float voteAverage) {
+        this.voteAverage = voteAverage;
     }
 
     public String getImdb() {
@@ -131,51 +151,27 @@ public class Movie {
         this.imdb = imdb;
     }
 
-    public String getGenres() {
+    public ArrayList<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(String genres) {
+    public void setGenres(ArrayList<Genre> genres) {
         this.genres = genres;
     }
 
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getRuntime() {
-        return runtime;
-    }
-
-    public void setRuntime(String runtime) {
-        this.runtime = runtime;
-    }
-
-    public ArrayList<Video> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(ArrayList<Video> videos) {
-        this.videos = videos;
-    }
-
-    public ArrayList<MovieTmdb> getRecommendations() {
+    public MovieResponse getRecommendations() {
         return recommendations;
     }
 
-    public void setRecommendations(ArrayList<MovieTmdb> recommendations) {
+    public void setRecommendations(MovieResponse recommendations) {
         this.recommendations = recommendations;
     }
 
-    public ArrayList<Cast> getCasts() {
-        return casts;
+    public Credits getCredits() {
+        return credits;
     }
 
-    public void setCasts(ArrayList<Cast> casts) {
-        this.casts = casts;
+    public void setCredits(Credits credits) {
+        this.credits = credits;
     }
 }

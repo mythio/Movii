@@ -4,8 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieResponse;
-import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.network.EndPoint;
 import com.mythio.movii.network.RetrofitBuilder;
 
@@ -29,14 +29,14 @@ public class Model implements Contract.Model {
         getSingleSearch(query)
                 .debounce(200, TimeUnit.MILLISECONDS)
                 .map(MovieResponse::getResults)
-//                .switchMap((Function<ArrayList<MovieTmdb>, ObservableSource<ArrayList<MovieTmdb>>>)
+//                .switchMap((Function<ArrayList<Movie>, ObservableSource<ArrayList<Movie>>>)
 //                        Observable::just)
                 .distinctUntilChanged()
-                .subscribe(new DisposableObserver<ArrayList<MovieTmdb>>() {
+                .subscribe(new DisposableObserver<ArrayList<Movie>>() {
                     @Override
-                    public void onNext(@NonNull ArrayList<MovieTmdb> movieTmdbs) {
-                        Log.d(TAG, "onNext: " + movieTmdbs.size());
-                        listener.onFinished(movieTmdbs);
+                    public void onNext(@NonNull ArrayList<Movie> movies) {
+                        Log.d(TAG, "onNext: " + movies.size());
+                        listener.onFinished(movies);
                     }
 
                     @Override

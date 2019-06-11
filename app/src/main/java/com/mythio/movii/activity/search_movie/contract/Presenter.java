@@ -4,8 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieResponse;
-import com.mythio.movii.model.movie.MovieTmdb;
 import com.mythio.movii.network.EndPoint;
 import com.mythio.movii.network.RetrofitBuilder;
 
@@ -41,10 +41,10 @@ public class Presenter implements Contract.Presenter {
                 .debounce(200, TimeUnit.MILLISECONDS)
                 .map(MovieResponse::getResults)
                 .distinctUntilChanged()
-                .subscribe(new DisposableObserver<ArrayList<MovieTmdb>>() {
+                .subscribe(new DisposableObserver<ArrayList<Movie>>() {
                     @Override
-                    public void onNext(@NonNull ArrayList<MovieTmdb> movieTmdbs) {
-                        view.showSearchResult(movieTmdbs);
+                    public void onNext(@NonNull ArrayList<Movie> movies) {
+                        view.showSearchResult(movies);
                     }
 
                     @Override

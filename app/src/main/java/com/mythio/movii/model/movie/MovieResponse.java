@@ -7,13 +7,13 @@ import java.util.ArrayList;
 public class MovieResponse {
 
     @SerializedName("results")
-    private ArrayList<MovieTmdb> results = null;
+    private ArrayList<Movie> results = null;
 
-    public ArrayList<MovieTmdb> getResults() {
+    public ArrayList<Movie> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<MovieTmdb> results) {
+    public void setResults(ArrayList<Movie> results) {
         this.results = results;
     }
 }

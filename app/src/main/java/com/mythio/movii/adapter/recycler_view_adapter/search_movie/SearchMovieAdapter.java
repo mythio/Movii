@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.recycler_view_adapter.Contract;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.ItemClickListener;
 
 import butterknife.BindView;
@@ -44,7 +44,7 @@ public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.
         return presenter.getCount();
     }
 
-    public class SearchMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<MovieTmdb> {
+    public class SearchMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<Movie> {
         @BindView(R.id.tv_title)
         TextView textViewTitle;
 
@@ -59,7 +59,7 @@ public class SearchMovieAdapter extends RecyclerView.Adapter<SearchMovieAdapter.
         }
 
         @Override
-        public void show(@NonNull MovieTmdb movie) {
+        public void show(@NonNull Movie movie) {
             String[] date = movie.getReleaseDate().split("-");
             textViewTitle.setText(movie.getTitle());
             textViewYear.setText(date[0]);

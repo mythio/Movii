@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.recycler_view_adapter.Contract;
-import com.mythio.movii.model.tv_show.TvShowTmdb;
+import com.mythio.movii.model.tv_show.TvShow;
 import com.mythio.movii.util.ItemClickListener;
 
 import butterknife.BindView;
@@ -44,7 +44,7 @@ public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapte
         return presenter.getCount();
     }
 
-    public class SearchTvShowViewHolder extends RecyclerView.ViewHolder implements Contract.View<TvShowTmdb> {
+    public class SearchTvShowViewHolder extends RecyclerView.ViewHolder implements Contract.View<TvShow> {
         @BindView(R.id.tv_title)
         TextView textViewTitle;
 
@@ -56,8 +56,8 @@ public class SearchTvShowAdapter extends RecyclerView.Adapter<SearchTvShowAdapte
         }
 
         @Override
-        public void show(@NonNull TvShowTmdb tvShowTmdb) {
-            textViewTitle.setText(tvShowTmdb.getName());
+        public void show(@NonNull TvShow tvShow) {
+            textViewTitle.setText(tvShow.getName());
         }
     }
 }

@@ -20,7 +20,7 @@ import com.mythio.movii.activity.search_movie.contract.Contract;
 import com.mythio.movii.activity.search_movie.contract.Presenter;
 import com.mythio.movii.adapter.recycler_view_adapter.search_movie.SearchMovieAdapter;
 import com.mythio.movii.adapter.recycler_view_adapter.search_movie.SearchMoviePresenter;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.ItemDecorator;
 
 import java.util.ArrayList;
@@ -102,7 +102,7 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
     }
 
     @Override
-    public void showSearchResult(@NonNull ArrayList<MovieTmdb> movies) {
+    public void showSearchResult(@NonNull ArrayList<Movie> movies) {
         SearchMoviePresenter presenter = new SearchMoviePresenter(movies);
         SearchMovieAdapter adapter = new SearchMovieAdapter(presenter, position -> {
             Intent intent = new Intent(SearchMovieActivity.this, MovieDetailsActivity.class);

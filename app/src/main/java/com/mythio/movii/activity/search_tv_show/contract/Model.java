@@ -4,8 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.mythio.movii.model.tv_show.TvShow;
 import com.mythio.movii.model.tv_show.TvShowResponse;
-import com.mythio.movii.model.tv_show.TvShowTmdb;
 import com.mythio.movii.network.EndPoint;
 import com.mythio.movii.network.RetrofitBuilder;
 
@@ -32,12 +32,12 @@ public class Model implements Contract.Model {
                 .debounce(200, TimeUnit.MILLISECONDS)
                 .distinctUntilChanged()
                 .map(TvShowResponse::getResults)
-                .switchMap((Function<ArrayList<TvShowTmdb>, ObservableSource<ArrayList<TvShowTmdb>>>)
+                .switchMap((Function<ArrayList<TvShow>, ObservableSource<ArrayList<TvShow>>>)
                         Observable::just)
-                .subscribe(new DisposableObserver<ArrayList<TvShowTmdb>>() {
+                .subscribe(new DisposableObserver<ArrayList<TvShow>>() {
                     @Override
-                    public void onNext(ArrayList<TvShowTmdb> tvShowTmdbs) {
-                        listener.onFinished(tvShowTmdbs);
+                    public void onNext(ArrayList<TvShow> tvShows) {
+                        listener.onFinished(tvShows);
                     }
 
                     @Override

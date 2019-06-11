@@ -35,7 +35,7 @@ import com.mythio.movii.adapter.recycler_view_adapter.cast.CastPresenter;
 import com.mythio.movii.adapter.recycler_view_adapter.recommended_movies.RecommendedMoviesAdapter;
 import com.mythio.movii.adapter.recycler_view_adapter.recommended_movies.RecommendedMoviesPresenter;
 import com.mythio.movii.model.cast.Cast;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.ItemDecorator;
 
 import java.util.ArrayList;
@@ -115,7 +115,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
     @SuppressLint("CheckResult")
     @Override
-    public void showMovieDetails(@NonNull MovieTmdb movie) {
+    public void showMovieDetails(@NonNull Movie movie) {
         Glide.with(getContext())
                 .asBitmap()
                 .load(IMAGE_BASE_URL + "w780" + movie.getPosterPath())
@@ -208,7 +208,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     }
 
     @Override
-    public void showRecommendationsRecyclerView(ArrayList<MovieTmdb> movies) {
+    public void showRecommendationsRecyclerView(ArrayList<Movie> movies) {
         recyclerViewRecommended.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewRecommended.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));

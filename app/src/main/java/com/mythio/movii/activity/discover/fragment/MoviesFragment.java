@@ -14,7 +14,7 @@ import com.mythio.movii.activity.discover.fragment.contract.Presenter;
 import com.mythio.movii.activity.movie_details.MovieDetailsActivity;
 import com.mythio.movii.activity.search_movie.SearchMovieActivity;
 import com.mythio.movii.adapter.view_pager_adapter.MovieSliderAdapter;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 
 import java.util.ArrayList;
 
@@ -22,14 +22,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MoviesFragment extends BaseDiscoverFragment implements Contract.View<MovieTmdb>,
-        Contract.Callback<MovieTmdb> {
+public class MoviesFragment extends BaseDiscoverFragment implements Contract.View<Movie>,
+        Contract.Callback<Movie> {
 
     @BindView(R.id.vp_popular)
     ViewPager viewPager;
 
-    private Contract.Presenter<MovieTmdb> mPresenter;
-    private ArrayList<MovieTmdb> movies;
+    private Contract.Presenter<Movie> mPresenter;
+    private ArrayList<Movie> movies;
     private Boolean hasReceived = false;
 
     @Override
@@ -55,7 +55,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     }
 
     @Override
-    public void onDataReceived(ArrayList<MovieTmdb> movies) {
+    public void onDataReceived(ArrayList<Movie> movies) {
         hasReceived = true;
         this.movies = movies;
         if (mPresenter != null) {
@@ -73,7 +73,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     }
 
     @Override
-    public void showSlideShow(ArrayList<MovieTmdb> movies) {
+    public void showSlideShow(ArrayList<Movie> movies) {
         MovieSliderAdapter adapter = new MovieSliderAdapter(getContext(), movies, position -> {
             Log.d("TAG_TAG_TAG", position + " returned");
             Intent intent = new Intent(getContext(), MovieDetailsActivity.class);
@@ -84,7 +84,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     }
 
     @Override
-    public void setPresenter(Contract.Presenter<MovieTmdb> presenter) {
+    public void setPresenter(Contract.Presenter<Movie> presenter) {
         this.mPresenter = presenter;
     }
 

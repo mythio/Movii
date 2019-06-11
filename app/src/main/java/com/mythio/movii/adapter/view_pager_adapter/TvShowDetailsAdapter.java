@@ -2,7 +2,6 @@ package com.mythio.movii.adapter.view_pager_adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,18 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
-import com.mythio.movii.model.season.SeasonDetails;
 import com.mythio.movii.model.tv_show.TvShow;
-import com.mythio.movii.util.App;
 
 import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-
-import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class TvShowDetailsAdapter extends PagerAdapter {
 
@@ -61,25 +54,26 @@ public class TvShowDetailsAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        final SeasonDetails season = tvShow.getSeasons().get(position);
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.item_tvshow_details, null);
-        ButterKnife.bind(this, view);
+//        final SeasonDetails season = tvShow.getSeasons().get(position);
+//        LayoutInflater inflater = (LayoutInflater) mContext
+//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View view = inflater.inflate(R.layout.item_tvshow_details, null);
+//        ButterKnife.bind(this, view);
+//
+//        txtViewTitle1.setText(tvShow.getName());
+//        txtViewTitle2.setText(season.getName());
+//
+//        Glide.with(App.getContext())
+//                .load(IMAGE_BASE_URL + "w780" + season.getPosterPath())
+//                .into(imgViewPoster);
+//
+//        txtViewOverview.setText(season.getOverview());
 
-        txtViewTitle1.setText(tvShow.getName());
-        txtViewTitle2.setText(season.getName());
-
-        Glide.with(App.getContext())
-                .load(IMAGE_BASE_URL + "w780" + season.getPosterPath())
-                .into(imgViewPoster);
-
-        txtViewOverview.setText(season.getOverview());
-
-        ViewPager viewPager = (ViewPager) container;
-        viewPager.addView(view, 0);
-
-        return view;
+//        ViewPager viewPager = (ViewPager) container;
+//        viewPager.addView(view, 0);
+//
+//        return view;
+        return null;
     }
 
     @Override

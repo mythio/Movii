@@ -10,7 +10,7 @@ public class Model implements Contract.Model {
     public void getDetails(@NonNull final OnSeasonListener listener, Integer id) {
 
 //        getTvShowTmdbObservable(id)
-//                .flatMap((Function<TvShowTmdb, ObservableSource<TvShowOmdb>>)
+//                .flatMap((Function<TvShow, ObservableSource<TvShowOmdb>>)
 //                        tvShowTmdb -> getTvShowOmdbObservable(tvShowTmdb.getExternalIds().getImdbId()), Utils::getTvShow)
 //                .subscribe(new DisposableObserver<TvShow>() {
 //                    @Override
@@ -30,7 +30,7 @@ public class Model implements Contract.Model {
 //                });
     }
 
-//    private Observable<TvShowTmdb> getTvShowTmdbObservable(Integer id) {
+//    private Observable<TvShow> getTvShowTmdbObservable(Integer id) {
 //        return RetrofitBuilder
 //                .getClientTmdb()
 //                .create(EndPoint.class)

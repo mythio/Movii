@@ -18,7 +18,7 @@ import com.mythio.movii.activity.movie_details.dialog_contract.Contract;
 import com.mythio.movii.activity.movie_details.dialog_contract.Presenter;
 import com.mythio.movii.adapter.recycler_view_adapter.recommended_movies.RecommendedMoviesAdapter;
 import com.mythio.movii.adapter.recycler_view_adapter.recommended_movies.RecommendedMoviesPresenter;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.App;
 import com.mythio.movii.util.ItemDecorator;
 
@@ -89,7 +89,7 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
     }
 
     @Override
-    public void showRecommendedMovies(ArrayList<MovieTmdb> movies) {
+    public void showRecommendedMovies(ArrayList<Movie> movies) {
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(App.getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.addItemDecoration(new ItemDecorator(24, ItemDecorator.HORIZONTAL));

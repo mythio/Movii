@@ -1,6 +1,6 @@
 package com.mythio.movii.activity.movie_details.dialog_contract;
 
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public interface Contract {
 
         void showInitView();
 
-        void showRecommendedMovies(ArrayList<MovieTmdb> movies);
+        void showRecommendedMovies(ArrayList<Movie> movies);
     }
 
     interface Presenter {
@@ -26,7 +26,7 @@ public interface Contract {
 
         interface OnMoviesReceivedListener {
 
-            void onFinished(ArrayList<MovieTmdb> movies);
+            void onFinished(ArrayList<Movie> movies);
         }
     }
 

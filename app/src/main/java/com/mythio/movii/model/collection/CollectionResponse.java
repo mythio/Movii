@@ -1,7 +1,7 @@
 package com.mythio.movii.model.collection;
 
 import com.google.gson.annotations.SerializedName;
-import com.mythio.movii.model.movie.MovieTmdb;
+import com.mythio.movii.model.movie.Movie;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class CollectionResponse {
     private String backdropPath;
 
     @SerializedName("parts")
-    private ArrayList<MovieTmdb> movies;
+    private ArrayList<Movie> movies;
 
     public Integer getId() {
         return id;
@@ -65,11 +65,11 @@ public class CollectionResponse {
         this.backdropPath = backdropPath;
     }
 
-    public ArrayList<MovieTmdb> getMovies() {
+    public ArrayList<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(ArrayList<MovieTmdb> movies) {
+    public void setMovies(ArrayList<Movie> movies) {
         this.movies = movies;
     }
 }

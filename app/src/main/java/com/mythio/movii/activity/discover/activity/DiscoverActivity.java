@@ -14,8 +14,8 @@ import com.mythio.movii.activity.discover.fragment.MoviesFragment;
 import com.mythio.movii.activity.discover.fragment.ProfileFragment;
 import com.mythio.movii.activity.discover.fragment.TvShowsFragment;
 import com.mythio.movii.activity.discover.fragment.contract.Contract.Callback;
-import com.mythio.movii.model.movie.MovieTmdb;
-import com.mythio.movii.model.tv_show.TvShowTmdb;
+import com.mythio.movii.model.movie.Movie;
+import com.mythio.movii.model.tv_show.TvShow;
 
 import java.util.ArrayList;
 
@@ -31,8 +31,8 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
     private final TvShowsFragment tvShowsFragment = new TvShowsFragment();
     private final ProfileFragment profileFragment = new ProfileFragment();
 
-    private static Callback<MovieTmdb> moviesCallback;
-    private static Callback<TvShowTmdb> tvShowsCallback;
+    private static Callback<Movie> moviesCallback;
+    private static Callback<TvShow> tvShowsCallback;
 
     private Contract.Presenter mPresenter;
 
@@ -74,12 +74,12 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
     }
 
     @Override
-    public void sendToMoviesFragment(ArrayList<MovieTmdb> movies) {
+    public void sendToMoviesFragment(ArrayList<Movie> movies) {
         moviesCallback.onDataReceived(movies);
     }
 
     @Override
-    public void sendToTvShowsFragment(ArrayList<TvShowTmdb> tvShows) {
+    public void sendToTvShowsFragment(ArrayList<TvShow> tvShows) {
         tvShowsCallback.onDataReceived(tvShows);
     }
 
