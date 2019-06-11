@@ -34,20 +34,17 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
     private static Callback<MovieTmdb> moviesCallback;
     private static Callback<TvShowTmdb> tvShowsCallback;
 
-    private Contract.Presenter presenter;
+    private Contract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
         ButterKnife.bind(this);
-
         setPresenter(new Presenter(this));
 
-        presenter.setFragment(moviesFragment);
-
-        presenter.getData();
+        mPresenter.setFragment(moviesFragment);
+        mPresenter.getData();
 
         moviesCallback = moviesFragment;
         tvShowsCallback = tvShowsFragment;
@@ -55,13 +52,13 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
         navBar.setNavigationChangeListener((view, position) -> {
             switch (position) {
                 case 0:
-                    presenter.setFragment(moviesFragment);
+                    mPresenter.setFragment(moviesFragment);
                     break;
                 case 1:
-                    presenter.setFragment(tvShowsFragment);
+                    mPresenter.setFragment(tvShowsFragment);
                     break;
                 case 2:
-                    presenter.setFragment(profileFragment);
+                    mPresenter.setFragment(profileFragment);
                     break;
             }
         });
@@ -88,6 +85,12 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
 
     @Override
     public void setPresenter(Contract.Presenter presenter) {
-        this.presenter = presenter;
+        this.mPresenter = presenter;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
     }
 }

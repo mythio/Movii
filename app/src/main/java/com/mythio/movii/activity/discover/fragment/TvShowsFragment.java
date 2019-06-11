@@ -29,15 +29,14 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
 
     private Contract.Presenter<TvShowTmdb> mPresenter;
     private ArrayList<TvShowTmdb> tvShows;
-    @NonNull
     private Boolean hasReceived = false;
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        setPresenter(new Presenter<>(this));
 
-        mPresenter = new Presenter<>(this);
         mPresenter.initViews();
 
         if (hasReceived) {
@@ -81,5 +80,16 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
             startActivity(intent);
         });
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void setPresenter(Contract.Presenter<TvShowTmdb> presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
     }
 }

@@ -28,7 +28,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     @BindView(R.id.vp_popular)
     ViewPager viewPager;
 
-    private Presenter<MovieTmdb> mPresenter;
+    private Contract.Presenter<MovieTmdb> mPresenter;
     private ArrayList<MovieTmdb> movies;
     private Boolean hasReceived = false;
 
@@ -36,8 +36,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
-        mPresenter = new Presenter<>(this);
+        setPresenter(new Presenter<>(this));
         mPresenter.initViews();
 
         if (hasReceived) {
@@ -82,5 +81,16 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
             startActivity(intent);
         });
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void setPresenter(Contract.Presenter<MovieTmdb> presenter) {
+        this.mPresenter = presenter;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
     }
 }
