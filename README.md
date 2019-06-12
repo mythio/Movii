@@ -111,11 +111,3 @@ A handcrafted Android application to show everything you want to know about your
 
 34 directories, 62 files
 ```
-
-### Upcoming:
-- Make the application reactive and improve the flow of data by introducing RxJava2, and RxAndroid.
-- Genre section which will allow the user to view the top movies from their favourite genre.
-- People fragment with top actors.
-- Favourite buttons on the movies and shows.
-- Profile section to keep track of the user's likings.
-- and much more.
