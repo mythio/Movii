@@ -9,14 +9,10 @@ public interface Contract {
 
     interface View<T> extends BaseView<Presenter<T>> {
 
-        void initViewPager();
-
         void showSlideShow(ArrayList<T> ts);
     }
 
     interface Presenter<T> extends BasePresenter {
-
-        void initViews();
 
         void setDataToViewPager(ArrayList<T> ts);
     }

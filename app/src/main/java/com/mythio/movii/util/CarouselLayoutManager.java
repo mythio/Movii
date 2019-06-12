@@ -7,13 +7,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CustomLinearLayoutManager extends LinearLayoutManager {
+public class CarouselLayoutManager extends LinearLayoutManager {
 
     private final float mShrinkAmount = 0.05f;
     private final float mShrinkDistance = 0.2f;
     private final int orientation;
 
-    public CustomLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
+    public CarouselLayoutManager(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
         this.orientation = orientation;
     }

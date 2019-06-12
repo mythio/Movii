@@ -13,9 +13,6 @@ import butterknife.ButterKnife;
 
 public class TvShowDetailsActivity extends AppCompatActivity implements Contract.View {
 
-//    @BindView(R.id.vp_details)
-//    ViewPager viewPager;
-
     private Contract.Presenter mPresenter;
 
     @Override
@@ -36,7 +33,6 @@ public class TvShowDetailsActivity extends AppCompatActivity implements Contract
 
     @Override
     public void showDetails(TvShow tvShow) {
-//        viewPager.setAdapter(new TvShowDetailsAdapter(this, tvShow));
     }
 
     @Override

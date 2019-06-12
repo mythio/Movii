@@ -11,11 +11,6 @@ public class Presenter<T> implements Contract.Presenter<T> {
     }
 
     @Override
-    public void initViews() {
-        view.initViewPager();
-    }
-
-    @Override
     public void setDataToViewPager(ArrayList<T> t) {
         view.showSlideShow(t);
     }

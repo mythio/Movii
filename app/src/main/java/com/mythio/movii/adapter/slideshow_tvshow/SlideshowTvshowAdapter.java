@@ -57,9 +57,6 @@ public class SlideshowTvshowAdapter extends RecyclerView.Adapter<SlideshowTvshow
         @BindView(R.id.tv_title1)
         TextView tvTitle1;
 
-//        @BindView(R.id.tv_title2)
-//        TextView tvTitle2;
-
         public SlideshowTvShowViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
