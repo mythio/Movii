@@ -1,5 +1,6 @@
 package com.mythio.movii.activity.movie_details;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,7 +83,7 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
         textViewCast.setText(castName);
         textViewCharacter.setText(characterName);
 
-        bg.setBackgroundColor(bundle.getInt("color"));
+        bg.setBackgroundTintList(ColorStateList.valueOf(bundle.getInt("color")));
 
         Glide.with(App.getContext())
                 .load(IMAGE_BASE_URL + "w185" + profilePath)

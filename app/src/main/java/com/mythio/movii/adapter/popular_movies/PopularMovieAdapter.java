@@ -83,6 +83,8 @@ public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapte
             Glide.with(App.getContext())
                     .load(url)
                     .into(ivBackdrop);
+
+            itemView.setOnClickListener(v -> mListener.onItemClick(getAdapterPosition()));
         }
     }
 }

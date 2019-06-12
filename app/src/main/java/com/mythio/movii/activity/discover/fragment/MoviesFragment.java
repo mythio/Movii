@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.discover.fragment.contract.Contract;
 import com.mythio.movii.activity.discover.fragment.contract.Presenter;
+import com.mythio.movii.activity.movie_details.MovieDetailsActivity;
 import com.mythio.movii.activity.search_movie.SearchMovieActivity;
 import com.mythio.movii.adapter.popular_movies.PopularMovieAdapter;
 import com.mythio.movii.adapter.popular_movies.PopularMoviePresenter;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.CarouselLayoutManager;
+import com.mythio.movii.util.ItemClickListener;
 
 import java.util.ArrayList;
 
@@ -63,7 +65,14 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
                 getContext(),
                 LinearLayoutManager.HORIZONTAL,
                 false));
-        rvSlideShow.setAdapter(new PopularMovieAdapter(new PopularMoviePresenter(movies), null));
+        rvSlideShow.setAdapter(new PopularMovieAdapter(new PopularMoviePresenter(movies), new ItemClickListener.OnItemClick() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getContext(), MovieDetailsActivity.class);
+                intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", movies.get(position).getId());
+                startActivity(intent);
+            }
+        }));
         SnapHelper helper = new PagerSnapHelper();
         helper.attachToRecyclerView(rvSlideShow);
     }
