@@ -191,7 +191,10 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         StringBuilder genre = new StringBuilder();
 
         for (int i = 0; i < Math.min(3, movie.getGenres().size()); ++i) {
-            genre.append(movie.getGenres().get(i).getName()).append("  |  ");
+            genre.append(movie.getGenres().get(i).getName());
+            if (i < Math.min(3, movie.getGenres().size()) - 1) {
+                genre.append("  |  ");
+            }
         }
 
         txtViewYear.setText(movie.getReleaseDate());
