@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.icu.text.NumberFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.ColorUtils;
 import androidx.core.view.ViewCompat;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +42,7 @@ import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.ItemDecorator;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -132,17 +136,29 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
                         Palette.from(resource).generate(palette -> {
                             assert palette != null;
                             if (palette.getDarkMutedSwatch() != null) {
-                                int rgb = palette.getDominantSwatch().getRgb();
-
-                                imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
-                                getWindow().getDecorView().setBackgroundColor(rgb);
-                            } else if (palette.getDarkVibrantSwatch() != null) {
-                                int rgb = palette.getDarkVibrantSwatch().getRgb();
+                                int rgb = ColorUtils.blendARGB(
+                                        palette.getDarkMutedSwatch().getRgb(),
+                                        Color.BLACK,
+                                        0.3f
+                                );
 
                                 imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
                                 getWindow().getDecorView().setBackgroundColor(rgb);
                             } else if (palette.getMutedSwatch() != null) {
-                                int rgb = palette.getMutedSwatch().getRgb();
+                                int rgb = ColorUtils.blendARGB(
+                                        palette.getMutedSwatch().getRgb(),
+                                        Color.BLACK,
+                                        0.3f
+                                );
+
+                                imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
+                                getWindow().getDecorView().setBackgroundColor(rgb);
+                            } else if (palette.getDarkVibrantSwatch() != null) {
+                                int rgb = ColorUtils.blendARGB(
+                                        palette.getDarkVibrantSwatch().getRgb(),
+                                        Color.BLACK,
+                                        0.3f
+                                );
 
                                 imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
                                 getWindow().getDecorView().setBackgroundColor(rgb);
@@ -172,13 +188,19 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
             txtViewTitle2.setVisibility(View.GONE);
         }
 
+        StringBuilder genre = new StringBuilder();
+
+        for (int i = 0; i < Math.min(3, movie.getGenres().size()); ++i) {
+            genre.append(movie.getGenres().get(i).getName()).append("  |  ");
+        }
+
         txtViewYear.setText(movie.getReleaseDate());
-        txtViewGenre.setText(movie.getGenres().get(0).getName());
-        txtViewRuntime.setText(String.valueOf(movie.getRuntime()));
+        txtViewGenre.setText(genre.toString());
+        txtViewRuntime.setText(movie.getRuntime() / 60 + " hours " + movie.getRuntime() % 60 + " mins");
         txtViewOverview.setText(movie.getOverview());
         ratingBar.setRating(movie.getVoteAverage() / 2);
         txtViewRating.setText(String.valueOf(movie.getVoteAverage()));
-        txtViewVoteCount.setText(String.valueOf(movie.getVoteCount()));
+        txtViewVoteCount.setText(NumberFormat.getNumberInstance(Locale.US).format(movie.getVoteCount()));
 
         animationView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_fade_out));
         animationView.setVisibility(View.GONE);

@@ -82,7 +82,6 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
 
         textViewCast.setText(castName);
         textViewCharacter.setText(characterName);
-
         bg.setBackgroundTintList(ColorStateList.valueOf(bundle.getInt("color")));
 
         Glide.with(App.getContext())
