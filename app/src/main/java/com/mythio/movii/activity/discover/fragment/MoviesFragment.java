@@ -17,7 +17,6 @@ import com.mythio.movii.activity.search_movie.SearchMovieActivity;
 import com.mythio.movii.adapter.slideshow_movies.SlideshowMovieAdapter;
 import com.mythio.movii.adapter.slideshow_movies.SlideshowMoviePresenter;
 import com.mythio.movii.model.movie.Movie;
-import com.mythio.movii.util.App;
 import com.mythio.movii.util.CustomLinearLayoutManager;
 
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
         this.movies = movies;
         mPresenter.setDataToViewPager(movies);
 
-        recyclerView.setLayoutManager(new CustomLinearLayoutManager(App.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new CustomLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new SlideshowMovieAdapter(new SlideshowMoviePresenter(movies), null));
         SnapHelper helper = new PagerSnapHelper();
         helper.attachToRecyclerView(recyclerView);
@@ -90,6 +89,8 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     @Override
     public void setPresenter(Contract.Presenter<Movie> presenter) {
         mPresenter = presenter;
+
+
     }
 
     @Override
