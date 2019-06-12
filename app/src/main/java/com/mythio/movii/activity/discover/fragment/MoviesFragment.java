@@ -30,18 +30,14 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
 
     private Contract.Presenter<Movie> mPresenter;
     private ArrayList<Movie> movies;
-    private Boolean hasReceived = false;
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         setPresenter(new Presenter<>(this));
-        mPresenter.initViews();
 
-        if (hasReceived) {
-            mPresenter.setDataToViewPager(movies);
-        }
+        mPresenter.initViews();
     }
 
     @OnClick(R.id.search_btn_go)
@@ -56,11 +52,8 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
 
     @Override
     public void onDataReceived(ArrayList<Movie> movies) {
-        hasReceived = true;
         this.movies = movies;
-        if (mPresenter != null) {
-            mPresenter.setDataToViewPager(movies);
-        }
+        mPresenter.setDataToViewPager(movies);
     }
 
     @Override

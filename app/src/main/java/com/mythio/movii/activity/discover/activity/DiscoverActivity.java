@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.mythio.movii.R;
@@ -30,6 +31,7 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
     private final MoviesFragment moviesFragment = new MoviesFragment();
     private final TvShowsFragment tvShowsFragment = new TvShowsFragment();
     private final ProfileFragment profileFragment = new ProfileFragment();
+    private Fragment activeFragment;
 
     private static Callback<Movie> moviesCallback;
     private static Callback<TvShow> tvShowsCallback;
@@ -42,6 +44,17 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
         setPresenter(new Presenter(this));
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, moviesFragment, "FRAGMENT 1")
+                .add(R.id.fragment_container, tvShowsFragment, "FRAGMENT 2")
+                .add(R.id.fragment_container, profileFragment, "FRAGMENT 3")
+                .hide(moviesFragment)
+                .hide(tvShowsFragment)
+                .hide(profileFragment)
+                .commit();
+
+        activeFragment = moviesFragment;
 
         mPresenter.setFragment(moviesFragment);
         mPresenter.getData();
@@ -68,9 +81,11 @@ public class DiscoverActivity extends AppCompatActivity implements Contract.View
     public void showFragment(@NonNull BaseDiscoverFragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                .replace(R.id.fragment_container, fragment)
+                .hide(activeFragment)
+                .show(fragment)
                 .commit();
+
+        activeFragment = fragment;
     }
 
     @Override

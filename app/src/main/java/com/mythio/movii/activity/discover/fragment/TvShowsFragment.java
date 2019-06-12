@@ -29,7 +29,6 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
 
     private Contract.Presenter<TvShow> mPresenter;
     private ArrayList<TvShow> tvShows;
-    private Boolean hasReceived = false;
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -37,11 +36,8 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
         ButterKnife.bind(this, view);
         setPresenter(new Presenter<>(this));
 
+        mPresenter.setDataToViewPager(tvShows);
         mPresenter.initViews();
-
-        if (hasReceived) {
-            mPresenter.setDataToViewPager(tvShows);
-        }
     }
 
     @OnClick(R.id.search_btn_go)
@@ -56,11 +52,7 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
 
     @Override
     public void onDataReceived(ArrayList<TvShow> tvShows) {
-        hasReceived = true;
         this.tvShows = tvShows;
-        if (mPresenter != null) {
-            mPresenter.setDataToViewPager(tvShows);
-        }
     }
 
     @Override
