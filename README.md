@@ -1,5 +1,6 @@
 # Movii
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5e1a18cd33e341a6ab15e8713baa155b)](https://app.codacy.com/app/mythio/Movii?utm_source=github.com&utm_medium=referral&utm_content=mythio/Movii&utm_campaign=Badge_Grade_Dashboard)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5e1a18cd33e341a6ab15e8713baa155b)](https://app.codacy.com/app/mythio/Movii?utm_source=github.com&utm_medium=referral&utm_content=mythio/Movii&utm_campaign=Badge_Grade_Settings)
 
 A handcrafted Android application to show everything you want to know about your favourite movies and TV shows!
