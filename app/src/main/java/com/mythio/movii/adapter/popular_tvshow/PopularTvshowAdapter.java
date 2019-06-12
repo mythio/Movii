@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.slideshow_tvshow;
+package com.mythio.movii.adapter.popular_tvshow;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,28 +19,28 @@ import com.mythio.movii.util.ItemClickListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
+import static com.mythio.movii.util.Constants.IMAGE_BASE_URL;
 
-public class SlideshowTvshowAdapter extends RecyclerView.Adapter<SlideshowTvshowAdapter.SlideshowTvShowViewHolder> {
+public class PopularTvshowAdapter extends RecyclerView.Adapter<PopularTvshowAdapter.PopularTvShowViewHolder> {
     private final Contract.Presenter<TvShow> mPresenter;
     private final ItemClickListener.OnItemClick mListener;
 
-    public SlideshowTvshowAdapter(Contract.Presenter<TvShow> presenter, ItemClickListener.OnItemClick listener) {
+    public PopularTvshowAdapter(Contract.Presenter<TvShow> presenter, ItemClickListener.OnItemClick listener) {
         this.mPresenter = presenter;
         this.mListener = listener;
     }
 
     @NonNull
     @Override
-    public SlideshowTvShowViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new SlideshowTvShowViewHolder(
+    public PopularTvShowViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new PopularTvShowViewHolder(
                 LayoutInflater
                         .from(parent.getContext())
                         .inflate(R.layout.item_slideshow, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SlideshowTvShowViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull PopularTvShowViewHolder viewHolder, int position) {
         mPresenter.onBindViewAtPosition(viewHolder, position);
     }
 
@@ -49,7 +49,7 @@ public class SlideshowTvshowAdapter extends RecyclerView.Adapter<SlideshowTvshow
         return mPresenter.getCount();
     }
 
-    class SlideshowTvShowViewHolder extends RecyclerView.ViewHolder implements Contract.View<TvShow> {
+    class PopularTvShowViewHolder extends RecyclerView.ViewHolder implements Contract.View<TvShow> {
 
         @BindView(R.id.iv_backdrop)
         ImageView ivBackdrop;
@@ -57,7 +57,7 @@ public class SlideshowTvshowAdapter extends RecyclerView.Adapter<SlideshowTvshow
         @BindView(R.id.tv_title1)
         TextView tvTitle1;
 
-        public SlideshowTvShowViewHolder(@NonNull View itemView) {
+        public PopularTvShowViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

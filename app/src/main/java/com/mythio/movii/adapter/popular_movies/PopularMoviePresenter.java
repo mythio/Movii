@@ -1,14 +1,14 @@
-package com.mythio.movii.adapter.slideshow_movies;
+package com.mythio.movii.adapter.popular_movies;
 
 import com.mythio.movii.adapter.Contract;
 import com.mythio.movii.model.movie.Movie;
 
 import java.util.ArrayList;
 
-public class SlideshowMoviePresenter implements Contract.Presenter<Movie> {
+public class PopularMoviePresenter implements Contract.Presenter<Movie> {
     private final ArrayList<Movie> movies;
 
-    public SlideshowMoviePresenter(ArrayList<Movie> movies) {
+    public PopularMoviePresenter(ArrayList<Movie> movies) {
         this.movies = movies;
     }
 

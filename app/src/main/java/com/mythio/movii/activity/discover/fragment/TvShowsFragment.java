@@ -14,8 +14,8 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.discover.fragment.contract.Contract;
 import com.mythio.movii.activity.discover.fragment.contract.Presenter;
 import com.mythio.movii.activity.search_tv_show.SearchTvShowActivity;
-import com.mythio.movii.adapter.slideshow_tvshow.SlideshowTvshowAdapter;
-import com.mythio.movii.adapter.slideshow_tvshow.SlideshowTvshowPresenter;
+import com.mythio.movii.adapter.popular_tvshow.PopularTvshowAdapter;
+import com.mythio.movii.adapter.popular_tvshow.PopularTvshowPresenter;
 import com.mythio.movii.model.tv_show.TvShow;
 import com.mythio.movii.util.CarouselLayoutManager;
 
@@ -63,7 +63,7 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
                 getContext(),
                 LinearLayoutManager.HORIZONTAL,
                 false));
-        rvSlideShow.setAdapter(new SlideshowTvshowAdapter(new SlideshowTvshowPresenter(tvShows), null));
+        rvSlideShow.setAdapter(new PopularTvshowAdapter(new PopularTvshowPresenter(tvShows), null));
         SnapHelper helper = new PagerSnapHelper();
         helper.attachToRecyclerView(rvSlideShow);
     }

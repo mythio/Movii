@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.slideshow_movies;
+package com.mythio.movii.adapter.popular_movies;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,28 +19,28 @@ import com.mythio.movii.util.ItemClickListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
+import static com.mythio.movii.util.Constants.IMAGE_BASE_URL;
 
-public class SlideshowMovieAdapter extends RecyclerView.Adapter<SlideshowMovieAdapter.SlideshowMovieViewHolder> {
+public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapter.PopularMovieViewHolder> {
     private final Contract.Presenter<Movie> mPresenter;
     private final ItemClickListener.OnItemClick mListener;
 
-    public SlideshowMovieAdapter(Contract.Presenter<Movie> presenter, ItemClickListener.OnItemClick listener) {
+    public PopularMovieAdapter(Contract.Presenter<Movie> presenter, ItemClickListener.OnItemClick listener) {
         this.mPresenter = presenter;
         this.mListener = listener;
     }
 
     @NonNull
     @Override
-    public SlideshowMovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new SlideshowMovieViewHolder(
+    public PopularMovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new PopularMovieViewHolder(
                 LayoutInflater
                         .from(parent.getContext())
                         .inflate(R.layout.item_slideshow, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SlideshowMovieViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull PopularMovieViewHolder viewHolder, int position) {
         mPresenter.onBindViewAtPosition(viewHolder, position);
     }
 
@@ -49,7 +49,7 @@ public class SlideshowMovieAdapter extends RecyclerView.Adapter<SlideshowMovieAd
         return mPresenter.getCount();
     }
 
-    class SlideshowMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<Movie> {
+    class PopularMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<Movie> {
 
         @BindView(R.id.iv_backdrop)
         ImageView ivBackdrop;
@@ -60,7 +60,7 @@ public class SlideshowMovieAdapter extends RecyclerView.Adapter<SlideshowMovieAd
         @BindView(R.id.tv_title2)
         TextView tvTitle2;
 
-        public SlideshowMovieViewHolder(@NonNull View itemView) {
+        public PopularMovieViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

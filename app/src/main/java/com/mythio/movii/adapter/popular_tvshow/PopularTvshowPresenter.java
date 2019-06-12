@@ -1,14 +1,14 @@
-package com.mythio.movii.adapter.slideshow_tvshow;
+package com.mythio.movii.adapter.popular_tvshow;
 
 import com.mythio.movii.adapter.Contract;
 import com.mythio.movii.model.tv_show.TvShow;
 
 import java.util.ArrayList;
 
-public class SlideshowTvshowPresenter implements Contract.Presenter<TvShow> {
+public class PopularTvshowPresenter implements Contract.Presenter<TvShow> {
     private final ArrayList<TvShow> tvShows;
 
-    public SlideshowTvshowPresenter(ArrayList<TvShow> tvShows) {
+    public PopularTvshowPresenter(ArrayList<TvShow> tvShows) {
         this.tvShows = tvShows;
     }
 

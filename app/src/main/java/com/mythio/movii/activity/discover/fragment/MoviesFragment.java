@@ -14,8 +14,8 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.discover.fragment.contract.Contract;
 import com.mythio.movii.activity.discover.fragment.contract.Presenter;
 import com.mythio.movii.activity.search_movie.SearchMovieActivity;
-import com.mythio.movii.adapter.slideshow_movies.SlideshowMovieAdapter;
-import com.mythio.movii.adapter.slideshow_movies.SlideshowMoviePresenter;
+import com.mythio.movii.adapter.popular_movies.PopularMovieAdapter;
+import com.mythio.movii.adapter.popular_movies.PopularMoviePresenter;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.CarouselLayoutManager;
 
@@ -63,7 +63,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
                 getContext(),
                 LinearLayoutManager.HORIZONTAL,
                 false));
-        rvSlideShow.setAdapter(new SlideshowMovieAdapter(new SlideshowMoviePresenter(movies), null));
+        rvSlideShow.setAdapter(new PopularMovieAdapter(new PopularMoviePresenter(movies), null));
         SnapHelper helper = new PagerSnapHelper();
         helper.attachToRecyclerView(rvSlideShow);
     }

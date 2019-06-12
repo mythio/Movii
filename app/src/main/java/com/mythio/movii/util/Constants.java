@@ -1,6 +1,6 @@
 package com.mythio.movii.util;
 
-public class Constant {
+public class Constants {
 
     public static final String API_KEY = "a781dd694991f0ea8dcf9050ec3e7a20";
 

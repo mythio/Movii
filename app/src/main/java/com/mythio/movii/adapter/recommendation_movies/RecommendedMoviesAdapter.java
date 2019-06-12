@@ -19,7 +19,7 @@ import com.mythio.movii.util.ItemClickListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
+import static com.mythio.movii.util.Constants.IMAGE_BASE_URL;
 
 public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMoviesAdapter.RecommendedMovieViewHolder> {
     private final Contract.Presenter<Movie> presenter;

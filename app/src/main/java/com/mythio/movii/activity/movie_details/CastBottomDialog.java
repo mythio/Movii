@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
+import static com.mythio.movii.util.Constants.IMAGE_BASE_URL;
 
 public class CastBottomDialog extends BottomSheetDialogFragment implements Contract.View {
 
