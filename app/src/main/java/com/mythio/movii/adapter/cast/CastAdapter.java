@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.recycler_view_adapter.cast;
+package com.mythio.movii.adapter.cast;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
-import com.mythio.movii.adapter.recycler_view_adapter.Contract;
+import com.mythio.movii.adapter.Contract;
 import com.mythio.movii.model.cast.Cast;
 import com.mythio.movii.util.App;
 import com.mythio.movii.util.ItemClickListener;

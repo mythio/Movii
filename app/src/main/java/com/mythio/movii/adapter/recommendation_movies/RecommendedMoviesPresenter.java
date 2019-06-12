@@ -1,8 +1,8 @@
-package com.mythio.movii.adapter.recycler_view_adapter.recommended_movies;
+package com.mythio.movii.adapter.recommendation_movies;
 
 import androidx.annotation.NonNull;
 
-import com.mythio.movii.adapter.recycler_view_adapter.Contract;
+import com.mythio.movii.adapter.Contract;
 import com.mythio.movii.model.movie.Movie;
 
 import java.util.ArrayList;

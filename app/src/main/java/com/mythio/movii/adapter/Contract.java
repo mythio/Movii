@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.recycler_view_adapter;
+package com.mythio.movii.adapter;
 
 public interface Contract {
 

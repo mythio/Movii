@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.recycler_view_adapter.recommended_movies;
+package com.mythio.movii.adapter.recommendation_movies;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
-import com.mythio.movii.adapter.recycler_view_adapter.Contract;
+import com.mythio.movii.adapter.Contract;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.App;
 import com.mythio.movii.util.ItemClickListener;
@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 import static com.mythio.movii.util.Constant.IMAGE_BASE_URL;
 
 public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMoviesAdapter.RecommendedMovieViewHolder> {
-    private final RecommendedMoviesPresenter presenter;
+    private final Contract.Presenter<Movie> presenter;
     private final ItemClickListener.OnItemClick listener;
 
     public RecommendedMoviesAdapter(RecommendedMoviesPresenter presenter, ItemClickListener.OnItemClick listener) {
@@ -32,11 +32,11 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
 
     @NonNull
     @Override
-    public RecommendedMovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public RecommendedMovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         return new RecommendedMovieViewHolder(
                 LayoutInflater
-                        .from(viewGroup.getContext())
-                        .inflate(R.layout.item_recommendation, viewGroup, false));
+                        .from(parent.getContext())
+                        .inflate(R.layout.item_recommendation, parent, false));
     }
 
     @Override
@@ -50,6 +50,7 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
     }
 
     class RecommendedMovieViewHolder extends RecyclerView.ViewHolder implements Contract.View<Movie> {
+
         @BindView(R.id.iv_poster)
         ImageView mImageViewPoster;
 

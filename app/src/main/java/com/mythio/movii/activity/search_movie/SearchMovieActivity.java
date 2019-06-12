@@ -18,8 +18,8 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.movie_details.MovieDetailsActivity;
 import com.mythio.movii.activity.search_movie.contract.Contract;
 import com.mythio.movii.activity.search_movie.contract.Presenter;
-import com.mythio.movii.adapter.recycler_view_adapter.search_movie.SearchMovieAdapter;
-import com.mythio.movii.adapter.recycler_view_adapter.search_movie.SearchMoviePresenter;
+import com.mythio.movii.adapter.search_movie.SearchMovieAdapter;
+import com.mythio.movii.adapter.search_movie.SearchMoviePresenter;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.ItemDecorator;
 

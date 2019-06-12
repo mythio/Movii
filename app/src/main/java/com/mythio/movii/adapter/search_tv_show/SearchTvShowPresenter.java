@@ -1,8 +1,8 @@
-package com.mythio.movii.adapter.recycler_view_adapter.search_tv_show;
+package com.mythio.movii.adapter.search_tv_show;
 
 import androidx.annotation.NonNull;
 
-import com.mythio.movii.adapter.recycler_view_adapter.Contract;
+import com.mythio.movii.adapter.Contract;
 import com.mythio.movii.model.tv_show.TvShow;
 
 import java.util.ArrayList;

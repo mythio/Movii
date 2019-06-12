@@ -36,7 +36,6 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
         ButterKnife.bind(this, view);
         setPresenter(new Presenter<>(this));
 
-        mPresenter.setDataToViewPager(tvShows);
         mPresenter.initViews();
     }
 
@@ -53,6 +52,7 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
     @Override
     public void onDataReceived(ArrayList<TvShow> tvShows) {
         this.tvShows = tvShows;
+        mPresenter.setDataToViewPager(tvShows);
     }
 
     @Override
