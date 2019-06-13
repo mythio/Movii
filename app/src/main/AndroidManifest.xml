@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
-        <activity android:name=".activity.about_cast.AboutCastActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/SplashScreen">
@@ -24,7 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.discover.activity.DiscoverActivity" />
-        <activity android:name=".activity.movie_details.MovieDetailsActivity" />
+        <activity
+            android:name=".activity.movie_details.MovieDetailsActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".activity.tv_show_details.TvShowDetailsActivity" />
         <activity
             android:name=".activity.search_movie.SearchMovieActivity"

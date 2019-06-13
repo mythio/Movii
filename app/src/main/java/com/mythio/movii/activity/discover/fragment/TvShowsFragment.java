@@ -62,7 +62,8 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
         rvSlideShow.setLayoutManager(new CarouselLayoutManager(
                 getContext(),
                 LinearLayoutManager.HORIZONTAL,
-                false));
+                false,
+                0.05f, 0.2f));
         rvSlideShow.setAdapter(new PopularTvshowAdapter(new PopularTvshowPresenter(tvShows), null));
         SnapHelper helper = new PagerSnapHelper();
         helper.attachToRecyclerView(rvSlideShow);

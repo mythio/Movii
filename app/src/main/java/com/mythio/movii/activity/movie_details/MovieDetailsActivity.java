@@ -1,6 +1,5 @@
 package com.mythio.movii.activity.movie_details;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -117,7 +116,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         mPresenter = presenter;
     }
 
-    @SuppressLint("CheckResult")
     @Override
     public void showMovieDetails(@NonNull Movie movie) {
         Glide.with(getContext())
