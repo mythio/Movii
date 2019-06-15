@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.icu.text.NumberFormat;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -106,7 +105,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         setPresenter(new Presenter(this));
 
         ButterKnife.bind(this);
-
         int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
         mPresenter.getDetails(id);
     }
@@ -176,7 +174,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
                 .into(imgViewPoster);
 
         String[] title_arr = movie.getTitle().split(": ");
-
         if (title_arr.length == 2) {
             txtViewTitle1.setText(title_arr[0].trim());
             txtViewTitle2.setVisibility(View.VISIBLE);
@@ -251,7 +248,5 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.detachView();
-
-        Log.d("TAG_TAG_TAG", "onDestroy: MovieDetail");
     }
 }

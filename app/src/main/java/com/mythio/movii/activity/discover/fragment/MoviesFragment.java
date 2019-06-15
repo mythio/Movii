@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class MoviesFragment extends BaseDiscoverFragment implements Contract.View<Movie>,
         Contract.Callback<Movie> {
@@ -33,11 +34,12 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     RecyclerView rvSlideShow;
 
     private Contract.Presenter<Movie> mPresenter;
+    private Unbinder unbinder;
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         setPresenter(new Presenter<>(this));
 
         rvSlideShow = view.findViewById(R.id.vp_popular);
@@ -62,7 +64,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     public void showSlideShow(ArrayList<Movie> movies) {
         rvSlideShow.setLayoutManager(new CarouselLayoutManager(
                 getContext(),
-                LinearLayoutManager.VERTICAL,
+                LinearLayoutManager.HORIZONTAL,
                 false,
                 0.05f, 0.2f));
         rvSlideShow.setAdapter(new PopularMovieAdapter(new PopularMoviePresenter(movies), position -> {
@@ -70,6 +72,7 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
             intent.putExtra("BUNDLED_EXTRA_MOVIE_ID", movies.get(position).getId());
             startActivity(intent);
         }));
+
         SnapHelper helper = new PagerSnapHelper();
         helper.attachToRecyclerView(rvSlideShow);
     }
@@ -80,8 +83,9 @@ public class MoviesFragment extends BaseDiscoverFragment implements Contract.Vie
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         mPresenter.detachView();
+        unbinder.unbind();
     }
 }

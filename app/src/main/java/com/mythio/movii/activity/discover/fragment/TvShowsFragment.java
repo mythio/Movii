@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class TvShowsFragment extends BaseDiscoverFragment implements Contract.View<TvShow>,
         Contract.Callback<TvShow> {
@@ -32,11 +33,12 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
     RecyclerView rvSlideShow;
 
     private Contract.Presenter<TvShow> mPresenter;
+    private Unbinder unbinder;
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         setPresenter(new Presenter<>(this));
 
         rvSlideShow = view.findViewById(R.id.vp_popular);
@@ -65,6 +67,7 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
                 false,
                 0.05f, 0.2f));
         rvSlideShow.setAdapter(new PopularTvshowAdapter(new PopularTvshowPresenter(tvShows), null));
+
         SnapHelper helper = new PagerSnapHelper();
         helper.attachToRecyclerView(rvSlideShow);
     }
@@ -75,8 +78,9 @@ public class TvShowsFragment extends BaseDiscoverFragment implements Contract.Vi
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         mPresenter.detachView();
+        unbinder.unbind();
     }
 }

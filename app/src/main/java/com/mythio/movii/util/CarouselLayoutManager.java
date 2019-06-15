@@ -49,6 +49,7 @@ public class CarouselLayoutManager extends LinearLayoutManager {
             float childMidpoint = (getDecoratedRight(child) + getDecoratedLeft(child)) / 2.0f;
             float d = Math.min(d1, Math.abs(midpoint - childMidpoint));
             float scale = s0 + (s1 - s0) * (d - d0) / (d1 - d0);
+
             child.setScaleX(scale);
             child.setScaleY(scale);
         }
