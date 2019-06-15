@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.mythio.movii.util.Constants.IMAGE_BASE_URL;
+import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
 
 public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder> {
     private final CastPresenter presenter;
@@ -63,7 +63,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         @Override
         public void show(@NonNull Cast cast) {
             Glide.with(App.getContext())
-                    .load(IMAGE_BASE_URL + "w185" + cast.getProfilePath())
+                    .load(BASE_URL_IMAGE + "w185" + cast.getProfilePath())
                     .into(imageView);
         }
     }

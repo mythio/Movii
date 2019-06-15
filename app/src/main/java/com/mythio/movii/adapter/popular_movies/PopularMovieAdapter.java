@@ -19,7 +19,7 @@ import com.mythio.movii.util.ItemClickListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mythio.movii.util.Constants.IMAGE_BASE_URL;
+import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
 
 public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapter.PopularMovieViewHolder> {
     private final Contract.Presenter<Movie> mPresenter;
@@ -78,7 +78,7 @@ public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapte
                 tvTitle2.setVisibility(View.GONE);
             }
 
-            String url = IMAGE_BASE_URL + "w780" + movie.getBackdropPath();
+            String url = BASE_URL_IMAGE + "w780" + movie.getBackdropPath();
 
             Glide.with(App.getContext())
                     .load(url)

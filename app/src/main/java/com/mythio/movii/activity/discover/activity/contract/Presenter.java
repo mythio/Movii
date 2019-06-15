@@ -9,7 +9,7 @@ import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieResponse;
 import com.mythio.movii.model.tv_show.TvShow;
 import com.mythio.movii.model.tv_show.TvShowResponse;
-import com.mythio.movii.network.EndPoint;
+import com.mythio.movii.network.ApiTmdb;
 import com.mythio.movii.network.RetrofitBuilder;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.mythio.movii.util.Constants.API_KEY;
+import static com.mythio.movii.util.Constants.API_KEY_TMDB;
 
 public class Presenter implements Contract.Presenter {
 
@@ -75,8 +75,8 @@ public class Presenter implements Contract.Presenter {
     private Single<MovieResponse> getSinglePopularMovies() {
         return RetrofitBuilder
                 .getClient()
-                .create(EndPoint.class)
-                .getPopularMovies(API_KEY)
+                .create(ApiTmdb.class)
+                .getPopularMovies(API_KEY_TMDB)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -84,8 +84,8 @@ public class Presenter implements Contract.Presenter {
     private Single<TvShowResponse> getSinglePopularTvShows() {
         return RetrofitBuilder
                 .getClient()
-                .create(EndPoint.class)
-                .getPopularTvShows(API_KEY)
+                .create(ApiTmdb.class)
+                .getPopularTvShows(API_KEY_TMDB)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

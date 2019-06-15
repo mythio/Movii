@@ -1,7 +1,7 @@
 package com.mythio.movii.activity.movie_details.dialog_contract;
 
 import com.mythio.movii.model.cast.CastMovies;
-import com.mythio.movii.network.EndPoint;
+import com.mythio.movii.network.ApiTmdb;
 import com.mythio.movii.network.RetrofitBuilder;
 
 import io.reactivex.Single;
@@ -9,7 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.mythio.movii.util.Constants.API_KEY;
+import static com.mythio.movii.util.Constants.API_KEY_TMDB;
 
 public class Presenter implements Contract.Presenter {
 
@@ -48,8 +48,8 @@ public class Presenter implements Contract.Presenter {
     private Single<CastMovies> getMovieTmdbObservable(int id) {
         return RetrofitBuilder
                 .getClient()
-                .create(EndPoint.class)
-                .getCastMovies(id, API_KEY)
+                .create(ApiTmdb.class)
+                .getCastMovies(id, API_KEY_TMDB)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -6,7 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.mythio.movii.util.Constants.BASE_URL;
+import static com.mythio.movii.util.Constants.BASE_URL_TMDB;
 
 public class RetrofitBuilder {
 
@@ -16,7 +16,7 @@ public class RetrofitBuilder {
     public static Retrofit getClient() {
         if (retrofitTmdb == null) {
             retrofitTmdb = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(BASE_URL_TMDB)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();

@@ -30,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.mythio.movii.util.Constants.IMAGE_BASE_URL;
+import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
 
 public class CastBottomDialog extends BottomSheetDialogFragment implements Contract.View {
 
@@ -85,7 +85,7 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
         bg.setBackgroundTintList(ColorStateList.valueOf(bundle.getInt("color")));
 
         Glide.with(App.getContext())
-                .load(IMAGE_BASE_URL + "w185" + profilePath)
+                .load(BASE_URL_IMAGE + "w185" + profilePath)
                 .into(imageView);
     }
 

@@ -19,7 +19,7 @@ import com.mythio.movii.util.ItemClickListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mythio.movii.util.Constants.IMAGE_BASE_URL;
+import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
 
 public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMoviesAdapter.RecommendedMovieViewHolder> {
     private final Contract.Presenter<Movie> presenter;
@@ -67,7 +67,7 @@ public class RecommendedMoviesAdapter extends RecyclerView.Adapter<RecommendedMo
         @Override
         public void show(@NonNull Movie movie) {
             Glide.with(App.getContext())
-                    .load(IMAGE_BASE_URL + "w154" + movie.getPosterPath())
+                    .load(BASE_URL_IMAGE + "w154" + movie.getPosterPath())
                     .into(mImageViewPoster);
             mTextViewTitle.setText(movie.getTitle());
         }

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.icu.text.NumberFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -37,6 +38,7 @@ import com.mythio.movii.adapter.recommendation_movies.RecommendedMoviesAdapter;
 import com.mythio.movii.adapter.recommendation_movies.RecommendedMoviesPresenter;
 import com.mythio.movii.model.cast.Cast;
 import com.mythio.movii.model.movie.Movie;
+import com.mythio.movii.network.ApiVideoSpider;
 import com.mythio.movii.util.ItemDecorator;
 
 import java.util.ArrayList;
@@ -44,9 +46,16 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static com.mythio.movii.util.App.getContext;
-import static com.mythio.movii.util.Constants.IMAGE_BASE_URL;
+import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
+import static com.mythio.movii.util.Constants.BASE_URL_IP;
 
 public class MovieDetailsActivity extends AppCompatActivity implements Contract.View {
 
@@ -107,6 +116,8 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         ButterKnife.bind(this);
         int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
         mPresenter.getDetails(id);
+
+        getD();
     }
 
     @Override
@@ -118,7 +129,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     public void showMovieDetails(@NonNull Movie movie) {
         Glide.with(getContext())
                 .asBitmap()
-                .load(IMAGE_BASE_URL + "w780" + movie.getPosterPath())
+                .load(BASE_URL_IMAGE + "w780" + movie.getPosterPath())
                 .listener(new RequestListener<Bitmap>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
@@ -248,5 +259,27 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.detachView();
+    }
+
+    private void getD() {
+        Retrofit r = new Retrofit.Builder()
+                .baseUrl(BASE_URL_IP)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+        r.create(ApiVideoSpider.class).getIpAddress().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSingleObserver<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        Log.d("TAG_TAG_TAG", s);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("TAG_TAG_TAG", e.getLocalizedMessage());
+                    }
+                });
     }
 }

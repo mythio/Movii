@@ -19,7 +19,7 @@ import com.mythio.movii.util.ItemClickListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mythio.movii.util.Constants.IMAGE_BASE_URL;
+import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
 
 public class PopularTvshowAdapter extends RecyclerView.Adapter<PopularTvshowAdapter.PopularTvShowViewHolder> {
     private final Contract.Presenter<TvShow> mPresenter;
@@ -65,7 +65,7 @@ public class PopularTvshowAdapter extends RecyclerView.Adapter<PopularTvshowAdap
         @Override
         public void show(TvShow tvShow) {
             tvTitle1.setText(tvShow.getName());
-            String url = IMAGE_BASE_URL + "w780" + tvShow.getBackdropPath();
+            String url = BASE_URL_IMAGE + "w780" + tvShow.getBackdropPath();
 
             Glide.with(App.getContext())
                     .load(url)
