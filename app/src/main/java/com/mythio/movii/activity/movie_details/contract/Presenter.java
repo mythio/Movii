@@ -37,7 +37,7 @@ public class Presenter implements Contract.Presenter {
                         view.showCastRecyclerView(movie.getCredits().getCast());
                         view.showRecommendationsRecyclerView(movie.getRecommendations().getResults());
 
-                        onGetStreamLink("tt2316204");
+                        onGetStreamLink(movie.getImdb());
                     }
 
                     @Override
@@ -54,19 +54,15 @@ public class Presenter implements Contract.Presenter {
                     Log.d(TAG, "onGetStreamLink: " + " IP ADDRESS: " + ip);
                     return getVideoSpiderTicket(imdbId, ip);
                 })
-                .flatMap((Function<String, SingleSource<String>>) ticket -> {
-                    Log.d(TAG, "onGetStreamLink: " + " TICKET: " + ticket);
-                    return getVideoSpiderStreamingLink(ticket, imdbId);
-                })
                 .subscribe(new DisposableSingleObserver<String>() {
                     @Override
-                    public void onSuccess(String s) {
-                        Log.d(TAG, "onSuccess: " + " STREAMING LINK: " + s);
+                    public void onSuccess(String ticket) {
+                        view.streamInBrowser(imdbId, ticket);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, "onError: " + e.getMessage());
+
                     }
                 });
     }
@@ -99,15 +95,6 @@ public class Presenter implements Contract.Presenter {
                 .getClientVideoSpiderTicket()
                 .create(ApiVideoSpider.class)
                 .getTicket(API_KEY_VIDEO_SPIDER, API_SECRET_VIDEO_SPIDER, imdbId, ip)
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private Single<String> getVideoSpiderStreamingLink(String imdbId, String ticket) {
-        return RetrofitBuilder
-                .getClientVideoSpiderStream()
-                .create(ApiVideoSpider.class)
-                .getLink(API_KEY_VIDEO_SPIDER, imdbId, ticket)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
     }

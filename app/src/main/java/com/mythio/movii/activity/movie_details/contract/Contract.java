@@ -16,6 +16,8 @@ public interface Contract {
         void showCastRecyclerView(ArrayList<Cast> casts);
 
         void showRecommendationsRecyclerView(ArrayList<Movie> movies);
+
+        void streamInBrowser(String imdbId, String ticket);
     }
 
     interface Presenter extends BasePresenter {

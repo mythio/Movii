@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.icu.text.NumberFormat;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -242,6 +243,13 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
             finish();
         });
         recyclerViewRecommended.setAdapter(recommendedMoviesAdapter);
+    }
+
+    @Override
+    public void streamInBrowser(String imdbId, String ticket) {
+        String urlString = "https://videospider.stream/getvideo?key=u06QnFufrtjVbFBd&video_id=" + imdbId + "&ticket=" + ticket;
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
+        startActivity(browserIntent);
     }
 
     @Override
