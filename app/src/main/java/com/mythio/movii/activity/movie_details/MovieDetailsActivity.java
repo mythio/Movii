@@ -1,5 +1,6 @@
 package com.mythio.movii.activity.movie_details;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -46,7 +47,9 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.SingleSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
@@ -54,8 +57,11 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static com.mythio.movii.util.App.getContext;
+import static com.mythio.movii.util.Constants.API_KEY_VIDEO_SPIDER;
+import static com.mythio.movii.util.Constants.API_SECRET_VIDEO_SPIDER;
 import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
 import static com.mythio.movii.util.Constants.BASE_URL_IP;
+import static com.mythio.movii.util.Constants.BASE_URL_TICKET;
 
 public class MovieDetailsActivity extends AppCompatActivity implements Contract.View {
 
@@ -261,24 +267,38 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         mPresenter.detachView();
     }
 
+    @SuppressLint("CheckResult")
     private void getD() {
-        Retrofit r = new Retrofit.Builder()
+        Retrofit r1 = new Retrofit.Builder()
                 .baseUrl(BASE_URL_IP)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
-        r.create(ApiVideoSpider.class).getIpAddress().subscribeOn(Schedulers.io())
+        Retrofit r2 = new Retrofit.Builder()
+                .baseUrl(BASE_URL_TICKET)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+        r1.create(ApiVideoSpider.class).getIpAddress().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .flatMap((Function<String, SingleSource<String>>) s -> {
+                    Log.d("TAG_TAG", s);
+                    return r2.create(ApiVideoSpider.class)
+                            .getTicket(API_KEY_VIDEO_SPIDER, API_SECRET_VIDEO_SPIDER, "tt6146586", s)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread());
+                })
                 .subscribe(new DisposableSingleObserver<String>() {
                     @Override
                     public void onSuccess(String s) {
-                        Log.d("TAG_TAG_TAG", s);
+                        Log.d("TAG_TAG", s);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("TAG_TAG_TAG", e.getLocalizedMessage());
+                        Log.d("TAG_TAG", e.getMessage());
                     }
                 });
     }

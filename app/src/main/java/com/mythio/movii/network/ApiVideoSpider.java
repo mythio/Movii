@@ -10,7 +10,7 @@ public interface ApiVideoSpider {
     Single<String> getIpAddress();
 
     @GET("getticket.php")
-    Single<String> getTicket(@Query("key") String key, @Query("secret_key") String secret, @Query("video_id") String id);
+    Single<String> getTicket(@Query("key") String key, @Query("secret_key") String secret, @Query("video_id") String id, @Query("ip") String ip);
 
     @GET("getvideo")
     Single<String> getLink(@Query("key") String key, @Query("video_id") String id, @Query("ticket_id") String ticket_id);
