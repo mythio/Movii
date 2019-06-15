@@ -2,6 +2,7 @@ package com.mythio.movii.network;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static com.mythio.movii.util.Constants.BASE_URL_IPIFY;
@@ -20,7 +21,7 @@ public class RetrofitBuilder {
         if (retrofitTmdb == null) {
             retrofitTmdb = new Retrofit.Builder()
                     .baseUrl(BASE_URL_TMDB)
-                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
         }
@@ -28,8 +29,8 @@ public class RetrofitBuilder {
     }
 
     public static Retrofit getClientIpify() {
-        if (retrofitTmdb == null) {
-            retrofitTmdb = new Retrofit.Builder()
+        if (retrofitIpify == null) {
+            retrofitIpify = new Retrofit.Builder()
                     .baseUrl(BASE_URL_IPIFY)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -39,8 +40,8 @@ public class RetrofitBuilder {
     }
 
     public static Retrofit getClientVideoSpiderTicket() {
-        if (retrofitTmdb == null) {
-            retrofitTmdb = new Retrofit.Builder()
+        if (retrofitVideoSpiderTicket == null) {
+            retrofitVideoSpiderTicket = new Retrofit.Builder()
                     .baseUrl(BASE_URL_VIDEO_SPIDER_TICKET)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -50,8 +51,8 @@ public class RetrofitBuilder {
     }
 
     public static Retrofit getClientVideoSpiderStream() {
-        if (retrofitTmdb == null) {
-            retrofitTmdb = new Retrofit.Builder()
+        if (retrofitVideoSpiderStream == null) {
+            retrofitVideoSpiderStream = new Retrofit.Builder()
                     .baseUrl(BASE_URL_VIDEO_SPIDER_STREAM)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

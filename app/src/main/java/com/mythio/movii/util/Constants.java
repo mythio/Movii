@@ -8,7 +8,7 @@ public class Constants {
 
     public static final String BASE_URL_TMDB = "http://api.themoviedb.org/3/";
     public static final String BASE_URL_IMAGE = "https://image.tmdb.org/t/p/";
-    public static final String BASE_URL_IPIFY = "https://api.ipify.org/";
+    public static final String BASE_URL_IPIFY = "https://api6.ipify.org";
     public static final String BASE_URL_VIDEO_SPIDER_TICKET = "https://videospider.in/";
     public static final String BASE_URL_VIDEO_SPIDER_STREAM = "https://videospider.stream/";
 }

@@ -21,5 +21,7 @@ public interface Contract {
     interface Presenter extends BasePresenter {
 
         void getDetails(int id);
+
+        void onGetStreamLink(String imdbId);
     }
 }
