@@ -70,7 +70,7 @@ public class Presenter implements Contract.Presenter {
 
     private Observable<TvShowResponse> getSingleSearch(String query) {
         return RetrofitBuilder
-                .getClient()
+                .getClientTmdb()
                 .create(ApiTmdb.class)
                 .getTvShowSearchResults(API_KEY_TMDB, query)
                 .subscribeOn(Schedulers.io())

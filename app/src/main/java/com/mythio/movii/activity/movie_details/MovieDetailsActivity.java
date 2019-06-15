@@ -1,13 +1,11 @@
 package com.mythio.movii.activity.movie_details;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.icu.text.NumberFormat;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -39,7 +37,6 @@ import com.mythio.movii.adapter.recommendation_movies.RecommendedMoviesAdapter;
 import com.mythio.movii.adapter.recommendation_movies.RecommendedMoviesPresenter;
 import com.mythio.movii.model.cast.Cast;
 import com.mythio.movii.model.movie.Movie;
-import com.mythio.movii.network.ApiVideoSpider;
 import com.mythio.movii.util.ItemDecorator;
 
 import java.util.ArrayList;
@@ -47,21 +44,9 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.SingleSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
-import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static com.mythio.movii.util.App.getContext;
-import static com.mythio.movii.util.Constants.API_KEY_VIDEO_SPIDER;
-import static com.mythio.movii.util.Constants.API_SECRET_VIDEO_SPIDER;
 import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
-import static com.mythio.movii.util.Constants.BASE_URL_IP;
-import static com.mythio.movii.util.Constants.BASE_URL_TICKET;
 
 public class MovieDetailsActivity extends AppCompatActivity implements Contract.View {
 
@@ -122,8 +107,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         ButterKnife.bind(this);
         int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
         mPresenter.getDetails(id);
-
-        getD();
     }
 
     @Override
@@ -265,41 +248,5 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.detachView();
-    }
-
-    @SuppressLint("CheckResult")
-    private void getD() {
-        Retrofit r1 = new Retrofit.Builder()
-                .baseUrl(BASE_URL_IP)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        Retrofit r2 = new Retrofit.Builder()
-                .baseUrl(BASE_URL_TICKET)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        r1.create(ApiVideoSpider.class).getIpAddress().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap((Function<String, SingleSource<String>>) s -> {
-                    Log.d("TAG_TAG", s);
-                    return r2.create(ApiVideoSpider.class)
-                            .getTicket(API_KEY_VIDEO_SPIDER, API_SECRET_VIDEO_SPIDER, "tt6146586", s)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread());
-                })
-                .subscribe(new DisposableSingleObserver<String>() {
-                    @Override
-                    public void onSuccess(String s) {
-                        Log.d("TAG_TAG", s);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d("TAG_TAG", e.getMessage());
-                    }
-                });
     }
 }

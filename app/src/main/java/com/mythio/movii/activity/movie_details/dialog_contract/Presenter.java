@@ -47,7 +47,7 @@ public class Presenter implements Contract.Presenter {
 
     private Single<CastMovies> getMovieTmdbObservable(int id) {
         return RetrofitBuilder
-                .getClient()
+                .getClientTmdb()
                 .create(ApiTmdb.class)
                 .getCastMovies(id, API_KEY_TMDB)
                 .subscribeOn(Schedulers.io())

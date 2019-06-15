@@ -74,7 +74,7 @@ public class Presenter implements Contract.Presenter {
 
     private Single<MovieResponse> getSinglePopularMovies() {
         return RetrofitBuilder
-                .getClient()
+                .getClientTmdb()
                 .create(ApiTmdb.class)
                 .getPopularMovies(API_KEY_TMDB)
                 .subscribeOn(Schedulers.io())
@@ -83,7 +83,7 @@ public class Presenter implements Contract.Presenter {
 
     private Single<TvShowResponse> getSinglePopularTvShows() {
         return RetrofitBuilder
-                .getClient()
+                .getClientTmdb()
                 .create(ApiTmdb.class)
                 .getPopularTvShows(API_KEY_TMDB)
                 .subscribeOn(Schedulers.io())
