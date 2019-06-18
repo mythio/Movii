@@ -1,7 +1,7 @@
 package com.mythio.movii.adapter.popular_tvshow;
 
 import com.mythio.movii.adapter.Contract;
-import com.mythio.movii.model.tv_show.TvShow;
+import com.mythio.movii.model.tvshow.TvShow;
 
 import java.util.ArrayList;
 

@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.discover.fragment.contract.Contract;
 import com.mythio.movii.activity.discover.fragment.contract.Presenter;
-import com.mythio.movii.activity.movie_details.MovieDetailsActivity;
-import com.mythio.movii.activity.search_movie.SearchMovieActivity;
-import com.mythio.movii.adapter.popular_movies.PopularMovieAdapter;
-import com.mythio.movii.adapter.popular_movies.PopularMoviePresenter;
+import com.mythio.movii.activity.moviedetails.MovieDetailsActivity;
+import com.mythio.movii.activity.searchmovie.SearchMovieActivity;
+import com.mythio.movii.adapter.popularmovies.PopularMovieAdapter;
+import com.mythio.movii.adapter.popularmovies.PopularMoviePresenter;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.util.CarouselLayoutManager;
 

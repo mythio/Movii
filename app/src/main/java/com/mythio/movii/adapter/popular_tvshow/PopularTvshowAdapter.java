@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.mythio.movii.R;
 import com.mythio.movii.adapter.Contract;
-import com.mythio.movii.model.tv_show.TvShow;
+import com.mythio.movii.model.tvshow.TvShow;
 import com.mythio.movii.util.App;
 import com.mythio.movii.util.ItemClickListener;
 

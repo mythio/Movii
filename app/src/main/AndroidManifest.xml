@@ -24,14 +24,14 @@
         </activity>
         <activity android:name=".activity.discover.activity.DiscoverActivity" />
         <activity
-            android:name=".activity.movie_details.MovieDetailsActivity"
+            android:name=".activity.moviedetails.MovieDetailsActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.tv_show_details.TvShowDetailsActivity" />
+        <activity android:name=".activity.tvshowdetails.TvShowDetailsActivity" />
         <activity
-            android:name=".activity.search_movie.SearchMovieActivity"
+            android:name=".activity.searchmovie.SearchMovieActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.search_tv_show.SearchTvShowActivity"
+            android:name=".activity.searchtvshow.SearchTvShowActivity"
             android:windowSoftInputMode="adjustPan" />
     </application>
 

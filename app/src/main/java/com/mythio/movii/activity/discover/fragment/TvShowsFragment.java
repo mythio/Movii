@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.discover.fragment.contract.Contract;
 import com.mythio.movii.activity.discover.fragment.contract.Presenter;
-import com.mythio.movii.activity.search_tv_show.SearchTvShowActivity;
+import com.mythio.movii.activity.searchtvshow.SearchTvShowActivity;
 import com.mythio.movii.adapter.popular_tvshow.PopularTvshowAdapter;
 import com.mythio.movii.adapter.popular_tvshow.PopularTvshowPresenter;
-import com.mythio.movii.model.tv_show.TvShow;
+import com.mythio.movii.model.tvshow.TvShow;
 import com.mythio.movii.util.CarouselLayoutManager;
 
 import java.util.ArrayList;

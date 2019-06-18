@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import com.mythio.movii.activity.discover.fragment.BaseDiscoverFragment;
 import com.mythio.movii.model.movie.Movie;
 import com.mythio.movii.model.movie.MovieResponse;
-import com.mythio.movii.model.tv_show.TvShow;
-import com.mythio.movii.model.tv_show.TvShowResponse;
+import com.mythio.movii.model.tvshow.TvShow;
+import com.mythio.movii.model.tvshow.TvShowResponse;
 import com.mythio.movii.network.ApiTmdb;
 import com.mythio.movii.network.RetrofitBuilder;
 

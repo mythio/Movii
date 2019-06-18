@@ -3,7 +3,7 @@ package com.mythio.movii.adapter.search_tv_show;
 import androidx.annotation.NonNull;
 
 import com.mythio.movii.adapter.Contract;
-import com.mythio.movii.model.tv_show.TvShow;
+import com.mythio.movii.model.tvshow.TvShow;
 
 import java.util.ArrayList;
 

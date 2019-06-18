@@ -5,7 +5,7 @@ import com.mythio.movii.BaseView;
 import com.mythio.movii.activity.discover.fragment.BaseDiscoverFragment;
 import com.mythio.movii.activity.discover.fragment.contract.FragmentNavigation;
 import com.mythio.movii.model.movie.Movie;
-import com.mythio.movii.model.tv_show.TvShow;
+import com.mythio.movii.model.tvshow.TvShow;
 
 import java.util.ArrayList;
 

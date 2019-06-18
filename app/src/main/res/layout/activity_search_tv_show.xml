@@ -5,7 +5,7 @@
     style="@style/SearchLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.search_movie.SearchMovieActivity">
+    tools:context=".activity.searchmovie.SearchMovieActivity">
 
     <LinearLayout
         android:id="@+id/search_plate"
