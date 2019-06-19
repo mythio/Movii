@@ -5,8 +5,8 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.icu.text.NumberFormat;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -45,6 +45,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.mythio.movii.util.App.getContext;
 import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
@@ -102,12 +103,26 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
-
         setPresenter(new Presenter(this));
-
+        mPresenter = new Presenter(this);
         ButterKnife.bind(this);
+
         int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
         mPresenter.getDetails(id);
+    }
+
+    @OnClick(R.id.ib_play)
+    public void onClickImgViewPlay() {
+        PlayDialog b = new PlayDialog();
+        Bundle bundle = new Bundle();
+//        bundle.putString("123", casts.get(position).getProfilePath());
+//        bundle.putString("234", casts.get(position).getName());
+//        bundle.putString("345", casts.get(position).getCharacter());
+//        bundle.putString("456", casts.get(position).getCreditId());
+//        bundle.putInt("int", casts.get(position).getId());
+//        bundle.putInt("color", ViewCompat.getBackgroundTintList(imgViewBgGrad).getDefaultColor());
+        b.setArguments(bundle);
+        b.show(getSupportFragmentManager(), b.getTag());
     }
 
     @Override
@@ -116,62 +131,69 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     }
 
     @Override
+    public void showPlayButton() {
+        imgViewPlay.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void showMovieDetails(@NonNull Movie movie) {
+        RequestListener<Bitmap> listener = new RequestListener<Bitmap>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target,
+                                           DataSource dataSource, boolean isFirstResource) {
+                imgViewPoster.setImageBitmap(resource);
+                Palette.from(resource).generate(palette -> {
+                    assert palette != null;
+                    if (palette.getDarkMutedSwatch() != null) {
+                        int rgb = ColorUtils.blendARGB(
+                                palette.getDarkMutedSwatch().getRgb(),
+                                Color.BLACK,
+                                0.3f
+                        );
+
+                        imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
+                        getWindow().getDecorView().setBackgroundColor(rgb);
+                    } else if (palette.getMutedSwatch() != null) {
+                        int rgb = ColorUtils.blendARGB(
+                                palette.getMutedSwatch().getRgb(),
+                                Color.BLACK,
+                                0.3f
+                        );
+
+                        imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
+                        getWindow().getDecorView().setBackgroundColor(rgb);
+                    } else if (palette.getDarkVibrantSwatch() != null) {
+                        int rgb = ColorUtils.blendARGB(
+                                palette.getDarkVibrantSwatch().getRgb(),
+                                Color.BLACK,
+                                0.3f
+                        );
+
+                        imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
+                        getWindow().getDecorView().setBackgroundColor(rgb);
+                    }
+
+                    if (palette.getLightMutedSwatch() != null) {
+                        int rgb = palette.getLightMutedSwatch().getRgb();
+                        imgViewPlay.setImageTintList(ColorStateList.valueOf(rgb));
+                    } else if (palette.getLightVibrantSwatch() != null) {
+                        int rgb = palette.getLightVibrantSwatch().getRgb();
+                        imgViewPlay.setImageTintList(ColorStateList.valueOf(rgb));
+                    }
+                });
+                return false;
+            }
+        };
+
         Glide.with(getContext())
                 .asBitmap()
                 .load(BASE_URL_IMAGE + "w780" + movie.getPosterPath())
-                .listener(new RequestListener<Bitmap>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target,
-                                                   DataSource dataSource, boolean isFirstResource) {
-                        imgViewPoster.setImageBitmap(resource);
-                        Palette.from(resource).generate(palette -> {
-                            assert palette != null;
-                            if (palette.getDarkMutedSwatch() != null) {
-                                int rgb = ColorUtils.blendARGB(
-                                        palette.getDarkMutedSwatch().getRgb(),
-                                        Color.BLACK,
-                                        0.3f
-                                );
-
-                                imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
-                                getWindow().getDecorView().setBackgroundColor(rgb);
-                            } else if (palette.getMutedSwatch() != null) {
-                                int rgb = ColorUtils.blendARGB(
-                                        palette.getMutedSwatch().getRgb(),
-                                        Color.BLACK,
-                                        0.3f
-                                );
-
-                                imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
-                                getWindow().getDecorView().setBackgroundColor(rgb);
-                            } else if (palette.getDarkVibrantSwatch() != null) {
-                                int rgb = ColorUtils.blendARGB(
-                                        palette.getDarkVibrantSwatch().getRgb(),
-                                        Color.BLACK,
-                                        0.3f
-                                );
-
-                                imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
-                                getWindow().getDecorView().setBackgroundColor(rgb);
-                            }
-
-                            if (palette.getLightMutedSwatch() != null) {
-                                int rgb = palette.getLightMutedSwatch().getRgb();
-                                imgViewPlay.setImageTintList(ColorStateList.valueOf(rgb));
-                            } else if (palette.getLightVibrantSwatch() != null) {
-                                int rgb = palette.getLightVibrantSwatch().getRgb();
-                                imgViewPlay.setImageTintList(ColorStateList.valueOf(rgb));
-                            }
-                        });
-                        return false;
-                    }
-                })
+                .listener(listener)
                 .into(imgViewPoster);
 
         String[] title_arr = movie.getTitle().split(": ");
@@ -247,14 +269,20 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
     @Override
     public void streamInBrowser(String imdbId, String ticket) {
-        String urlString = "https://videospider.stream/getvideo?key=u06QnFufrtjVbFBd&video_id=" + imdbId + "&ticket=" + ticket;
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
-        startActivity(browserIntent);
+
     }
+
+    //    @Override
+//    public void streamInBrowser(String imdbId, String ticket) {
+//        String urlString = "https://videospider.stream/getvideo?key=u06QnFufrtjVbFBd&video_id=" + imdbId + "&ticket=" + ticket;
+//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
+////        startActivity(browserIntent);
+//    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.d("TAG_TAG", "onDestroy");
         mPresenter.detachView();
     }
 }

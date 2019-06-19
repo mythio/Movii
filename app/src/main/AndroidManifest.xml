@@ -25,7 +25,8 @@
         <activity android:name=".activity.discover.activity.DiscoverActivity" />
         <activity
             android:name=".activity.moviedetails.MovieDetailsActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme" />
         <activity android:name=".activity.tvshowdetails.TvShowDetailsActivity" />
         <activity
             android:name=".activity.searchmovie.SearchMovieActivity"

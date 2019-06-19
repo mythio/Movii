@@ -57,7 +57,7 @@ public class Presenter implements Contract.Presenter {
                 .subscribe(new DisposableSingleObserver<String>() {
                     @Override
                     public void onSuccess(String ticket) {
-                        view.streamInBrowser(imdbId, ticket);
+                        view.showPlayButton();
                     }
 
                     @Override

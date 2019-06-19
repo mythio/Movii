@@ -1,4 +1,4 @@
-package com.mythio.movii.activity.moviedetails.bottomdialogcontract;
+package com.mythio.movii.activity.moviedetails.castdialogcontract;
 
 import com.mythio.movii.model.cast.CastMovies;
 import com.mythio.movii.network.ApiTmdb;

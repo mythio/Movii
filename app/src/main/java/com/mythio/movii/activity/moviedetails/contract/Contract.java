@@ -11,6 +11,8 @@ public interface Contract {
 
     interface View extends BaseView<Presenter> {
 
+        void showPlayButton();
+
         void showMovieDetails(Movie movie);
 
         void showCastRecyclerView(ArrayList<Cast> casts);

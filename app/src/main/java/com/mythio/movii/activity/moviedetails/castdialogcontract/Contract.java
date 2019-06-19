@@ -1,4 +1,4 @@
-package com.mythio.movii.activity.moviedetails.bottomdialogcontract;
+package com.mythio.movii.activity.moviedetails.castdialogcontract;
 
 import com.mythio.movii.BasePresenter;
 import com.mythio.movii.BaseView;

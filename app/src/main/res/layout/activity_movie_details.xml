@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
     tools:context=".activity.moviedetails.MovieDetailsActivity">
 
     <com.airbnb.lottie.LottieAnimationView
@@ -55,6 +54,7 @@
             android:alpha="0.6"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_play"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
