@@ -4,18 +4,22 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.icu.text.NumberFormat;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.ColorUtils;
 import androidx.core.view.ViewCompat;
@@ -29,6 +33,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.material.button.MaterialButton;
 import com.mythio.movii.R;
 import com.mythio.movii.activity.moviedetails.contract.Contract;
 import com.mythio.movii.activity.moviedetails.contract.Presenter;
@@ -61,9 +66,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     @BindView(R.id.v_bg_grad)
     View imgViewBgGrad;
 
-    @BindView(R.id.ib_play)
-    ImageButton imgViewPlay;
-
     @BindView(R.id.tv_year)
     TextView txtViewYear;
 
@@ -82,6 +84,12 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     @BindView(R.id.tv_overview)
     TextView txtViewOverview;
 
+    @BindView(R.id.btn_trailer)
+    MaterialButton btnTrailer;
+
+    @BindView(R.id.btn_stream)
+    MaterialButton btnStream;
+
     @BindView(R.id.ratingbar)
     RatingBar ratingBar;
 
@@ -98,6 +106,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     RecyclerView recyclerViewRecommended;
 
     private Contract.Presenter mPresenter;
+    private AlertDialog streamDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,32 +116,31 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         mPresenter = new Presenter(this);
         ButterKnife.bind(this);
 
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View streamView = LayoutInflater
+                .from(this)
+                .inflate(R.layout.dialog_streaming, viewGroup, false);
+
+        streamDialog = new AlertDialog
+                .Builder(this)
+                .setView(streamView)
+                .create();
+
+        streamDialog.getWindow()
+                .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
         mPresenter.getDetails(id);
     }
 
-    @OnClick(R.id.ib_play)
-    public void onClickImgViewPlay() {
-        PlayDialog b = new PlayDialog();
-        Bundle bundle = new Bundle();
-//        bundle.putString("123", casts.get(position).getProfilePath());
-//        bundle.putString("234", casts.get(position).getName());
-//        bundle.putString("345", casts.get(position).getCharacter());
-//        bundle.putString("456", casts.get(position).getCreditId());
-//        bundle.putInt("int", casts.get(position).getId());
-//        bundle.putInt("color", ViewCompat.getBackgroundTintList(imgViewBgGrad).getDefaultColor());
-        b.setArguments(bundle);
-        b.show(getSupportFragmentManager(), b.getTag());
+    @OnClick(R.id.btn_stream)
+    public void btnStream() {
+        mPresenter.onGenerateStreamLink();
     }
 
     @Override
     public void setPresenter(Contract.Presenter presenter) {
         mPresenter = presenter;
-    }
-
-    @Override
-    public void showPlayButton() {
-        imgViewPlay.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -155,7 +163,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
                                 Color.BLACK,
                                 0.3f
                         );
-
                         imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
                         getWindow().getDecorView().setBackgroundColor(rgb);
                     } else if (palette.getMutedSwatch() != null) {
@@ -164,7 +171,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
                                 Color.BLACK,
                                 0.3f
                         );
-
                         imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
                         getWindow().getDecorView().setBackgroundColor(rgb);
                     } else if (palette.getDarkVibrantSwatch() != null) {
@@ -173,17 +179,14 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
                                 Color.BLACK,
                                 0.3f
                         );
-
                         imgViewBgGrad.setBackgroundTintList(ColorStateList.valueOf(rgb));
                         getWindow().getDecorView().setBackgroundColor(rgb);
                     }
 
-                    if (palette.getLightMutedSwatch() != null) {
-                        int rgb = palette.getLightMutedSwatch().getRgb();
-                        imgViewPlay.setImageTintList(ColorStateList.valueOf(rgb));
-                    } else if (palette.getLightVibrantSwatch() != null) {
+                    if (palette.getLightVibrantSwatch() != null) {
                         int rgb = palette.getLightVibrantSwatch().getRgb();
-                        imgViewPlay.setImageTintList(ColorStateList.valueOf(rgb));
+                        btnStream.setRippleColor(ColorStateList.valueOf(rgb));
+                        btnTrailer.setRippleColor(ColorStateList.valueOf(rgb));
                     }
                 });
                 return false;
@@ -270,13 +273,46 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     @Override
     public void streamInBrowser(String imdbId, String ticket) {
 
+        streamDialog.show();
+    }
+
+    @Override
+    public void notifyDialogTicket() {
+        AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
+        AlphaAnimation fadeIn = new AlphaAnimation(0, 1);
+        fadeOut.setDuration(400);
+        fadeIn.setDuration(400);
+
+        TextView t1 = streamDialog.findViewById(R.id.tv_dialog_ip);
+        TextView t2 = streamDialog.findViewById(R.id.tv_dialog_ticket);
+
+        t2.setVisibility(View.VISIBLE);
+        t1.setVisibility(View.INVISIBLE);
+        t2.startAnimation(fadeIn);
+        t1.startAnimation(fadeOut);
+    }
+
+    @Override
+    public void notifyDialogSuccess() {
+        AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
+        AlphaAnimation fadeIn = new AlphaAnimation(0, 1);
+        fadeOut.setDuration(400);
+        fadeIn.setDuration(400);
+
+        TextView t1 = streamDialog.findViewById(R.id.tv_dialog_ticket);
+        TextView t2 = streamDialog.findViewById(R.id.tv_dialog_success);
+
+        t2.setVisibility(View.VISIBLE);
+        t1.setVisibility(View.INVISIBLE);
+        t2.startAnimation(fadeIn);
+        t1.startAnimation(fadeOut);
     }
 
     //    @Override
 //    public void streamInBrowser(String imdbId, String ticket) {
 //        String urlString = "https://videospider.stream/getvideo?key=u06QnFufrtjVbFBd&video_id=" + imdbId + "&ticket=" + ticket;
 //        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
-////        startActivity(browserIntent);
+//        startActivity(browserIntent);
 //    }
 
     @Override

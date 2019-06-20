@@ -1,6 +1,5 @@
 package com.mythio.movii.activity.moviedetails;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +32,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
 
 public class CastBottomDialog extends BottomSheetDialogFragment implements Contract.View {
-
-    @BindView(R.id.v_bg)
-    View bg;
+//
+//    @BindView(R.id.v_bg)
+//    View bg;
 
     @BindView(R.id.iv_cast_profile)
     CircleImageView imageView;
@@ -82,7 +81,7 @@ public class CastBottomDialog extends BottomSheetDialogFragment implements Contr
 
         textViewCast.setText(castName);
         textViewCharacter.setText(characterName);
-        bg.setBackgroundTintList(ColorStateList.valueOf(bundle.getInt("color")));
+//        bg.setBackgroundTintList(ColorStateList.valueOf(bundle.getInt("color")));
 
         Glide.with(App.getContext())
                 .load(BASE_URL_IMAGE + "w185" + profilePath)

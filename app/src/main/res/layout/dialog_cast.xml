@@ -5,21 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
-        android:id="@+id/v_bg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="0.6"
-        android:background="@drawable/rounded_dialog"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_cast_profile"
-        android:layout_width="144dp"
-        android:layout_height="144dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:transitionName="TEMP"
@@ -49,6 +38,15 @@
         app:layout_constraintStart_toEndOf="@+id/iv_cast_profile"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
+    <View
+        android:id="@+id/v_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="#33ffffff"
+        app:layout_constraintTop_toBottomOf="@id/tv_character" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recommended"
         android:layout_width="match_parent"
@@ -57,7 +55,6 @@
         android:background="@drawable/bg_rounded_rectangle"
         android:backgroundTint="#33000000"
         android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_cast_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/v_separator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

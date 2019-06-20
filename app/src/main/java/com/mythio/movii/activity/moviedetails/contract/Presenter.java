@@ -22,6 +22,7 @@ public class Presenter implements Contract.Presenter {
 
     private static final String TAG = "TAG_TAG_TAG: Presenter";
     private Contract.View view;
+    private Movie movie;
 
     public Presenter(Contract.View view) {
         this.view = view;
@@ -33,11 +34,10 @@ public class Presenter implements Contract.Presenter {
                 .subscribe(new DisposableSingleObserver<Movie>() {
                     @Override
                     public void onSuccess(Movie movie) {
+                        Presenter.this.movie = movie;
                         view.showMovieDetails(movie);
                         view.showCastRecyclerView(movie.getCredits().getCast());
                         view.showRecommendationsRecyclerView(movie.getRecommendations().getResults());
-
-                        onGetStreamLink(movie.getImdb());
                     }
 
                     @Override
@@ -48,16 +48,18 @@ public class Presenter implements Contract.Presenter {
     }
 
     @Override
-    public void onGetStreamLink(String imdbId) {
+    public void onGenerateStreamLink() {
+        view.streamInBrowser(null, null);
+//        view.notifyDialogIP();
         getIpAddress()
                 .flatMap((Function<String, SingleSource<String>>) ip -> {
-                    Log.d(TAG, "onGetStreamLink: " + " IP ADDRESS: " + ip);
-                    return getVideoSpiderTicket(imdbId, ip);
+                    view.notifyDialogTicket();
+                    return getVideoSpiderTicket(movie.getImdb(), ip);
                 })
                 .subscribe(new DisposableSingleObserver<String>() {
                     @Override
                     public void onSuccess(String ticket) {
-                        view.showPlayButton();
+                        view.notifyDialogSuccess();
                     }
 
                     @Override

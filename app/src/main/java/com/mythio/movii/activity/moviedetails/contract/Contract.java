@@ -11,7 +11,11 @@ public interface Contract {
 
     interface View extends BaseView<Presenter> {
 
-        void showPlayButton();
+//        void notifyDialogIP();
+
+        void notifyDialogTicket();
+
+        void notifyDialogSuccess();
 
         void showMovieDetails(Movie movie);
 
@@ -26,6 +30,6 @@ public interface Contract {
 
         void getDetails(int id);
 
-        void onGetStreamLink(String imdbId);
+        void onGenerateStreamLink();
     }
 }
