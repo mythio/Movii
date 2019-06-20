@@ -142,12 +142,18 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         streamDialog.getWindow()
                 .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        dialogViewHolder.dialogBtnCancel.setOnClickListener(view -> {
-            streamDialog.dismiss();
-        });
+        dialogViewHolder.dialogBtnCancel.setOnClickListener(view -> streamDialog.dismiss());
 
         int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
         mPresenter.getDetails(id);
+    }
+
+    @Override
+    public void notifyDialogTicket() {
+        dialogViewHolder.dialogTvTicket.setVisibility(View.VISIBLE);
+        dialogViewHolder.dialogTvTicket.startAnimation(fadeIn);
+        dialogViewHolder.dialogTvIp.setVisibility(View.INVISIBLE);
+        dialogViewHolder.dialogTvIp.startAnimation(fadeOut);
     }
 
     @Override
@@ -170,6 +176,31 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         dialogViewHolder.dialogAnim.setAnimation(fadeOut);
         dialogViewHolder.dialogIbPlay.setVisibility(View.VISIBLE);
         dialogViewHolder.dialogIbPlay.startAnimation(fadeIn);
+    }
+
+    static class DialogViewHolder {
+
+        @BindView(R.id.anim)
+        LottieAnimationView dialogAnim;
+
+        @BindView(R.id.ib_play)
+        ImageButton dialogIbPlay;
+
+        @BindView(R.id.tv_dialog_ip)
+        TextView dialogTvIp;
+
+        @BindView(R.id.tv_dialog_ticket)
+        TextView dialogTvTicket;
+
+        @BindView(R.id.tv_dialog_success)
+        TextView dialogTvSuccess;
+
+        @BindView(R.id.btn_cancel)
+        Button dialogBtnCancel;
+
+        DialogViewHolder(View rootView) {
+            ButterKnife.bind(this, rootView);
+        }
     }
 
     @OnClick(R.id.btn_stream)
@@ -307,39 +338,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
             finish();
         });
         recyclerViewRecommended.setAdapter(recommendedMoviesAdapter);
-    }
-
-    @Override
-    public void notifyDialogTicket() {
-        dialogViewHolder.dialogTvTicket.setVisibility(View.VISIBLE);
-        dialogViewHolder.dialogTvTicket.startAnimation(fadeIn);
-        dialogViewHolder.dialogTvIp.setVisibility(View.INVISIBLE);
-        dialogViewHolder.dialogTvIp.startAnimation(fadeOut);
-    }
-
-    static class DialogViewHolder {
-
-        @BindView(R.id.anim)
-        LottieAnimationView dialogAnim;
-
-        @BindView(R.id.ib_play)
-        ImageButton dialogIbPlay;
-
-        @BindView(R.id.tv_dialog_ip)
-        TextView dialogTvIp;
-
-        @BindView(R.id.tv_dialog_ticket)
-        TextView dialogTvTicket;
-
-        @BindView(R.id.tv_dialog_success)
-        TextView dialogTvSuccess;
-
-        @BindView(R.id.btn_cancel)
-        Button dialogBtnCancel;
-
-        DialogViewHolder(View rootView) {
-            ButterKnife.bind(this, rootView);
-        }
     }
 
     @Override
