@@ -11,6 +11,8 @@ public interface Contract {
 
     interface View extends BaseView<Presenter> {
 
+        void showStreamDialog();
+
         void notifyDialogTicket();
 
         void notifyDialogSuccess();
@@ -21,7 +23,7 @@ public interface Contract {
 
         void showRecommendationsRecyclerView(ArrayList<Movie> movies);
 
-        void streamInBrowser(String imdbId, String ticket);
+        void streamInBrowser(String streamUrl);
     }
 
     interface Presenter extends BasePresenter {
@@ -29,5 +31,7 @@ public interface Contract {
         void getDetails(int id);
 
         void onGenerateStreamLink();
+
+        void onPlay();
     }
 }

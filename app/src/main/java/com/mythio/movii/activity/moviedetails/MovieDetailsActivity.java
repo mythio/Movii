@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.NumberFormat;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -144,8 +145,23 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
         dialogViewHolder.dialogBtnCancel.setOnClickListener(view -> streamDialog.dismiss());
 
+        dialogViewHolder.dialogIbPlay.setOnClickListener(view -> {
+            Log.d("TAG_TAG", "CLICK");
+            mPresenter.onPlay();
+        });
+
         int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
         mPresenter.getDetails(id);
+    }
+
+    @Override
+    public void showStreamDialog() {
+        streamDialog.show();
+
+        dialogViewHolder.dialogAnim.setVisibility(View.VISIBLE);
+        dialogViewHolder.dialogAnim.setAnimation(fadeIn);
+        dialogViewHolder.dialogTvIp.setVisibility(View.VISIBLE);
+        dialogViewHolder.dialogTvIp.setAnimation(fadeIn);
     }
 
     @Override
@@ -154,16 +170,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         dialogViewHolder.dialogTvTicket.startAnimation(fadeIn);
         dialogViewHolder.dialogTvIp.setVisibility(View.INVISIBLE);
         dialogViewHolder.dialogTvIp.startAnimation(fadeOut);
-    }
-
-    @Override
-    public void streamInBrowser(String imdbId, String ticket) {
-        streamDialog.show();
-
-        dialogViewHolder.dialogAnim.setVisibility(View.VISIBLE);
-        dialogViewHolder.dialogAnim.setAnimation(fadeIn);
-        dialogViewHolder.dialogTvIp.setVisibility(View.VISIBLE);
-        dialogViewHolder.dialogTvIp.setAnimation(fadeIn);
     }
 
     @Override
@@ -176,6 +182,12 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         dialogViewHolder.dialogAnim.setAnimation(fadeOut);
         dialogViewHolder.dialogIbPlay.setVisibility(View.VISIBLE);
         dialogViewHolder.dialogIbPlay.startAnimation(fadeIn);
+    }
+
+    @Override
+    public void streamInBrowser(String streamUrl) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(streamUrl));
+        startActivity(browserIntent);
     }
 
     static class DialogViewHolder {
