@@ -29,49 +29,50 @@ A handcrafted Android application to show everything you want to know about your
 │   │       ├── ProfileFragment.java
 │   │       └── TvShowsFragment.java
 │   ├── MainActivity.java
-│   ├── movie_details
+│   ├── moviedetails
 │   │   ├── CastBottomDialog.java
+│   │   ├── castdialogcontract
+│   │   │   ├── Contract.java
+│   │   │   └── Presenter.java
 │   │   ├── contract
 │   │   │   ├── Contract.java
 │   │   │   └── Presenter.java
-│   │   ├── dialog_contract
-│   │   │   ├── Contract.java
-│   │   │   └── Presenter.java
 │   │   └── MovieDetailsActivity.java
-│   ├── search_movie
+│   ├── searchmovie
 │   │   ├── contract
 │   │   │   ├── Contract.java
 │   │   │   └── Presenter.java
 │   │   └── SearchMovieActivity.java
-│   ├── search_tv_show
+│   ├── searchtvshow
 │   │   ├── contract
 │   │   │   ├── Contract.java
 │   │   │   └── Presenter.java
 │   │   └── SearchTvShowActivity.java
-│   └── tv_show_details
+│   └── tvshowdetails
 │       ├── contract
 │       │   ├── Contract.java
 │       │   └── Presenter.java
 │       └── TvShowDetailsActivity.java
 ├── adapter
-│   ├── recycler_view_adapter
-│   │   ├── cast
-│   │   │   ├── CastAdapter.java
-│   │   │   └── CastPresenter.java
-│   │   ├── Contract.java
-│   │   ├── recommended_movies
-│   │   │   ├── RecommendedMoviesAdapter.java
-│   │   │   └── RecommendedMoviesPresenter.java
-│   │   ├── search_movie
-│   │   │   ├── SearchMovieAdapter.java
-│   │   │   └── SearchMoviePresenter.java
-│   │   └── search_tv_show
-│   │       ├── SearchTvShowAdapter.java
-│   │       └── SearchTvShowPresenter.java
-│   └── view_pager_adapter
-│       ├── MovieSliderAdapter.java
-│       ├── TvShowDetailsAdapter.java
-│       └── TvShowSliderAdapter.java
+│   ├── cast
+│   │   ├── CastAdapter.java
+│   │   └── CastPresenter.java
+│   ├── Contract.java
+│   ├── popularmovies
+│   │   ├── PopularMovieAdapter.java
+│   │   └── PopularMoviePresenter.java
+│   ├── populartvshow
+│   │   ├── PopularTvshowAdapter.java
+│   │   └── PopularTvshowPresenter.java
+│   ├── recommendationmovies
+│   │   ├── RecommendedMoviesAdapter.java
+│   │   └── RecommendedMoviesPresenter.java
+│   ├── searchmovie
+│   │   ├── SearchMovieAdapter.java
+│   │   └── SearchMoviePresenter.java
+│   └── searchtvshow
+│       ├── SearchTvShowAdapter.java
+│       └── SearchTvShowPresenter.java
 ├── BasePresenter.java
 ├── BaseView.java
 ├── model
@@ -84,7 +85,7 @@ A handcrafted Android application to show everything you want to know about your
 │   │   └── CollectionResponse.java
 │   ├── episode
 │   │   └── Episode.java
-│   ├── external_ids
+│   ├── externalids
 │   │   └── ExternalIds.java
 │   ├── genre
 │   │   └── Genre.java
@@ -94,20 +95,22 @@ A handcrafted Android application to show everything you want to know about your
 │   ├── season
 │   │   ├── SeasonDetails.java
 │   │   └── Season.java
-│   ├── tv_show
+│   ├── tvshow
 │   │   ├── TvShow.java
 │   │   └── TvShowResponse.java
 │   └── video
 │       ├── Video.java
 │       └── VideoResponse.java
 ├── network
-│   ├── EndPoint.java
+│   ├── ApiTmdb.java
+│   ├── ApiVideoSpider.java
 │   └── RetrofitBuilder.java
 └── util
     ├── App.java
-    ├── Constant.java
+    ├── CarouselLayoutManager.java
+    ├── Constants.java
     ├── ItemClickListener.java
     └── ItemDecorator.java
 
-34 directories, 62 files
+34 directories, 65 files
 ```
