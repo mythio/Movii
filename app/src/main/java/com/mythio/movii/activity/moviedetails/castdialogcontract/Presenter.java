@@ -1,5 +1,7 @@
 package com.mythio.movii.activity.moviedetails.castdialogcontract;
 
+import android.util.Log;
+
 import com.mythio.movii.model.cast.CastMovies;
 import com.mythio.movii.network.ApiTmdb;
 import com.mythio.movii.network.RetrofitBuilder;
@@ -13,6 +15,7 @@ import static com.mythio.movii.util.Constants.API_KEY_TMDB;
 
 public class Presenter implements Contract.Presenter {
 
+    private static final String TAG = "TAG_TAG_TAG: Presenter";
     private Contract.View view;
 
     public Presenter(Contract.View view) {
@@ -35,7 +38,7 @@ public class Presenter implements Contract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e(TAG, "onError: " + e.getMessage(), e);
                     }
                 });
     }

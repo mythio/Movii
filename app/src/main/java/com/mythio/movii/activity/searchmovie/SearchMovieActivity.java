@@ -56,7 +56,9 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                /*
+                Not used
+                 */
             }
 
             @Override
@@ -70,7 +72,9 @@ public class SearchMovieActivity extends AppCompatActivity implements Contract.V
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                /*
+                Not used
+                 */
             }
         });
     }

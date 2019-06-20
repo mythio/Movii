@@ -65,7 +65,7 @@ public class Presenter implements Contract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e(TAG, "onError: " + e.getMessage(), e);
                     }
                 });
     }

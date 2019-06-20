@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.search_tv_show;
+package com.mythio.movii.adapter.searchtvshow;
 
 import android.view.LayoutInflater;
 import android.view.View;

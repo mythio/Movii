@@ -23,7 +23,7 @@ import static com.mythio.movii.util.Constants.API_KEY_TMDB;
 
 public class Presenter implements Contract.Presenter {
 
-    private static final String TAG = "Presenter";
+    private static final String TAG = "TAG_TAG_TAG: Presenter";
 
     private Contract.View view;
 
@@ -52,12 +52,14 @@ public class Presenter implements Contract.Presenter {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d(TAG, "onError: " + e.getMessage());
+                        Log.e(TAG, "onError: " + e.getMessage(), e);
                     }
 
                     @Override
                     public void onComplete() {
-
+                        /*
+                        Not used
+                         */
                     }
                 });
         view.hidePlate();

@@ -14,8 +14,8 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.discover.fragment.contract.Contract;
 import com.mythio.movii.activity.discover.fragment.contract.Presenter;
 import com.mythio.movii.activity.searchtvshow.SearchTvShowActivity;
-import com.mythio.movii.adapter.popular_tvshow.PopularTvshowAdapter;
-import com.mythio.movii.adapter.popular_tvshow.PopularTvshowPresenter;
+import com.mythio.movii.adapter.populartvshow.PopularTvshowAdapter;
+import com.mythio.movii.adapter.populartvshow.PopularTvshowPresenter;
 import com.mythio.movii.model.tvshow.TvShow;
 import com.mythio.movii.util.CarouselLayoutManager;
 

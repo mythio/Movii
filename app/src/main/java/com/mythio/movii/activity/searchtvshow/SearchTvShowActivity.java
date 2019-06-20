@@ -18,8 +18,8 @@ import com.mythio.movii.R;
 import com.mythio.movii.activity.searchtvshow.contract.Contract;
 import com.mythio.movii.activity.searchtvshow.contract.Presenter;
 import com.mythio.movii.activity.tvshowdetails.TvShowDetailsActivity;
-import com.mythio.movii.adapter.search_tv_show.SearchTvShowAdapter;
-import com.mythio.movii.adapter.search_tv_show.SearchTvShowPresenter;
+import com.mythio.movii.adapter.searchtvshow.SearchTvShowAdapter;
+import com.mythio.movii.adapter.searchtvshow.SearchTvShowPresenter;
 import com.mythio.movii.model.tvshow.TvShow;
 import com.mythio.movii.util.ItemDecorator;
 
@@ -57,7 +57,9 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                /*
+                Not used
+                 */
             }
 
             @Override
@@ -71,7 +73,9 @@ public class SearchTvShowActivity extends AppCompatActivity implements Contract.
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                /*
+                Not used
+                 */
             }
         });
     }

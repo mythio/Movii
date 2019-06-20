@@ -1,4 +1,4 @@
-package com.mythio.movii.adapter.popular_tvshow;
+package com.mythio.movii.adapter.populartvshow;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +23,11 @@ import static com.mythio.movii.util.Constants.BASE_URL_IMAGE;
 
 public class PopularTvshowAdapter extends RecyclerView.Adapter<PopularTvshowAdapter.PopularTvShowViewHolder> {
     private final Contract.Presenter<TvShow> mPresenter;
-    private final ItemClickListener.OnItemClick mListener;
+//    private final ItemClickListener.OnItemClick mListener;
 
     public PopularTvshowAdapter(Contract.Presenter<TvShow> presenter, ItemClickListener.OnItemClick listener) {
         this.mPresenter = presenter;
-        this.mListener = listener;
+//        this.mListener = listener;
     }
 
     @NonNull

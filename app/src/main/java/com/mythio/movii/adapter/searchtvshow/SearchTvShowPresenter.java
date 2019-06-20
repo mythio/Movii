@@ -1,19 +1,21 @@
-package com.mythio.movii.adapter.popular_tvshow;
+package com.mythio.movii.adapter.searchtvshow;
+
+import androidx.annotation.NonNull;
 
 import com.mythio.movii.adapter.Contract;
 import com.mythio.movii.model.tvshow.TvShow;
 
 import java.util.ArrayList;
 
-public class PopularTvshowPresenter implements Contract.Presenter<TvShow> {
+public class SearchTvShowPresenter implements Contract.Presenter<TvShow> {
     private final ArrayList<TvShow> tvShows;
 
-    public PopularTvshowPresenter(ArrayList<TvShow> tvShows) {
+    public SearchTvShowPresenter(ArrayList<TvShow> tvShows) {
         this.tvShows = tvShows;
     }
 
     @Override
-    public void onBindViewAtPosition(Contract.View<TvShow> view, int position) {
+    public void onBindViewAtPosition(@NonNull Contract.View<TvShow> view, int position) {
         view.show(tvShows.get(position));
     }
 
