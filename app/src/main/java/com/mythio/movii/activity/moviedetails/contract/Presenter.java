@@ -75,13 +75,6 @@ public class Presenter implements Contract.Presenter {
         view.streamInBrowser("https://videospider.stream/getvideo?key=u06QnFufrtjVbFBd&video_id=" + movie.getImdb() + "&ticket=" + ticket);
     }
 
-    //    @Override
-//    public void streamInBrowser(String imdbId, String ticket) {
-//        String urlString = "https://videospider.stream/getvideo?key=u06QnFufrtjVbFBd&video_id=" + imdbId + "&ticket=" + ticket;
-//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
-//        startActivity(browserIntent);
-//    }
-
     @Override
     public void detachView() {
         this.view = null;

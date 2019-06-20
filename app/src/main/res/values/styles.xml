@@ -7,7 +7,6 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:fontFamily">@font/gsans_medium</item>
-        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="SplashScreen" parent="AppTheme">
