@@ -118,7 +118,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
         setPresenter(new Presenter(this));
-        mPresenter = new Presenter(this);
         ButterKnife.bind(this);
 
         fadeOut.setDuration(400);
@@ -141,6 +140,25 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
         int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
         mPresenter.getDetails(id);
+    }
+
+    static class DialogViewHolder {
+
+        @BindView(R.id.tv_dialog_ip)
+        TextView dialogTvIp;
+
+        @BindView(R.id.tv_dialog_ticket)
+        TextView dialogTvTicket;
+
+        @BindView(R.id.tv_dialog_success)
+        TextView dialogTvSuccess;
+
+        @BindView(R.id.btn_cancel)
+        Button dialogBtnCancel;
+
+        DialogViewHolder(View rootView) {
+            ButterKnife.bind(this, rootView);
+        }
     }
 
     @Override
@@ -309,25 +327,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         dialogViewHolder.dialogTvSuccess.startAnimation(fadeIn);
         dialogViewHolder.dialogTvTicket.setVisibility(View.INVISIBLE);
         dialogViewHolder.dialogTvTicket.startAnimation(fadeOut);
-    }
-
-    static class DialogViewHolder {
-
-        @BindView(R.id.tv_dialog_ip)
-        TextView dialogTvIp;
-
-        @BindView(R.id.tv_dialog_ticket)
-        TextView dialogTvTicket;
-
-        @BindView(R.id.tv_dialog_success)
-        TextView dialogTvSuccess;
-
-        @BindView(R.id.btn_cancel)
-        Button dialogBtnCancel;
-
-        DialogViewHolder(View rootView) {
-            ButterKnife.bind(this, rootView);
-        }
     }
 
     @Override
