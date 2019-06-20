@@ -11,8 +11,6 @@ public interface Contract {
 
     interface View extends BaseView<Presenter> {
 
-//        void notifyDialogIP();
-
         void notifyDialogTicket();
 
         void notifyDialogSuccess();

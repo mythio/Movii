@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -107,6 +108,10 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
     private Contract.Presenter mPresenter;
     private AlertDialog streamDialog;
+    private final AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
+    private final AlphaAnimation fadeIn = new AlphaAnimation(0, 1);
+
+    DialogViewHolder dialogViewHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,10 +121,15 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         mPresenter = new Presenter(this);
         ButterKnife.bind(this);
 
+        fadeOut.setDuration(400);
+        fadeIn.setDuration(400);
+
         ViewGroup viewGroup = findViewById(android.R.id.content);
         View streamView = LayoutInflater
                 .from(this)
                 .inflate(R.layout.dialog_streaming, viewGroup, false);
+
+        dialogViewHolder = new DialogViewHolder(streamView);
 
         streamDialog = new AlertDialog
                 .Builder(this)
@@ -131,6 +141,14 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
 
         int id = getIntent().getIntExtra("BUNDLED_EXTRA_MOVIE_ID", 0);
         mPresenter.getDetails(id);
+    }
+
+    @Override
+    public void streamInBrowser(String imdbId, String ticket) {
+        streamDialog.show();
+
+        dialogViewHolder.dialogTvIp.setVisibility(View.VISIBLE);
+        dialogViewHolder.dialogTvIp.setAnimation(fadeIn);
     }
 
     @OnClick(R.id.btn_stream)
@@ -271,25 +289,13 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
     }
 
     @Override
-    public void streamInBrowser(String imdbId, String ticket) {
-
-        streamDialog.show();
-    }
-
-    @Override
     public void notifyDialogTicket() {
-        AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
-        AlphaAnimation fadeIn = new AlphaAnimation(0, 1);
-        fadeOut.setDuration(400);
-        fadeIn.setDuration(400);
 
-        TextView t1 = streamDialog.findViewById(R.id.tv_dialog_ip);
-        TextView t2 = streamDialog.findViewById(R.id.tv_dialog_ticket);
 
-        t2.setVisibility(View.VISIBLE);
-        t1.setVisibility(View.INVISIBLE);
-        t2.startAnimation(fadeIn);
-        t1.startAnimation(fadeOut);
+        dialogViewHolder.dialogTvTicket.setVisibility(View.VISIBLE);
+        dialogViewHolder.dialogTvTicket.startAnimation(fadeIn);
+        dialogViewHolder.dialogTvIp.setVisibility(View.INVISIBLE);
+        dialogViewHolder.dialogTvIp.startAnimation(fadeOut);
     }
 
     @Override
@@ -299,21 +305,30 @@ public class MovieDetailsActivity extends AppCompatActivity implements Contract.
         fadeOut.setDuration(400);
         fadeIn.setDuration(400);
 
-        TextView t1 = streamDialog.findViewById(R.id.tv_dialog_ticket);
-        TextView t2 = streamDialog.findViewById(R.id.tv_dialog_success);
-
-        t2.setVisibility(View.VISIBLE);
-        t1.setVisibility(View.INVISIBLE);
-        t2.startAnimation(fadeIn);
-        t1.startAnimation(fadeOut);
+        dialogViewHolder.dialogTvSuccess.setVisibility(View.VISIBLE);
+        dialogViewHolder.dialogTvSuccess.startAnimation(fadeIn);
+        dialogViewHolder.dialogTvTicket.setVisibility(View.INVISIBLE);
+        dialogViewHolder.dialogTvTicket.startAnimation(fadeOut);
     }
 
-    //    @Override
-//    public void streamInBrowser(String imdbId, String ticket) {
-//        String urlString = "https://videospider.stream/getvideo?key=u06QnFufrtjVbFBd&video_id=" + imdbId + "&ticket=" + ticket;
-//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
-//        startActivity(browserIntent);
-//    }
+    static class DialogViewHolder {
+
+        @BindView(R.id.tv_dialog_ip)
+        TextView dialogTvIp;
+
+        @BindView(R.id.tv_dialog_ticket)
+        TextView dialogTvTicket;
+
+        @BindView(R.id.tv_dialog_success)
+        TextView dialogTvSuccess;
+
+        @BindView(R.id.btn_cancel)
+        Button dialogBtnCancel;
+
+        DialogViewHolder(View rootView) {
+            ButterKnife.bind(this, rootView);
+        }
+    }
 
     @Override
     protected void onDestroy() {
